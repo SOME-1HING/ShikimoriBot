@@ -40,7 +40,10 @@ def ping(update: Update, _):
     end_time = time.time()
     ping_time = round((end_time - start_time) * 1000, 3)
     message.edit_text(
-        "*PONG!!!*\n`{}ms`".format(ping_time), parse_mode=ParseMode.MARKDOWN
+        "<b>PONG</b> ✨\n"
+        "<b>Time Taken:</b> <code>{}</code>\n"
+        "<b>Service Uptime:</b> <code>{}</code>".format(telegram_ping, uptime),
+        parse_mode=ParseMode.HTML,
     )
 
 
