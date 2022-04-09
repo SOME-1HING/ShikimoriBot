@@ -101,7 +101,7 @@ if ENV:
     TIME_API_KEY = os.environ.get("TIME_API_KEY", None)
     AI_API_KEY = os.environ.get("AI_API_KEY", None)
     LASTFM_API_KEY = os.environ.get("LASTFM_API_KEY", None)
-    API_WEATHER = os.environ.get("API_OPENWEATHER", None)
+    API_WEATHER = os.environ.get("API_WEATHER", None)
     WALL_API = os.environ.get("WALL_API", None)
     REDIS_URL = os.environ.get("REDIS_URL")
     SUPPORT_CHAT = os.environ.get("SUPPORT_CHAT", None)
