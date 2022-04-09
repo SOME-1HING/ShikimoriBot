@@ -1,11 +1,11 @@
-![Shikimori](https://telegra.ph/file/cbad2a4725b43314dc340.jpg)
+![Shikimori](https://telegra.ph/file/c40f4f6f39cfcef0c7040.jpg)
 # Shikimori
 [![Open Source Love svg2](https://badges.frapsoft.com/os/v2/open-source.svg?v=103)](https://github.com/ellerbrock/open-source-badges/)!]
 
 
-A modular Telegram Group Management bot, can be found on telegram as [Shikimori](https://t.me/Shikimoribest_bot).
+A modular Telegram Group Management bot, can be found on telegram as [Shikimori](https://t.me/tyranteyeeee).
 
-The Support group can be reached out to at [Support](https://t.me/ShikimoriSupportChat), where you can ask for help about Shikimori Bot, discover/request new features, report bugs, and stay in the loop whenever a new update is available. 
+The Support group can be reached out to at [Support](https://t.me/micchon_shikimori_bot), where you can ask for help about Shikimori Bot, discover/request new features, report bugs, and stay in the loop whenever a new update is available. 
 
 ## How to setup/deploy.
 
@@ -22,7 +22,7 @@ REMEMBER: Turn on worker dyno (Don't worry It's free :D) & Webhook
 Now send the bot /start, If it doesn't respond go to https://dashboard.heroku.com/apps/(app-name)/settings and remove webhook and port.
 ```
 
-  [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/asadali32117/ShikimoriIshigamiPTB.git)
+  [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/SOME-1HING/ShikimoriBot.git)
 
 </details>  
 <details>
