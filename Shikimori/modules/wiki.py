@@ -51,5 +51,5 @@ def wiki(update: Update, context: CallbackContext):
             )
 
 
-WIKI_HANDLER = DisableAbleCommandHandler("wiki", wiki, run_async=True)
+WIKI_HANDLER = DisableAbleCommandHandler("wiki", wiki, run_async = True)
 dispatcher.add_handler(WIKI_HANDLER)
