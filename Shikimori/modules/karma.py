@@ -26,7 +26,7 @@ regex_downvote = r"^(\-|\-\-|\-1|👎|noob|weak)$"
 
 @app.on_message(
     filters.text
-    & Filters.chat_type.groups
+    & filters.chat_type.groups
     & filters.incoming
     & filters.reply
     & filters.regex(regex_upvote)
