@@ -19,14 +19,14 @@ from Shikimori.ex_plugins.dbfunctions import (
 from Shikimori.utils.filter_groups import karma_negative_group, karma_positive_group
 from Shikimori import arq
 
-regex_upvote = r"^((?i)\+|\+\+|\+1|thx|thanx|thanks|pro|cool|good|pro|pero|op|nice|noice|best|uwu|owo|right|correct|peru|piro|👍)$"
-regex_downvote = r"^(\-|\-\-|\-1|👎|noob|baka|idiot|chutiya|nub|noob|wrong|incorrect|chaprii|chapri|weak)$"
+regex_upvote = r"^((?i)\+|\+\+|\+1|thx|thanx|thanks|pro|cool|good|👍)$"
+regex_downvote = r"^(\-|\-\-|\-1|👎|noob|weak)$"
 
 
 
 @app.on_message(
     filters.text
-    & filters.group
+    & Filters.chat_type.groups
     & filters.incoming
     & filters.reply
     & filters.regex(regex_upvote)
@@ -67,7 +67,7 @@ async def upvote(_, message):
 
 @app.on_message(
     filters.text
-    & filters.group
+    & Filters.chat_type.groups
     & filters.incoming
     & filters.reply
     & filters.regex(regex_upvote)
@@ -104,7 +104,7 @@ async def upvote(_, message):
 
 @app.on_message(
     filters.text
-    & filters.group
+    & Filters.chat_type.groups
     & filters.incoming
     & filters.reply
     & filters.regex(regex_downvote)
@@ -140,7 +140,7 @@ async def downvote(_, message):
     )
 
 
-@app.on_message(filters.command("karmastat") & filters.group)
+@app.on_message(filters.command("karmastat") & Filters.chat_type.groups)
 @capture_err
 async def karma(_, message):
     chat_id = message.chat.id
