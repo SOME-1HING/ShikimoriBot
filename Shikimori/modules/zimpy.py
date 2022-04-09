@@ -18,15 +18,15 @@ async def is_register_admin(chat, user):
 
         return isinstance(
             (
-                await client(functions.channels.GetParticipantRequest(chat, user))
+                await telethn(functions.channels.GetParticipantRequest(chat, user))
             ).participant,
             (types.ChannelParticipantAdmin, types.ChannelParticipantCreator),
         )
     if isinstance(chat, types.InputPeerChat):
 
-        ui = await client.get_peer_id(user)
+        ui = await telethn.get_peer_id(user)
         ps = (
-            await client(functions.messages.GetFullChatRequest(chat.chat_id))
+            await telethn(functions.messages.GetFullChatRequest(chat.chat_id))
         ).full_chat.participants.participants
         return isinstance(
             next((p for p in ps if p.user_id == ui), None),
@@ -57,7 +57,7 @@ async def _(event):
         reply_message = await event.get_reply_message()
         try:
             time.time()
-            downloaded_file_name = await event.client.download_media(
+            downloaded_file_name = await event.telethn.download_media(
                 reply_message, TEMP_DOWNLOAD_DIRECTORY
             )
             directory_name = downloaded_file_name
@@ -66,7 +66,7 @@ async def _(event):
     zipfile.ZipFile(directory_name + ".zip", "w", zipfile.ZIP_DEFLATED).write(
         directory_name
     )
-    await event.client.send_file(
+    await event.telethn.send_file(
         event.chat_id,
         directory_name + ".zip",
         force_document=True,
@@ -100,15 +100,15 @@ async def is_register_admin(chat, user):
 
         return isinstance(
             (
-                await client(functions.channels.GetParticipantRequest(chat, user))
+                await telethn(functions.channels.GetParticipantRequest(chat, user))
             ).participant,
             (types.ChannelParticipantAdmin, types.ChannelParticipantCreator),
         )
     if isinstance(chat, types.InputPeerChat):
 
-        ui = await client.get_peer_id(user)
+        ui = await telethn.get_peer_id(user)
         ps = (
-            await client(functions.messages.GetFullChatRequest(chat.chat_id))
+            await telethn(functions.messages.GetFullChatRequest(chat.chat_id))
         ).full_chat.participants.participants
         return isinstance(
             next((p for p in ps if p.user_id == ui), None),
@@ -140,7 +140,7 @@ async def _(event):
         reply_message = await event.get_reply_message()
         try:
             time.time()
-            downloaded_file_name = await client.download_media(
+            downloaded_file_name = await telethn.download_media(
                 reply_message, TEMP_DOWNLOAD_DIRECTORY
             )
         except Exception as e:
@@ -182,7 +182,7 @@ async def _(event):
                         )
                     ]
                 try:
-                    await client.send_file(
+                    await telethn.send_file(
                         event.chat_id,
                         single_file,
                         force_document=force_document,
@@ -192,7 +192,7 @@ async def _(event):
                         attributes=document_attributes,
                     )
                 except Exception as e:
-                    await client.send_message(
+                    await telethn.send_message(
                         event.chat_id,
                         "{} caused `{}`".format(caption_rts, str(e)),
                         reply_to=event.message.id,
