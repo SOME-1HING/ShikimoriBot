@@ -8,7 +8,7 @@ import zipfile
 from telethon import types
 from telethon.tl import functions
 
-from Shikimori import client
+from Shikimori import telethn
 from Shikimori.events import register
 
 TEMP_DOWNLOAD_DIRECTORY = "./"
