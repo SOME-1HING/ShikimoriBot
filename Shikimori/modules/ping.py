@@ -100,29 +100,6 @@ def get_bot_ip(update, _):
     update.message.reply_text(res.text)
 
 
-@typing_action
-def speedtst(update: Update, context: CallbackContext):
-    message = update.effective_message
-    ed_msg = message.reply_text("Running high speed test . . .")
-    test = speedtest.Speedtest()
-    test.get_best_server()
-    test.download()
-    test.upload()
-    test.results.share()
-    result = test.results.dict()
-    context.bot.editMessageText(
-        "Download "
-        f"{speed_convert(result['download'])} \n"
-        "Upload "
-        f"{speed_convert(result['upload'])} \n"
-        "Ping "
-        f"{result['ping']} \n"
-        "ISP "
-        f"{result['client']['isp']}",
-        update.effective_chat.id,
-        ed_msg.message_id,
-    )
-
 
 @typing_action
 def system_status(update: Update, context: CallbackContext):
@@ -164,14 +141,10 @@ IP_HANDLER = CommandHandler(
 PING_HANDLER = CommandHandler(
     "ping", ping, filters=CustomFilters.dev_filter, run_async=True
 )
-SPEED_HANDLER = CommandHandler(
-    "speedtest", speedtst, filters=CustomFilters.dev_filter, run_async=True
-)
 SYS_STATUS_HANDLER = CommandHandler(
     "sysinfo", system_status, filters=CustomFilters.dev_filter, run_async=True
 )
 
 dispatcher.add_handler(IP_HANDLER)
-dispatcher.add_handler(SPEED_HANDLER)
 dispatcher.add_handler(PING_HANDLER)
 dispatcher.add_handler(SYS_STATUS_HANDLER)
