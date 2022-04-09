@@ -19,8 +19,8 @@ from Shikimori.ex_plugins.dbfunctions import (
 from Shikimori.utils.filter_groups import karma_negative_group, karma_positive_group
 from Shikimori import arq
 
-regex_upvote = r"^((?i)\+|\+\+|\+1|thx|thanx|thanks|pro|cool|good|pro|pero|op|nice|noice|best|uwu|👍)$"
-regex_downvote = r"^(\-|\-\-|\-1|👎|noob|baka|idiot|weak)$"
+regex_upvote = r"^((?i)\+|\+\+|\+1|thx|thanx|thanks|pro|cool|good|pro|pero|op|nice|noice|best|uwu|owo|right|correct|👍)$"
+regex_downvote = r"^(\-|\-\-|\-1|👎|noob|baka|idiot|chutiya|nub|noob|wrong|incorrect|weak)$"
 
 
 
