@@ -327,9 +327,9 @@ def info(update: Update, context: CallbackContext):
             profile = context.bot.get_file(context.bot.get_user_profile_photos(user.id).photos[0][-1]["file_id"])
             profile.download(f"{user.id}.png")
             context.bot.sendChatAction(chat.id, "upload_photo")
-            context.bot.send_document(
+            context.bot.send_photo(
               chat.id,
-              document=open(f"{user.id}.png", "rb"),
+              photo=open(f"{user.id}.png", "rb"),
               caption=(text),
               parse_mode=ParseMode.HTML,            
             )
