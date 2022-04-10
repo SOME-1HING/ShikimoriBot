@@ -24,3 +24,9 @@ dispatcher.add_handler(UD_HANDLER)
 
 __command_list__ = ["ud"]
 __handlers__ = [UD_HANDLER]
+
+__mod_name__ = "Urban Dictionary"
+__help__ = """
+*Urban Dictionary*
+ ❍ `/ud` : Search for word in Urban Dictionary
+"""
