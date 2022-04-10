@@ -207,6 +207,7 @@ __mod_name__ = "Karma"
 __help__ = """
 *Karma*
  ❍ `/karma` [ON][OFF]: To enable / disable Karma system
+ ❍ `/karmastat`: Get stats of karma for your chat
  ❍ Reply to any meassage with (`+, +1, thx, thanx, thanks, pro, cool, good,pro, pero, op, nice, noice, best, uwu, owo, right, correct, peru, piro`, 👍) to increse karma of user.
  ❍ Reply to any meassage with (`-, -1, 👎, noob, baka, idiot, chutiya, nub, noob, wrong, incorrect, chaprii, chapri, weak`) to decrease karma of user.
 """
