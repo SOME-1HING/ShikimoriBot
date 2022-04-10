@@ -300,13 +300,12 @@ def info(update: Update, context: CallbackContext, lul):
         disaster_level_present = True
 
     if disaster_level_present:
-        text += ' [<a href="https://t.me/Shikimori_bot_Updates/6">?</a>]'.format(
-            bot.username)
+        
         buttons = [
-        [
-            InlineKeyboardButton("Image", callback_data="speedtest_image"),
-            InlineKeyboardButton("Text", callback_data="speedtest_text"),
-        ],
+            [
+            InlineKeyboardButton(text="Disaster", url="https://t.me/Shikimori_bot_Updates/6")
+        
+            ],
         ]
 
     try:
