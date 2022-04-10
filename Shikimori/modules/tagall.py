@@ -34,4 +34,8 @@ async def _(event):
     await event.delete()
 
 
-__mod_name__ = "Tagger"
+__mod_name__ = "TagAll"
+__help__ = """
+*Tag All*
+ ❍ `/all` : (reply to message or add another message) To mention all members in your group, without exception.
+"""
