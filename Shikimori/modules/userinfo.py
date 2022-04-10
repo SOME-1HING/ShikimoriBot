@@ -209,7 +209,7 @@ def gifid(update: Update, context: CallbackContext):
             "Please reply to a gif to get its ID.")
 
 
-def info(update: Update, context: CallbackContext, lul):
+def info(update: Update, context: CallbackContext):
     bot, args = context.bot, context.args
     message = update.effective_message
     chat = update.effective_chat
