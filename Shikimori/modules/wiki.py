@@ -1,11 +1,12 @@
 import wikipedia
-from Shikimori import dispatcher
-from Shikimori.modules.disable import DisableAbleCommandHandler
+from Yumeko import dispatcher
+from Yumeko.modules.disable import DisableAbleCommandHandler
 from telegram import ParseMode, Update
 from telegram.ext import CallbackContext, run_async
 from wikipedia.exceptions import DisambiguationError, PageError
 
 
+@run_async
 def wiki(update: Update, context: CallbackContext):
     msg = (
         update.effective_message.reply_to_message
@@ -51,5 +52,14 @@ def wiki(update: Update, context: CallbackContext):
             )
 
 
-WIKI_HANDLER = DisableAbleCommandHandler("wiki", wiki, run_async = True)
+WIKI_HANDLER = DisableAbleCommandHandler("wiki", wiki)
 dispatcher.add_handler(WIKI_HANDLER)
+
+__help__ = r"""
+Wiki module:
+
+× /wiki <query>: Gets Wikipedia article about query
+
+""" 
+
+__mod_name__ = "Wiki"
