@@ -241,6 +241,10 @@ def info(update: Update, context: CallbackContext):
 
     if user.username:
         text += f"\nUsername: @{html.escape(user.username)}"
+        [
+        InlineKeyboardButton(
+            text="User Profile", url="t.me/"(user.username)),
+        ],
 
     text += f"\nPermalink: {mention_html(user.id, 'link')}"
 
