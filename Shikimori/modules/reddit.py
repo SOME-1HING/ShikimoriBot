@@ -53,3 +53,9 @@ async def reddit(_, message):
         await m.delete()
     except Exception as e:
         await m.edit(e.MESSAGE)
+
+__mod_name__ = "Reddit"
+__help__ = """
+*Reddit*
+ ❍ `/reddit` : Searches reddit
+"""
