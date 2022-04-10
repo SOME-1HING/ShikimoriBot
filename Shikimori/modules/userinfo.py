@@ -2,18 +2,18 @@ import html
 import re
 import os
 import requests
-from Shikimori.modules.dbcleanup import callback_button
 
 from telethon.tl.functions.channels import GetFullChannelRequest
 from telethon.tl.types import ChannelParticipantsAdmins
 from telethon import events
 
 from telegram import MAX_MESSAGE_LENGTH, ParseMode, Update, MessageEntity
-from telegram import InlineKeyboardButton, InlineKeyboardMarkup, ParseMode, Update
 from telegram.ext import CallbackContext, CommandHandler
 from telegram.ext.dispatcher import run_async
 from telegram.error import BadRequest
 from telegram.utils.helpers import escape_markdown, mention_html
+from telegram import InlineKeyboardButton, InlineKeyboardMarkup, ParseMode, Update
+from telegram.ext import CallbackContext, CallbackQueryHandler
 
 from Shikimori import (
     DEV_USERS,
@@ -208,7 +208,7 @@ def gifid(update: Update, context: CallbackContext):
             "Please reply to a gif to get its ID.")
 
 
-def info(update: Update, context: CallbackContext):
+def info(update: Update, context: CallbackContext, lul):
     bot, args = context.bot, context.args
     message = update.effective_message
     chat = update.effective_chat
@@ -243,10 +243,6 @@ def info(update: Update, context: CallbackContext):
 
     if user.username:
         text += f"\nUsername: @{html.escape(user.username)}"
-        [
-        InlineKeyboardButton(
-            text="User Profile", callback_button=(user.username)),
-        ],
 
     text += f"\nPermalink: {mention_html(user.id, 'link')}"
 
@@ -304,10 +300,14 @@ def info(update: Update, context: CallbackContext):
         disaster_level_present = True
 
     if disaster_level_present:
-        if disaster_level_present:
-            inf = "https://t.me/Shikimori_bot_Updates/6"
-            buttons = [[InlineKeyboardButton("Disaster", url=inf)]]
-            reply_markup=InlineKeyboardMarkup(buttons)
+        text += ' [<a href="https://t.me/Shikimori_bot_Updates/6">?</a>]'.format(
+            bot.username)
+        buttons = [
+        [
+            InlineKeyboardButton("Image", callback_data="speedtest_image"),
+            InlineKeyboardButton("Text", callback_data="speedtest_text"),
+        ],
+        ]
 
     try:
         user_member = chat.get_member(user.id)
