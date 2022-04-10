@@ -772,3 +772,14 @@ if __name__ == "__main__":
     telethn.start(bot_token=TOKEN)
     pbot.start()
     main()
+
+__mod_name__ = "VC Player"
+__help__ = """
+*VC Player*
+ • `/pause` - To pause the playback.
+ • `/resume` - To resuming the playback You've paused.
+ • `/skip` - To skipping the player.
+ • `/end` - For end the playback.
+ • `/play` <query /reply audio> - Playing music via YouTube.
+ • `/playlist` - To playing a playlist of groups or your personal playlist
+"""
