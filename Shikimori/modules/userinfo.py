@@ -2,6 +2,7 @@ import html
 import re
 import os
 import requests
+from Shikimori.modules.dbcleanup import callback_button
 
 from telethon.tl.functions.channels import GetFullChannelRequest
 from telethon.tl.types import ChannelParticipantsAdmins
@@ -235,17 +236,17 @@ def info(update: Update, context: CallbackContext):
 
     text = (f"╒═══「<b> Appraisal results:</b> 」\n"
             f"ID: <code>{user.id}</code>\n"
-            f"First Name: {html.escape(user.first_name)}"
-            [
-            InlineKeyboardButton(
-            text="User Profile", url="t.me/"(user.username)),],)
+            f"First Name: {html.escape(user.first_name)}")
 
     if user.last_name:
         text += f"\nLast Name: {html.escape(user.last_name)}"
 
     if user.username:
         text += f"\nUsername: @{html.escape(user.username)}"
-        
+        [
+        InlineKeyboardButton(
+            text="User Profile", callback_button=(user.username)),
+        ],
 
     text += f"\nPermalink: {mention_html(user.id, 'link')}"
 
