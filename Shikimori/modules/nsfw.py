@@ -814,4 +814,11 @@ __handlers__ = [
 
 
 
-__mod_name__ = "ɴsғᴡ"
+__mod_name__ = "NSFW"
+__help__ = """
+*NSFW*
+ ❍ `/addnsfw` : To enable NSFW commands
+ ❍ `/rmnsfw` : To disable NSFW commands
+ ❍ Following are the commands\n
+ `/neko, /feet, /yuri, /trap, /futanari, /hololewd, /sologif, /cumgif, /erokemo, /lesbian, /wallpaper, /ledk, /ngif, /tickle, /lewd, /feed, /eroyuri, /eron, /cum, /bjgif, /bj, /nekonsfw, /solo, /kemonomimi, /avatarlewd, /gasm, /poke, /anal, /hentai, /avtar, /erofeet, /holo, /tits, /pussygif, /holoero, /pussy, /hentaigif, /classic, /kuni, /waifu, /lewd, /kiss, /femdom, /hug, /erok, /foxgirl, /ero, /smug, /baka, /dva`
+"""
