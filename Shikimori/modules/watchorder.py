@@ -26,8 +26,14 @@ def watchorderx(_,message):
 		data = f"{data}\n{x.text}" if data else x.text
 	message.reply_text(f'Watchorder of {anime}: \n```{data}```')
 
-__mod_name__ = "Watch Order"
+__mod_name__ = "VC Player"
 __help__ = """
-*Watch Order*
- ❍ `/watchorder` :Get watch order of animes
+*VC Player*
+ • `/pause` - To pause the playback.
+ • `/resume` - To resuming the playback You've paused.
+ • `/skip` - To skipping the player.
+ • `/end` - For end the playback.
+ • `/play` <query /reply audio> - Playing music via YouTube.
+ • `/playlist` - To playing a playlist of groups or your personal playlist
 """
+
