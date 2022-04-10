@@ -2,6 +2,7 @@ import html
 import re
 import os
 import requests
+from Shikimori.modules.reporting import buttons
 
 from telethon.tl.functions.channels import GetFullChannelRequest
 from telethon.tl.types import ChannelParticipantsAdmins
@@ -300,14 +301,8 @@ def info(update: Update, context: CallbackContext, lul):
         disaster_level_present = True
 
     if disaster_level_present:
-        
-        buttons = [
-            [
-            InlineKeyboardButton(text="Disaster", url="https://t.me/Shikimori_bot_Updates/6")
-        
-            ],
-        ]
-
+        text += buttons
+    
     try:
         user_member = chat.get_member(user.id)
         if user_member.status == 'administrator':
@@ -486,7 +481,11 @@ def set_about_bio(update: Update, context: CallbackContext):
     else:
         message.reply_text("Reply to someone to set their bio!")
 
-
+def button(update: Update, context: CallbackContext):
+    
+    InlineKeyboardButton(
+         text=" Disasters", url="https://t.me/Shikimori_bot_Updates/6")
+    
 def __user_info__(user_id):
     bio = html.escape(sql.get_user_bio(user_id) or "")
     me = html.escape(sql.get_user_me_info(user_id) or "")
