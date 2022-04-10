@@ -1,10 +1,10 @@
-from userbot import bot
+from Shikimori import bot
 from telethon import events
 from var import Var
 from pathlib import Path
-from userbot.uniborgConfig import Config
-from userbot import LOAD_PLUG
-from userbot import CMD_LIST
+from Shikimori.config import Config
+from Shikimori import LOAD_PLUG
+from Shikimori import CMD_LIST
 import re
 import logging
 import inspect
@@ -79,23 +79,23 @@ def load_module(shortname):
     if shortname.startswith("__"):
         pass
     elif shortname.endswith("_"):
-        import userbot.utils
+        import Shikimori.utils
         import sys
         import importlib
         from pathlib import Path
-        path = Path(f"userbot/plugins/{shortname}.py")
-        name = "userbot.plugins.{}".format(shortname)
+        path = Path(f"Shikimori/plugins/{shortname}.py")
+        name = "Shikimori.plugins.{}".format(shortname)
         spec = importlib.util.spec_from_file_location(name, path)
         mod = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(mod)
         print("Successfully (re)imported "+shortname)
     else:
-        import userbot.utils
+        import Shikimori.utils
         import sys
         import importlib
         from pathlib import Path
-        path = Path(f"userbot/plugins/{shortname}.py")
-        name = "userbot.plugins.{}".format(shortname)
+        path = Path(f"Shikimori/plugins/{shortname}.py")
+        name = "Shikimori.plugins.{}".format(shortname)
         spec = importlib.util.spec_from_file_location(name, path)
         mod = importlib.util.module_from_spec(spec)
         mod.bot = bot
@@ -104,14 +104,14 @@ def load_module(shortname):
         mod.command = command
         mod.logger = logging.getLogger(shortname)
         # support for uniborg
-        sys.modules["uniborg.util"] = userbot.utils
+        sys.modules["uniborg.util"] = Shikimori.utils
         mod.Config = Config
         mod.borg = bot
         # support for paperplaneextended
-        sys.modules["userbot.events"] = userbot.utils
+        sys.modules["Shikimori.events"] = Shikimori.utils
         spec.loader.exec_module(mod)
         # for imports
-        sys.modules["userbot.plugins."+shortname] = mod
+        sys.modules["Shikimori.plugins."+shortname] = mod
         print("Successfully (re)imported "+shortname)
 
 def remove_plugin(shortname):
@@ -122,7 +122,7 @@ def remove_plugin(shortname):
             del LOAD_PLUG[shortname]
 
         except:
-            name = f"userbot.plugins.{shortname}"
+            name = f"Shikimori.plugins.{shortname}"
 
             for i in reversed(range(len(bot._event_builders))):
                 ev, cb = bot._event_builders[i]
@@ -176,12 +176,12 @@ def admin_cmd(pattern=None, **args):
 
     return events.NewMessage(**args)
 
-""" Userbot module for managing events.
- One of the main components of the userbot. """
+""" Shikimori module for managing events.
+ One of the main components of the Shikimori. """
 
 from telethon import events
 import asyncio
-from userbot import bot
+from Shikimori import bot
 from traceback import format_exc
 from time import gmtime, strftime
 import math
