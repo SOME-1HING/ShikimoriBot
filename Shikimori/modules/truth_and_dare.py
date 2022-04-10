@@ -22,3 +22,9 @@ DARE_HANDLER = DisableAbleCommandHandler("dare", dare, run_async=True)
 dispatcher.add_handler(TRUTH_HANDLER)
 dispatcher.add_handler(DARE_HANDLER)
 
+__mod_name__ = "Truth or Dare"
+__help__ = """
+*Truth or Dare*
+ ❍ `/truth` : Asks a question
+ ❍ `/dare` : Tells a task to to
+"""
