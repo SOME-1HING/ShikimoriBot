@@ -3,9 +3,9 @@ import sys
 from motor import motor_asyncio
 from pymongo import MongoClient
 from pymongo.errors import ServerSelectionTimeoutError
-from Senku import MONGO_DB_URI
-from Senku.confing import get_int_key, get_str_key
-from Senku.utils.logger import log
+from Shikimori import MONGO_DB_URI
+from Shikimori.confing import get_int_key, get_str_key
+from Shikimori.utils.logger import log
 
 MONGO_PORT = get_int_key("27017")
 MONGO_DB_URI = get_str_key("MONGO_URI")
