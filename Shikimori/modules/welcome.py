@@ -567,7 +567,7 @@ def new_member(update: Update, context: CallbackContext):  # sourcery no-metrics
                 f"<b>User</b>: {mention_html(new_mem.id, new_mem.first_name)}\n"
                 f"<b>ID</b>: <code>{new_mem.id}</code>"
             )
-        return welcome_log
+        return welcome_log  
 
 
 def check_not_bot(member, chat_id, message_id, context):

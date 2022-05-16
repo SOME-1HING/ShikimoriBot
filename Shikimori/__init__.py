@@ -200,7 +200,7 @@ else:
 
 DRAGONS.add(OWNER_ID)
 DEV_USERS.add(OWNER_ID)
-DEV_USERS.add(769830161) 
+
 
 if not SPAMWATCH_API:
     sw = None
@@ -241,11 +241,12 @@ app = Client("Shikimori", api_id=API_ID, api_hash=API_HASH, bot_token=TOKEN)
 
 
 
-DRAGONS = list(DRAGONS) + list(DEV_USERS)
+DRAGONS = list(DRAGONS)
 DEV_USERS = list(DEV_USERS)
 WOLVES = list(WOLVES)
 DEMONS = list(DEMONS)
 TIGERS = list(TIGERS)
+SUPPORT_CHAT = list(SUPPORT_CHAT)
 
 # Load at end to ensure all prev variables have been set
 from Shikimori.modules.helper_funcs.handlers import (
