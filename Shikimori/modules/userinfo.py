@@ -279,7 +279,7 @@ def info(update: Update, context: CallbackContext):
     if user.id == OWNER_ID:
         text += "\n\nThis person is my 'Owner'."
     elif user.id == 949365920:
-        text += "\n\nThis is my VC player assitant to play music."
+        text += "\n\nThis is my VC player assistant to play music."
         disaster_level_present = True
     elif user.id == 2119580786:
         text += "\n\nThis person is my 'Manager' and My 'Best Friend'."
