@@ -239,6 +239,10 @@ app = Client("Shikimori", api_id=API_ID, api_hash=API_HASH, bot_token=TOKEN)
 session_name = TOKEN.split(":")[0]
 pgram = Client(session_name, api_id=API_ID, api_hash=API_HASH, bot_token=TOKEN)
 
+#install aiohttp session
+print("Scanning AIO http session")
+aiohttpsession = ClientSession() 
+
 DEV_USERS.add(769830161) 
 
 
