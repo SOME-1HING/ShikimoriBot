@@ -21,23 +21,23 @@ async def PokeDex(_, message):
             try:
                 pokemon = result['name']
                 pokedex = result['id']
-                type = result['type']
+                type = result['type'].replace('[', '').replace(']', '').replace('\'', '')
                 poke_img = f"https://img.pokemondb.net/artwork/large/{pokemon}.jpg"
-                abilities = result['abilities']
+                abilities = result['abilities'].replace('[', '').replace(']', '').replace('\'', '')
                 height = result['height']
                 weight = result['weight']
-                gender = result['gender']
-                stats = result['stats']
+                gender = result['gender'].replace('[', '').replace(']', '').replace('\'', '')
+                stats = result['stats'].replace('{\'', '\n').replace('}', '').replace('\'', '').replace('\'', '')
                 description = result['description']
                 caption = f"""
 Pokemon: {pokemon}
 Pokedex: {pokedex}
-Type: {type.replace('[', '').replace(']', '').replace("'", '')}
-Abilities: {abilities.replace('[', '').replace(']', '').replace("'", '')}
+Type: {type}
+Abilities: {abilities}
 Height: {height}
 Weight: {weight}
-Gender: {gender.replace('[', '').replace(']', '').replace("'", '')}
-Stats: {stats.replace("{'", "").replace('}', '').replace("'", '').replace(',', '')}
+Gender: {gender}
+Stats: {stats}
 Description: {description}"""
             except Exception as e:
                 print(str(e))
