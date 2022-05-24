@@ -3,7 +3,7 @@ import aiohttp
 from pyrogram import filters
 from Shikimori import pgram as shiki
 
-@shiki.on_message(filters.command(['pokedex', 'pokemon']))
+@shiki.on_message(filters.command('pokedex'))
 async def PokeDex(_, message):
     if len(message.command) != 2:
         await message.reply_text("/pokedex <Pokemon Name>")
