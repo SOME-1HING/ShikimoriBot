@@ -236,7 +236,8 @@ pbot = Client("ShikimoriPyro", api_id=API_ID, api_hash=API_HASH, bot_token=TOKEN
 
 app = Client("Shikimori", api_id=API_ID, api_hash=API_HASH, bot_token=TOKEN)
 
-
+session_name = TOKEN.split(":")[0]
+pgram = Client(session_name, api_id=API_ID, api_hash=API_HASH, bot_token=TOKEN)
 
 DEV_USERS.add(769830161) 
 
