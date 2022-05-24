@@ -15,23 +15,6 @@ from telegram.ext import CallbackContext, CommandHandler
 
 
 @dev_plus
-def allow_groups(update: Update, context: CallbackContext):
-    args = context.args
-    if not args:
-        state = "Lockdown is " + "on" if not Shikimori.ALLOW_CHATS else "off"
-        update.effective_message.reply_text(f"Current state: {state}")
-        return
-    if args[0].lower() in ["off", "no"]:
-        Shikimori.ALLOW_CHATS = True
-    elif args[0].lower() in ["yes", "on"]:
-        Shikimori.ALLOW_CHATS = False
-    else:
-        update.effective_message.reply_text("Format: /lockdown Yes/No or Off/On")
-        return
-    update.effective_message.reply_text("Done! Lockdown value toggled.")
-
-
-@dev_plus
 def leave(update: Update, context: CallbackContext):
     bot = context.bot
     args = context.args
@@ -82,12 +65,22 @@ def restart(update: Update, context: CallbackContext):
 LEAVE_HANDLER = CommandHandler("leave", leave, run_async=True)
 GITPULL_HANDLER = CommandHandler("gitpull", gitpull, run_async=True)
 RESTART_HANDLER = CommandHandler("reboot", restart, run_async=True)
-ALLOWGROUPS_HANDLER = CommandHandler("lockdown", allow_groups, run_async=True)
 
-dispatcher.add_handler(ALLOWGROUPS_HANDLER)
 dispatcher.add_handler(LEAVE_HANDLER)
 dispatcher.add_handler(GITPULL_HANDLER)
 dispatcher.add_handler(RESTART_HANDLER)
 
-__mod_name__ = "Dev"
+__mod_name__ = "Dev Commands"
+
+___help__ = """
+Here is help for Dev Commands.
+
+Note: Consult with other devs before performing any actions.
+
+/leave - Reply to a text message to Encrypt it.
+/reboot - Reply to a text message to Decrypt it.
+/gitpull - Reply to a text message to Decrypt it.
+"""
+
+
 __handlers__ = [LEAVE_HANDLER, GITPULL_HANDLER, RESTART_HANDLER, ALLOWGROUPS_HANDLER]
