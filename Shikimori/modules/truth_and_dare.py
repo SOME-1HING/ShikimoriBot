@@ -17,7 +17,7 @@ def dare(update: Update, context: CallbackContext):
 def wyr(update: Update, context: CallbackContext):
     update.effective_message.reply_text(random.choice(truth_and_dare_string.WYR))
 
-@run_async
+
 def tord(update: Update, context: CallbackContext):
     update.effective_message.reply_text(random.choice(truth_and_dare_string.TORD))
 
