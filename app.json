@@ -220,6 +220,16 @@
          "description": "Required for wallpaper. Get your's from https://wall.alphacoders.com/",
          "required": false,
          "value": ""
+      },
+      "SS_USERNAME": {
+         "description": "Required for taking screenshot. Get your's from https://nocodeapi.com/docs/screenshot-api",
+         "required": false,
+         "value": ""
+      },
+      "SS_TOKEN": {
+         "description": "Required for taking screenshot. Get your's from https://nocodeapi.com/docs/screenshot-api",
+         "required": false,
+         "value": ""
       }
       
    }

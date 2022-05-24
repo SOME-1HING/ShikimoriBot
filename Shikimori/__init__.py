@@ -109,7 +109,9 @@ if ENV:
     SPAMWATCH_API = os.environ.get("SPAMWATCH_API", None)
     ARQ_API_URL = "https://arq.hamker.in"
     ARQ_API_KEY = "AFMJDA-MQSBCE-RNSVHB-WUVNVP-ARQ"
-    
+    SS_USERNAME = os.environ.get("SS_USERNAME", None)
+    SS_TOKEN = os.environ.get("SS_TOKEN", None)
+
     
     try:
         WHITELIST_CHATS = {int(x) for x in os.environ.get('WHITELIST_CHATS', "").split()}
@@ -185,6 +187,8 @@ else:
     SPAMWATCH_SUPPORT_CHAT = Config.SPAMWATCH_SUPPORT_CHAT
     SPAMWATCH_API = Config.SPAMWATCH_API
     INFOPIC = Config.INFOPIC
+    SS_USERNAME = Config.SS_USERNAME
+    SS_TOKEN = Config.SS_TOKEN
 
     try:
         WHITELIST_CHATS = {int(x) for x in os.environ.get('WHITELIST_CHATS', "").split()}

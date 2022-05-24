@@ -3,6 +3,8 @@ from pyrogram import filters
 from pyrogram.types import Message
 
 from Shikimori import pbot as app
+from Shikimori import SS_USERNAME as USERNAME
+from Shikimori import SS_TOKEN as TOKEN
 from Shikimori.utils.errors import capture_err
 
 __mod_name__ = "Web Screenshot"
@@ -20,7 +22,7 @@ async def take_ss(_, message: Message):
         await m.edit("**Uploading**")
         try:
             await message.reply_photo(
-                photo=f"https://screenshotlayer.com/php_helper_scripts/scl_api.php?secret_key=824c7064ef36ae74083de06edb1ab15d&url={url}",
+                photo=f"https://v1.nocodeapi.com/{USERNAME}/screen/{TOKEN}/screenshot?url={url}&full_page=1",
                 quote=False,
             )
         except TypeError:
@@ -28,3 +30,6 @@ async def take_ss(_, message: Message):
         await m.delete()
     except Exception as e:
         await message.reply_text(str(e))
+
+
+

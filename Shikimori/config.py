@@ -2,6 +2,8 @@
 import json
 import os
 
+from Shikimori import SS_TOKEN, SS_USERNAME
+
 
 def get_user_list(config, key):
     with open("{}/Senku/{}".format(os.getcwd(), config), "r") as json_file:
@@ -67,6 +69,12 @@ class Config(object):
     AI_API_KEY = "awoo"  # For chatbot, get one from https://coffeehouse.intellivoid.net/dashboard
     BL_CHATS = []  # List of groups that you want blacklisted.
     SPAMMERS = None
+    SS_TOKEN = (
+        "awoo"  # Required for taking screenshot. Get your's from https://nocodeapi.com/docs/screenshot-api
+    )
+    SS_USERNAME = (
+        "awoo"  # Required for taking screenshot. Get your's from https://nocodeapi.com/docs/screenshot-api
+    )
 
 
 class Production(Config):
