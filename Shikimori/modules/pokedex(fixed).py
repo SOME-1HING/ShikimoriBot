@@ -2,6 +2,7 @@
 import aiohttp
 from pyrogram import filters
 from Shikimori import pbot
+from Shikimori.Extras.errors import capture_err
 
 @pbot.on_message(filters.command(['pokedex', 'pokemon']))
 @capture_err
