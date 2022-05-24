@@ -1,9 +1,9 @@
 from pyrogram import filters
 from pyrogram.types import Message
 
-from Shikimori import DEV_USERS, SUPPORT_USERS,pbot as app
+from Shikimori import pbot as app
 
-SUDOERS = SUPPORT_USERS.append(DEV_USERS)
+
 
 __mod_name__ = "GAMEY 🎁"
 __help__ = """
