@@ -21,13 +21,13 @@ async def PokeDex(_, message):
             try:
                 pokemon = result['name']
                 pokedex = result['id']
-                type = result['type'].replace('[', '').replace(']', '').replace('\'', '')
+                type = result['type']
                 poke_img = f"https://img.pokemondb.net/artwork/large/{pokemon}.jpg"
-                abilities = result['abilities'].replace('[', '').replace(']', '').replace('\'', '')
+                abilities = result['abilities']
                 height = result['height']
                 weight = result['weight']
-                gender = result['gender'].replace('[', '').replace(']', '').replace('\'', '')
-                stats = result['stats'].replace('{\'', '\n').replace('}', '').replace('\'', '').replace('\'', '')
+                gender = result['gender']
+                stats = result['stats']
                 description = result['description']
                 caption = f"""
 Pokemon: {pokemon}
