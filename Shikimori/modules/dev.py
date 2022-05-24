@@ -83,4 +83,4 @@ Note: Consult with other devs before performing any actions.
 """
 
 
-__handlers__ = [LEAVE_HANDLER, GITPULL_HANDLER, RESTART_HANDLER, ALLOWGROUPS_HANDLER]
+__handlers__ = [LEAVE_HANDLER, GITPULL_HANDLER, RESTART_HANDLER]
