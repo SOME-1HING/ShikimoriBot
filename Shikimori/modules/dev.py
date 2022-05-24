@@ -77,9 +77,9 @@ Here is help for Dev Commands.
 
 Note: Consult with other devs before performing any actions.
 
-/leave - Reply to a text message to Encrypt it.
-/reboot - Reply to a text message to Decrypt it.
-/gitpull - Reply to a text message to Decrypt it.
+/leave <chat id> - Bot leaves the group.
+/reboot - To restart Bot.
+/gitpull - Pull changes from github and redeploys the bot. [Must have github connected with Heroku]
 """
 
 
