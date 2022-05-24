@@ -37,7 +37,7 @@ Abilities: {abilities.replace('[', '').replace(']', '').replace("'", '')}
 Height: {height}
 Weight: {weight}
 Gender: {gender.replace('[', '').replace(']', '').replace("'", '')}
-Stats: {stats.replace("{'", "\n").replace('}', '').replace("'", '').replace(',', '\n')}
+Stats: {stats.replace("{'", "").replace('}', '').replace("'", '').replace(',', '')}
 Description: {description}"""
             except Exception as e:
                 print(str(e))
