@@ -1,5 +1,5 @@
 import os
-from Shikimori import client as tbot
+from Shikimori import telethn as tbot
 from geopy.geocoders import Nominatim
 from Shikimori.events import register
 from Shikimori import *
