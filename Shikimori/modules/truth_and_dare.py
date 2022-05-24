@@ -29,8 +29,9 @@ WYR_HANDLER = DisableAbleCommandHandler("rather", wyr, run_async=True)
 
 
 dispatcher.add_handler(TRUTH_HANDLER)
+dispatcher.add_handler(TORD_HANDLER)
+dispatcher.add_handler(WYR_HANDLER)
 dispatcher.add_handler(DARE_HANDLER)
-
 
 __mod_name__ = "Truth or Dare"
 __help__ = """
