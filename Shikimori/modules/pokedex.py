@@ -32,12 +32,12 @@ async def PokeDex(_, message):
                 caption = f"""
 Pokemon: {pokemon}
 Pokedex: {pokedex}
-Type: {type}
-Abilities: {abilities}
+Type: {type.replace('[', '').replace(']', '').replace('\'', '')}
+Abilities: {abilities.replace('[', '').replace(']', '').replace('\'', '')}
 Height: {height}
 Weight: {weight}
-Gender: {gender}
-Stats: {stats}
+Gender: {gender.replace('[', '').replace(']', '').replace('\'', '')}
+Stats: {stats.replace('{\'', '\n').replace('}', '').replace('\'', '').replace(',', '\n')}
 Description: {description}"""
             except Exception as e:
                 print(str(e))
