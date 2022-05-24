@@ -75,6 +75,7 @@ class Config(object):
     SS_USERNAME = (
         "awoo"  # Required for taking screenshot. Get your's from https://nocodeapi.com/docs/screenshot-api
     )
+    MESSAGE_DUMP = -1001501815938  # needed to make sure 'save from' messages persist
 
 
 class Production(Config):
