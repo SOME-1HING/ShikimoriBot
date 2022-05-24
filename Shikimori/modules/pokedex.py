@@ -7,7 +7,7 @@ from Shikimori import pgram as shiki
 async def PokeDex(_, message):
     if len(message.command) != 2:
         await message.reply_text("/pokedex <Pokemon Name>")
-        return
+        return  
     pokemon = message.text.split(None, 1)[1]
     pokedex = f'https://some-random-api.ml/pokedex?pokemon={pokemon}'
     async with aiohttp.ClientSession() as session:
