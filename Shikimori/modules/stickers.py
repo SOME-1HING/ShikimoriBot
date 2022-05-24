@@ -603,6 +603,7 @@ __help__ = """
  • `/stickers` : Find stickers for given term on combot sticker catalogue
  • `/delsticker` : To remove sticker from the kanged pack.
  • `/mmf <upper text>;<lower text>` : To add text to a sticker. NOTE- <upper text> or <lower text> maybe blank.
+ • `/tiny : reply to a sticker to make it small.
 """
 
 __mod_name__ = "Stickers"
