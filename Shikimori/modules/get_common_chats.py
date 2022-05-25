@@ -1,7 +1,7 @@
 import os
 from time import sleep
 
-from Shikimori import DEV_USERS, SUPPORT_USERS, dispatcher
+from Shikimori import DEV_USERS, dispatcher
 from Shikimori.modules.helper_funcs.extraction import extract_user
 from Shikimori.modules.sql.users_sql import get_user_com_chats
 from telegram import Update
