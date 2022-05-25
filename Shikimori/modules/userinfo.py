@@ -34,6 +34,8 @@ from Shikimori.modules.helper_funcs.chat_status import sudo_plus
 from Shikimori.modules.helper_funcs.extraction import extract_user
 from Shikimori import telethn as SaitamaTelethonClient
 
+BOT_IMG = "https://telegra.ph/file/fa1acd48ae767baa02e3f.jpg"
+
 
 
 def no_by_per(totalhp, percentage):
@@ -43,6 +45,30 @@ def no_by_per(totalhp, percentage):
     """
     return totalhp * percentage / 100
 
+
+def get_readable_time(seconds: int) -> str:
+    count = 0
+    ping_time = ""
+    time_list = []
+    time_suffix_list = ["s", "m", "h", "days"]
+
+    while count < 4:
+        count += 1
+        remainder, result = divmod(seconds, 60) if count < 3 else divmod(seconds, 24)
+        if seconds == 0 and remainder == 0:
+            break
+        time_list.append(int(result))
+        seconds = int(remainder)
+
+    for x in range(len(time_list)):
+        time_list[x] = str(time_list[x]) + time_suffix_list[x]
+    if len(time_list) == 4:
+        ping_time += time_list.pop() + ", "
+
+    time_list.reverse()
+    ping_time += ":".join(time_list)
+
+    return ping_time
 
 def get_percentage(totalhp, earnedhp):
     """
@@ -116,7 +142,7 @@ def hpmanager(user):
 
 def make_bar(per):
     done = min(round(per / 10), 10)
-    return "■" * done + "□" * (10 - done)
+    return "❤" * done + "♡" * (10 - done)
 
 
 def get_id(update: Update, context: CallbackContext):
@@ -210,6 +236,17 @@ def info(update: Update, context: CallbackContext):
     bot, args = context.bot, context.args
     message = update.effective_message
     chat = update.effective_chat
+    buttons = [
+    [
+                        InlineKeyboardButton(
+                             text="Health",
+                             url="https://t.me/Shikimori_bot_Updates/9"),
+                       InlineKeyboardButton(
+                             text="Disasters",
+                             url="https://t.me/Shikimori_bot_Updates/6"),
+                    ],
+    ]
+    
     user_id = extract_user(update.effective_message, args)
 
     if user_id:
@@ -219,35 +256,40 @@ def info(update: Update, context: CallbackContext):
         user = message.from_user
 
     elif not message.reply_to_message and (
-            not args or
-        (len(args) >= 1 and not args[0].startswith("@") and
-         not args[0].isdigit() and
-         not message.parse_entities([MessageEntity.TEXT_MENTION]))):
+        not args
+        or (
+            len(args) >= 1
+            and not args[0].startswith("@")
+            and not args[0].isdigit()
+            and not message.parse_entities([MessageEntity.TEXT_MENTION])
+        )
+    ):
         message.reply_text("I can't extract a user from this.")
         return
 
     else:
         return
 
-    rep = message.reply_text(
-        "<code>Appraising...</code>", parse_mode=ParseMode.HTML)
+    rep = message.reply_text("<code>Appraising...</code>", parse_mode=ParseMode.HTML)
 
-    text = (f"╒═══「<b> Appraisal results:</b> 」\n"
-            f"ID: <code>{user.id}</code>\n"
-            f"First Name: {html.escape(user.first_name)}")
+    text = (
+        f"╒═══「<b>• Appraisal results •</b> 」\n"
+        f"• ID: <code>{user.id}</code>\n"
+        f"• First Name: {html.escape(user.first_name)}"
+    )
 
     if user.last_name:
-        text += f"\nLast Name: {html.escape(user.last_name)}"
+        text += f"\n• Last Name: {html.escape(user.last_name)}"
 
     if user.username:
-        text += f"\nUsername: @{html.escape(user.username)}"
+        text += f"\n• Username: @{html.escape(user.username)}"
 
-    text += f"\nPermalink: {mention_html(user.id, 'link')}"
+    text += f"\n• Userlink: {mention_html(user.id, 'link')}"
 
     if chat.type != "private" and user_id != bot.id:
-        _stext = "\nPresence: <code>{}</code>"
+        _stext = "\n• Presence: <code>{}</code>"
 
-        afk_st = is_user_afk(user.id)
+        afk_st = is_afk(user.id)
         if afk_st:
             text += _stext.format("AFK")
         else:
@@ -269,8 +311,6 @@ def info(update: Update, context: CallbackContext):
             text += "\n\n<b>This person is Spamwatched!</b>"
             text += f"\nReason: <pre>{spamwtc.reason}</pre>"
             text += "\nAppeal at @SpamWatchSupport"
-        else:
-            pass
     except:
         pass  # don't crash if api is down somehow...
 
@@ -283,9 +323,6 @@ def info(update: Update, context: CallbackContext):
         disaster_level_present = True
     elif user.id == 2119580786:
         text += "\n\nThis person is my 'Manager' and My 'Best Friend'."
-        disaster_level_present = True
-    elif user.id == 5174486297:
-        text += "\n\nThis person is my 'Creator' and My 'BoyFriend'."
         disaster_level_present = True
     elif user.id in DEV_USERS:
         text += "\n\nThis person is my 'Best Friend'."
@@ -303,19 +340,16 @@ def info(update: Update, context: CallbackContext):
         text += "\n\nThis person is just a 'Slave'."
         disaster_level_present = True
 
-    if disaster_level_present:
-        text += ' [<a href="https://t.me/Shikimori_bot_Updates/6">?</a>]'.format(
-            bot.username)
 
     try:
         user_member = chat.get_member(user.id)
-        if user_member.status == 'administrator':
+        if user_member.status == "administrator":
             result = requests.post(
-                f"https://api.telegram.org/bot{TOKEN}/getChatMember?chat_id={chat.id}&user_id={user.id}"
+                f"https://api.telegram.org/bot{TOKEN}/getChatMember?chat_id={chat.id}&user_id={user.id}",
             )
             result = result.json()["result"]
             if "custom_title" in result.keys():
-                custom_title = result['custom_title']
+                custom_title = result["custom_title"]
                 text += f"\n\nTitle:\n<b>{custom_title}</b>"
     except BadRequest:
         pass
@@ -330,27 +364,31 @@ def info(update: Update, context: CallbackContext):
 
     if INFOPIC:
         try:
-            profile = context.bot.get_file(context.bot.get_user_profile_photos(user.id).photos[0][-1]["file_id"])
-            profile.download(f"{user.id}.png")
+            profile = context.bot.get_user_profile_photos(user.id).photos[0][-1]
             context.bot.sendChatAction(chat.id, "upload_photo")
             context.bot.send_photo(
-              chat.id,
-              photo=open(f"{user.id}.png", "rb"),
-              caption=(text),
-              parse_mode=ParseMode.HTML,            
-            )
-            os.remove(f"{user.id}.png")
+            chat.id,
+            photo=profile,
+            caption=(text),
+            reply_markup=InlineKeyboardMarkup(buttons),
+                parse_mode=ParseMode.HTML,            
+        )
         # Incase user don't have profile pic, send normal text
         except IndexError:
             message.reply_text(
-                text, parse_mode=ParseMode.HTML)
+            text,
+        reply_markup=InlineKeyboardMarkup(buttons),
+                parse_mode=ParseMode.HTML,            
+                   )
 
     else:
         message.reply_text(
-            text, parse_mode=ParseMode.HTML)
+            text,
+        reply_markup=InlineKeyboardMarkup(buttons),
+                parse_mode=ParseMode.HTML,            
+                   )
 
     rep.delete()
-
 
 def about_me(update: Update, context: CallbackContext):
     bot, args = context.bot, context.args
