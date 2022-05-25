@@ -34,7 +34,6 @@ from Shikimori import (
     dispatcher,
     sw,
     StartTime,
-    SUPPORT_CHAT
 )
 from Shikimori.__main__ import STATS, TOKEN, USER_INFO
 from Shikimori.modules.sql import SESSION
