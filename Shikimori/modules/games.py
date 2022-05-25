@@ -5,7 +5,7 @@ from Shikimori import pbot as app
 
 
 
-__mod_name__ = "GAMEY 🎁"
+__mod_name__ = "GAMES"
 __help__ = """
 Use these commands and try to score.\n\n
 /dice - Dice 🎲\n
