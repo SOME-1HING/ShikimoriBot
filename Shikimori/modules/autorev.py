@@ -203,7 +203,7 @@ def scam(imgspage, lim):
     return imglinks
   
 AUTOREV_HANDLER = DisableAbleMessageHandler(
-    Filters.regex(r"(?i)(QQ|qq|Qq)"), fastreverse, friendly="fastreverse"
+    Filters.regex(r"(?i)(PP|pp|Pp)"), fastreverse, friendly="fastreverse"
 )
   
 dispatcher.add_handler(AUTOREV_HANDLER)
