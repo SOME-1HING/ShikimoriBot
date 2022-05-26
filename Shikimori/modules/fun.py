@@ -12,6 +12,7 @@ from telegram.error import BadRequest
 from telegram.ext import CallbackContext, Filters, run_async
 
 GIF_ID = "CgACAgQAAx0CSVUvGgAC7KpfWxMrgGyQs-GUUJgt-TSO8cOIDgACaAgAAlZD0VHT3Zynpr5nGxsE"
+img_gm = "https://telegra.ph/file/fff37608fa21d9d3d0b39.jpg"
 
 
 
@@ -31,12 +32,12 @@ def goodnight(update: Update, context: CallbackContext):
 
 
 def goodmorning(update, context):
-    message = update.effective_message
-    curr_user = html.escape(message.from_user.first_name)
-    user1 = curr_user
-    temp = random.choice(fun_strings.GDMORNING)
-    reply = temp.format(user1=user1)
-    message.reply_text(reply)
+    user1 = message.from_user.first_name
+    update.effective_message.reply_photo(
+            img_gm
+            + f"Good Morning: {user1}",
+            parse_mode=ParseMode.MARKDOWN,
+        )
 
 
 
