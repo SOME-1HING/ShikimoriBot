@@ -24,26 +24,11 @@ def me_too(update, context):
 
 
 def goodnight(update: Update, context: CallbackContext):
-    # message = update.effective_message
-    # curr_user = html.escape(message.from_user.first_name)
-    # user1 = curr_user
-    # temp = random.choice(fun_strings.GDNIGHT)
-    # reply = temp.format(user1=user1)
-    # message.reply_text(reply)
     args = context.args
     message = update.effective_message
-
-    reply_text = (
-        message.reply_to_message.reply_text
-        if message.reply_to_message
-        else message.reply_text
-    )
-
     user1 = extract_user(message, args)
-    temp = random.choice(fun_strings.GDNIGHT)
-    reply = temp.format(user1=user1)
-    reply_text(reply, parse_mode=ParseMode.HTML)
-
+    reply = f"Good Night: {user1}"
+    message.reply_text(reply)
 
 
 def goodmorning(update, context):
