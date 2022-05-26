@@ -68,10 +68,10 @@ GDNIGHT_HANDLER = DisableAbleMessageHandler(
     Filters.regex(r"(?i)(good night|gn|goodnight)"), goodnight, friendly="goodnight", run_async = True
 )
 BYE_HANDLER = DisableAbleMessageHandler(
-    Filters.regex(r"(?i)(bye)"), goodnight, friendly="bye", run_async = True
+    Filters.regex(r"(?i)(bye)"), bye, friendly="bye", run_async = True
 )
 HELLO_HANDLER = DisableAbleMessageHandler(
-    Filters.regex(r"(?i)(hello)"), goodnight, friendly="hello", run_async = True
+    Filters.regex(r"(?i)(hello)"), hello, friendly="hello", run_async = True
 )
 
 dispatcher.add_handler(GDMORNING_HANDLER)
