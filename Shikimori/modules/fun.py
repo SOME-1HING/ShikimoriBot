@@ -32,6 +32,7 @@ def goodnight(update: Update, context: CallbackContext):
 
 
 def goodmorning(update, context):
+    message = update.effective_message
     user1 = message.from_user.first_name
     update.effective_message.reply_photo(
             img_gm
