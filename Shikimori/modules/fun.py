@@ -24,9 +24,9 @@ def me_too(update, context):
 
 
 def goodnight(update, context):
+    message = update.effective_message
     curr_user = html.escape(message.from_user.first_name)
     user1 = curr_user
-    message = update.effective_message
     temp = random.choice(fun_strings.GDNIGHT)
     reply = temp.format(user1=user1)
     message.reply_text(reply)
@@ -34,9 +34,9 @@ def goodnight(update, context):
 
 
 def goodmorning(update, context):
+    message = update.effective_message
     curr_user = html.escape(message.from_user.first_name)
     user1 = curr_user
-    message = update.effective_message
     temp = random.choice(fun_strings.GDMORNING)
     reply = temp.format(user1=user1)
     message.reply_text(reply)
