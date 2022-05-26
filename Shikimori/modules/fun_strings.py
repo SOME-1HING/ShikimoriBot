@@ -444,13 +444,13 @@ TABLE = (
     "Go do some work instead of flippin tables.",
 )
 
-GDNIGHT = [
+GDNIGHT = (
     "Good Night {user1}"
-]
+)
 
-GDMORNING = [
+GDMORNING = (
     "Good Morning {user1}"
-]
+)
 
 
 # GDNIGHT = [
