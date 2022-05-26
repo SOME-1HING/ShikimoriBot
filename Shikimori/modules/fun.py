@@ -14,6 +14,29 @@ from telegram.ext import CallbackContext
 GIF_ID = "CgACAgQAAx0CSVUvGgAC7KpfWxMrgGyQs-GUUJgt-TSO8cOIDgACaAgAAlZD0VHT3Zynpr5nGxsE"
 
 
+
+def me_too(update, context):
+    message = update.effective_message
+    reply = random.choice(
+        ["Me too thanks", "Haha yes, me too", "Same lol", "Me irl"])
+    message.reply_text(reply)
+
+
+
+def goodnight(update, context):
+    message = update.effective_message
+    reply = random.choice(fun.GDNIGHT)
+    message.reply_text(reply, parse_mode=ParseMode.MARKDOWN)
+
+
+
+def goodmorning(update, context):
+    message = update.effective_message
+    reply = random.choice(fun.GDMORNING)
+    message.reply_text(reply, parse_mode=ParseMode.MARKDOWN)
+
+
+
 def runs(update: Update, context: CallbackContext):
     temp = random.choice(fun_strings.RUN_STRINGS)
     if update.effective_user.id == 1170714920:
@@ -262,6 +285,17 @@ TABLE_HANDLER = DisableAbleCommandHandler("table", table, run_async=True)
 SHOUT_HANDLER = DisableAbleCommandHandler("shout", shout, run_async=True)
 WEEBIFY_HANDLER = DisableAbleCommandHandler("weebify", weebify, run_async=True)
 
+
+GDMORNING_HANDLER = DisableAbleMessageHandler(
+    Filters.regex(r"(?i)(good morning)"), goodmorning, friendly=("goodmorning", "gm", "good morning"), run_async = True
+)
+GDNIGHT_HANDLER = DisableAbleMessageHandler(
+    Filters.regex(r"(?i)(good night)"), goodnight, friendly="goodnight", run_async = True
+)
+MEETOO_HANDLER = DisableAbleMessageHandler(
+    Filters.regex(r"(?i)(me too)"), me_too, friendly="metoo", run_async = True
+)
+
 dispatcher.add_handler(WEEBIFY_HANDLER)
 dispatcher.add_handler(SHOUT_HANDLER)
 dispatcher.add_handler(SANITIZE_HANDLER)
@@ -274,6 +308,10 @@ dispatcher.add_handler(RLG_HANDLER)
 dispatcher.add_handler(DECIDE_HANDLER)
 dispatcher.add_handler(EIGHTBALL_HANDLER)
 dispatcher.add_handler(TABLE_HANDLER)
+dispatcher.add_handler(MEETOO_HANDLER)
+dispatcher.add_handler(GDMORNING_HANDLER)
+dispatcher.add_handler(GDNIGHT_HANDLER)
+
 
 __mod_name__ = "Fun"
 __command_list__ = [
