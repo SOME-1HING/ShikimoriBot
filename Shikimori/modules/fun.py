@@ -287,10 +287,10 @@ WEEBIFY_HANDLER = DisableAbleCommandHandler("weebify", weebify, run_async=True)
 
 
 GDMORNING_HANDLER = DisableAbleMessageHandler(
-    Filters.regex(r"(?i)(good morning)"), goodmorning, friendly=("goodmorning", "gm", "good morning"), run_async = True
+    Filters.regex(r"(?i)(good morning|gm|goodmorning)"), goodmorning, friendly="goodmorning", run_async = True
 )
 GDNIGHT_HANDLER = DisableAbleMessageHandler(
-    Filters.regex(r"(?i)(good night)"), goodnight, friendly="goodnight", run_async = True
+    Filters.regex(r"(?i)(good night|gn|goodnight)"), goodnight, friendly="goodnight", run_async = True
 )
 MEETOO_HANDLER = DisableAbleMessageHandler(
     Filters.regex(r"(?i)(me too)"), me_too, friendly="metoo", run_async = True
