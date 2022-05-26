@@ -5,7 +5,7 @@ from Shikimori import telethn
 from Shikimori.events import register as tomori
 
 
-@tomori(pattern="^/all ?(.*)")
+@tomori(pattern="^/(all|mentionall|tagall) ?(.*)")
 async def _(event):
     if event.fwd_from:
         return
@@ -38,4 +38,6 @@ __mod_name__ = "TagAll"
 __help__ = """
 *Tag All*
  ❍ `/all` : (reply to message or add another message) To mention all members in your group, without exception.
+ ❍ `/tagall` : (reply to message or add another message) To mention all members in your group, without exception.
+ ❍ `/mentionall` : (reply to message or add another message) To mention all members in your group, without exception.
 """
