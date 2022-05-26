@@ -34,11 +34,14 @@ def goodnight(update: Update, context: CallbackContext):
 def goodmorning(update, context):
     message = update.effective_message
     user1 = message.from_user.first_name
-    update.effective_message.reply_photo(
+    try:
+        update.effective_message.reply_photo(
             IMG_GM,f"Good Morning: {user1}",
             parse_mode=ParseMode.MARKDOWN,
         )
-
+    except:
+        reply = f"Good Night: {user1}"
+        message.reply_text(reply)
 
 
 def runs(update: Update, context: CallbackContext):
