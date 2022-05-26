@@ -13,7 +13,7 @@ from telegram.ext import CallbackContext, Filters, run_async
 
 GIF_ID = "CgACAgQAAx0CSVUvGgAC7KpfWxMrgGyQs-GUUJgt-TSO8cOIDgACaAgAAlZD0VHT3Zynpr5nGxsE"
 IMG_GM = "https://telegra.ph/file/fff37608fa21d9d3d0b39.jpg"
-
+IMG_GN = "https://telegra.ph/file/1862c7260109e24ed4715.jpg"
 
 
 def me_too(update, context):
@@ -27,8 +27,14 @@ def me_too(update, context):
 def goodnight(update: Update, context: CallbackContext):
     message = update.effective_message
     user1 = message.from_user.first_name
-    reply = f"Good Night: {user1}"
-    message.reply_text(reply)
+    try:
+        update.effective_message.reply_photo(
+            IMG_GN,f"*Good Night:* {user1}",
+            parse_mode=ParseMode.MARKDOWN,
+        )
+    except:
+        reply = f"*Good Night:* {user1}"
+        message.reply_text(reply)
 
 
 def goodmorning(update, context):
@@ -36,11 +42,11 @@ def goodmorning(update, context):
     user1 = message.from_user.first_name
     try:
         update.effective_message.reply_photo(
-            IMG_GM,f"Good Morning: {user1}",
+            IMG_GM,f"*Good Morning:* {user1}",
             parse_mode=ParseMode.MARKDOWN,
         )
     except:
-        reply = f"Good Night: {user1}"
+        reply = f"*Good Morning:* {user1}"
         message.reply_text(reply)
 
 
