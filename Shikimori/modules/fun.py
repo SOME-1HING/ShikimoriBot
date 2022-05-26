@@ -24,9 +24,8 @@ def me_too(update, context):
 
 
 def goodnight(update: Update, context: CallbackContext):
-    args = context.args
     message = update.effective_message
-    user1 = extract_user(message, args)
+    user1 = message.from_user.first_name
     reply = f"Good Night: {user1}"
     message.reply_text(reply)
 
