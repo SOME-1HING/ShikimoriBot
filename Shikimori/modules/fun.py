@@ -35,8 +35,7 @@ def goodmorning(update, context):
     message = update.effective_message
     user1 = message.from_user.first_name
     update.effective_message.reply_photo(
-            IMG_GM,
-            + f"Good Morning: {user1}",
+            IMG_GM,f"Good Morning: {user1}",
             parse_mode=ParseMode.MARKDOWN,
         )
 
