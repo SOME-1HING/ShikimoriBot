@@ -12,7 +12,7 @@ from telegram.error import BadRequest
 from telegram.ext import CallbackContext, Filters, run_async
 
 GIF_ID = "CgACAgQAAx0CSVUvGgAC7KpfWxMrgGyQs-GUUJgt-TSO8cOIDgACaAgAAlZD0VHT3Zynpr5nGxsE"
-img_gm = "https://telegra.ph/file/fff37608fa21d9d3d0b39.jpg"
+IMG_GM = "https://telegra.ph/file/fff37608fa21d9d3d0b39.jpg"
 
 
 
@@ -35,7 +35,7 @@ def goodmorning(update, context):
     message = update.effective_message
     user1 = message.from_user.first_name
     update.effective_message.reply_photo(
-            img_gm
+            IMG_GM
             + f"Good Morning: {user1}",
             parse_mode=ParseMode.MARKDOWN,
         )
