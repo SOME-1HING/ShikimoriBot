@@ -25,14 +25,14 @@ def me_too(update, context):
 
 def goodnight(update, context):
     message = update.effective_message
-    reply = random.choice(fun.GDNIGHT)
+    reply = random.choice(fun_strings.GDNIGHT)
     message.reply_text(reply, parse_mode=ParseMode.MARKDOWN)
 
 
 
 def goodmorning(update, context):
     message = update.effective_message
-    reply = random.choice(fun.GDMORNING)
+    reply = random.choice(fun_strings.GDMORNING)
     message.reply_text(reply, parse_mode=ParseMode.MARKDOWN)
 
 
