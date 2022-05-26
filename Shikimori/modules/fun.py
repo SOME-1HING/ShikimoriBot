@@ -25,40 +25,20 @@ def me_too(update, context):
 
 def goodnight(update, context):
     curr_user = html.escape(message.from_user.first_name)
-    user_id = extract_user(message, args)
-    bot = context.bot
-
-    if user_id:
-        patted_user = bot.get_chat(user_id)
-        user1 = curr_user
-        user2 = html.escape(patted_user.first_name)
-
-    else:
-        user1 = bot.first_name
-        user2 = curr_user
+    user1 = curr_user
     message = update.effective_message
     temp = random.choice(fun_strings.GDNIGHT)
-    reply = temp.format(user1=user1, user2=user2)
+    reply = temp.format(user1=user1)
     message.reply_text(reply)
 
 
 
 def goodmorning(update, context):
     curr_user = html.escape(message.from_user.first_name)
-    user_id = extract_user(message, args)
-    bot = context.bot
-
-    if user_id:
-        patted_user = bot.get_chat(user_id)
-        user1 = curr_user
-        user2 = html.escape(patted_user.first_name)
-
-    else:
-        user1 = bot.first_name
-        user2 = curr_user
+    user1 = curr_user
     message = update.effective_message
     temp = random.choice(fun_strings.GDMORNING)
-    reply = temp.format(user1=user1, user2=user2)
+    reply = temp.format(user1=user1)
     message.reply_text(reply)
 
 
