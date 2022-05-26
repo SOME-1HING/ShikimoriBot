@@ -50,9 +50,12 @@ def hello(update: Update, context: CallbackContext):
 def bye(update: Update, context: CallbackContext):
     message = update.effective_message
     user1 = message.from_user.first_name
+    caption = f"*Bye!!* {user1}"
+    img = IMG_BYE
     try:
         update.effective_message.reply_video(
-            IMG_BYE,f"*Bye!!* {user1}",
+            photo = img,
+            caption = caption,
             parse_mode=ParseMode.MARKDOWN,
         )
     except:
