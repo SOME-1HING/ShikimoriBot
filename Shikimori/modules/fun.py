@@ -16,11 +16,6 @@ IMG_GM = "https://telegra.ph/file/fff37608fa21d9d3d0b39.jpg"
 IMG_GN = "https://telegra.ph/file/1862c7260109e24ed4715.jpg"
 
 
-def me_too(update, context):
-    message = update.effective_message
-    reply = random.choice(
-        ["Me too thanks", "Haha yes, me too", "Same lol", "Me irl"])
-    message.reply_text(reply)
 
 
 
@@ -305,9 +300,6 @@ GDMORNING_HANDLER = DisableAbleMessageHandler(
 GDNIGHT_HANDLER = DisableAbleMessageHandler(
     Filters.regex(r"(?i)(good night|gn|goodnight)"), goodnight, friendly="goodnight", run_async = True
 )
-MEETOO_HANDLER = DisableAbleMessageHandler(
-    Filters.regex(r"(?i)(me too)"), me_too, friendly="metoo", run_async = True
-)
 
 dispatcher.add_handler(WEEBIFY_HANDLER)
 dispatcher.add_handler(SHOUT_HANDLER)
@@ -321,7 +313,6 @@ dispatcher.add_handler(RLG_HANDLER)
 dispatcher.add_handler(DECIDE_HANDLER)
 dispatcher.add_handler(EIGHTBALL_HANDLER)
 dispatcher.add_handler(TABLE_HANDLER)
-dispatcher.add_handler(MEETOO_HANDLER)
 dispatcher.add_handler(GDMORNING_HANDLER)
 dispatcher.add_handler(GDNIGHT_HANDLER)
 
