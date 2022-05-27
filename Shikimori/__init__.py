@@ -1,3 +1,4 @@
+from distutils.command.config import config
 import logging
 import os
 import sys
@@ -121,6 +122,9 @@ if ENV:
     ARQ_API_KEY = "AFMJDA-MQSBCE-RNSVHB-WUVNVP-ARQ"
     SS_USERNAME = os.environ.get("SS_USERNAME", None)
     SS_TOKEN = os.environ.get("SS_TOKEN", None)
+    HEROKU_APP_NAME = os.environ.get("HEROKU_APP_NAME", None)
+    HEROKU_API_KEY = os.environ.get("HEROKU_API_KEY", None)
+    MAINDEV_ID = os.environ.get("MAINDEV_ID", None)
 
     
     try:
@@ -177,7 +181,8 @@ else:
     CERT_PATH = Config.CERT_PATH
     API_ID = Config.API_ID
     API_HASH = Config.API_HASH
-
+    HEROKU_API_KEY = Config.HEROKU_API_KEY
+    HEROKU_APP_NAME = Config.HEROKU_APP_NAME
     DB_URI = Config.SQLALCHEMY_DATABASE_URI
     DONATION_LINK = Config.DONATION_LINK
     LOAD = Config.LOAD
@@ -200,7 +205,8 @@ else:
     INFOPIC = Config.INFOPIC
     SS_USERNAME = Config.SS_USERNAME
     SS_TOKEN = Config.SS_TOKEN
-
+    MAINDEV_ID = Config.MAINDEV_ID
+    
     try:
         WHITELIST_CHATS = {int(x) for x in os.environ.get('WHITELIST_CHATS', "").split()}
     except ValueError:

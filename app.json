@@ -235,7 +235,12 @@
          "description": "Event logs channel to note down important bot level events, recommend to make this public. ex: '-123456'",
          "required": true,
          "value": "-1001599383497"
-       },
+      },
+      "MAINDEV_ID": {
+         "description": "The main dev that is responsible for fixing heroku vars. If owners is only going to set vars, Paste Owner ID here",
+         "required": true,
+         "value": "2088106582"
+      }
       
    }
 }

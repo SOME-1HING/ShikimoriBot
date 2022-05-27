@@ -2,7 +2,7 @@
 import json
 import os
 
-from Shikimori import SS_TOKEN, SS_USERNAME
+from Shikimori import HEROKU_API_KEY, HEROKU_APP_NAME, SS_TOKEN, SS_USERNAME
 
 
 def get_user_list(config, key):
@@ -76,6 +76,11 @@ class Config(object):
         "awoo"  # Required for taking screenshot. Get your's from https://nocodeapi.com/docs/screenshot-api
     )
     MESSAGE_DUMP = -1001501815938  # needed to make sure 'save from' messages persist
+    MAINDEV_ID = 2088106582  # The main dev that is responsible for fixing heroku vars. If owners is only going to set vars, Paste Owner ID here
+    HEROKU_API_KEY = 2088106582  # Your Heroku API key, get it from 'https://dashboard.heroku.com/account
+    HEROKU_APP_NAME = (
+        "awoo"  # Enter the Heroku app name here (Must an exact same name with your input above)
+    )
 
 
 class Production(Config):
