@@ -814,7 +814,7 @@ __handlers__ = [
 
 
 
-__mod_name__ = "NSFW"
+__mod_name__ = "NSFW 🔞"
 __help__ = """
 *NSFW*
  ❍ `/addnsfw` : To enable NSFW commands

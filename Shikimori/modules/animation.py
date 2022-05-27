@@ -268,11 +268,6 @@ def kill(update: Update, context: CallbackContext):
     msg.edit_text("⚰")
 
 
-__help__ = """
-- /love ❣️
-- /hack 👨‍💻
-- /bombs 💣
-"""
 KILL_HANDLER = DisableAbleCommandHandler("kill", kill, run_async=True)
 LOVE_HANDLER = DisableAbleCommandHandler("love", love, run_async=True)
 HACK_HANDLER = DisableAbleCommandHandler("hack", hack, run_async=True)
@@ -296,7 +291,7 @@ dispatcher.add_handler(MOONANIMATION_HANDLER)
 dispatcher.add_handler(CLOCKANIMATION_HANDLER)
 dispatcher.add_handler(BLOCKANIMATION_HANDLER)
 
-__mod_name__ = "Animation"
+
 __command_list__ = [
     "love",
     "hack",
@@ -317,3 +312,16 @@ __handlers__ = [
     BLOCKANIMATION_HANDLER,
     KILL_HANDLER,
 ]
+
+
+__mod_name__ = "Animation 🎬"
+
+__help__ = """
+- /love ❣️
+- /hack 👨‍💻
+- /bombs 💣
+- /moon 🌖
+- /clock 🕑 
+- /earth 🌏
+- /kill 💀
+"""

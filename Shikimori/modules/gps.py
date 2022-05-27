@@ -34,7 +34,7 @@ async def _(event):
         print(e)
         await event.reply("I can't find that")
 
-__mod_name__ = "GPS"
+__mod_name__ = "GPS 📡"
 __help__ = """
 Help for module  *GPS*
 

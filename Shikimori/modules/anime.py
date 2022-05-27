@@ -551,20 +551,7 @@ def kayo(update: Update, context: CallbackContext):
     site_search(update, context, "kayo")
 
 
-__help__ = """
-                       
-> /anime <anime>: returns information about the anime.
-> /whatanime: returns source of anime when replied to photo or gif.                                                          
-> /character <character>: returns information about the character.
-> /manga <manga>: returns information about the manga.
-> /user <user>: returns information about a MyAnimeList user.
-> /upcoming: returns a list of new anime in the upcoming seasons.
-> /airing <anime>: returns anime airing info.
-> /whatanime <anime>: reply to gif or photo.
-> /kaizoku <anime>: search an anime on animekaizoku.com
-> /kayo <anime>: search an anime on animekayo.com
 
- """
 
 ANIME_HANDLER = DisableAbleCommandHandler("anime", anime, run_async=True)
 AIRING_HANDLER = DisableAbleCommandHandler("airing", airing, run_async=True)
@@ -586,7 +573,7 @@ dispatcher.add_handler(KAIZOKU_SEARCH_HANDLER)
 dispatcher.add_handler(KAYO_SEARCH_HANDLER)
 dispatcher.add_handler(UPCOMING_HANDLER)
 
-__mod_name__ = "Anime"
+
 __command_list__ = [
     "anime", "manga", "character", "user", "upcoming", "kaizoku", "airing",
     "kayo"
@@ -596,3 +583,21 @@ __handlers__ = [
     UPCOMING_HANDLER, KAIZOKU_SEARCH_HANDLER, KAYO_SEARCH_HANDLER,
     BUTTON_HANDLER, AIRING_HANDLER
 ]
+
+
+__mod_name__ = "Anime ⛩️"
+
+__help__ = """
+                       
+> /anime <anime>: returns information about the anime.
+> /whatanime: returns source of anime when replied to photo or gif.                                                          
+> /character <character>: returns information about the character.
+> /manga <manga>: returns information about the manga.
+> /user <user>: returns information about a MyAnimeList user.
+> /upcoming: returns a list of new anime in the upcoming seasons.
+> /airing <anime>: returns anime airing info.
+> /whatanime <anime>: reply to gif or photo.
+> /kaizoku <anime>: search an anime on animekaizoku.com
+> /kayo <anime>: search an anime on animekayo.com
+
+ """

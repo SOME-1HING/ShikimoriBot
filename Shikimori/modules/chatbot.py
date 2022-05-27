@@ -139,14 +139,6 @@ def list_all_chats(update: Update, context: CallbackContext):
             sleep(e.retry_after)
     update.effective_message.reply_text(text, parse_mode="HTML")
 
-__help__ = """
-Chatbot utilizes the Kuki's api which allows Kuki to talk and provide a more interactive group chat experience.
-*Admins only Commands*:
-  ➢ `/Chatbot`*:* Shows chatbot control panel
-*Powered by ItelAi*
-"""
-
-__mod_name__ = "ChatBot"
 
 
 CHATBOTK_HANDLER = CommandHandler("chatbot", kuki, run_async = True)
@@ -171,3 +163,12 @@ __handlers__ = [
     LIST_ALL_CHATS_HANDLER,
     CHATBOT_HANDLER,
 ]
+
+__mod_name__ = "ChatBot 🤖"
+
+__help__ = """
+Chatbot utilizes the Kuki's api which allows Kuki to talk and provide a more interactive group chat experience.
+*Admins only Commands*:
+  ➢ `/Chatbot`*:* Shows chatbot control panel
+*Powered by ItelAi*
+"""

@@ -203,7 +203,7 @@ async def captcha_state(_, message):
     else:
         await message.reply_text(usage)
 
-__mod_name__ = "Karma"
+__mod_name__ = "Karma ☯️"
 __help__ = """
 *Karma*
  ❍ `/karma` [ON][OFF]: To enable / disable Karma system

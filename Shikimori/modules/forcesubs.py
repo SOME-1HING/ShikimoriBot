@@ -210,4 +210,4 @@ Feds are now divided into 3 sections for your ease.
 • `/fedadminhelp`*:* Provides help for fed administration commands
 • `/feduserhelp`*:* Provides help for commands anyone can use
 """
-__mod_name__ = "F-Sub/Feds"
+__mod_name__ = "F-Sub/Feds 🏢"

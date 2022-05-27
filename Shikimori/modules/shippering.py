@@ -74,7 +74,7 @@ __New couple of the day may be chosen at 12AM {tomorrow}__"""
         await message.reply_text(e)
 
 
-__mod_name__ = "Couples / Shippering"
+__mod_name__ = "Couples / Shippering 💑"
 __help__ = """
 *Couples / Shippering*
  ❍ `/couples` :  get couples of the day!

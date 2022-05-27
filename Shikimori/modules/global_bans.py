@@ -537,20 +537,6 @@ def __chat_settings__(chat_id, user_id):
     return f"This chat is enforcing *gbans*: `{sql.does_chat_gban(chat_id)}`."
 
 
-__help__ = f"""
-*Admins only:*
-❂ `/antispam <on/off/yes/no>`*:* Will toggle our antispam tech or return your current settings.
-
-Anti-Spam, used by bot devs to ban spammers across all groups. This helps protect \
-you and your groups by removing spam flooders as quickly as possible.
-*Note:* Users can appeal gbans or report spammers at @{SUPPORT_CHAT}
-
-This also integrates @Spamwatch API to remove Spammers as much as possible from your chatroom!
-*What is SpamWatch?*
-SpamWatch maintains a large constantly updated ban-list of spambots, trolls, bitcoin spammers and unsavoury characters[.](https://telegra.ph/file/f584b643c6f4be0b1de53.jpg)
-Constantly help banning spammers off from your group automatically So, you wont have to worry about spammers storming your group.
-*Note:* Users can appeal spamwatch bans at @SpamwatchSupport
-"""
 
 GBAN_HANDLER = CommandHandler("gban", gban, run_async=True)
 UNGBAN_HANDLER = CommandHandler("ungban", ungban, run_async=True)
@@ -567,9 +553,28 @@ dispatcher.add_handler(UNGBAN_HANDLER)
 dispatcher.add_handler(GBAN_LIST)
 dispatcher.add_handler(GBAN_STATUS)
 
-__mod_name__ = "Anti-Spam"
+
 __handlers__ = [GBAN_HANDLER, UNGBAN_HANDLER, GBAN_LIST, GBAN_STATUS]
 
 if STRICT_GBAN:  # enforce GBANS if this is set
     dispatcher.add_handler(GBAN_ENFORCER, GBAN_ENFORCE_GROUP)
     __handlers__.append((GBAN_ENFORCER, GBAN_ENFORCE_GROUP))
+
+
+__mod_name__ = "Anti-Spam 🚫"
+
+
+__help__ = f"""
+*Admins only:*
+❂ `/antispam <on/off/yes/no>`*:* Will toggle our antispam tech or return your current settings.
+
+Anti-Spam, used by bot devs to ban spammers across all groups. This helps protect \
+you and your groups by removing spam flooders as quickly as possible.
+*Note:* Users can appeal gbans or report spammers at @{SUPPORT_CHAT}
+
+This also integrates @Spamwatch API to remove Spammers as much as possible from your chatroom!
+*What is SpamWatch?*
+SpamWatch maintains a large constantly updated ban-list of spambots, trolls, bitcoin spammers and unsavoury characters[.](https://telegra.ph/file/f584b643c6f4be0b1de53.jpg)
+Constantly help banning spammers off from your group automatically So, you wont have to worry about spammers storming your group.
+*Note:* Users can appeal spamwatch bans at @SpamwatchSupport
+"""

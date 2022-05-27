@@ -487,7 +487,7 @@ dispatcher.add_handler(REVERSE_HANDLER)
 dispatcher.add_handler(GRS_HANDLER)
 dispatcher.add_handler(GG_HANDLER)
 
-__mod_name__ = "Reverse"
+__mod_name__ = "Reverse 🔄"
 __help__ = """
 *Reverse*
  ❍ `/pp` : Please reply to a sticker, or an image to search it!

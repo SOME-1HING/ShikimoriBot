@@ -23,7 +23,7 @@ async def awake(event):
   BUTTON = [[Button.url("Updates", "https://t.me/Shikimori_bot_Updates"), Button.url("Support", "https://t.me/Shikimori_bot_Support")]]
   await tbot.send_file(event.chat_id, PHOTO, caption=TEXT,  buttons=BUTTON)
 
-__mod_name__ = "Alive"
+__mod_name__ = "Alive ✨"
 __help__ = """
 *ALIVE*
  ❍ `/alive` :Check BOT status

@@ -26,7 +26,7 @@ def watchorderx(_,message):
 		data = f"{data}\n{x.text}" if data else x.text
 	message.reply_text(f'Watchorder of {anime}: \n```{data}```')
 
-__mod_name__ = "VC Player"
+__mod_name__ = "VC Player 🎧"
 __help__ = """
 *VC Player*
  • `/pause` - To pause the playback.

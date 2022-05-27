@@ -574,7 +574,7 @@ A button can be added to a note by using standard markdown link syntax - the lin
  *Note:* Note names are case-insensitive, and they are automatically converted to lowercase before getting saved.
 """
 
-__mod_name__ = "Notes"
+__mod_name__ = "Notes 📚"
 
 GET_HANDLER = CommandHandler("get", cmd_get, run_async=True)
 HASH_GET_HANDLER = MessageHandler(Filters.regex(r"^#[^\s]+"), hash_get, run_async=True)

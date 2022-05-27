@@ -19,7 +19,7 @@ async def is_register_admin(chat, user):
         return True
 
 
-@tbot.on(events.NewMessage(pattern="/c$"))
+@tbot.on(events.NewMessage(pattern="/(c|cs)$"))
 async def _(event):
     if event.fwd_from:
         return
@@ -40,8 +40,9 @@ async def _(event):
         parse_mode="HTML",
     )
 
-__mod_name__ = "Cricket Score"
+__mod_name__ = "Cricket Score 🏏"
 __help__ = """
 *Cricket Score*
  ❍ `/c` : To check live cricket score
+ ❍ `/cs` : To check live cricket score
 """

@@ -553,27 +553,7 @@ def banme(update: Update, context: CallbackContext):
 
 
 
-__help__ = """
-*User Commands:*
 
-❂ /kickme*:* kicks the user who issued the command
-
-*Admins only:*
-
-❂ /ban <userhandle>*:* bans a user. (via handle, or reply)
-❂ /sban <userhandle>*:* Silently ban a user. Deletes command, Replied message and doesn't reply. (via handle, or reply)
-❂ /tban <userhandle> x(m/h/d)*:* bans a user for x time. (via handle, or reply). m = minutes, h = hours, d = days.
-❂ /unban <userhandle>*:* unbans a user. (via handle, or reply)
-❂ /kick <userhandle>*:* kicks a user out of the group, (via handle, or reply)
-❂ /mute <userhandle>*:* silences a user. Can also be used as a reply, muting the replied to user.
-❂ /tmute <userhandle> x(m/h/d)*:* mutes a user for x time. (via handle, or reply). m = minutes, h = hours, d = days.
-❂ /unmute <userhandle>*:* unmutes a user. Can also be used as a reply, muting the replied to user.
-❂ /zombies*:* searches deleted accounts
-❂ /zombies clean*:* removes deleted accounts from the group.
-"""
-
-
-__mod_name__ = "Bans/Mutes"
 
 BAN_HANDLER = CommandHandler(["ban", "sban"], ban, run_async=True)
 TEMPBAN_HANDLER = CommandHandler(["tban"], temp_ban, run_async=True)
@@ -603,3 +583,25 @@ __handlers__ = [
     UNBAN_BUTTON_HANDLER,
     BANME_HANDLER,
 ]
+
+__mod_name__ = "Bans/Mutes 👮"
+
+__help__ = """
+*User Commands:*
+
+❂ /kickme*:* kicks the user who issued the command
+
+*Admins only:*
+
+❂ /ban <userhandle>*:* bans a user. (via handle, or reply)
+❂ /sban <userhandle>*:* Silently ban a user. Deletes command, Replied message and doesn't reply. (via handle, or reply)
+❂ /tban <userhandle> x(m/h/d)*:* bans a user for x time. (via handle, or reply). m = minutes, h = hours, d = days.
+❂ /unban <userhandle>*:* unbans a user. (via handle, or reply)
+❂ /kick <userhandle>*:* kicks a user out of the group, (via handle, or reply)
+❂ /mute <userhandle>*:* silences a user. Can also be used as a reply, muting the replied to user.
+❂ /tmute <userhandle> x(m/h/d)*:* mutes a user for x time. (via handle, or reply). m = minutes, h = hours, d = days.
+❂ /unmute <userhandle>*:* unmutes a user. Can also be used as a reply, muting the replied to user.
+❂ /zombies*:* searches deleted accounts
+❂ /zombies clean*:* removes deleted accounts from the group.
+"""
+
