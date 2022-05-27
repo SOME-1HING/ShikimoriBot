@@ -89,3 +89,4 @@ loguru
 aiofiles
 pytube
 yt_dlp
+animedev
