@@ -5,6 +5,7 @@ import asyncio
 import time
 import spamwatch
 from motor.motor_asyncio import AsyncIOMotorClient as MongoClient
+from pyrogram.types import Message
 from pyrogram import Client, errors
 from redis import StrictRedis
 from Shikimori.confing import get_bool_key, get_int_key, get_list_key, get_str_key
