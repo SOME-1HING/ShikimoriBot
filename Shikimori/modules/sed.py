@@ -74,7 +74,6 @@ def separate_sed(sed_string):
         return replace, replace_with, flags.lower()
 
 
-@run_async
 def sed(update: Update, context: CallbackContext):
     sed_result = separate_sed(update.effective_message.text)
     if sed_result and update.effective_message.reply_to_message:
@@ -154,6 +153,6 @@ __mod_name__ = "Sed/Regex"
 SED_HANDLER = DisableAbleMessageHandler(
     Filters.regex(r's([{}]).*?\1.*'.format("".join(DELIMITERS))),
     sed,
-    friendly="sed")
+    friendly="sed", run_async = True)
 
 dispatcher.add_handler(SED_HANDLER)

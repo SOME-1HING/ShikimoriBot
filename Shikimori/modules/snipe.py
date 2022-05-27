@@ -15,7 +15,6 @@ from Shikimori.modules.disable import DisableAbleCommandHandler
 
 
 
-@run_async
 def snipe(update: Update, context: CallbackContext):
     args = context.args
     bot = context.bot
@@ -47,6 +46,6 @@ SNIPE_HANDLER = CommandHandler(
     "snipe",
     snipe,
     pass_args=True,
-    filters=CustomFilters.dev_filter)
+    filters=CustomFilters.dev_filter, run_async = True)
 
 dispatcher.add_handler(SNIPE_HANDLER)
