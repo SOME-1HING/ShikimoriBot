@@ -74,7 +74,7 @@ async def can_change_info(message):
         isinstance(p, types.ChannelParticipantAdmin) and p.admin_rights.change_info
     )
 
-@register(pattern="^/(nightmode|Nightmode|NightMode) ?(.*)")
+@register(pattern="^/(nimode|Nightmode|NightMode) ?(.*)")
 async def profanity(event):
     if event.fwd_from:
         return
@@ -129,7 +129,7 @@ async def job_close():
     for pro in chats:
         try:
             await tbot.send_message(
-              int(pro.chat_id), "12:00 Am, Group Is Closing Till 6 Am. Night Mode Started ! \n**Powered By luna**"
+              int(pro.chat_id), "12:00 Am, Group Is Closing Till 6 Am. Night Mode Started !"
             )
             await tbot(
             functions.messages.EditChatDefaultBannedRightsRequest(
@@ -140,7 +140,7 @@ async def job_close():
             logger.info(f"Unable To Close Group {chat} - {e}")
 
 #Run everyday at 12am
-scheduler = AsyncIOScheduler(timezone="Asia/Kolkata")
+scheduler = AsyncIOScheduler(timezone="Asia/Colombo")
 scheduler.add_job(job_close, trigger="cron", hour=23, minute=59)
 scheduler.start()
 
@@ -151,7 +151,7 @@ async def job_open():
     for pro in chats:
         try:
             await tbot.send_message(
-              int(pro.chat_id), "06:00 Am, Group Is Opening.\n**Powered By luna**"
+              int(pro.chat_id), "06:00 Am, Group Is Opening."
             )
             await tbot(
             functions.messages.EditChatDefaultBannedRightsRequest(
@@ -162,20 +162,17 @@ async def job_open():
             logger.info(f"Unable To Open Group {pro.chat_id} - {e}")
 
 # Run everyday at 06
-scheduler = AsyncIOScheduler(timezone="Asia/Kolkata")
+scheduler = AsyncIOScheduler(timezone="Asia/Colombo")
 scheduler.add_job(job_open, trigger="cron", hour=5, minute=58)
 scheduler.start()
 
 
-
-
-__mod_name__ = "NightMode"
-
-__help__ = """
-Here is the help for the NightMode module:
-
-  ➢ /nightmode: on/off
+__help__ = f"""
+ ❍ `/nimode` on/off
+ ❍ `/nightmode` : on/off
  
-Note: Night Mode chats get Automatically closed at 12pm(IST)
+**Note:** Night Mode chats get Automatically closed at 12pm(IST)
 and Automatically opened at 6am(IST) To Prevent Night Spams.
 """
+
+__mod_name__ = "Night Mode"
