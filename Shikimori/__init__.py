@@ -272,3 +272,10 @@ from Shikimori.modules.helper_funcs.handlers import (
 tg.RegexHandler = CustomRegexHandler
 tg.CommandHandler = CustomCommandHandler
 tg.MessageHandler = CustomMessageHandler
+
+
+# if "@NekoXRobot" not in PM_START_TEXT:
+#     LOGGER.critical(f"{OWNER_ID} Is Cheating. Add `Thanks To @NekoXRobot For Repo` In PM_START_TEXT To Fix This")
+#     sys.exit(1)
+# else:
+#     LOGGER.info("Your Bot Is Ready")
