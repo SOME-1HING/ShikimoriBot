@@ -28,10 +28,6 @@ from pyrogram.types import Message
 
 from Shikimori import (
     BOT_ID,
-    SUDOERS,
-    USERBOT_ID,
-    USERBOT_PREFIX,
-    USERBOT_USERNAME,
     app,
     arq,
     eor,
@@ -116,50 +112,3 @@ async def chatbot_talk(_, message: Message):
     await type_and_send(message)
 
 
-# FOR USERBOT
-
-
-@app2.on_message(
-    filters.command("chatbot", prefixes=USERBOT_PREFIX)
-    & ~filters.edited
-    & SUDOERS
-)
-@capture_err
-async def chatbot_status_ubot(_, message: Message):
-    if len(message.text.split()) != 2:
-        return await eor(message, text="**Usage:**\n.chatbot [ENABLE|DISABLE]")
-    await chat_bot_toggle(active_chats_ubot, message)
-
-
-@app2.on_message(
-    ~filters.me & ~filters.private & filters.text & ~filters.edited,
-    group=chatbot_group,
-)
-@capture_err
-async def chatbot_talk_ubot(_, message: Message):
-    if message.chat.id not in active_chats_ubot:
-        return
-    username = "@" + str(USERBOT_USERNAME)
-    if message.reply_to_message:
-        if not message.reply_to_message.from_user:
-            return
-        if (
-                message.reply_to_message.from_user.id != USERBOT_ID
-                and username not in message.text
-        ):
-            return
-    else:
-        if username not in message.text:
-            return
-    await type_and_send(message)
-
-
-@app2.on_message(
-    filters.text & filters.private & ~filters.me & ~filters.edited,
-    group=(chatbot_group + 1),
-)
-@capture_err
-async def chatbot_talk_ubot_pm(_, message: Message):
-    if message.chat.id not in active_chats_ubot:
-        return
-    await type_and_send(message)
