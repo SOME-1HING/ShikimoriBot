@@ -71,7 +71,7 @@ BYE_HANDLER = DisableAbleMessageHandler(
     Filters.regex(r"(?i)(bye|brb|afk)"), bye, friendly="bye", run_async = True
 )
 HELLO_HANDLER = DisableAbleMessageHandler(
-    Filters.regex(r"(?i)(hello|sup)"), hello, friendly="hello", run_async = True
+    Filters.regex(r"(?i)(hello)"), hello, friendly="hello", run_async = True
 )
 
 dispatcher.add_handler(GDMORNING_HANDLER)
