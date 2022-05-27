@@ -592,7 +592,6 @@ dispatcher.add_handler(UNBAN_HANDLER)
 dispatcher.add_handler(ROAR_HANDLER)
 dispatcher.add_handler(KICKME_HANDLER)
 dispatcher.add_handler(UNBAN_BUTTON_HANDLER)
-dispatcher.add_handler(SNIPE_HANDLER)
 dispatcher.add_handler(BANME_HANDLER)
 
 __handlers__ = [
@@ -603,6 +602,5 @@ __handlers__ = [
     ROAR_HANDLER,
     KICKME_HANDLER,
     UNBAN_BUTTON_HANDLER,
-    SNIPE_HANDLER,
     BANME_HANDLER,
 ]
