@@ -1,4 +1,5 @@
 from telegram import ParseMode
+from pyrogram import filters
 
 from Shikimori import pbot
 from Shikimori.Extras.errors import capture_err
