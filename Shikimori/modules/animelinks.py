@@ -1,29 +1,38 @@
-from telegram import ParseMode
+from Shikimori import pbot
+from telegram import InlineKeyboardButton
+from Shikimori.modules.animedev import client as animedev_client, exceptions
 from pyrogram import filters
 
-from Shikimori import pbot
-from Shikimori.Extras.errors import capture_err
-from Shikimori.modules.animedev import client, exceptions
-
-@pbot.on_message(filters.command('anilink'))
+@pbot.on_message(filters.command('animelink'))
 @capture_err
-async def search_anime(_, message):
-    if len(message.command) <= 1:
-        await message.reply_text("/anilink anime name")
+async def animelink(_, message):
+    animename = message.message.split()
+    if len(animename) <= 1:
+        await message.reply('/anilink anime name')
         return
-    animename = message.text.split()[1:]
     try:
-        anime = client.search(animename)
-        text = f'''
+        anime = animedev_client.search(' '.join(animename[1:]))
+        anime['Search_Query'] = anime['Search_Query'].replace(' ', '+')
+    except exceptions.NotFound:
+        await message.reply('Anime not found.')
+        return
+    except Exception as e:
+        await message.reply(f'*Error*: Contact @tyranteyeeee.\nERROR: {e}')
+        return
+    text = f'''
                 *Anime Title*: {anime['AnimeTitle']}
-
-                *Anime Link*: {anime['AnimeLink']}
 
                 *Search Query*: {anime['Search_Query']}
                 '''
-        await message.reply_photo(photo=anime['AnimeImg'], caption=text)
-    except exceptions.NotFound as e:
-        text = "Not Found"
-        await message.reply_text(caption=text)
+    buttons = [
+    [
+        InlineKeyboardButton(
+            text="Link", url= anime['AnimeLink']),
+    ],
+    [
+        InlineKeyboardButton(text="Search Query", url= anime['Search_Query']),
+    ],
+]
+    await message.reply_photo(anime['AnimeImg'], caption=text, buttons = buttons, parse_mode='html')
 
 
