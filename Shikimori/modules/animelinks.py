@@ -1,22 +1,22 @@
-from Shikimori import pbot
 from telegram import InlineKeyboardButton
 from Shikimori.modules.animedev import client as animedev_client, exceptions
-from pyrogram import filters
+from Shikimori.events import register
+from Shikimori import telethn
 
-@pbot.on_message(filters.command('anilink'))
-async def animelink(_, message):
-    animename = message.text.split()
+@register(pattern='/anilink')
+async def animelink(event):
+    animename = event.message.message.split()
     if len(animename) <= 1:
-        await message.reply('/anilink anime name')
+        await event.reply('/anilink anime name')
         return
     try:
         anime = animedev_client.search(' '.join(animename[1:]))
         anime['Search_Query'] = anime['Search_Query'].replace(' ', '+')
     except exceptions.NotFound:
-        await message.reply('Anime not found.')
+        await event.reply('Anime not found.')
         return
     except Exception as e:
-        await message.reply(f'*Error*: Contact @tyranteyeeee.\nERROR: {e}')
+        await event.reply(f'*Error*: Contact @tyranteyeeee.\nERROR: {e}')
         return
     text = f'''
                 *Anime Title*: {anime['AnimeTitle']}
@@ -31,7 +31,8 @@ async def animelink(_, message):
     [
         InlineKeyboardButton(text="Search Query", url= anime['Search_Query']),
     ],
-]
-    await message.reply_photo(anime['AnimeImg'], caption=text, buttons = buttons, parse_mode='html')
+    ]
+    
+    await telethn.send_file(event.chat_id, anime['AnimeImg'], caption=text, buttons = buttons)
 
 
