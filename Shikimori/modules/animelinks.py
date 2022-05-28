@@ -8,7 +8,7 @@ from Shikimori.modules.animedev import client, exceptions
 @pbot.on_message(filters.command('anilink'))
 @capture_err
 async def search_anime(_, message):
-    if len(message.command) != 2:
+    if len(message.command) <= 1:
         await message.reply_text("/anilink anime name")
         return
     animename = message.text.split()[1:]
