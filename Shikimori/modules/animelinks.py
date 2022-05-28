@@ -26,6 +26,6 @@ async def search_anime(_, message):
     except exceptions.NotFound as e:
         text = "Not Found"
         return
-    await message.reply_text(caption=text, parse_mode= ParseMode.MARKUP)
+    await message.reply_photo(text, parse_mode= ParseMode.MARKUP)
 
 
