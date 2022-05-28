@@ -72,7 +72,7 @@ envparse
 better_profanity
 textblob 
 nudepy
-nekos.py
+nekos.py==1.0.3
 motor
 gpytranslate
 fontTools

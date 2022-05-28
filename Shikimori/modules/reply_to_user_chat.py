@@ -78,3 +78,10 @@ dispatcher.add_handler(GDMORNING_HANDLER)
 dispatcher.add_handler(GDNIGHT_HANDLER)
 dispatcher.add_handler(HELLO_HANDLER)
 dispatcher.add_handler(BYE_HANDLER)
+
+__handlers__ = [
+    GDMORNING_HANDLER,
+    GDNIGHT_HANDLER,
+    HELLO_HANDLER,
+    BYE_HANDLER
+]
