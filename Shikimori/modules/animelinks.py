@@ -11,17 +11,15 @@ async def search_anime(_, message):
     if len(message.command) != 2:
         await message.reply_text("/anilink anime name")
         return
-    animename = message.text.split(None, 1)[1]
+    animename = message.text.split()[1:]
     try:
         anime = client.search(animename)
         text = f'''
-                Anime Title: {anime['AnimeTitle']}
+                *Anime Title*: {anime['AnimeTitle']}
 
-                Anime Link: {anime['AnimeLink']}
+                *Anime Link*: {anime['AnimeLink']}
 
-                Anime Image: {anime['AnimeImg']}
-
-                Search Query: {anime['Search_Query']}
+                *Search Query*: {anime['Search_Query']}
                 '''
         await message.reply_photo(photo=anime['AnimeImg'], caption=text)
     except exceptions.NotFound as e:
