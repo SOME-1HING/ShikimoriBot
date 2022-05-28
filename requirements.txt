@@ -67,6 +67,7 @@ redis
 pySmartDL
 bing_image_downloader
 google_trans_new
+NumPy
 search_engine_parser
 pytz
 jikanpy
