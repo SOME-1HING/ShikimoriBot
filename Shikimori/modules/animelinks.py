@@ -5,7 +5,7 @@ from pyrogram import filters
 
 @pbot.on_message(filters.command('anilink'))
 async def animelink(_, message):
-    animename = message.message.split()
+    animename = message.text.split()
     if len(animename) <= 1:
         await message.reply('/anilink anime name')
         return
