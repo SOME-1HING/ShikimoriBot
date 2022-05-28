@@ -1,31 +1,30 @@
-import http
-import aiohttp
-
 from telegram import ParseMode
 
 from Shikimori import pbot
 from Shikimori.Extras.errors import capture_err
-
+from Shikimori.modules.animedev import client, exceptions
 
 @pbot.on_message(filters.command('anilink'))
 @capture_err
-async def animelink(_, message):
+async def search_anime(_, message):
     if len(message.command) != 2:
         await message.reply_text("/anilink anime name")
         return
-    aniname = message.text.split(None, 1)[1]
-    URL = f'https://9anime.dev/{aniname}'
-    async with aiohttp.ClientSession() as session:
-        async with session.get(URL) as request:
-            if request.status == 404:
-                return await message.reply_text("404")
+    animename = message.text.split(None, 1)[1]
+    try:
+        anime = client.search(animename)
+        text = f'''
+                Anime Title: {anime['AnimeTitle']}
 
-            try:
-                caption = URL
-            except Exception as e:
-                print(str(e))
-                pass
-    await message.reply_text(caption=caption, parse_mode= ParseMode.MARKUP)
+                Anime Link: {anime['AnimeLink']}
+
+                Anime Image: {anime['AnimeImg']}
+
+                Search Query: {anime['Search_Query']}
+                '''
+    except exceptions.NotFound as e:
+        text = "Not Found"
+        return
+    await message.reply_text(caption=text, parse_mode= ParseMode.MARKUP)
 
 
-    
