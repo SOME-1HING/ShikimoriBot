@@ -2,10 +2,8 @@ from Shikimori import pbot
 from telegram import InlineKeyboardButton
 from Shikimori.modules.animedev import client as animedev_client, exceptions
 from pyrogram import filters
-from Shikimori.Extras.errors import capture_err
 
-@pbot.on_message(filters.command('animelink'))
-@capture_err
+@pbot.on_message(filters.command('anilink'))
 async def animelink(_, message):
     animename = message.message.split()
     if len(animename) <= 1:
