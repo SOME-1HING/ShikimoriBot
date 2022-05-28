@@ -51,7 +51,7 @@ def bye(update: Update, context: CallbackContext):
     message = update.effective_message
     user1 = message.from_user.first_name
     try:
-        update.effective_message.reply_video(
+        update.effective_message.reply_animation(
             IMG_BYE,f"*Bye!!* {user1}",
             parse_mode=ParseMode.MARKDOWN,
         )
