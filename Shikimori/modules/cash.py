@@ -4,6 +4,7 @@ from telegram import Update, ParseMode
 from telegram.ext import CallbackContext, CommandHandler, run_async
 
 
+
 def convert(update: Update, context: CallbackContext):
     args = update.effective_message.text.split(" ")
 
@@ -55,3 +56,12 @@ dispatcher.add_handler(CONVERTER_HANDLER)
 
 __command_list__ = ["cash"]
 __handlers__ = [CONVERTER_HANDLER]
+
+__mod_name__ = "Currency"
+
+__help__ = """
+*Commands:*
+
+- `/cash` : currency converter
+Example syntax: /cash 1 USD LKR
+"""

@@ -207,10 +207,10 @@
          "description": "Set this to True if you want to delete command messages from users who don't have the perms to run that command.",
          "value": "True"
       },
-        "ARQ_API": {
-            "description": "Get this from @ARQRobot.",
-            "required": true
-        },
+      "ARQ_API": {
+         "description": "Get this from @ARQRobot.",
+         "required": true
+      },
       "BAN_STICKER": {
          "description": "ID of the sticker you want to use when banning people.",
          "required": false,
@@ -240,7 +240,17 @@
          "description": "The main dev that is responsible for fixing heroku vars. If owners is only going to set vars, Paste Owner ID here",
          "required": true,
          "value": "2088106582"
-      }
+      },
+      "REM_BG_API_KEY": {
+         "description": "Get api  https://www.remove.bg/",
+         "required": false,
+         "value": ""
+      },
+      "VIRUS_API_KEY": {
+         "description": "Get api  https://www.virustotal.com/gui/my-apikey",
+         "required": false,
+         "value": ""
+      }  
       
    }
 }

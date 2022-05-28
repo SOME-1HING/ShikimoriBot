@@ -125,6 +125,9 @@ if ENV:
     HEROKU_APP_NAME = os.environ.get("HEROKU_APP_NAME", None)
     HEROKU_API_KEY = os.environ.get("HEROKU_API_KEY", None)
     MAINDEV_ID = os.environ.get("MAINDEV_ID", None)
+    REM_BG_API_KEY = os.environ.get("REM_BG_API_KEY", None)
+    VIRUS_API_KEY = os.environ.get("VIRUS_API_KEY", None)
+
 
     
     try:
@@ -206,7 +209,11 @@ else:
     SS_USERNAME = Config.SS_USERNAME
     SS_TOKEN = Config.SS_TOKEN
     MAINDEV_ID = Config.MAINDEV_ID
-    
+    REM_BG_API_KEY = Config.MAINDEV_ID
+    VIRUS_API_KEY = Config.VIRUS_API_KEY
+
+
+
     try:
         WHITELIST_CHATS = {int(x) for x in os.environ.get('WHITELIST_CHATS', "").split()}
     except ValueError:
