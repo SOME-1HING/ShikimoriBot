@@ -89,3 +89,9 @@ loguru
 aiofiles
 pytube
 yt_dlp
+
+
+
+cloudmersive_virus_api_client
+nude
+google_trans_new
