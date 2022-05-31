@@ -5,4 +5,5 @@ __help__ = """
 > /hug *:* Sends help for /hug command
 > /slap *:* Slap someone.
 > /sanitize *:* Sanitize someone.
+
 """
