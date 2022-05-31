@@ -89,4 +89,4 @@ loguru
 aiofiles
 pytube
 yt_dlp
-youtube_search
+cloudmersive_virus_api_client
