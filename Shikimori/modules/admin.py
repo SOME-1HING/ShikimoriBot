@@ -1,11 +1,15 @@
+import os
 import html
 
 from telegram import ParseMode, Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.error import BadRequest
+from telethon import events
 from telegram.ext import CallbackContext, CommandHandler, Filters, run_async
 from telegram.utils.helpers import mention_html
+from telethon.tl import functions, types
 
 from Shikimori import DRAGONS, dispatcher
+from Shikimori import DRAGONS, dispatcher, telethn as bot
 from Shikimori.modules.disable import DisableAbleCommandHandler
 from Shikimori.modules.helper_funcs.chat_status import (
     bot_admin,
@@ -23,6 +27,17 @@ from Shikimori.modules.helper_funcs.extraction import (
 )
 from Shikimori.modules.log_channel import loggable
 from Shikimori.modules.helper_funcs.alternate import send_message
+
+async def is_register_admin(chat, user):
+    if isinstance(chat, (types.InputPeerChannel, types.InputChannel)):
+        return isinstance(
+            (
+                await bot(functions.channels.GetParticipantRequest(chat, user))
+            ).participant,
+            (types.ChannelParticipantAdmin, types.ChannelParticipantCreator),
+        )
+    if isinstance(chat, types.InputPeerUser):
+        return True
 
 
 @bot_admin
@@ -635,7 +650,7 @@ def unpin(update: Update, context: CallbackContext):
         not (unpinner.can_pin_messages or unpinner.status == "creator")
         and user.id not in DRAGONS
     ):
-        message.reply_text("You don't have the necessary rights to do that!")
+        msg.reply_text("You don't have the necessary rights to do that!")
         return
 
     if msg.chat.username:
@@ -748,10 +763,37 @@ def invite(update: Update, context: CallbackContext):
         )
 
 
+@bot.on(events.NewMessage(pattern="/users$"))
+async def get_users(show):
+    if not show.is_group:
+        return
+    if show.is_group:
+        if not await is_register_admin(show.input_chat, show.sender_id):
+            return
+    info = await bot.get_entity(show.chat_id)
+    title = info.title if info.title else "this chat"
+    mentions = "Users in {}: \n".format(title)
+    async for user in bot.iter_participants(show.chat_id):
+        if not user.deleted:
+            mentions += f"\n[{user.first_name}](tg://user?id={user.id}) {user.id}"
+        else:
+            mentions += f"\nDeleted Account {user.id}"
+    file = open("userslist.txt", "w+")
+    file.write(mentions)
+    file.close()
+    await bot.send_file(
+        show.chat_id,
+        "userslist.txt",
+        caption="Users in {}".format(title),
+        reply_to=show.id,
+    )
+    os.remove("userslist.txt")
+
+
 @connection_status
 def adminlist(update, context):
-    chat = update.effective_chat  # type: Optional[Chat] -> unused variable
-    user = update.effective_user  # type: Optional[User]
+    chat = update.effective_chat  
+    user = update.effective_user  
     args = context.args  # -> unused variable
     bot = context.bot
 

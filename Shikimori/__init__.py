@@ -119,7 +119,7 @@ if ENV:
     SPAMWATCH_SUPPORT_CHAT = os.environ.get("SPAMWATCH_SUPPORT_CHAT", None)
     SPAMWATCH_API = os.environ.get("SPAMWATCH_API", None)
     ARQ_API_URL = "https://arq.hamker.in"
-    ARQ_API_KEY = "AFMJDA-MQSBCE-RNSVHB-WUVNVP-ARQ"
+    ARQ_API_KEY = os.environ.get("ARQ_API", None)
     SS_USERNAME = os.environ.get("SS_USERNAME", None)
     SS_TOKEN = os.environ.get("SS_TOKEN", None)
     HEROKU_APP_NAME = os.environ.get("HEROKU_APP_NAME", None)

@@ -81,6 +81,7 @@ class Config(object):
     HEROKU_APP_NAME = (
         "awoo"  # Enter the Heroku app name here (Must an exact same name with your input above)
     )
+    ARQ_API = "awoo"
 
 
 class Production(Config):

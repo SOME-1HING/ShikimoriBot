@@ -59,4 +59,5 @@ __mod_name__ = "Wallpaper"
 __help__ = """
 *Wallpaper*
  ❍ `/wall` : Search for wallpaper of given query
+ ❍ `/wallpaper` : Get a random wallpaper
 """

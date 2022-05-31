@@ -466,18 +466,27 @@ def stats(update, context):
         update.effective_message.reply_photo(
             SHIKI_IMG,
             status
-            + "\n*Bot statistics*:\n"
-            + "\n".join([mod.__stats__() for mod in STATS])
-            + f"\n\n[✦ Support](https://t.me/tyranteyeeee) | [✦ Updates](https://t.me/Shikimori_bot_Updates)\n\n"
-            + "\n╘══「 by [Sneha](https://t.me/Sneha_UwU_OwO) 」\n",
+            + "\n𝕭𝖔𝖙 𝖘𝖙𝖆𝖙𝖎𝖘𝖙𝖎𝖈𝖘:\n"
+            + "\n".join([mod.__stats__() for mod in STATS]),
             parse_mode=ParseMode.MARKDOWN,
             reply_markup=InlineKeyboardMarkup(
                 [
-                  [                  
-                       InlineKeyboardButton(
-                             text="Dev's Github Profile",
-                             url="github.com/SOME-1HING")
-                     ] 
+                    [                  
+                    InlineKeyboardButton(
+                            text="Support",
+                            url="https://t.me/tyranteyeeee"),
+                    InlineKeyboardButton(
+                            text="Owner",
+                            url="https://t.me/Sneha_UwU_OwO"),
+                    InlineKeyboardButton(
+                            text="Updates",
+                            url="https://t.me/Shikimori_bot_Updates"),
+                    ] 
+                    [                  
+                    InlineKeyboardButton(
+                            text="Dev's Github Profile",
+                            url="github.com/SOME-1HING")
+                    ]
                 ]
             ),
         )
@@ -544,15 +553,11 @@ def set_about_bio(update: Update, context: CallbackContext):
             message.reply_text(
                 "Ha, you can't set your own bio! You're at the mercy of others here...",
             )
-            return
-
-        if user_id in [777000, 1087968824] and sender_id not in DEV_USERS:
-            message.reply_text("You are not authorised")
-            return
+            return 
 
         if user_id == bot.id and sender_id not in DEV_USERS:
             message.reply_text(
-                "Erm... yeah, I only trust the Ackermans to set my bio.",
+                "Erm... yeah, I only trust my best friends to set my bio.",
             )
             return
 

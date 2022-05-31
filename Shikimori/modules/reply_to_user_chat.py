@@ -1,9 +1,13 @@
+# This module is made by https://github.com/SOME-1HING/
+# You are free to use this module. But don't delete this commented text. Thank you.
+
+
 import html
 
 from Shikimori import dispatcher
 from Shikimori.modules.disable import DisableAbleMessageHandler
-from telegram import ChatPermissions, ParseMode, Update
-from telegram.ext import CallbackContext, Filters, run_async
+from telegram import ParseMode, Update
+from telegram.ext import CallbackContext, Filters
 
 IMG_GM = "https://telegra.ph/file/fff37608fa21d9d3d0b39.jpg"
 IMG_GN = "https://telegra.ph/file/1862c7260109e24ed4715.jpg"
@@ -52,7 +56,7 @@ def bye(update: Update, context: CallbackContext):
     user1 = message.from_user.first_name
     try:
         update.effective_message.reply_animation(
-            IMG_BYE,f"*Bye!!* {user1}",
+            IMG_BYE, caption = f"*Bye!!* {user1}",
             parse_mode=ParseMode.MARKDOWN,
         )
     except:

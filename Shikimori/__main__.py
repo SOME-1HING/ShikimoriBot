@@ -108,10 +108,7 @@ Click on the button bellow to get description about specifics command."""
 KURUMI_IMG = "https://telegra.ph/file/19b5a3970a0a416d05a4d.jpg"
 ShikimoriSTART = "https://telegra.ph/file/d25870fc3e94ed674490c.mp4"
 
-DONATE_STRING = """Heya, glad to hear you want to donate!
- You can support the project by contacting @ShikimoriIshigamiXD \
- Supporting isnt always financial! \
- Those who cannot provide monetary support are welcome to help us develop the bot at ."""
+
 
 IMPORTED = {}
 MIGRATEABLE = []

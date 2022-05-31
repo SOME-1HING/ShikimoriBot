@@ -212,48 +212,6 @@ async def jssong(_, message):
     is_downloading = False
 
 
-# Deezer Music
-
-
-@Client.on_message(filters.command("deezer") & ~filters.edited)
-async def deezsong(_, message):
-    global is_downloading
-    if len(message.command) < 2:
-        await message.reply_text("/deezer requires an argument.")
-        return
-    if is_downloading:
-        await message.reply_text(
-            "Another download is in progress, try again after sometime."
-        )
-        return
-    if dl_limit >= 3:
-        await message.reply_text(
-            "Too many requests, please try again after sometime."
-        )
-        return
-    is_downloading = True
-    text = message.text.split(None, 1)[1]
-    query = text.replace(" ", "%20")
-    m = await message.reply_text("Searching...")
-    try:
-        songs = await arq.deezer(query, 1)
-        if not songs.ok:
-            await message.reply_text(songs.result)
-            return
-        title = songs.result[0].title
-        url = songs.result[0].url
-        artist = songs.result[0].artist
-        await m.edit("Downloading")
-        song = await download_song(url)
-        await m.edit("Uploading")
-        await message.reply_audio(audio=song, title=title, performer=artist)
-        os.remove(song)
-        await m.delete()
-    except Exception as e:
-        is_downloading = False
-        await m.edit(str(e))
-        return
-    is_downloading = False
 
 
 @Client.on_message(filters.command(["vsong", "video"]))
@@ -352,21 +310,14 @@ async def ytmusic(client, message: Message):
         if files and os.path.exists(files):
             os.remove(files)
 
+__mod_name__ = "Song 🎵"
 
-from Shikimori import aiohttpsession as session
-from Shikimori.utils.errors import capture_err
-from Shikimori.utils.pastebin import paste
+__help__ = """
+Note: Refer to VC player module help in /help to see commands for music player.
 
-
-@Client.on_message(filters.command("lyrics"))
-async def lyrics_func(_, message):
-    if len(message.command) < 2:
-        return await message.reply_text("Give me a song name to search lyrics for")
-    m = await message.reply_text("**Searching**")
-    query = message.text.strip().split(None, 1)[1]
-    song = await arq.lyrics(query)
-    lyrics = song.result
-    if len(lyrics) < 4095:
-        return await m.edit(f"__{lyrics}__")
-    lyrics = await paste(lyrics)
-    await m.edit(f"**LYRICS_TOO_LONG:** [URL]({lyrics})")
+> `/song` <songname> *:* To download a song. (Works with Youtube link too)
+> `/music` <songname> *:* To download a song. (Works with Youtube link too)
+> `/video` <videoname> or Youtube Link> *:* To download a video.
+> `/vsong` <videoname> or Youtube Link> *:* To download a video.
+> `/saavn` <songname> *:* To download a song
+"""
