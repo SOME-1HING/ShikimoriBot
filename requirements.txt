@@ -46,6 +46,7 @@ TgCrypto
 Pyrogram
 PyDictionary
 git+https://github.com/Sorrybabe/downloader
+youtube_search_python
 lyrics_extractor
 asyncio
 cloudscraper
@@ -75,6 +76,7 @@ nekos.py
 motor
 gpytranslate
 fontTools
+opencv-python-headless
 odmantic
 tzlocal
 pendulum
