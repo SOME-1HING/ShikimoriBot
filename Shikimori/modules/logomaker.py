@@ -1,5 +1,5 @@
 from Shikimori.events import register
-from Shikimori import MAINDEV_ID, OWNER_ID,SUDO_USERS
+from Shikimori import MAINDEV_ID, OWNER_ID
 from Shikimori import telethn as tbot
 import os 
 from PIL import Image, ImageDraw, ImageFont
