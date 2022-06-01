@@ -33,7 +33,7 @@ def avatar(update, context):
      target = "avatar"
      msg.reply_video(nekos.img(target))
 
-def waifu(update, context):
+def waifus(update, context):
     msg = update.effective_message
     target = "waifu"
     msg.reply_video(nekos.img(target))
@@ -99,7 +99,7 @@ TICKLE_HANDLER = CommandHandler("tickle", tickle, run_async=True)
 FEED_HANDLER = CommandHandler("feed", feed, run_async=True)
 GASM_HANDLER = CommandHandler("gasm", gasm, run_async=True)
 AVATAR_HANDLER = CommandHandler("avatar", avatar, run_async=True)
-WAIFU_HANDLER = CommandHandler("waifu", waifu, run_async=True)
+WAIFUS_HANDLER = CommandHandler("waifus", waifus, run_async=True)
 KISS_HANDLER = CommandHandler("kiss", kiss, run_async=True)
 HUG_HANDLER = CommandHandler("hug", hug, run_async=True)
 CUDDLE_HANDLER = CommandHandler("cuddle",  cuddle, run_async=True)
@@ -125,7 +125,7 @@ dispatcher.add_handler(TICKLE_HANDLER)
 dispatcher.add_handler(FEED_HANDLER)
 dispatcher.add_handler(GASM_HANDLER)
 dispatcher.add_handler(AVATAR_HANDLER)
-dispatcher.add_handler(WAIFU_HANDLER)
+dispatcher.add_handler(WAIFUS_HANDLER)
 dispatcher.add_handler(KISS_HANDLER)
 dispatcher.add_handler(CUDDLE_HANDLER)
 dispatcher.add_handler(FOXGIRL_HANDLER)
@@ -144,7 +144,7 @@ __handlers__ = [
     SPANK_HANDLER,
     GASM_HANDLER,
     AVATAR_HANDLER,
-    WAIFU_HANDLER,
+    WAIFUS_HANDLER,
     GECG_HANDLER,
     KISS_HANDLER,
     CUDDLE_HANDLER,
@@ -163,7 +163,7 @@ __help__ = """
    ➢ `/feed`*:*Sends Random Feeding GIFs.
    ➢ `/gasm`*:*Sends Random Orgasm Stickers.
    ➢ `/avatar`*:*Sends Random Avatar Stickers.
-   ➢ `/waifu`*:* Sends Random Waifu Stickers.
+   ➢ `/waifus`*:* Sends Random Waifu Stickers.
    ➢ `/kiss`*:* Sends Random Kissing GIFs.
    ➢ `/cuddle`*:* Sends Random Cuddle GIFs.
    ➢ `/foxgirl`*:* Sends Random FoxGirl source Images.

@@ -1,24 +1,44 @@
+# Imports from external libraries. (DON'T EDIT)
 import requests
-from pyrogram import filters
-from Shikimori import pbot
-from Shikimori.Extras.errors import capture_err
+from telegram import ParseMode
+from telegram.ext import CommandHandler
 
-@pbot.on_message(filters.command('ann'))
-@capture_err
-async def ann(_, message):
-    url = f'https://api.animeepisode.org/waifu/animenews.php'
-    result = requests.get(url).json()
+# Imports dispatcher = updater.dispatcher from __init__.py (*MUST EDIT* CHANGE MODULE NAME TO THE FOLDER NAME OF MODULES IN YOUR BOT)
+from Shikimori import dispatcher
+
+# Main code, Credit to https://github.com/itspro-dev for making the API. 
+def ann(update, context):
     try:
-        title = result['Post_title']
-        description = result['Description']
+        msg = update.effective_message
+        # API (DON'T EDIT)
+        url = f'https://api.animeepisode.org/waifu/animenews.php'
+        result = requests.get(url).json()
         img = result['Post_image']
-        url = result['Post_url']
-        caption = f"""
-Title: {title}
-Description: {description}
-url: {url}
-"""
+        # Message (EDIT THIS PART AS HTML *IF YOU WANT*)
+        text = f'''
+<b>Title :</b> <code>{result['Post_title']}</code>
+        
+<b>Description :</b> <code>{result['Description']}</code>
+
+<b>For more info :</b> <code>{result['Post_url']}</code>
+'''
+        msg.reply_photo(photo=img, caption=text, parse_mode=ParseMode.HTML)
+
     except Exception as e:
-        print(str(e))
-        pass
-    await message.reply_photo(photo=img, caption=caption)
+        text = f'<b>Error</b>: <code>' + e + '</code>'
+        msg.reply_text(text, parse_mode=ParseMode.HTML)
+
+# Code Handler (YOU CAN CHANGE 'ann' TO ANY 'cmd' FOR THIS TO BE WORKED AS '/cmd' *IF YOU WANT*.)
+ANN_HANDLER = CommandHandler('ann', ann, run_async=True)
+dispatcher.add_handler(ANN_HANDLER)
+
+#  Buttons for /help .
+__mod_name__ = 'Anime News'  # *IF YOU WANT* EDIT NAME OF BUTTON IN '/help'
+
+# *IF YOU WANT* EDIT MESSAGE FOR HELP OF THIS MODULE.
+__help__ = '''
+❍ `/ann` : Gives latest Anime news.
+'''
+
+# DON'T EDIT
+__handlers__ = [ANN_HANDLER]
