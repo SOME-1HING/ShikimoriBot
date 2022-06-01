@@ -6,9 +6,9 @@ from faker.providers import internet
 from telethon import events
 
 from Shikimori.pyrogramee.telethonbasics import is_admin
-from Shikimori import telethn as Galaxy
+from Shikimori import telethn as pbot
 
-@Galaxy.on(events.NewMessage(pattern="/fakegen$"))
+@pbot.on(events.NewMessage(pattern="/fakegen$"))
 async def hi(event):
     if event.fwd_from:
         return
@@ -33,22 +33,10 @@ async def hi(event):
     )
 
 
-@Galaxy.on(events.NewMessage(pattern="/picgen$"))
+@pbot.on(events.NewMessage(pattern="/picgen$"))
 async def _(event):
-    if event.fwd_from:
-        return
-    if await is_admin(event, event.message.sender_id):
-        url = "https://thispersondoesnotexist.com/image"
-        response = requests.get(url)
-        if response.status_code == 200:
-            with open("PicByGalaxy.jpg", "wb") as f:
-                f.write(response.content)
-
-        captin = f"Fake Image powered by @GalaxyLanka."
-        fole = "PicByGalaxy.jpg"
-        await Galaxy.send_file(event.chat_id, fole, caption=captin)
-        await event.delete()
-        os.system("rm ./PicByGalaxy.jpg ")
+    URL = "https://thispersondoesnotexist.com/image"
+    await pbot.send_img(event.chat_id, URL)
 
 
 
