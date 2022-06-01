@@ -498,18 +498,28 @@ def stats(update, context):
                         "\n*Bot statistics*:\n"
                         + "\n".join(mod.__stats__() for mod in STATS)
                     )
-                    + f"\n\n✦ [Support](https://t.me/tyranteyeeee) | ✦ [Updates](https://t.me/Shikimori_bot_Updates)\n\n"
+                    
                 )
-                + "╘══「 by [Sneha](https://t.me/Sneha_UwU_OwO) 」\n"
             ),
             parse_mode=ParseMode.MARKDOWN,
             reply_markup=InlineKeyboardMarkup(
                 [
-                  [                  
-                       InlineKeyboardButton(
-                             text="Dev's Github Profile",
-                             url="github.com/SOME-1HING")
-                     ] 
+                    [                  
+                    InlineKeyboardButton(
+                            text="Support",
+                            url="https://t.me/tyranteyeeee"),
+                    InlineKeyboardButton(
+                            text="Owner",
+                            url="https://t.me/Sneha_UwU_OwO"),
+                    InlineKeyboardButton(
+                            text="Updates",
+                            url="https://t.me/Shikimori_bot_Updates"),
+                    ] 
+                    [                  
+                    InlineKeyboardButton(
+                            text="Dev's Github Profile",
+                            url="github.com/SOME-1HING")
+                    ]
                 ]
             ),
         )
