@@ -6,9 +6,9 @@ from faker.providers import internet
 from telethon import events
 
 from Shikimori.pyrogramee.telethonbasics import is_admin
-from Shikimori import telethn as pbot
+from Shikimori import telethn as tbot
 
-@pbot.on(events.NewMessage(pattern="/fakegen$"))
+@tbot.on(events.NewMessage(pattern="/fakegen$"))
 async def hi(event):
     if event.fwd_from:
         return
@@ -33,10 +33,23 @@ async def hi(event):
     )
 
 
-@pbot.on(events.NewMessage(pattern="/picgen$"))
+@tbot.on(events.NewMessage(pattern="/picgen$"))
 async def _(event):
-    URL = "https://thispersondoesnotexist.com/image"
-    await pbot.send_img(event.chat_id, URL)
+    if event.fwd_from:
+        return
+    if await is_admin(event, event.message.sender_id):
+        url = "https://thispersondoesnotexist.com/image"
+        response = requests.get(url)
+        if response.status_code == 200:
+            with open("luna.jpg", "wb") as f:
+                f.write(response.content)
+
+        captin = f"Fake Image successfully generated."
+        fole = "luna.jpg"
+        await tbot.send_file(event.chat_id, fole, caption=captin)
+        await event.delete()
+        os.system("rm ./luna.jpg ")
+
 
 
 
@@ -45,5 +58,5 @@ __mod_name__ = "Fake info"
 __help__ = """
 *Commands:*
 - /fakegen : Generates Fake Information
-- /picgen : generate a fake pic
+- /picgen : Generate a fake pic
 """

@@ -66,10 +66,10 @@ def bye(update: Update, context: CallbackContext):
 
 
 GDMORNING_HANDLER = DisableAbleMessageHandler(
-    Filters.regex(r"(?i)(good morning|gm|goodmorning)"), goodmorning, friendly="goodmorning", run_async = True
+    Filters.regex(r"(?i)(good morning|goodmorning)"), goodmorning, friendly="goodmorning", run_async = True
 )
 GDNIGHT_HANDLER = DisableAbleMessageHandler(
-    Filters.regex(r"(?i)(good night|gn|goodnight)"), goodnight, friendly="goodnight", run_async = True
+    Filters.regex(r"(?i)(good night|goodnight)"), goodnight, friendly="goodnight", run_async = True
 )
 BYE_HANDLER = DisableAbleMessageHandler(
     Filters.regex(r"(?i)(bye|brb|afk)"), bye, friendly="bye", run_async = True
