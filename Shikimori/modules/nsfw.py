@@ -18,6 +18,11 @@ def tickle(update, context):
      target = "tickle"
      msg.reply_video(nekos.img(target))
 
+def ngif(update, context):
+     msg = update.effective_message
+     target = "ngif"
+     msg.reply_video(nekos.img(target))
+
 def feed(update, context):
     msg = update.effective_message
     target = "feed"
@@ -26,17 +31,17 @@ def feed(update, context):
 def gasm(update, context):
     msg = update.effective_message
     target = "gasm"
-    msg.reply_video(nekos.img(target))
+    msg.reply_photo(nekos.img(target))
 
 def avatar(update, context):
      msg = update.effective_message
      target = "avatar"
-     msg.reply_video(nekos.img(target))
+     msg.reply_photo(nekos.img(target))
 
 def waifus(update, context):
     msg = update.effective_message
     target = "waifu"
-    msg.reply_video(nekos.img(target))
+    msg.reply_photo(nekos.img(target))
 
 def kiss(update, context):
     msg = update.effective_message
@@ -61,7 +66,7 @@ def foxgirl(update, context):
 def gecg(update, context):
     msg = update.effective_message
     target = "gecg"
-    msg.reply_video(nekos.img(target))
+    msg.reply_photo(nekos.img(target))
 
 def slap(update, context):
     msg = update.effective_message
@@ -76,7 +81,7 @@ def smug(update, context):
 def lizard(update, context):
     msg = update.effective_message
     target = "lizard"
-    msg.reply_video(nekos.img(target))
+    msg.reply_photo(nekos.img(target))
 
 def spank(update, context):
     msg = update.effective_message
@@ -86,12 +91,12 @@ def spank(update, context):
 def goose(update, context):
     msg = update.effective_message
     target = "goose"
-    msg.reply_video(nekos.img(target))
+    msg.reply_photo(nekos.img(target))
 
 def woof(update, context):
     msg = update.effective_message
     target = "woof"
-    msg.reply_video(nekos.img(target))       
+    msg.reply_photo(nekos.img(target))       
 
 NEKO_HANDLER = CommandHandler("neko", neko, run_async=True)
 WALLPAPER_HANDLER = CommandHandler("wallpaper", wallpaper, run_async=True)
@@ -111,8 +116,10 @@ LIZARD_HANDLER = CommandHandler("lizard", lizard, run_async=True)
 SPANK_HANDLER = CommandHandler("spank", spank, run_async=True)
 GOOSE_HANDLER = CommandHandler("goose", goose, run_async=True)
 WOOF_HANDLER = CommandHandler("woof", woof, run_async=True)
+NGIF_HANDLER = CommandHandler("ngif", ngif, run_async=True)
 
 dispatcher.add_handler(LIZARD_HANDLER)
+dispatcher.add_handler(NGIF_HANDLER)
 dispatcher.add_handler(GOOSE_HANDLER)
 dispatcher.add_handler(WOOF_HANDLER)
 dispatcher.add_handler(SPANK_HANDLER)
