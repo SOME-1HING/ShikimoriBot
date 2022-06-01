@@ -25,33 +25,33 @@ SOFTWARE.
 
 
 import random
-from Shikimori import app
+from Shikimori import pbot
 from pyrogram import filters
 from Shikimori.core.decorators.errors import capture_err
 from Shikimori.utils.http import get
 import Shikimori.modules.animal_facts_string as animal_facts
 
-@app.on_message(filters.command("animalfacts"))
+@pbot.on_message(filters.command("animalfacts"))
 @capture_err
 async def animalfacts(client, message):
     message = await message.reply_text("`Getting animal facts...`")
     fact = await get(random.choice(animal_facts.ANIMAL_FACTS))
     return await message.reply_text(fact[0]["fact"])
 
-@app.on_message(filters.command("dogfacts"))
+@pbot.on_message(filters.command("dogfacts"))
 @capture_err
 async def dogfacts(client, message):
     message = await message.reply_text("`Getting dog facts...`")
-    fact = await get("https://dog-facts-api.herokuapp.com/api/v1/resources/dogs?number=1")
+    fact = await get("https://dog-facts-api.herokupbot.com/api/v1/resources/dogs?number=1")
     return await message.reply_text(fact[0]["fact"])
 
-@app.on_message(filters.command("randomcat"))
+@pbot.on_message(filters.command("randomcat"))
 @capture_err
 async def randomcat(_, message):
     cat = await get("https://aws.random.cat/meow")
     await message.reply_photo(cat["file"])
 
-@app.on_message(filters.command("cats"))
+@pbot.on_message(filters.command("cats"))
 @capture_err
 async def cats(_, message):
     cat = await get("https://thatcopy.pw/catapi/rest/")
