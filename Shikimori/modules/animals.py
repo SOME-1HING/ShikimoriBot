@@ -20,7 +20,7 @@ def cats(update, context):
         img = result['file']
         msg.reply_photo(img)
     except:        
-            msg.reply_text("ERROR")
+        msg.reply_text("ERROR")
 
 ANIMALFACT_HANDLER = DisableAbleCommandHandler("animalfacts", animalfact, run_async=True)
 dispatcher.add_handler(ANIMALFACT_HANDLER)
