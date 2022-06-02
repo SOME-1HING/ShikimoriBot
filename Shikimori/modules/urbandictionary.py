@@ -8,7 +8,8 @@ from telegram.ext import CallbackContext, run_async
 
 def ud(update: Update, context: CallbackContext):
     message = update.effective_message
-    if len(message.text) == 0:
+    args = context.args
+    if len(args) == 0:
         return message.reply("/ud [word]")
         
     text = message.text[len('/ud '):]
