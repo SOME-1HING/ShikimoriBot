@@ -31,7 +31,7 @@ def crypto(update: Update, context: CallbackContext):
             reply_markup=InlineKeyboardMarkup(buttons)
         )
 
-    body = {i.upper(): j for i, j in r.get(currency).items()}
+    body = {i.upper(): j for i, j in result.get(currency).items()}
 
     text = section(
         "Current Crypto Rates For " + currency.upper(),
