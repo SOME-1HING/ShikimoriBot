@@ -1,548 +1,234 @@
-"""
-MIT License
+import html
+import nekos
+from Shikimori import dispatcher
+import Shikimori.modules.sql.nsfw_sql as sql
+from Shikimori.modules.log_channel import gloggable
+from telegram import Update
+from telegram.error import BadRequest, RetryAfter, Unauthorized
+from telegram.ext import CommandHandler, CallbackContext
+from Shikimori.modules.helper_funcs.filters import CustomFilters
+from Shikimori.modules.helper_funcs.chat_status import user_admin
+from telegram.utils.helpers import mention_html
+url_nsfw = "https://api.waifu.pics/nsfw/"
+url_nsfw_metavoid = "https://www.metavoid.info/api/animeimage/nsfw/"
 
-Copyright (c) 2021 rozari0
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-"""
-
-from pyrogram import filters
-from Shikimori.utils.http import get
-from Shikimori import app
-from Shikimori.ex_plugins.dbfunctions import get_nsfw_status, set_nsfw_status
-from Shikimori.core.decorators.errors import capture_err
-from Shikimori.core.decorators.permissions import adminsOnly
-
-
-BASE_URL = "https://api.waifu.pics/"
-__MODULE__ = "Anime Pics"
-__HELP__ = "**Get SFW (Safe for work) Anime Pics. Try This Commands:**"
-
-commands = ['waifus','neko','shinobu','megumin','bully','cuddle','cry',
-            'hug','awoo','kiss','lick','pat','smug','bonk','yeet','blush',
-            'smile','wave','highfive','handhold','nom','bite','glomp','slapgif',
-            'kill','kick','happy','wink','poke','dance','cringe']
-
-for _i in commands:
-    __HELP__ += f"\n/{_i}"
-
-__HELP__ += "\n\n**Get NSFW (Not Safe for work) Anime Pics. Try This Commands:**"
-nsfw_commands = ['trap','blowjob','nsfwwaifu','nwaifu','nsfwneko']
-for _i in nsfw_commands:
-    __HELP__ += f"\n/{_i}"
-
-__HELP__ += "\n\n** Turn on/off NSFW by /nsfw on/off **"
-
-@app.on_message(filters.command("waifus"))
-@capture_err
-async def waifu(client, message):
-    m = await message.reply_text("Getting a random waifu...")
-    data = await get(f"{BASE_URL}sfw/waifu")
-    await message.reply_photo(data["url"])
-    return await m.delete()
-
-@app.on_message(filters.command("neko"))
-@capture_err
-async def neko(client, message):
-    m = await message.reply_text("Getting a random neko...")
-    data = await get(f"{BASE_URL}sfw/neko")
-    await message.reply_photo(data["url"])
-    return await m.delete()
-
-@app.on_message(filters.command("shinobu"))
-@capture_err
-async def shinobu(client, message):
-    m = await message.reply_text("Getting a random shinobu...")
-    data = await get(f"{BASE_URL}sfw/shinobu")
-    await message.reply_photo(data["url"])
-    return await m.delete()
-
-@app.on_message(filters.command("megumin"))
-@capture_err
-async def megumin(client, message):
-    m = await message.reply_text("Getting a random megumin...")
-    data = await get(f"{BASE_URL}sfw/megumin")
-    await message.reply_photo(data["url"])
-    return await m.delete()
-
-@app.on_message(filters.command("bully"))
-@capture_err
-async def bully(client, message):
-    m = await message.reply_text("Getting a random bully...")
-    data = await get(f"{BASE_URL}sfw/bully")
-    await message.reply_animation(data["url"])
-    return await m.delete()
-
-@app.on_message(filters.command("cuddle"))
-@capture_err
-async def cuddle(client, message):
-    m = await message.reply_text("Getting a random cuddle...")
-    data = await get(f"{BASE_URL}sfw/cuddle")
-    await message.reply_animation(data["url"])
-    return await m.delete()
-
-@app.on_message(filters.command("cry"))
-@capture_err
-async def cry(client,message):
-    m = await message.reply_text("Getting a random cry...")
-    data = await get(f"{BASE_URL}sfw/cry")
-    await message.reply_animation(data["url"])
-    return await m.delete()
-
-@app.on_message(filters.command("hug"))
-@capture_err
-async def hug(client,message):
-    m = await message.reply_text("Getting a random hug...")
-    data = await get(f"{BASE_URL}sfw/hug")
-    await message.reply_animation(data["url"])
-    return await m.delete()
-@app.on_message(filters.command("awoo"))
-@capture_err
-async def awoo(client,message):
-    m = await message.reply_text("Getting a random awoo...")
-    data = await get(f"{BASE_URL}sfw/awoo")
-    await message.reply_animation(data["url"])
-    return await m.delete()
-
-@app.on_message(filters.command("kiss"))
-@capture_err
-async def kiss(client,message):
-    m = await message.reply_text("Getting a random kiss...")
-    data = await get(f"{BASE_URL}sfw/kiss")
-    await message.reply_animation(data["url"])
-    return await m.delete()
-
-@app.on_message(filters.command("lick"))
-@capture_err
-async def lick(client,message):
-    m = await message.reply_text("Getting a random lick...")
-    data = await get(f"{BASE_URL}sfw/lick")
-    await message.reply_animation(data["url"])
-    return await m.delete()
-
-@app.on_message(filters.command("pat"))
-@capture_err
-async def pat(client,message):
-    m = await message.reply_text("Getting a random pat...")
-    data = await get(f"{BASE_URL}sfw/pat")
-    await message.reply_animation(data["url"])
-    return await m.delete()
-
-@app.on_message(filters.command("smug"))
-@capture_err
-async def smug(client,message):
-    m = await message.reply_text("Getting a random smug...")
-    data = await get(f"{BASE_URL}sfw/smug")
-    await message.reply_animation(data["url"])
-    return await m.delete()
-
-@app.on_message(filters.command("bonk"))
-@capture_err
-async def bonk(client,message):
-    try:
-        await message.delete()
-    except:
-        pass
-    m = await message.reply_text("Getting a random bonk...")
-    data = await get(f"{BASE_URL}sfw/bonk")
-    if message.reply_to_message:
-        await message.reply_to_message.reply_animation(data["url"])
+@user_admin
+@gloggable
+def add_nsfw(update: Update, context: CallbackContext):
+    chat = update.effective_chat
+    msg = update.effective_message
+    user = update.effective_user
+    is_nsfw = sql.is_nsfw(chat.id)
+    if not is_nsfw:
+        sql.set_nsfw(chat.id)
+        msg.reply_text("Activated NSFW Mode!")
+        message = (
+            f"<b>{html.escape(chat.title)}:</b>\n"
+            f"ACTIVATED_NSFW\n"
+            f"<b>Admin:</b> {mention_html(user.id, html.escape(user.first_name))}\n"
+        )
+        return message
     else:
-        await message.reply_animation(data["url"])
-    return await m.delete()
+        msg.reply_text("NSFW Mode is already Activated for this chat!")
+        return ""
 
-@app.on_message(filters.command("yeet"))
-@capture_err
-async def yeet(client,message):
-    m = await message.reply_text("Getting a random yeet...")
-    data = await get(f"{BASE_URL}sfw/yeet")
-    await message.reply_animation(data["url"])
-    return await m.delete()
-
-@app.on_message(filters.command("blush"))
-@capture_err
-async def blush(client,message):
-    m = await message.reply_text("Getting a random blush...")
-    data = await get(f"{BASE_URL}sfw/blush")
-    await message.reply_animation(data["url"])
-    return await m.delete()
-
-@app.on_message(filters.command("smile"))
-@capture_err
-async def smile(client,message):
-    m = await message.reply_text("Getting a random smile...")
-    data = await get(f"{BASE_URL}sfw/smile")
-    await message.reply_animation(data["url"])
-    return await m.delete()
-
-@app.on_message(filters.command("wave"))
-@capture_err
-async def wave(client,message):
-    m = await message.reply_text("Getting a random wave...")
-    data = await get(f"{BASE_URL}sfw/wave")
-    await message.reply_animation(data["url"])
-    return await m.delete()
-
-@app.on_message(filters.command("highfive"))
-@capture_err
-async def highfive(client,message):
-    m = await message.reply_text("Getting a random highfive...")
-    try:
-        await message.delete()
-    except:
-        pass
-    data = await get(f"{BASE_URL}sfw/highfive")
-    if message.reply_to_message:
-        await message.reply_to_message.reply_animation(data["url"])
+@user_admin
+@gloggable
+def rem_nsfw(update: Update, context: CallbackContext):
+    msg = update.effective_message
+    chat = update.effective_chat
+    user = update.effective_user
+    is_nsfw = sql.is_nsfw(chat.id)
+    if not is_nsfw:
+        msg.reply_text("NSFW Mode is already Deactivated")
+        return ""
     else:
-        await message.reply_animation(data["url"])
-    return await m.delete()
+        sql.rem_nsfw(chat.id)
+        msg.reply_text("Rolled Back to SFW Mode!")
+        message = (
+            f"<b>{html.escape(chat.title)}:</b>\n"
+            f"DEACTIVATED_NSFW\n"
+            f"<b>Admin:</b> {mention_html(user.id, html.escape(user.first_name))}\n"
+        )
+        return message
 
-@app.on_message(filters.command("handhold"))
-@capture_err
-async def highfive(client,message):
-    m = await message.reply_text("Getting a random handhold...")
-    try:
-        await message.delete()
-    except:
-        pass
-    data = await get(f"{BASE_URL}sfw/handhold")
-    if message.reply_to_message:
-        await message.reply_to_message.reply_animation(data["url"])
-    else:
-        await message.reply_animation(data["url"])
-    return await m.delete()
+def list_nsfw_chats(update: Update, context: CallbackContext):
+    chats = sql.get_all_nsfw_chats()
+    text = "<b>NSFW Activated Chats</b>\n"
+    for chat in chats:
+        try:
+            x = context.bot.get_chat(int(*chat))
+            name = x.title if x.title else x.first_name
+            text += f"• <code>{name}</code>\n"
+        except BadRequest:
+            sql.rem_nsfw(*chat)
+        except Unauthorized:
+            sql.rem_nsfw(*chat)
+        except RetryAfter as e:
+            sleep(e.retry_after)
+    update.effective_message.reply_text(text, parse_mode="HTML")
 
-@app.on_message(filters.command("nom"))
-@capture_err
-async def highfive(client,message):
-    m = await message.reply_text("Getting a random nom...")
-    try:
-        await message.delete()
-    except:
-        pass
-    data = await get(f"{BASE_URL}sfw/nom")
-    if message.reply_to_message:
-        await message.reply_to_message.reply_animation(data["url"])
-    else:
-        await message.reply_animation(data["url"])
-    return await m.delete()
-
-
-@app.on_message(filters.command("bite"))
-@capture_err
-async def highfive(client,message):
-    m = await message.reply_text("Getting a random bite...")
-    try:
-        await message.delete()
-    except:
-        pass
-    data = await get(f"{BASE_URL}sfw/bite")
-    if message.reply_to_message:
-        await message.reply_to_message.reply_animation(data["url"])
-    else:
-        await message.reply_animation(data["url"])
-    return await m.delete()
-
-@app.on_message(filters.command("glomp"))
-@capture_err
-async def glomp(client,message):
-    m = await message.reply_text("Getting a random glomp...")
-    try:
-        await message.delete()
-    except:
-        pass
-    data = await get(f"{BASE_URL}sfw/glomp")
-    if message.reply_to_message:
-        await message.reply_to_message.reply_animation(data["url"])
-    else:
-        await message.reply_animation(data["url"])
-    return await m.delete()
-
-@app.on_message(filters.command("slapgif"))
-@capture_err
-async def slap(client,message):
-    m = await message.reply_text("Getting a random slap...")
-    try:
-        await message.delete()
-    except:
-        pass
-    data = await get(f"{BASE_URL}sfw/slap")
-    if message.reply_to_message:
-        await message.reply_to_message.reply_animation(data["url"])
-    else:
-        await message.reply_animation(data["url"])
-    return await m.delete()
-
-@app.on_message(filters.command("kill"))
-@capture_err
-async def kill(client,message):
-    m = await message.reply_text("Getting a random kill...")
-    try:
-        await message.delete()
-    except:
-        pass
-    data = await get(f"{BASE_URL}sfw/kill")
-    if message.reply_to_message:
-        await message.reply_to_message.reply_animation(data["url"])
-    else:
-        await message.reply_animation(data["url"])
-    return await m.delete()
-
-@app.on_message(filters.command("kick"))
-@capture_err
-async def kick(client,message):
-    m = await message.reply_text("Getting a random kick...")
-    try:
-        await message.delete()
-    except:
-        pass
-    data = await get(f"{BASE_URL}sfw/kick")
-    if message.reply_to_message:
-        await message.reply_to_message.reply_animation(data["url"])
-    else:
-        await message.reply_animation(data["url"])
-    return await m.delete()
-
-@app.on_message(filters.command("happy"))
-@capture_err
-async def happy(client,message):
-    m = await message.reply_text("Getting a random happy image...")
-    try:
-        await message.delete()
-    except:
-        pass
-    data = await get(f"{BASE_URL}sfw/happy")
-    if message.reply_to_message:
-        await message.reply_to_message.reply_animation(data["url"])
-    else:
-        await message.reply_animation(data["url"])
-    return await m.delete()
-
-@app.on_message(filters.command("wink"))
-@capture_err
-async def happy(client,message):
-    m = await message.reply_text("Getting a random wink image...")
-    try:
-        await message.delete()
-    except:
-        pass
-    data = await get(f"{BASE_URL}sfw/wink")
-    if message.reply_to_message:
-        await message.reply_to_message.reply_animation(data["url"])
-    else:
-        await message.reply_animation(data["url"])
-    return await m.delete()
-
-@app.on_message(filters.command("poke"))
-@capture_err
-async def happy(client,message):
-    m = await message.reply_text("Getting a random poke image...")
-    try:
-        await message.delete()
-    except:
-        pass
-    data = await get(f"{BASE_URL}sfw/poke")
-    if message.reply_to_message:
-        await message.reply_to_message.reply_animation(data["url"])
-    else:
-        await message.reply_animation(data["url"])
-    return await m.delete()
-
-
-@app.on_message(filters.command("dance"))
-@capture_err
-async def happy(client,message):
-    m = await message.reply_text("Getting a random dance image...")
-    try:
-        await message.delete()
-    except:
-        pass
-    data = await get(f"{BASE_URL}sfw/dance")
-    if message.reply_to_message:
-        await message.reply_to_message.reply_animation(data["url"])
-    else:
-        await message.reply_animation(data["url"])
-    return await m.delete()
-
-
-@app.on_message(filters.command("cringe"))
-@capture_err
-async def happy(client,message):
-    m = await message.reply_text("Getting a random cringe image...")
-    try:
-        await message.delete()
-    except:
-        pass
-    data = await get(f"{BASE_URL}sfw/cringe")
-    if message.reply_to_message:
-        await message.reply_to_message.reply_animation(data["url"])
-    else:
-        await message.reply_animation(data["url"])
-    return await m.delete()
-
-
-
-@app.on_message(filters.command("nsfw") & filters.group)
-@adminsOnly("can_change_info")
-async def nsfw(client,message):
-    if len(message.command)>=2 and message.command[1].lower() == "on":
-        if await get_nsfw_status(message.chat.id) != False:
-            return await message.reply_text("NSFW mode already enabled")
-
-        await set_nsfw_status(message.chat.id,True)
-        return await message.reply_text("NSFW mode enabled")
-    elif len(message.command)>=2 and message.command[1].lower() == "off":
-        if await get_nsfw_status(message.chat.id):
-            m = await message.reply_text("Turning NSFW off...")
-            await set_nsfw_status(message.chat.id,False)
-            return await m.edit("NSFW mode disabled")
-        else:
-            await message.reply_text("NSFW is already off!")
+def blowjob(update, context):
+    chat_id = update.effective_chat.id
+    if not update.effective_message.chat.type == "private":
+        is_nsfw = sql.is_nsfw(chat_id)
+        if not is_nsfw:
+            msg.reply_text("NSFW is not activated")
             return
-    else:
-        return await message.reply_text("Usage: /nsfw [on/off]")
-    
-@app.on_message(filters.command("nsfw") & filters.private)
-async def nsfw(client,message):
-    if len(message.command)>=2 and message.command[1].lower() == "on":
-        if await get_nsfw_status(message.chat.id) != False:
-            return await message.reply_text("NSFW mode already enabled")
+    msg = update.effective_message
+    img = f"{url_nsfw}blowjob"
+    msg.reply_photo(photo=img)
 
-        await set_nsfw_status(message.chat.id,True)
-        return await message.reply_text("NSFW mode enabled")
-    elif len(message.command)>=2 and message.command[1].lower() == "off":
-        if await get_nsfw_status(message.chat.id):
-            m = await message.reply_text("Turning NSFW off...")
-            await set_nsfw_status(message.chat.id,False)
-            return m.edit("NSFW is now off!")
-        else:
-            await message.reply_text("NSFW is already off!")
+def trap(update, context):
+    chat_id = update.effective_chat.id
+    if not update.effective_message.chat.type == "private":
+        is_nsfw = sql.is_nsfw(chat_id)
+        if not is_nsfw:
+            msg.reply_text("NSFW is not activated")
             return
-    else:
-        return await message.reply_text("Usage: /nsfw [on/off]")
+    msg = update.effective_message
+    img = f"{url_nsfw}trap"
+    msg.reply_photo(photo=img)
 
-@app.on_message(filters.command(["nsfwwaifu","nwaifu"]))
-@capture_err
-async def nsfwwaifu(client,message):
-    if await get_nsfw_status(message.chat.id) == False:
-        return await message.reply_text("NSFW mode is off! Turn it on to use this command!")
-    m = await message.reply_text("Getting a random nsfw waifu image...")
-    try:
-        await message.delete()
-    except:
-        pass
-    data = await get(f"{BASE_URL}nsfw/waifu")
-    if message.reply_to_message:
-        try:
-            await message.reply_to_message.reply_photo(data["url"])
-        except:
-            await message.reply_to_message.reply_photo(data["url"])
-    else:
-        try:
-            await message.reply_photo(data["url"])
-        except:
-            await message.reply_photo(data["url"])
-    return await m.delete()
+def nsfwwaifu(update, context):
+    chat_id = update.effective_chat.id
+    if not update.effective_message.chat.type == "private":
+        is_nsfw = sql.is_nsfw(chat_id)
+        if not is_nsfw:
+            msg.reply_text("NSFW is not activated")
+            return
+    msg = update.effective_message
+    img = f"{url_nsfw}waifu"
+    msg.reply_photo(photo=img)
 
-@app.on_message(filters.command(["nsfwneko"]))
-@capture_err
-async def nsfwneko(client,message):
-    if await get_nsfw_status(message.chat.id) == False:
-        return await message.reply_text("NSFW mode is off! Turn it on to use this command!")
-    m = await message.reply_text("Getting a random nsfw neko image...")
-    try:
-        await message.delete()
-    except:
-        pass
-    data = await get(f"{BASE_URL}nsfw/neko")
-    if message.reply_to_message:
-        try:
-            await message.reply_to_message.reply_photo(data["url"])
-        except:
-            await message.reply_to_message.reply_photo(data["url"])
-    else:
-        try:
-            await message.reply_photo(data["url"])
-        except:
-            await message.reply_photo(data["url"])
-    return await m.delete()
+def nsfwneko(update, context):
+    chat_id = update.effective_chat.id
+    if not update.effective_message.chat.type == "private":
+        is_nsfw = sql.is_nsfw(chat_id)
+        if not is_nsfw:
+            msg.reply_text("NSFW is not activated")
+            return
+    msg = update.effective_message
+    img = f"{url_nsfw}neko"
+    msg.reply_photo(photo=img)
 
-@app.on_message(filters.command(["nsfwtrap","trap"]))
-@capture_err
-async def nsfwtrap(client,message):
-    if await get_nsfw_status(message.chat.id) == False:
-        return await message.reply_text("NSFW mode is off! Turn it on to use this command!")
-    m = await message.reply_text("Getting a random nsfw trap image...")
-    try:
-        await message.delete()
-    except:
-        pass
-    data = await get(f"{BASE_URL}nsfw/trap")
-    if str(data["url"]).endswith(".gif"):
-        try:
-            await message.reply_animation(data["url"])
-        except:
-            await message.reply_animation(data["url"])
-    else:
-        try:
-            await message.reply_photo(data["url"])
-        except:
-            await message.reply_photo(data["url"])
-    return await m.delete()
+def nwaifu(update, context):
+    chat_id = update.effective_chat.id
+    if not update.effective_message.chat.type == "private":
+        is_nsfw = sql.is_nsfw(chat_id)
+        if not is_nsfw:
+            msg.reply_text("NSFW is not activated")
+            return
+    msg = update.effective_message
+    img = f"{url_nsfw_metavoid}waifu"
+    msg.reply_photo(photo=img)
 
-@app.on_message(filters.command("blowjob"))
-@capture_err
-async def blowjob(client,message):
-    if await get_nsfw_status(message.chat.id) == False:
-        return await message.reply_text("NSFW mode is off! Turn it on to use this command!")
-    m = await message.reply_text("Getting a random nsfw blowjob image...")
-    try:
-        await message.delete()
-    except:
-        pass
-    data = await get(f"{BASE_URL}nsfw/blowjob")
-    if message.reply_to_message:
-        try:
-            await message.reply_to_message.reply_animation(data["url"])
-        except:
-            await message.reply_to_message.reply_animation(data["url"])
-    else:
-        try:
-            await message.reply_animation(data["url"])
-        except:
-            await message.reply_animation(data["url"])
-    return await m.delete()
+def ntrap(update, context):
+    chat_id = update.effective_chat.id
+    if not update.effective_message.chat.type == "private":
+        is_nsfw = sql.is_nsfw(chat_id)
+        if not is_nsfw:
+            msg.reply_text("NSFW is not activated")
+            return
+    msg = update.effective_message
+    img = f"{url_nsfw_metavoid}trap"
+    msg.reply_photo(photo=img)
+
+def nneko(update, context):
+    chat_id = update.effective_chat.id
+    if not update.effective_message.chat.type == "private":
+        is_nsfw = sql.is_nsfw(chat_id)
+        if not is_nsfw:
+            msg.reply_text("NSFW is not activated")
+            return
+    msg = update.effective_message
+    img = f"{url_nsfw_metavoid}neko"
+    msg.reply_photo(photo=img)
+
+def nblowjob(update, context):
+    chat_id = update.effective_chat.id
+    if not update.effective_message.chat.type == "private":
+        is_nsfw = sql.is_nsfw(chat_id)
+        if not is_nsfw:
+            msg.reply_text("NSFW is not activated")
+            return
+    msg = update.effective_message
+    img = f"{url_nsfw_metavoid}blowjob"
+    msg.reply_photo(photo=img)
+
+def spank(update, context):
+    chat_id = update.effective_chat.id
+    if not update.effective_message.chat.type == "private":
+        is_nsfw = sql.is_nsfw(chat_id)
+        if not is_nsfw:
+            return
+    msg = update.effective_message
+    target = "spank"
+    msg.reply_photo(nekos.img(target))
+
+ADD_NSFW_HANDLER = CommandHandler("addnsfw", add_nsfw)
+REMOVE_NSFW_HANDLER = CommandHandler("rmnsfw", rem_nsfw)
+LIST_NSFW_CHATS_HANDLER = CommandHandler(
+    "nsfwchats", list_nsfw_chats, filters=CustomFilters.dev_filter)
+NSFWWAIFU_HANDLER = CommandHandler("nsfwwaifu", nsfwwaifu, run_async=True)
+BLOWJOB_HANDLER = CommandHandler("blowjob", blowjob, run_async=True)
+NWAIFU_HANDLER = CommandHandler("nwaifu", nwaifu, run_async=True)
+NBLOWJOB_HANDLER = CommandHandler("nblowjob", nblowjob, run_async=True)
+TRAP_HANDLER = CommandHandler("trap", trap, run_async=True)
+NTRAP_HANDLER = CommandHandler("ntrap", ntrap, run_async=True)
+NSFWNEKO_HANDLER = CommandHandler("nsfwneko", nsfwneko, run_async=True)
+NNEKO_HANDLER = CommandHandler("nneko", nneko, run_async=True)
+SPANK_HANDLER = CommandHandler("spank", spank, run_async=True)
+
+dispatcher.add_handler(ADD_NSFW_HANDLER)
+dispatcher.add_handler(REMOVE_NSFW_HANDLER)
+dispatcher.add_handler(LIST_NSFW_CHATS_HANDLER)
+dispatcher.add_handler(NSFWWAIFU_HANDLER)
+dispatcher.add_handler(BLOWJOB_HANDLER)
+dispatcher.add_handler(NWAIFU_HANDLER)
+dispatcher.add_handler(NBLOWJOB_HANDLER)
+dispatcher.add_handler(NTRAP_HANDLER)
+dispatcher.add_handler(SPANK_HANDLER)
+dispatcher.add_handler(TRAP_HANDLER)
+dispatcher.add_handler(NSFWNEKO_HANDLER)
+dispatcher.add_handler(NNEKO_HANDLER)
+
+__handlers__ = [
+    ADD_NSFW_HANDLER,
+    REMOVE_NSFW_HANDLER,
+    LIST_NSFW_CHATS_HANDLER,
+    ADD_NSFW_HANDLER,
+    REMOVE_NSFW_HANDLER,
+    LIST_NSFW_CHATS_HANDLER,
+    NSFWWAIFU_HANDLER,
+    SPANK_HANDLER,
+    BLOWJOB_HANDLER,
+    NWAIFU_HANDLER,
+    NBLOWJOB_HANDLER,
+    NTRAP_HANDLER,
+    TRAP_HANDLER,
+    NSFWNEKO_HANDLER,
+    NNEKO_HANDLER
+]
+
 
 
 __mod_name__ = "NSFW 🔞"
 
 __help__ = """
-❍ `/nsfw` [on/off]: To toggle NSFW mode on or off.
+❍ `/addnsfw` : To Activate NSFW commands.
+❍ `/addnsfw` : To Deactivate NSFW commands.
+❍ `/nsfwchats` : Lists NSFW chats.
 
-Get NSFW (Not Safe for work) Anime Pics. Try This Commands:
-   ➢ `/trap`
-   ➢ `/blowjob`
-   ➢ `/nsfwwaifu`
-   ➢ `/nwaifu`
-   ➢ `/nsfwneko`
-   ➢ `/spank`
+Following are the NSFW commands:
 
-Credits:- rozari0
+    ➢ `/nsfwwaifu`
+    ➢ `/blowjob`
+    ➢ `/nwaifu`
+    ➢ `/nblowjob`
+    ➢ `/trap`
+    ➢ `/ntrap`
+    ➢ `/nsfwneko`
+    ➢ `/nneko`
+    ➢ `/spank`
 """
