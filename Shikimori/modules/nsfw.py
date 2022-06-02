@@ -1,4 +1,5 @@
 import html
+import requests
 import nekos
 from Shikimori import dispatcher
 import Shikimori.modules.sql.nsfw_sql as sql
@@ -76,8 +77,10 @@ def blowjob(update, context):
             msg.reply_text("NSFW is not activated")
             return
     msg = update.effective_message
-    img = f"{url_nsfw}blowjob"
-    msg.reply_photo(photo=img)
+    url = f"{url_nsfw}blowjob" 
+    result = requests.get(url).json()
+    img = result['url']
+    msg.reply_animation(img)
 
 def trap(update, context):
     chat_id = update.effective_chat.id
@@ -87,8 +90,10 @@ def trap(update, context):
             msg.reply_text("NSFW is not activated")
             return
     msg = update.effective_message
-    img = f"{url_nsfw}trap"
-    msg.reply_photo(photo=img)
+    url = f"{url_nsfw}trap" 
+    result = requests.get(url).json()
+    img = result['url']
+    msg.reply_animation(img)
 
 def nsfwwaifu(update, context):
     chat_id = update.effective_chat.id
@@ -98,7 +103,9 @@ def nsfwwaifu(update, context):
             msg.reply_text("NSFW is not activated")
             return
     msg = update.effective_message
-    img = f"{url_nsfw}waifu"
+    url = f"{url_nsfw}waifu" 
+    result = requests.get(url).json()
+    img = result['url']
     msg.reply_photo(photo=img)
 
 def nsfwneko(update, context):
@@ -109,7 +116,9 @@ def nsfwneko(update, context):
             msg.reply_text("NSFW is not activated")
             return
     msg = update.effective_message
-    img = f"{url_nsfw}neko"
+    url = f"{url_nsfw}neko" 
+    result = requests.get(url).json()
+    img = result['url']
     msg.reply_photo(photo=img)
 
 def nwaifu(update, context):
@@ -132,7 +141,7 @@ def ntrap(update, context):
             return
     msg = update.effective_message
     img = f"{url_nsfw_metavoid}trap"
-    msg.reply_photo(photo=img)
+    msg.reply_animation(img)
 
 def nneko(update, context):
     chat_id = update.effective_chat.id
@@ -154,7 +163,7 @@ def nblowjob(update, context):
             return
     msg = update.effective_message
     img = f"{url_nsfw_metavoid}blowjob"
-    msg.reply_photo(photo=img)
+    msg.reply_animation(img)
 
 def spank(update, context):
     chat_id = update.effective_chat.id
@@ -164,7 +173,7 @@ def spank(update, context):
             return
     msg = update.effective_message
     target = "spank"
-    msg.reply_photo(nekos.img(target))
+    msg.reply_animation(nekos.img(target))
 
 ADD_NSFW_HANDLER = CommandHandler("addnsfw", add_nsfw)
 REMOVE_NSFW_HANDLER = CommandHandler("rmnsfw", rem_nsfw)
