@@ -10,7 +10,7 @@ def crypto(update: Update, context: CallbackContext):
     if len(args) == 0:
         return message.reply_text("/crypto [currency]")
 
-    currency = args
+    currency = message.text.split(None, 1)[1].lower()
 
     buttons = [
         [
