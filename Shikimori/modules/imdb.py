@@ -70,6 +70,8 @@ __handlers__ = [
 
 __mod_name__ = "IMDB"
 __help__ = """
+*CURRENTLY UNAVAILABLE*
+
    ➢ `/imdb` <movie name> - To Get IMDB info about movie/show.
 
 credits: rozari0   
