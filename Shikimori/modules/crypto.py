@@ -26,7 +26,7 @@ def crypto(update: Update, context: CallbackContext):
         return message.reply_text("[ERROR]: Something went wrong.")
 
     if currency not in result:
-        return message.effective_message.reply_text(
+        return update.effective_message.reply_text(
             "[ERROR]: INVALID CURRENCY",
             reply_markup=InlineKeyboardMarkup(buttons)
         )
@@ -37,7 +37,7 @@ def crypto(update: Update, context: CallbackContext):
         "Current Crypto Rates For " + currency.upper(),
         body,
     )
-    message.effective_message.reply_text(text, reply_markup=InlineKeyboardMarkup(buttons))
+    update.effective_message.reply_text(text, reply_markup=InlineKeyboardMarkup(buttons))
 
 CRYPTO_HANDLER = CommandHandler("crypto", crypto, run_async=True)
 
