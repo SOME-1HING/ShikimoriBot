@@ -46,10 +46,3 @@ async def carbon_func(_, message):
     await pbot.send_document(message.chat.id, carbon)
     await m.delete()
     carbon.close()
-
-
-__mod_name__ = "Carbon"
-__name__ = """
-   ➢ `/Carbon` : Reply to a message to show it as code.
-
-"""

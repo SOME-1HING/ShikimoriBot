@@ -1,29 +1,6 @@
-"""
-MIT License
+# Module rewritten by https://github.com/SOME-1HING from the original module by rozari0
 
-Copyright (c) 2021 rozari0
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-"""
-# Module rewritten by https://github.com/SOME-1HING
-
-
+import requests
 import random
 from Shikimori import pbot
 from pyrogram import filters
@@ -53,17 +30,29 @@ async def randomcat(_, message):
     cat = await get("https://aws.random.cat/meow")
     await message.reply_photo(cat["file"])
 
-@pbot.on_message(filters.command("cats"))
-@capture_err
-async def cats(_, message):
-    cat = await get("https://thatcopy.pw/catapi/rest/")
-    if len(message.command)<2:
-        return await message.reply_photo(cat["url"])
-    else:
-        return await message.reply_sticker(cat["webpurl"])
+def cats(update, context):
+    try:
+        msg = update.effective_message
+        url = f'https://thatcopy.pw/catapi/rest/'
+        result = requests.get(url).json()
+        if len(msg.command)<2:
+            img = result['url']
+            msg.reply_photo(img)
+        else:
+            img = result['webpurl']
+            msg.reply_photo(img)
+    except:        
+            msg.reply_text("ERROR")
 
 ANIMALFACT_HANDLER = DisableAbleCommandHandler("animalfacts", animalfact, run_async=True)
 dispatcher.add_handler(ANIMALFACT_HANDLER)
+DOGFACT_HANDLER = DisableAbleCommandHandler("dogfacts", dogfacts, run_async=True)
+dispatcher.add_handler(DOGFACT_HANDLER)
+RANDOMCAT_HANDLER = DisableAbleCommandHandler("randomcat", randomcat, run_async=True)
+dispatcher.add_handler(RANDOMCAT_HANDLER)
+CAT_HANDLER = DisableAbleCommandHandler("cats", cats, run_async=True)
+dispatcher.add_handler(CAT_HANDLER)
+
 
 __mod_name__ = "Animal facts"
 __help__ = """
