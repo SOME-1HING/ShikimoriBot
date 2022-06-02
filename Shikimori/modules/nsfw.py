@@ -11,7 +11,6 @@ from Shikimori.modules.helper_funcs.filters import CustomFilters
 from Shikimori.modules.helper_funcs.chat_status import user_admin
 from telegram.utils.helpers import mention_html
 url_nsfw = "https://api.waifu.pics/nsfw/"
-url_nsfw_metavoid = "https://www.metavoid.info/api/animeimage/nsfw/"
 
 @user_admin
 @gloggable
@@ -121,39 +120,6 @@ def nsfwneko(update, context):
     img = result['url']
     msg.reply_photo(photo=img)
 
-def nwaifu(update, context):
-    chat_id = update.effective_chat.id
-    if not update.effective_message.chat.type == "private":
-        is_nsfw = sql.is_nsfw(chat_id)
-        if not is_nsfw:
-            msg.reply_text("NSFW is not activated")
-            return
-    msg = update.effective_message
-    img = f"{url_nsfw_metavoid}waifu"
-    msg.reply_photo(photo=img)
-
-def nneko(update, context):
-    chat_id = update.effective_chat.id
-    if not update.effective_message.chat.type == "private":
-        is_nsfw = sql.is_nsfw(chat_id)
-        if not is_nsfw:
-            msg.reply_text("NSFW is not activated")
-            return
-    msg = update.effective_message
-    img = f"{url_nsfw_metavoid}neko"
-    msg.reply_photo(photo=img)
-
-def nblowjob(update, context):
-    chat_id = update.effective_chat.id
-    if not update.effective_message.chat.type == "private":
-        is_nsfw = sql.is_nsfw(chat_id)
-        if not is_nsfw:
-            msg.reply_text("NSFW is not activated")
-            return
-    msg = update.effective_message
-    img = f"{url_nsfw_metavoid}blowjob"
-    msg.reply_animation(img)
-
 def spank(update, context):
     chat_id = update.effective_chat.id
     if not update.effective_message.chat.type == "private":
@@ -168,13 +134,10 @@ ADD_NSFW_HANDLER = CommandHandler("addnsfw", add_nsfw)
 REMOVE_NSFW_HANDLER = CommandHandler("rmnsfw", rem_nsfw)
 LIST_NSFW_CHATS_HANDLER = CommandHandler(
     "nsfwchats", list_nsfw_chats, filters=CustomFilters.dev_filter)
-NSFWWAIFU_HANDLER = CommandHandler("nsfwwaifu", nsfwwaifu, run_async=True)
-BLOWJOB_HANDLER = CommandHandler("blowjob", blowjob, run_async=True)
-NWAIFU_HANDLER = CommandHandler("nwaifu", nwaifu, run_async=True)
-NBLOWJOB_HANDLER = CommandHandler("nblowjob", nblowjob, run_async=True)
+NSFWWAIFU_HANDLER = CommandHandler(("nsfwwaifu", "nwaifu"), nsfwwaifu, run_async=True)
+BLOWJOB_HANDLER = CommandHandler(("blowjob", "bj"), blowjob, run_async=True)
 TRAP_HANDLER = CommandHandler("trap", trap, run_async=True)
-NSFWNEKO_HANDLER = CommandHandler("nsfwneko", nsfwneko, run_async=True)
-NNEKO_HANDLER = CommandHandler("nneko", nneko, run_async=True)
+NSFWNEKO_HANDLER = CommandHandler(("nsfwneko", "nneko"), nsfwneko, run_async=True)
 SPANK_HANDLER = CommandHandler("spank", spank, run_async=True)
 
 dispatcher.add_handler(ADD_NSFW_HANDLER)
@@ -182,12 +145,9 @@ dispatcher.add_handler(REMOVE_NSFW_HANDLER)
 dispatcher.add_handler(LIST_NSFW_CHATS_HANDLER)
 dispatcher.add_handler(NSFWWAIFU_HANDLER)
 dispatcher.add_handler(BLOWJOB_HANDLER)
-dispatcher.add_handler(NWAIFU_HANDLER)
-dispatcher.add_handler(NBLOWJOB_HANDLER)
 dispatcher.add_handler(SPANK_HANDLER)
 dispatcher.add_handler(TRAP_HANDLER)
 dispatcher.add_handler(NSFWNEKO_HANDLER)
-dispatcher.add_handler(NNEKO_HANDLER)
 
 __handlers__ = [
     ADD_NSFW_HANDLER,
@@ -199,11 +159,8 @@ __handlers__ = [
     NSFWWAIFU_HANDLER,
     SPANK_HANDLER,
     BLOWJOB_HANDLER,
-    NWAIFU_HANDLER,
-    NBLOWJOB_HANDLER,
     TRAP_HANDLER,
-    NSFWNEKO_HANDLER,
-    NNEKO_HANDLER
+    NSFWNEKO_HANDLER
 ]
 
 
@@ -220,7 +177,7 @@ Following are the NSFW commands:
     ➢ `/nsfwwaifu`
     ➢ `/blowjob`
     ➢ `/nwaifu`
-    ➢ `/nblowjob`
+    ➢ `/bj`
     ➢ `/trap`
     ➢ `/nsfwneko`
     ➢ `/nneko`
