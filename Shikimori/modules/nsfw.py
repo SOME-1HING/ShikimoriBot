@@ -177,9 +177,6 @@ __help__ = """
    ➢ `/smug`*:* Sends Random Smug GIFs.
    ➢ `/gecg`*:* IDK
    ➢ `/slap`*:* Sends Random Slap GIFs.
-   ➢ `/lizard`*:* Sends Random Lizard GIFs.
    ➢ `/spank`*:* Sends Random Spank GIFs.
-   ➢ `/goose`*:* Sends Random Goose GIFs.
-   ➢ `/woof`*:* Sends Random Woof GIFs.
 """
 
