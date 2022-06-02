@@ -132,17 +132,6 @@ def nwaifu(update, context):
     img = f"{url_nsfw_metavoid}waifu"
     msg.reply_photo(photo=img)
 
-def ntrap(update, context):
-    chat_id = update.effective_chat.id
-    if not update.effective_message.chat.type == "private":
-        is_nsfw = sql.is_nsfw(chat_id)
-        if not is_nsfw:
-            msg.reply_text("NSFW is not activated")
-            return
-    msg = update.effective_message
-    img = f"{url_nsfw_metavoid}trap"
-    msg.reply_photo(photo=img)
-
 def nneko(update, context):
     chat_id = update.effective_chat.id
     if not update.effective_message.chat.type == "private":
@@ -184,7 +173,6 @@ BLOWJOB_HANDLER = CommandHandler("blowjob", blowjob, run_async=True)
 NWAIFU_HANDLER = CommandHandler("nwaifu", nwaifu, run_async=True)
 NBLOWJOB_HANDLER = CommandHandler("nblowjob", nblowjob, run_async=True)
 TRAP_HANDLER = CommandHandler("trap", trap, run_async=True)
-NTRAP_HANDLER = CommandHandler("ntrap", ntrap, run_async=True)
 NSFWNEKO_HANDLER = CommandHandler("nsfwneko", nsfwneko, run_async=True)
 NNEKO_HANDLER = CommandHandler("nneko", nneko, run_async=True)
 SPANK_HANDLER = CommandHandler("spank", spank, run_async=True)
@@ -196,7 +184,6 @@ dispatcher.add_handler(NSFWWAIFU_HANDLER)
 dispatcher.add_handler(BLOWJOB_HANDLER)
 dispatcher.add_handler(NWAIFU_HANDLER)
 dispatcher.add_handler(NBLOWJOB_HANDLER)
-dispatcher.add_handler(NTRAP_HANDLER)
 dispatcher.add_handler(SPANK_HANDLER)
 dispatcher.add_handler(TRAP_HANDLER)
 dispatcher.add_handler(NSFWNEKO_HANDLER)
@@ -214,7 +201,6 @@ __handlers__ = [
     BLOWJOB_HANDLER,
     NWAIFU_HANDLER,
     NBLOWJOB_HANDLER,
-    NTRAP_HANDLER,
     TRAP_HANDLER,
     NSFWNEKO_HANDLER,
     NNEKO_HANDLER
@@ -226,7 +212,7 @@ __mod_name__ = "NSFW 🔞"
 
 __help__ = """
 ❍ `/addnsfw` : To Activate NSFW commands.
-❍ `/addnsfw` : To Deactivate NSFW commands.
+❍ `/rmnsfw` : To Deactivate NSFW commands.
 ❍ `/nsfwchats` : Lists NSFW chats.
 
 Following are the NSFW commands:
@@ -236,7 +222,6 @@ Following are the NSFW commands:
     ➢ `/nwaifu`
     ➢ `/nblowjob`
     ➢ `/trap`
-    ➢ `/ntrap`
     ➢ `/nsfwneko`
     ➢ `/nneko`
     ➢ `/spank`
