@@ -18,7 +18,7 @@ def cats(update, context):
         url = f'https://aws.random.cat/meow'
         result = requests.get(url).json()
         img = result['file']
-        msg.reply_photo(img)
+        msg.reply_photo(photo=img)
     except:        
         msg.reply_text("ERROR")
 
