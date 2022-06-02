@@ -3,7 +3,8 @@ from Shikimori.utils.http import get
 from Shikimori import dispatcher
 from telegram.ext import CommandHandler, CallbackContext
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, ParseMode
-from imdb import IMDb
+
+IMDb = ()
 ia = IMDb()
 
 def imdb(update: Update, context: CallbackContext):
