@@ -1,4 +1,5 @@
 from Shikimori.core.sections import section
+import requests
 from Shikimori.utils.http import get
 from Shikimori import dispatcher
 from telegram.ext import CommandHandler, CallbackContext
@@ -19,11 +20,12 @@ def crypto(update: Update, context: CallbackContext):
     ]
 
     try:
-        r = get("https://x.wazirx.com/wazirx-falcon/api/v2.0/crypto_rates",timeout=5)
+        url = f'https://x.wazirx.com/wazirx-falcon/api/v2.0/crypto_rates'
+        result = requests.get(url).json()
     except Exception:
         return message.reply_text("[ERROR]: Something went wrong.")
 
-    if currency not in r:
+    if currency not in result:
         return message.effective_message.reply_text(
             "[ERROR]: INVALID CURRENCY",
             reply_markup=InlineKeyboardMarkup(buttons)
