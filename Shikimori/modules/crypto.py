@@ -13,7 +13,11 @@ def crypto(update: Update, context: CallbackContext):
 
     currency = message.text.split(None, 1)[1].lower()
 
-    buttons = [InlineKeyboardButton(text = "Available Currencies", url ="https://plotcryptoprice.herokuapp.com")]
+    buttons = [
+        [
+            InlineKeyboardButton(text = "Available Currencies", url ="https://plotcryptoprice.herokuapp.com"),
+        ],
+    ]
 
     try:
         url = f'https://x.wazirx.com/wazirx-falcon/api/v2.0/crypto_rates'
@@ -43,7 +47,8 @@ __handlers__ = [
     CRYPTO_HANDLER
 ]
 
-__mod_name__ = "Crypto 🪙"
+
+__mod_name__ = "Crypto"
 __help__ = """
    ➢ `/crypto` [currency] :Get Real Time value from currency given.
 """
