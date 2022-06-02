@@ -72,93 +72,93 @@ def smug(update, context):
 def bonk(update, context):
     msg = update.effective_message
     img = f"{url_sfw}bonk"
-    msg.reply_animation(video=img)
+    msg.reply_animation(img)
 
 def yeet(update, context):
     msg = update.effective_message
     img = f"{url_sfw}yeet"
-    msg.reply_animation(video=img)
+    msg.reply_animation(img)
 
 def blush(update, context):
     msg = update.effective_message
     img = f"{url_sfw}blush"
-    msg.reply_animation(video=img)
+    msg.reply_animation(img)
 
 def smile(update, context):
     msg = update.effective_message
     img = f"{url_sfw}smile"
-    msg.reply_animation(video=img)
+    msg.reply_animation(img)
 
 def wave(update, context):
     msg = update.effective_message
     img = f"{url_sfw}wave"
-    msg.reply_animation(video=img)
+    msg.reply_animation(img)
 
 def highfive(update, context):
     msg = update.effective_message
     img = f"{url_sfw}highfive"
-    msg.reply_animation(video=img)
+    msg.reply_animation(img)
 
 def handhold(update, context):
     msg = update.effective_message
     img = f"{url_sfw}handhold"
-    msg.reply_animation(video=img)
+    msg.reply_animation(img)
 
 def nom(update, context):
     msg = update.effective_message
     img = f"{url_sfw}nom"
-    msg.reply_animation(video=img)
+    msg.reply_animation(img)
 
 def bite(update, context):
     msg = update.effective_message
     img = f"{url_sfw}bite"
-    msg.reply_animation(video=img)
+    msg.reply_animation(img)
 
 
 def glomp(update, context):
     msg = update.effective_message
     img = f"{url_sfw}glomp"
-    msg.reply_animation(video=img)
+    msg.reply_animation(img)
 
 def slap(update, context):
     msg = update.effective_message
     img = f"{url_sfw}slap"
-    msg.reply_animation(video=img)
+    msg.reply_animation(img)
 
 def killgif(update, context):
     msg = update.effective_message
     img = f"{url_sfw}kill"
-    msg.reply_animation(video=img)
+    msg.reply_animation(img)
 
 def kickgif(update, context):
     msg = update.effective_message
     img = f"{url_sfw}kick"
-    msg.reply_animation(video=img)
+    msg.reply_animation(img)
 
 def happy(update, context):
     msg = update.effective_message
     img = f"{url_sfw}happy"
-    msg.reply_animation(video=img)
+    msg.reply_animation(img)
 
 def wink(update, context):
     msg = update.effective_message
     img = f"{url_sfw}wink"
-    msg.reply_animation(video=img)
+    msg.reply_animation(img)
 
 def poke(update, context):
     msg = update.effective_message
     img = f"{url_sfw}poke"
-    msg.reply_animation(video=img)
+    msg.reply_animation(img)
 
 def dance(update, context):
     msg = update.effective_message
     img = f"{url_sfw}dance"
-    msg.reply_animation(video=img)
+    msg.reply_animation(img)
 
 def cringe(update, context):
     msg = update.effective_message
     img = f"{url_sfw}cringe"
-    msg.reply_animation(video=img)
+    msg.reply_animation(img)
 
 ################
 def wallpaper(update, context):
