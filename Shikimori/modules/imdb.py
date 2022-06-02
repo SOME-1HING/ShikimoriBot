@@ -1,109 +1,76 @@
-from Shikimori import telethn as tbot
-import os
-import re
-import bs4
-import requests
-from telethon import types
-from telethon.tl import functions
-from Shikimori.events import register
+import html
+from Shikimori.utils.http import get
+from Shikimori import dispatcher
+from telegram.ext import CommandHandler, CallbackContext
+from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, ParseMode
+from imdb import IMDb
+ia = IMDb()
 
-langi = "en"
+def imdb(update: Update, context: CallbackContext):
 
+    message = update.effective_message
+    args = context.args
 
-@register(pattern="^/imdb (.*)")
-async def imdb(e):
-    if e.fwd_from:
-        return
+    if len(args) > 1:
+        movie = " ".join(args[1:])
+    else:
+        return message.reply_text("/imdb [show/movie name]")
+
     try:
-        movie_name = e.pattern_match.group(1)
-        remove_space = movie_name.split(" ")
-        final_name = "+".join(remove_space)
-        page = requests.get(
-            "https://www.imdb.com/find?ref_=nv_sr_fn&q=" + final_name + "&s=all"
-        )
-        str(page.status_code)
-        soup = bs4.BeautifulSoup(page.content, "html.parser")
-        odds = soup.findAll("tr", "odd")
-        mov_title = odds[0].findNext("td").findNext("td").text
-        mov_link = (
-            "http://www.imdb.com/" + odds[0].findNext("td").findNext("td").a["href"]
-        )
-        page1 = requests.get(mov_link)
-        soup = bs4.BeautifulSoup(page1.content, "lxml")
-        if soup.find("div", "poster"):
-            poster = soup.find("div", "poster").img["src"]
-        else:
-            poster = ""
-        if soup.find("div", "title_wrapper"):
-            pg = soup.find("div", "title_wrapper").findNext("div").text
-            mov_details = re.sub(r"\s+", " ", pg)
-        else:
-            mov_details = ""
-        credits = soup.findAll("div", "credit_summary_item")
-        if len(credits) == 1:
-            director = credits[0].a.text
-            writer = "Not available"
-            stars = "Not available"
-        elif len(credits) > 2:
-            director = credits[0].a.text
-            writer = credits[1].a.text
-            actors = []
-            for x in credits[2].findAll("a"):
-                actors.append(x.text)
-            actors.pop()
-            stars = actors[0] + "," + actors[1] + "," + actors[2]
-        else:
-            director = credits[0].a.text
-            writer = "Not available"
-            actors = []
-            for x in credits[1].findAll("a"):
-                actors.append(x.text)
-            actors.pop()
-            stars = actors[0] + "," + actors[1] + "," + actors[2]
-        if soup.find("div", "inline canwrap"):
-            story_line = soup.find("div", "inline canwrap").findAll("p")[0].text
-        else:
-            story_line = "Not available"
-        info = soup.findAll("div", "txt-block")
-        if info:
-            mov_country = []
-            mov_language = []
-            for node in info:
-                a = node.findAll("a")
-                for i in a:
-                    if "country_of_origin" in i["href"]:
-                        mov_country.append(i.text)
-                    elif "primary_language" in i["href"]:
-                        mov_language.append(i.text)
-        if soup.findAll("div", "ratingValue"):
-            for r in soup.findAll("div", "ratingValue"):
-                mov_rating = r.strong["title"]
-        else:
-            mov_rating = "Not available"
-        await e.reply(
-            "<a href=" + poster + ">&#8203;</a>"
-            "<b>Title : </b><code>"
-            + mov_title
-            + "</code>\n<code>"
-            + mov_details
-            + "</code>\n<b>Rating : </b><code>"
-            + mov_rating
-            + "</code>\n<b>Country : </b><code>"
-            + mov_country[0]
-            + "</code>\n<b>Language : </b><code>"
-            + mov_language[0]
-            + "</code>\n<b>Director : </b><code>"
-            + director
-            + "</code>\n<b>Writer : </b><code>"
-            + writer
-            + "</code>\n<b>Stars : </b><code>"
-            + stars
-            + "</code>\n<b>IMDB Url : </b>"
-            + mov_link
-            + "\n<b>Story Line : </b>"
-            + story_line,
-            link_preview=True,
-            parse_mode="HTML",
-        )
-    except IndexError:
-        await e.reply("Plox enter **Valid movie name** kthx")
+        movie = ia.get_movie(ia.search_movie(movie)[0].movieID)
+    except:
+        return message.reply_text("[ERROR]: Something went wrong.")
+    
+    buttons = [InlineKeyboardButton(text = "More Info", url =f"https://www.imdb.com/title/tt{movie.movieID}")]
+
+    _writers, _directors,_casts = [],[],[]
+    try:
+        for _i in movie['writer']: _writers.append(_i['name'])
+    except:
+        pass
+    try:
+        for _i in movie['director']: _directors.append(_i['name'])
+    except:
+        pass
+    try:
+        for _i in movie['cast']: _casts.append(_i['name'])
+        _casts = _casts[:4] if len(_casts) >= 5 else _casts
+    except:
+        pass
+    info = f"<b>{movie['kind'].capitalize()}</b>\n======\n<b>\
+Title:</b> <code>{movie['title']}</code>\n\
+<b>Year:</b> <code>{movie['year']}</code>\n\
+<b>Rating:</b> <code>{movie['rating'] if 'rating' in movie else 'Not Found'}</code>\n\
+<b>Genre:</b> <code>{', '.join(movie['genres'])}</code>\n\
+<b>Runtime:</b> <code>{movie['runtime'][0] if 'runtime' in movie else 'Not Found'}</code>\n\
+<b>Writers:</b> <code>{', '.join(_writers)}</code>\n\
+<b>Directors:</b> <code>{', '.join(_directors)}</code>\n\
+<b>Actors:</b> <code>{', '.join(_casts)}</code>\n\
+<b>Language:</b> <code>{movie['language'] if 'language' in movie else 'Not Found'}</code>\n\
+<b>Country:</b> <code>{movie['country'] if 'country' in movie else 'Not Found'}</code>\n\
+<b>Plot:</b> <code>{movie['plot outline'] if 'plot outline' in movie else 'Not available'}</code>\n\
+    "
+    try:
+        update.effective_message.reply_photo(photo= movie['full-size cover url'], caption=info, reply_markup=InlineKeyboardMarkup(buttons), parse_mode=ParseMode.HTML)
+    except KeyError:
+        update.effective_message.reply_photo(photo= movie['cover url'], caption=info, reply_markup=InlineKeyboardMarkup(buttons), parse_mode=ParseMode.HTML)
+
+
+
+
+
+
+IMDB_HANDLER = CommandHandler("imdb", imdb, run_async=True)
+
+dispatcher.add_handler(IMDB_HANDLER)
+
+__handlers__ = [
+    IMDB_HANDLER
+]
+
+__mod_name__ = "IMDB"
+__help__ = """
+   ➢ `/imdb` <movie name> - To Get IMDB info about movie/show.
+
+credits: rozari0   
+"""

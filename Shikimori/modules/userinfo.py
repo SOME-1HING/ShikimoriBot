@@ -473,17 +473,6 @@ def stats(update, context):
                 [
                     [                  
                         InlineKeyboardButton(
-                                text="Support",
-                                url="https://t.me/tyranteyeeee"),
-                        InlineKeyboardButton(
-                                text="Owner",
-                                url="https://t.me/Sneha_UwU_OwO"),
-                        InlineKeyboardButton(
-                                text="Updates",
-                                url="https://t.me/Shikimori_bot_Updates"),
-                    ] 
-                    [                  
-                        InlineKeyboardButton(
                                 text="Dev's Github Profile",
                                 url="github.com/SOME-1HING"),
                     ]
