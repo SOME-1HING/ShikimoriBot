@@ -16,7 +16,7 @@ from Shikimori import pbot
 
 ARQ_API = "WPLYQX-KLEHQY-AXINRQ-WNIPGO-ARQ"
 ARQ_API_KEY = "WPLYQX-KLEHQY-AXINRQ-WNIPGO-ARQ"
-SUDOERS = OWNER_ID
+DRAGONS = OWNER_ID
 ARQ_API_URL = "https://arq.hamker.in"
 
 # Aiohttp Client
