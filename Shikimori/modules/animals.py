@@ -30,13 +30,15 @@ from pyrogram import filters
 from Shikimori.core.decorators.errors import capture_err
 from Shikimori.utils.http import get
 import Shikimori.modules.animal_facts_string as animal_facts
+from Shikimori import dispatcher
+from telegram import ParseMode, Update, Bot
+from Shikimori.modules.disable import DisableAbleCommandHandler
+from telegram.ext import CallbackContext, run_async
 
-@pbot.on_message(filters.command("animalfacts"))
-@capture_err
-async def animalfacts(client, message):
-    message = await message.reply_text("`Getting animal facts...`")
-    fact = await get(random.choice(animal_facts.ANIMAL_FACTS))
-    return await message.reply_text(fact[0]["fact"])
+
+def animalfact(update: Update, context: CallbackContext):
+    update.effective_message.reply_text(random.choice(animal_facts.ANIMAL_FACTS))
+
 
 @pbot.on_message(filters.command("dogfacts"))
 @capture_err
@@ -59,6 +61,9 @@ async def cats(_, message):
         return await message.reply_photo(cat["url"])
     else:
         return await message.reply_sticker(cat["webpurl"])
+
+ANIMALFACT_HANDLER = DisableAbleCommandHandler("animalfacts", animalfact, run_async=True)
+dispatcher.add_handler(ANIMALFACT_HANDLER)
 
 __mod_name__ = "Animal facts"
 __help__ = """
