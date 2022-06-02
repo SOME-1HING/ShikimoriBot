@@ -93,7 +93,7 @@ def trap(update, context):
     url = f"{url_nsfw}trap" 
     result = requests.get(url).json()
     img = result['url']
-    msg.reply_animation(img)
+    msg.reply_photo(photo=img)
 
 def nsfwwaifu(update, context):
     chat_id = update.effective_chat.id
@@ -141,7 +141,7 @@ def ntrap(update, context):
             return
     msg = update.effective_message
     img = f"{url_nsfw_metavoid}trap"
-    msg.reply_animation(img)
+    msg.reply_photo(photo=img)
 
 def nneko(update, context):
     chat_id = update.effective_chat.id
