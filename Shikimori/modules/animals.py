@@ -14,10 +14,16 @@ def animalfact(update: Update, context: CallbackContext):
 
 def cats(update, context):
     msg = update.effective_message
-    url = f'https://aws.random.cat/meow'
-    result = requests.get(url).json()
-    img = result['file']
-    msg.reply_photo(photo=img)
+    try:
+        url = f'https://aws.random.cat/meow'
+        result = requests.get(url).json()
+        img = result['file']
+        msg.reply_photo(photo=img)
+    except:        
+        url = f'https://aws.random.cat/meow'
+        result = requests.get(url).json()
+        img = result['file']
+        msg.reply_photo(photo=img)
 
 ANIMALFACT_HANDLER = DisableAbleCommandHandler("animalfacts", animalfact, run_async=True)
 dispatcher.add_handler(ANIMALFACT_HANDLER)
