@@ -4,8 +4,7 @@ from Shikimori import dispatcher
 from telegram.ext import CommandHandler, CallbackContext
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, ParseMode
 
-IMDb = ()
-ia = IMDb()
+ia = ()
 
 def imdb(update: Update, context: CallbackContext):
 
