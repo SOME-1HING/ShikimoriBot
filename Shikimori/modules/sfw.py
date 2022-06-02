@@ -7,7 +7,7 @@ url_sfw = "https://api.waifu.pics/sfw/"
 
 def waifu(update, context):
     msg = update.effective_message
-    url = f"{url_sfw}blowjob" 
+    url = f"{url_sfw}waifu" 
     result = requests.get(url).json()
     img = result['url']
     msg.reply_photo(photo=img)
@@ -38,63 +38,63 @@ def bully(update, context):
     url = f"{url_sfw}bully" 
     result = requests.get(url).json()
     img = result['url']
-    msg.reply_animation(photo=img)
+    msg.reply_animation(img)
 
 def cuddle(update, context):
     msg = update.effective_message
     url = f"{url_sfw}cuddle" 
     result = requests.get(url).json()
     img = result['url']
-    msg.reply_animation(photo=img)
+    msg.reply_animation(img)
 
 def cry(update, context):
     msg = update.effective_message
     url = f"{url_sfw}cry" 
     result = requests.get(url).json()
     img = result['url']
-    msg.reply_animation(photo=img)
+    msg.reply_animation(img)
 
 def hug(update, context):
     msg = update.effective_message
     url = f"{url_sfw}hug" 
     result = requests.get(url).json()
     img = result['url']
-    msg.reply_animation(photo=img)
+    msg.reply_animation(img)
 
 def awoo(update, context):
     msg = update.effective_message
     url = f"{url_sfw}awoo" 
     result = requests.get(url).json()
     img = result['url']
-    msg.reply_animation(photo=img)
+    msg.reply_animation(img)
 
 def kiss(update, context):
     msg = update.effective_message
     url = f"{url_sfw}kiss" 
     result = requests.get(url).json()
     img = result['url']
-    msg.reply_animation(photo=img)
+    msg.reply_animation(img)
 
 def lick(update, context):
     msg = update.effective_message
     url = f"{url_sfw}lick" 
     result = requests.get(url).json()
     img = result['url']
-    msg.reply_animation(photo=img)
+    msg.reply_animation(img)
 
 def pat(update, context):
     msg = update.effective_message
     url = f"{url_sfw}pat" 
     result = requests.get(url).json()
     img = result['url']
-    msg.reply_animation(photo=img)
+    msg.reply_animation(img)
 
 def smug(update, context):
     msg = update.effective_message
     url = f"{url_sfw}smug" 
     result = requests.get(url).json()
     img = result['url']
-    msg.reply_animation(photo=img)
+    msg.reply_animation(img)
 
 def bonk(update, context):
     msg = update.effective_message
