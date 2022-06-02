@@ -8,6 +8,9 @@ from telegram.ext import CallbackContext, run_async
 
 def ud(update: Update, context: CallbackContext):
     message = update.effective_message
+    if len(message.command) < 2:
+        return message.reply("/ud [word]")
+        
     text = message.text[len('/ud '):]
     results = requests.get(
         f'https://api.urbandictionary.com/v0/define?term={text}').json()
