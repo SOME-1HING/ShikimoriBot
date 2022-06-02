@@ -273,6 +273,7 @@ WOLVES = list(WOLVES)
 DEMONS = list(DEMONS)
 TIGERS = list(TIGERS)
 
+SUDOERS = DEV_USERS + DRAGONS + OWNER_ID
 
 # Load at end to ensure all prev variables have been set
 from Shikimori.modules.helper_funcs.handlers import (
