@@ -1,18 +1,14 @@
 from pyrogram import filters
+
 from Shikimori import app
 from Shikimori.core.decorators.errors import capture_err
 from Shikimori.core.keyboard import ikb
 from Shikimori.core.sections import section
 from Shikimori.utils.http import get
 
-__MODULE__ = "Crypto"
-__HELP__ = """
-/crypto [currency]
-        Get Real Time value from currency given.
-"""
 
 
-@app.on_message(filters.command("crypto") & ~filters.edited)
+@app.on_message(filters.command("crypto"))
 @capture_err
 async def crypto(_, message):
     if len(message.command) < 2:
@@ -47,3 +43,8 @@ async def crypto(_, message):
         body,
     )
     await m.edit(text, reply_markup=btn)
+
+__mod_name__ = "Crypto"
+__help__ = """
+   ➢ `/crypto [currency] :Get Real Time value from currency given.
+"""
