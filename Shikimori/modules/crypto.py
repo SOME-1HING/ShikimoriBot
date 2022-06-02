@@ -3,7 +3,7 @@ import requests
 from Shikimori.utils.http import get
 from Shikimori import dispatcher
 from telegram.ext import CommandHandler, CallbackContext
-from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
+from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, ParseMode
 
 def crypto(update: Update, context: CallbackContext):
     message = update.effective_message
@@ -37,7 +37,7 @@ def crypto(update: Update, context: CallbackContext):
         "Current Crypto Rates For " + currency.upper(),
         body,
     )
-    update.effective_message.reply_text(text, reply_markup=InlineKeyboardMarkup(buttons))
+    update.effective_message.reply_text(text, reply_markup=InlineKeyboardMarkup(buttons), parse_mode=ParseMode.MARKDOWN)
 
 CRYPTO_HANDLER = CommandHandler("crypto", crypto, run_async=True)
 
