@@ -10,7 +10,7 @@ def ud(update: Update, context: CallbackContext):
     message = update.effective_message
     args = context.args
     if len(args) == 0:
-        return message.reply("/ud [word]")
+        return message.reply_text("/ud [word]")
         
     text = message.text[len('/ud '):]
     results = requests.get(
