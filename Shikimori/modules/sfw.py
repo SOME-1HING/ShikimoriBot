@@ -11,14 +11,14 @@ def pout(update, context):
     resp = requests.get("https://nekos.best/api/v2/pout")
     data = resp.json()
     img = (data["results"][0]["url"])
-    msg.reply_animation(photo=img)
+    msg.reply_animation(img)
 
 def bored(update, context):
     msg = update.effective_message
     resp = requests.get("https://nekos.best/api/v2/bored")
     data = resp.json()
     img = (data["results"][0]["url"])
-    msg.reply_animation(photo=img)
+    msg.reply_animation(img)
 
 def nekos2(update, context):
     msg = update.effective_message
@@ -32,21 +32,21 @@ def stare(update, context):
     resp = requests.get("https://nekos.best/api/v2/stare")
     data = resp.json()
     img = (data["results"][0]["url"])
-    msg.reply_animation(photo=img)
+    msg.reply_animation(img)
 
 def think(update, context):
     msg = update.effective_message
     resp = requests.get("https://nekos.best/api/v2/think")
     data = resp.json()
     img = (data["results"][0]["url"])
-    msg.reply_animation(photo=img)
+    msg.reply_animation(img)
 
 def thumbsup(update, context):
     msg = update.effective_message
     resp = requests.get("https://nekos.best/api/v2/thumbsup")
     data = resp.json()
     img = (data["results"][0]["url"])
-    msg.reply_animation(photo=img)
+    msg.reply_animation(img)
 
 def waifu(update, context):
     msg = update.effective_message
