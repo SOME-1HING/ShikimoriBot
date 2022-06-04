@@ -1,74 +1,28 @@
-# ptb
+from pyrogram import filters
 import requests
-from datetime import date
-import calendar
-from Shikimori import dispatcher
-from telegram.ext import CommandHandler, CallbackContext
-from telegram import Update
+from Shikimori import pbot
+
+@pbot.on_message(filters.command('latest'))
+def schedule(_, message):
+    results = requests.get('https://subsplease.org/api/?f=schedule&h=true&tz=Japan').json()
+    text = None
+    for result in results['schedule']:
+        title = result['title']
+        time = result['time']
+        aired = bool(result['aired'])
+        title = f"**[{title}](https://subsplease.org/shows/{result['page']})**" if not aired else f"**~~[{title}](https://subsplease.org/shows/{result['page']})~~**"
+        data = f"{title} - **{time}**"
+        
+        if text:
+            text = f"{text}\n{data}"
+        else:
+            text = data
+
+    message.reply_text(f"**Today's Schedule:**\nTime-Zone: Tokyo (GMT +9)\n\n{text}")
 
 
-curr_date = date.today()
-tody = calendar.day_name[curr_date.weekday()]
-today = tody.lower()
+__mod_name__ = "Schedule"
 
-def schedule(update: Update, context: CallbackContext):
-    message = update.effective_message
-    results = requests.get(f'https://api.jikan.moe/v3/schedule/{today}').json()
-    count = 0
-    text = ''
-    for i in results:
-        j = results[today][0:7][count]['title']
-        text += f'\n{count + 1} {j}'
-        count += 1
-    message.reply_text(text)
-
-SCHEDULE_HANDLER = CommandHandler(('schedule', 'ongoing', 'latest'), schedule, run_async=True)
-
-dispatcher.add_handler(SCHEDULE_HANDLER)
-
-__handlers__ = [
-    SCHEDULE_HANDLER
-]
-
-
-# # pyrogram    
-# from pyrogram import filters
-# from datetime import date
-# import calendar
-# from Shikimori import pbot
-
-# curr_date = date.today()
-# tody = calendar.day_name[curr_date.weekday()]
-# today = tody.lower()
-
-# @pbot.on_message(filters.command('schedule', 'ongoing', 'latest'))
-# async def schedule(_, message):
-#     results = requests.get(f'https://api.jikan.moe/v3/schedule/{today}').json()
-#     count = 0
-#     text = ''
-#     for i in results:
-#         j = results[today][0:7][count]['title']
-#         text += f'\n{count + 1} {j}'
-#         count += 1
-#     await message.reply_text(text)
-
-# # telethon
-# from Shikimori import dispatcher, telethn as bot
-# from telethon import events
-# from datetime import date
-# import calendar
-
-# curr_date = date.today()
-# tody = calendar.day_name[curr_date.weekday()]
-# today = tody.lower()
-
-# @bot.on(events.NewMessage(pattern='/(schedule|ongoing|latest)$)'))
-# async def schedule(event):
-#     results = requests.get(f'https://api.jikan.moe/v3/schedule/{today}').json()
-#     count = 0
-#     text = ''
-#     for i in results:
-#         j = results[today][0:7][count]['title']
-#         text += f'\n{count + 1} {j}'
-#         count += 1
-#     await event.reply(text)
+__help__ = """
+ ❍ /latest: to see latest anime episode
+"""

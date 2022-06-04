@@ -3,158 +3,166 @@ import requests
 from Shikimori import dispatcher
 from telegram.ext import CommandHandler
 
-url_sfw = "https://api.waifu.pics/sfw/" 
+url_sfw_1 = "https://api.waifu.pics/sfw/" 
+url_sfw_2 = "https://nekos.best/"
+
+def pout(update, context):
+    msg = update.effective_message
+    url = f"{url_sfw_2}pout" 
+    result = requests.get(url).json()
+    img = result['url']
+    msg.reply_photo(photo=img)
 
 def waifu(update, context):
     msg = update.effective_message
-    url = f"{url_sfw}waifu" 
+    url = f"{url_sfw_1}waifu" 
     result = requests.get(url).json()
     img = result['url']
     msg.reply_photo(photo=img)
 
 def neko(update, context):
     msg = update.effective_message
-    url = f"{url_sfw}neko" 
+    url = f"{url_sfw_1}neko" 
     result = requests.get(url).json()
     img = result['url']
     msg.reply_photo(photo=img)
 
 def shinobu(update, context):
     msg = update.effective_message
-    url = f"{url_sfw}shinobu" 
+    url = f"{url_sfw_1}shinobu" 
     result = requests.get(url).json()
     img = result['url']
     msg.reply_photo(photo=img)
 
 def megumin(update, context):
     msg = update.effective_message
-    url = f"{url_sfw}megumin" 
+    url = f"{url_sfw_1}megumin" 
     result = requests.get(url).json()
     img = result['url']
     msg.reply_photo(photo=img)
 
 def bully(update, context):
     msg = update.effective_message
-    url = f"{url_sfw}bully" 
+    url = f"{url_sfw_1}bully" 
     result = requests.get(url).json()
     img = result['url']
     msg.reply_animation(img)
 
 def cuddle(update, context):
     msg = update.effective_message
-    url = f"{url_sfw}cuddle" 
+    url = f"{url_sfw_1}cuddle" 
     result = requests.get(url).json()
     img = result['url']
     msg.reply_animation(img)
 
 def cry(update, context):
     msg = update.effective_message
-    url = f"{url_sfw}cry" 
+    url = f"{url_sfw_1}cry" 
     result = requests.get(url).json()
     img = result['url']
     msg.reply_animation(img)
 
 def hug(update, context):
     msg = update.effective_message
-    url = f"{url_sfw}hug" 
+    url = f"{url_sfw_1}hug" 
     result = requests.get(url).json()
     img = result['url']
     msg.reply_animation(img)
 
 def awoo(update, context):
     msg = update.effective_message
-    url = f"{url_sfw}awoo" 
+    url = f"{url_sfw_1}awoo" 
     result = requests.get(url).json()
     img = result['url']
     msg.reply_animation(img)
 
 def kiss(update, context):
     msg = update.effective_message
-    url = f"{url_sfw}kiss" 
+    url = f"{url_sfw_1}kiss" 
     result = requests.get(url).json()
     img = result['url']
     msg.reply_animation(img)
 
 def lick(update, context):
     msg = update.effective_message
-    url = f"{url_sfw}lick" 
+    url = f"{url_sfw_1}lick" 
     result = requests.get(url).json()
     img = result['url']
     msg.reply_animation(img)
 
 def pat(update, context):
     msg = update.effective_message
-    url = f"{url_sfw}pat" 
+    url = f"{url_sfw_1}pat" 
     result = requests.get(url).json()
     img = result['url']
     msg.reply_animation(img)
 
 def smug(update, context):
     msg = update.effective_message
-    url = f"{url_sfw}smug" 
+    url = f"{url_sfw_1}smug" 
     result = requests.get(url).json()
     img = result['url']
     msg.reply_animation(img)
 
 def bonk(update, context):
     msg = update.effective_message
-    url = f"{url_sfw}bonk" 
+    url = f"{url_sfw_1}bonk" 
     result = requests.get(url).json()
     img = result['url']
     msg.reply_animation(img)
 
 def yeet(update, context):
     msg = update.effective_message
-    url = f"{url_sfw}yeet" 
+    url = f"{url_sfw_1}yeet" 
     result = requests.get(url).json()
     img = result['url']
     msg.reply_animation(img)
 
 def blush(update, context):
     msg = update.effective_message
-    url = f"{url_sfw}blush" 
+    url = f"{url_sfw_1}blush" 
     result = requests.get(url).json()
     img = result['url']
     msg.reply_animation(img)
 
 def smile(update, context):
     msg = update.effective_message
-    url = f"{url_sfw}smile" 
+    url = f"{url_sfw_1}smile" 
     result = requests.get(url).json()
     img = result['url']
     msg.reply_animation(img)
 
 def wave(update, context):
     msg = update.effective_message
-    url = f"{url_sfw}wave" 
+    url = f"{url_sfw_1}wave" 
     result = requests.get(url).json()
     img = result['url']
     msg.reply_animation(img)
 
 def highfive(update, context):
     msg = update.effective_message
-    url = f"{url_sfw}highfive" 
+    url = f"{url_sfw_1}highfive" 
     result = requests.get(url).json()
     img = result['url']
     msg.reply_animation(img)
 
 def handhold(update, context):
     msg = update.effective_message
-    url = f"{url_sfw}handhold" 
+    url = f"{url_sfw_1}handhold" 
     result = requests.get(url).json()
     img = result['url']
     msg.reply_animation(img)
 
 def nom(update, context):
     msg = update.effective_message
-    url = f"{url_sfw}nom" 
+    url = f"{url_sfw_1}nom" 
     result = requests.get(url).json()
     img = result['url']
     msg.reply_animation(img)
 
 def bite(update, context):
     msg = update.effective_message
-    url = f"{url_sfw}bite" 
+    url = f"{url_sfw_1}bite" 
     result = requests.get(url).json()
     img = result['url']
     msg.reply_animation(img)
@@ -162,63 +170,63 @@ def bite(update, context):
 
 def glomp(update, context):
     msg = update.effective_message
-    url = f"{url_sfw}glomp" 
+    url = f"{url_sfw_1}glomp" 
     result = requests.get(url).json()
     img = result['url']
     msg.reply_animation(img)
 
 def slap(update, context):
     msg = update.effective_message
-    url = f"{url_sfw}slap" 
+    url = f"{url_sfw_1}slap" 
     result = requests.get(url).json()
     img = result['url']
     msg.reply_animation(img)
 
 def killgif(update, context):
     msg = update.effective_message
-    url = f"{url_sfw}kill" 
+    url = f"{url_sfw_1}kill" 
     result = requests.get(url).json()
     img = result['url']
     msg.reply_animation(img)
 
 def kickgif(update, context):
     msg = update.effective_message
-    url = f"{url_sfw}kick" 
+    url = f"{url_sfw_1}kick" 
     result = requests.get(url).json()
     img = result['url']
     msg.reply_animation(img)
 
 def happy(update, context):
     msg = update.effective_message
-    url = f"{url_sfw}happy" 
+    url = f"{url_sfw_1}happy" 
     result = requests.get(url).json()
     img = result['url']
     msg.reply_animation(img)
 
 def wink(update, context):
     msg = update.effective_message
-    url = f"{url_sfw}wink" 
+    url = f"{url_sfw_1}wink" 
     result = requests.get(url).json()
     img = result['url']
     msg.reply_animation(img)
 
 def poke(update, context):
     msg = update.effective_message
-    url = f"{url_sfw}poke" 
+    url = f"{url_sfw_1}poke" 
     result = requests.get(url).json()
     img = result['url']
     msg.reply_animation(img)
 
 def dance(update, context):
     msg = update.effective_message
-    url = f"{url_sfw}dance" 
+    url = f"{url_sfw_1}dance" 
     result = requests.get(url).json()
     img = result['url']
     msg.reply_animation(img)
 
 def cringe(update, context):
     msg = update.effective_message
-    url = f"{url_sfw}cringe" 
+    url = f"{url_sfw_1}cringe" 
     result = requests.get(url).json()
     img = result['url']
     msg.reply_animation(img)
@@ -335,7 +343,9 @@ POKE_HANDLER = CommandHandler("poke", poke, run_async=True)
 DANCE_HANDLER = CommandHandler("dance", dance, run_async=True)
 CRINGE_HANDLER = CommandHandler("cringe", cringe, run_async=True)
 
+POUT_HANDLER = CommandHandler("pout", pout, run_async=True)
 
+dispatcher.add_handler(POUT_HANDLER)
 
 dispatcher.add_handler(SLAP_HANDLER)
 dispatcher.add_handler(KILLGIF_HANDLER)
