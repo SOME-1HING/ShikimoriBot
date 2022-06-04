@@ -11,7 +11,42 @@ def pout(update, context):
     resp = requests.get("https://nekos.best/api/v2/pout")
     data = resp.json()
     img = (data["results"][0]["url"])
+    msg.reply_animation(photo=img)
+
+def bored(update, context):
+    msg = update.effective_message
+    resp = requests.get("https://nekos.best/api/v2/bored")
+    data = resp.json()
+    img = (data["results"][0]["url"])
+    msg.reply_animation(photo=img)
+
+def nekos2(update, context):
+    msg = update.effective_message
+    resp = requests.get("https://nekos.best/api/v2/nekos")
+    data = resp.json()
+    img = (data["results"][0]["url"])
     msg.reply_photo(photo=img)
+
+def stare(update, context):
+    msg = update.effective_message
+    resp = requests.get("https://nekos.best/api/v2/stare")
+    data = resp.json()
+    img = (data["results"][0]["url"])
+    msg.reply_animation(photo=img)
+
+def think(update, context):
+    msg = update.effective_message
+    resp = requests.get("https://nekos.best/api/v2/think")
+    data = resp.json()
+    img = (data["results"][0]["url"])
+    msg.reply_animation(photo=img)
+
+def thumbsup(update, context):
+    msg = update.effective_message
+    resp = requests.get("https://nekos.best/api/v2/thumbsup")
+    data = resp.json()
+    img = (data["results"][0]["url"])
+    msg.reply_animation(photo=img)
 
 def waifu(update, context):
     msg = update.effective_message
@@ -344,8 +379,18 @@ DANCE_HANDLER = CommandHandler("dance", dance, run_async=True)
 CRINGE_HANDLER = CommandHandler("cringe", cringe, run_async=True)
 
 POUT_HANDLER = CommandHandler("pout", pout, run_async=True)
+BORED_HANDLER = CommandHandler("bored", bored, run_async=True)
+NEKOS_HANDLER = CommandHandler("nekos", nekos2, run_async=True)
+STARE_HANDLER = CommandHandler("stare", stare, run_async=True)
+THINK_HANDLER = CommandHandler("think", think, run_async=True)
+THUMBSUP_HANDLER = CommandHandler("thumbsup", thumbsup, run_async=True)
 
 dispatcher.add_handler(POUT_HANDLER)
+dispatcher.add_handler(BORED_HANDLER)
+dispatcher.add_handler(NEKOS_HANDLER)
+dispatcher.add_handler(STARE_HANDLER)
+dispatcher.add_handler(THINK_HANDLER)
+dispatcher.add_handler(THUMBSUP_HANDLER)
 
 dispatcher.add_handler(SLAP_HANDLER)
 dispatcher.add_handler(KILLGIF_HANDLER)
@@ -455,5 +500,11 @@ __help__ = """
    ➢ `/poke`
    ➢ `/dance`
    ➢ `/cringe`
+   ➢ `/pout`
+   ➢ `/bored`
+   ➢ `/nekos`
+   ➢ `/stare`
+   ➢ `/think`
+   ➢ `/thumbsup`
 """
 
