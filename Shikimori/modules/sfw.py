@@ -8,9 +8,9 @@ url_sfw_2 = "https://nekos.best/"
 
 def pout(update, context):
     msg = update.effective_message
-    url = f"{url_sfw_2}pout" 
-    result = requests.get(url).json()
-    img = result['url']
+    resp = requests.get("https://nekos.best/api/v2/pout")
+    data = resp.json()
+    img = (data["results"][0]["url"])
     msg.reply_photo(photo=img)
 
 def waifu(update, context):
