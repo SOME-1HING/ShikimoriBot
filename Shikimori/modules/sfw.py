@@ -22,7 +22,7 @@ def bored(update, context):
 
 def nekos2(update, context):
     msg = update.effective_message
-    resp = requests.get("https://nekos.best/api/v2/nekos")
+    resp = requests.get("https://nekos.best/api/v2/neko")
     data = resp.json()
     img = (data["results"][0]["url"])
     msg.reply_photo(photo=img)
