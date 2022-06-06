@@ -37,12 +37,21 @@ WAIFUINFO_HANDLER = CommandHandler('waifuinfo', waifu, run_async=True)
 dispatcher.add_handler(WAIFUINFO_HANDLER)
 
 #  Buttons for /help .
-__mod_name__ = 'Waifu Info'  # *IF YOU WANT* EDIT NAME OF BUTTON IN '/help'
+__mod_name__ = 'Waifus'  # *IF YOU WANT* EDIT NAME OF BUTTON IN '/help'
 
 
 # *IF YOU WANT* EDIT MESSAGE FOR HELP OF THIS MODULE.
 __help__ = '''
-❍ `/waifuinfo` : Gives random image of waifu with info.   
+*Get waifu images*
+
+   ➢ `/waifu`*:* Sends limited but best Waifu image. *RECOMMENDED*
+   ➢ `/waifus`*:* Gives random image of waifu with info. 
+   ➢ `/waifus`*:* Sends Random Waifu image.
+   ➢ `/swaifu`*:* Sends Random Waifu image.
+
+   *NSFW CONTENT*
+   ➢ `/nsfwwaifu`
+   ➢ `/nwaifu`  
 '''
 
 # DON'T EDIT

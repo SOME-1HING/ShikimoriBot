@@ -12,6 +12,12 @@ url_sfw_2 = "https://nekos.best/"
 def waifus(update, context):
     update.effective_message.reply_photo(random.choice(waifu_string.WAIFUS))
 
+def swaifu(update, context):
+    msg = update.effective_message
+    url = f"{url_sfw_1}waifu" 
+    result = requests.get(url).json()
+    img = result['url']
+    msg.reply_photo(photo=img)
 
 def pout(update, context):
     msg = update.effective_message
@@ -393,6 +399,8 @@ THINK_HANDLER = CommandHandler("think", think, run_async=True)
 THUMBSUP_HANDLER = CommandHandler("thumbsup", thumbsup, run_async=True)
 WAIFU_HANDLER = CommandHandler('waifu', waifus, run_async=True)
 dispatcher.add_handler(WAIFU_HANDLER)
+SWAIFU_HANDLER = CommandHandler('swaifu', swaifu, run_async=True)
+dispatcher.add_handler(SWAIFU_HANDLER)
 
 dispatcher.add_handler(POUT_HANDLER)
 dispatcher.add_handler(BORED_HANDLER)
@@ -477,6 +485,8 @@ __help__ = """
    ➢ `/gasm`*:*Sends Random Orgasm Stickers.
    ➢ `/avatar`*:*Sends Random Avatar Stickers.
    ➢ `/waifus`*:* Sends Random Waifu Stickers.
+   ➢ `/waifu`*:* Sends Random Waifu image.
+   ➢ `/swaifu`*:* Sends Random Waifu image.
    ➢ `/kiss`*:* Sends Random Kissing GIFs.
    ➢ `/cuddle`*:* Sends Random Cuddle GIFs.
    ➢ `/foxgirl`*:* Sends Random FoxGirl source Images.
