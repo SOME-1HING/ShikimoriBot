@@ -13,7 +13,6 @@ from Shikimori import dispatcher
 # Main code, Credit to https://github.com/itspro-dev for making the API. 
 
 def waifu(update, context):
-    update.effective_message.reply_photo(random.choice(waifu_string.WAIFUS))
     try:
         msg = update.effective_message
         # API (DON'T EDIT)
@@ -34,17 +33,16 @@ def waifu(update, context):
 
 
 # Code Handler (YOU CAN CHANGE 'waifu' TO ANY 'cmd' FOR THIS TO BE WORKED AS '/cmd' *IF YOU WANT*.)
-WAIFUINFO_HANDLER = CommandHandler('waifu', waifu, run_async=True)
+WAIFUINFO_HANDLER = CommandHandler('waifuinfo', waifu, run_async=True)
 dispatcher.add_handler(WAIFUINFO_HANDLER)
 
 #  Buttons for /help .
-__mod_name__ = 'Waifu'  # *IF YOU WANT* EDIT NAME OF BUTTON IN '/help'
+__mod_name__ = 'Waifu Info'  # *IF YOU WANT* EDIT NAME OF BUTTON IN '/help'
 
 
 # *IF YOU WANT* EDIT MESSAGE FOR HELP OF THIS MODULE.
 __help__ = '''
-❍ `/waifu` : Gives random image of waifu.  
-❍ `/waifu` : Gives random image of waifu.  
+❍ `/waifuinfo` : Gives random image of waifu with info.   
 '''
 
 # DON'T EDIT
