@@ -2,9 +2,16 @@ import nekos
 import requests
 from Shikimori import dispatcher
 from telegram.ext import CommandHandler
+import random
+import Shikimori.modules.waifu_string as waifu_string
 
 url_sfw_1 = "https://api.waifu.pics/sfw/" 
 url_sfw_2 = "https://nekos.best/"
+
+
+def waifus(update, context):
+    update.effective_message.reply_photo(random.choice(waifu_string.WAIFUS))
+
 
 def pout(update, context):
     msg = update.effective_message
@@ -384,6 +391,8 @@ NEKOS_HANDLER = CommandHandler("nekos", nekos2, run_async=True)
 STARE_HANDLER = CommandHandler("stare", stare, run_async=True)
 THINK_HANDLER = CommandHandler("think", think, run_async=True)
 THUMBSUP_HANDLER = CommandHandler("thumbsup", thumbsup, run_async=True)
+WAIFU_HANDLER = CommandHandler('waifu', waifus, run_async=True)
+dispatcher.add_handler(WAIFU_HANDLER)
 
 dispatcher.add_handler(POUT_HANDLER)
 dispatcher.add_handler(BORED_HANDLER)
@@ -453,6 +462,7 @@ __handlers__ = [
     AVATAR_HANDLER,
     GECG_HANDLER,
     FOXGIRL_HANDLER,
+    WAIFU_HANDLER,
 ]
 
 
