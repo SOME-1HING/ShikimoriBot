@@ -532,5 +532,6 @@ __help__ = """
    ➢ `/stare`
    ➢ `/think`
    ➢ `/thumbsup`
+   ➢ `/source`
 """
 
