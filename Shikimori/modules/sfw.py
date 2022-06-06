@@ -339,7 +339,12 @@ def goose(update, context):
 def woof(update, context):
     msg = update.effective_message
     target = "woof"
-    msg.reply_photo(nekos.img(target))       
+    msg.reply_photo(nekos.img(target))   
+
+def source(update, context):
+    msg = update.effective_message
+    img = "https://telegra.ph/file/f55d977a723b679197b43.mp4"
+    msg.reply_animation(img)    
 
 WALLPAPER_HANDLER = CommandHandler("wallpaper", wallpaper, run_async=True)
 TICKLE_HANDLER = CommandHandler("tickle", tickle, run_async=True)
@@ -401,7 +406,8 @@ WAIFU_HANDLER = CommandHandler('waifu', waifus, run_async=True)
 dispatcher.add_handler(WAIFU_HANDLER)
 SWAIFU_HANDLER = CommandHandler('swaifu', swaifu, run_async=True)
 dispatcher.add_handler(SWAIFU_HANDLER)
-
+SOURCE_HANDLER = CommandHandler('source', source, run_async=True)
+dispatcher.add_handler(SOURCE_HANDLER)
 dispatcher.add_handler(POUT_HANDLER)
 dispatcher.add_handler(BORED_HANDLER)
 dispatcher.add_handler(NEKOS_HANDLER)
