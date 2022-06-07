@@ -149,13 +149,13 @@ async def lego(event):
  await event.reply('Creating your logo..')
  try:
     text = event.pattern_match.group(1)
-    img = Image.open('./Mizuharabot/resources/blackbg.jpg')
+    img = Image.open('./Shikimori/resources/blackbg.jpg')
     draw = ImageDraw.Draw(img)
     image_widthz, image_heightz = img.size
     pointsize = 500
     fillcolor = "gold"
     shadowcolor = "blue"
-    font = ImageFont.truetype("./Mizuhara/resources/1.ttf", 330)
+    font = ImageFont.truetype("./Shikimori/resources/1.ttf", 330)
     w, h = draw.textsize(text, font=font)
     h += int(h*0.21)
     image_width, image_height = img.size
@@ -165,7 +165,7 @@ async def lego(event):
     draw.text((x, y), text, font=font, fill="black", stroke_width=25, stroke_fill="yellow")
     fname2 = "MizuharaLogo.png"
     img.save(fname2, "png")
-    await tbot.send_file(event.chat_id, fname2, caption="Made By @chizuru_mizuhara_robot ⚡️")
+    await tbot.send_file(event.chat_id, fname2, caption="Heres your logo")
     if os.path.exists(fname2):
             os.remove(fname2)
  except Exception as e:
@@ -186,13 +186,13 @@ async def lego(event):
  await event.reply('Creating your logo...wait!')
  try:
     text = event.pattern_match.group(1)
-    img = Image.open('./Mizuhara/resources/blackbg.jpg')
+    img = Image.open('./Shikimori/resources/blackbg.jpg')
     draw = ImageDraw.Draw(img)
     image_widthz, image_heightz = img.size
     pointsize = 500
     fillcolor = "gold"
     shadowcolor = "blue"
-    font = ImageFont.truetype("./Mizuhara/resources/Chopsic.otf", 950)
+    font = ImageFont.truetype("./Shikimori/resources/Chopsic.otf", 950)
     w, h = draw.textsize(text, font=font)
     h += int(h*0.21)
     image_width, image_height = img.size
@@ -202,7 +202,7 @@ async def lego(event):
     draw.text((x, y), text, font=font, fill="black", stroke_width=25, stroke_fill="yellow")
     fname2 = "Mizuhara.png"
     img.save(fname2, "png")
-    await tbot.send_file(event.chat_id, fname2, caption="Made By @chizuru_mizuhara_robot ⚡️")
+    await tbot.send_file(event.chat_id, fname2, caption="Heres ur logo")
     if os.path.exists(fname2):
             os.remove(fname2)
  except Exception as e:
@@ -224,13 +224,13 @@ async def lego(event):
  await event.reply('Creating your logo...wait!')
  try:
     text = event.pattern_match.group(1)
-    img = Image.open('./Mizuhara/resources/blackbg.jpg')
+    img = Image.open('./Shikimori/resources/blackbg.jpg')
     draw = ImageDraw.Draw(img)
     image_widthz, image_heightz = img.size
     pointsize = 500
     fillcolor = "white"
     shadowcolor = "blue"
-    font = ImageFont.truetype("./Mizuhara/resources/Maghrib.ttf", 1000)
+    font = ImageFont.truetype("./Shikimori/resources/Maghrib.ttf", 1000)
     w, h = draw.textsize(text, font=font)
     h += int(h*0.21)
     image_width, image_height = img.size
@@ -240,7 +240,7 @@ async def lego(event):
     draw.text((x, y), text, font=font, fill="white", stroke_width=0, stroke_fill="white")
     fname2 = "Mizuhara.png"
     img.save(fname2, "png")
-    await tbot.send_file(event.chat_id, fname2, caption="Made By @chizuru_mizuhara_robot ")
+    await tbot.send_file(event.chat_id, fname2, caption="Heres your logo ")
     if os.path.exists(fname2):
             os.remove(fname2)
  except Exception as e:
