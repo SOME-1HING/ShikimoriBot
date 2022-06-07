@@ -1,11 +1,7 @@
 import logging
-
 from pyrogram.types import Message
-from search_engine_parser import GoogleSearch
 from Shikimori.imports.youtube_search import YoutubeSearch
-
-from pyrogram import Client as app, filters
-
+from Shikimori import pbot
 logging.basicConfig(
     level=logging.DEBUG, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
 )
@@ -15,7 +11,7 @@ import pyrogram
 
 logging.getLogger("pyrogram").setLevel(logging.WARNING)
 
-@app.on_message(pyrogram.filters.command("yts"))
+@pbot.on_message(pyrogram.filters.command("yts"))
 async def ytsearch(_, message: Message):
     try:
         if len(message.command) < 2:
@@ -37,7 +33,7 @@ async def ytsearch(_, message: Message):
     except Exception as e:
         await message.reply_text(str(e))
         
-@app.on_message(pyrogram.filters.command(["ytsearch"]))
+@pbot.on_message(pyrogram.filters.command(["ytsearch"]))
 async def ytsearch(_, message: Message):
     try:
         if len(message.command) < 2:

@@ -325,12 +325,7 @@ def lizard(update, context):
     msg = update.effective_message
     target = "lizard"
     msg.reply_photo(nekos.img(target))
-
-def spank(update, context):
-    msg = update.effective_message
-    target = "spank"
-    msg.reply_video(nekos.img(target))    
-
+   
 def goose(update, context):
     msg = update.effective_message
     target = "goose"
