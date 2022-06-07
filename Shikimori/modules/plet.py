@@ -14,9 +14,6 @@ from Shikimori.modules.thonkify_dict import thonkifydict
 
 def plet(update: Update, context: CallbackContext):
     message = update.effective_message
-    if len(message.command) != 2:
-        message.reply_text("/plet <text>")
-        return
     if not message.reply_to_message:
         msg = message.text.split(None, 1)[1]
     else:
