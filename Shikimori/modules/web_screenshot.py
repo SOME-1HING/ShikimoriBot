@@ -2,16 +2,14 @@
 from pyrogram import filters
 from pyrogram.types import Message
 
-from Shikimori import pbot as app
-from Shikimori import SS_USERNAME as USERNAME
-from Shikimori import SS_TOKEN as TOKEN
+from Shikimori import pbot
 from Shikimori.utils.errors import capture_err
 
-__mod_name__ = "Web Screenshot"
-__help__ = "/ss | .ss [URL] - Take A Screenshot Of A Webpage"
+__mod_name__ = "WebSS"
+__help__ = "/webss | .webss [URL] - Take A Screenshot Of A Webpage"
 
 
-@app.on_message(filters.command("ss"))
+@pbot.on_message(filters.command("webss"))
 @capture_err
 async def take_ss(_, message: Message):
     try:
@@ -22,7 +20,7 @@ async def take_ss(_, message: Message):
         await m.edit("**Uploading**")
         try:
             await message.reply_photo(
-                photo=f"https://v1.nocodeapi.com/{USERNAME}/screen/{TOKEN}/screenshot?url={url}&full_page=1",
+                photo=f"https://webshot.amanoteam.com/print?q={url}",
                 quote=False,
             )
         except TypeError:
@@ -30,6 +28,3 @@ async def take_ss(_, message: Message):
         await m.delete()
     except Exception as e:
         await message.reply_text(str(e))
-
-
-
