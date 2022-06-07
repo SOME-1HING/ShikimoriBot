@@ -2,6 +2,8 @@ import math
 import os
 import urllib.request as urllib
 from html import escape
+import ffmpeg
+import cv2
 
 import requests
 from bs4 import BeautifulSoup as bs
@@ -10,12 +12,48 @@ from telegram import (InlineKeyboardButton, InlineKeyboardMarkup, ParseMode,
                       TelegramError, Update, constants)
 from telegram.ext import CallbackContext
 from telegram.utils.helpers import mention_html
-from SiestaRobot import dispatcher
-from SiestaRobot.modules.disable import DisableAbleCommandHandler
-from SiestaRobot.modules.helper_funcs.misc import convert_gif
+from Shikimori import dispatcher
+from Shikimori.modules.disable import DisableAbleCommandHandler
 
 combot_stickers_url = "https://combot.org/telegram/stickers?q="
 
+def convert_gif(input):
+    """Function to convert mp4 to webm(vp9)"""
+
+    vid = cv2.VideoCapture(input)
+    height = vid.get(cv2.CAP_PROP_FRAME_HEIGHT)
+    width = vid.get(cv2.CAP_PROP_FRAME_WIDTH)
+
+    #check height and width to scale
+    if width > height:
+        width = 512
+        height = -1
+    elif height > width:
+        height = 512
+        width = -1
+    elif width == height:
+        width = 512
+        height = 512
+
+
+    converted_name = 'kangsticker.webm'
+
+    (
+        ffmpeg
+            .input(input)
+            .filter('fps', fps=30, round="up")
+            .filter('scale', width=width, height=height)
+            .trim(start="00:00:00", end="00:00:03", duration="3")
+            .output(converted_name, vcodec="libvpx-vp9", 
+                        **{
+                            #'vf': 'scale=512:-1',
+                            'crf': '30'
+                            })
+            .overwrite_output()
+            .run()
+    )
+
+    return converted_name
 
 def stickerid(update: Update, context: CallbackContext):
     msg = update.effective_message
