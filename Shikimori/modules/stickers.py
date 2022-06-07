@@ -22,6 +22,46 @@ from Shikimori import telethn as bot
 
 combot_stickers_url = "https://combot.org/telegram/stickers?q="
 
+import ffmpeg
+import cv2
+def convert_gif(input):
+    """Function to convert mp4 to webm(vp9)"""
+
+    vid = cv2.VideoCapture(input)
+    height = vid.get(cv2.CAP_PROP_FRAME_HEIGHT)
+    width = vid.get(cv2.CAP_PROP_FRAME_WIDTH)
+
+    #check height and width to scale
+    if width > height:
+        width = 512
+        height = -1
+    elif height > width:
+        height = 512
+        width = -1
+    elif width == height:
+        width = 512
+        height = 512
+
+
+    converted_name = 'kangsticker.webm'
+
+    (
+        ffmpeg
+            .input(input)
+            .filter('fps', fps=30, round="up")
+            .filter('scale', width=width, height=height)
+            .trim(start="00:00:00", end="00:00:03", duration="3")
+            .output(converted_name, vcodec="libvpx-vp9", 
+                        **{
+                            #'vf': 'scale=512:-1',
+                            'crf': '30'
+                            })
+            .overwrite_output()
+            .run()
+    )
+
+    return converted_name
+
 
 
 def stickerid(update: Update, context: CallbackContext):
@@ -117,20 +157,30 @@ def kang(update: Update, context: CallbackContext):
         if msg.reply_to_message.sticker:
             if msg.reply_to_message.sticker.is_animated:
                 is_animated = True
+            elif msg.reply_to_message.sticker.is_video:
+                is_video = True
             file_id = msg.reply_to_message.sticker.file_id
 
         elif msg.reply_to_message.photo:
             file_id = msg.reply_to_message.photo[-1].file_id
-        elif msg.reply_to_message.document:
+        elif msg.reply_to_message.document and not msg.reply_to_message.document.mime_type == "video/mp4":
             file_id = msg.reply_to_message.document.file_id
+        elif msg.reply_to_message.animation:
+            file_id = msg.reply_to_message.animation.file_id
+            is_gif = True
         else:
-            msg.reply_text("Yea, I can't kang that.")
+            msg.reply_text("Bruh, I can't kang that dumass.")
 
         kang_file = context.bot.get_file(file_id)
-        if not is_animated:
+        if not is_animated and not (is_video or is_gif):
             kang_file.download("kangsticker.png")
-        else:
+        elif is_animated:
             kang_file.download("kangsticker.tgs")
+        elif is_video and not is_gif:
+            kang_file.download("kangsticker.webm")
+        elif is_gif:
+            kang_file.download("kang.mp4")
+            convert_gif("kang.mp4")
 
         if args:
             sticker_emoji = str(args[0])
