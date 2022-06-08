@@ -24,14 +24,16 @@ regex_downvote = r"^(\-|\-\-|\-1|👎|noob|baka|idiot|chutiya|nub|noob|wrong|inc
 
 
 
-@app.on_edited_message()(
+
+@app.on_message(
     filters.text
     & filters.group
     & filters.incoming
     & filters.reply
     & filters.regex(regex_upvote)
     & ~filters.via_bot
-    & ~filters.bot,
+    & ~filters.bot
+    & ~filters.edited,
     group=karma_positive_group,
 )
 @capture_err
@@ -64,14 +66,17 @@ async def upvote(_, message):
     )
 
 
-@app.on_edited_message()(
+
+@app.on_message(
+
     filters.text
     & filters.group
     & filters.incoming
     & filters.reply
     & filters.regex(regex_upvote)
     & ~filters.via_bot
-    & ~filters.bot,
+    & ~filters.bot
+    & ~filters.edited,
     group=karma_positive_group,
 )
 @capture_err
@@ -100,14 +105,17 @@ async def upvote(_, message):
     )
 
 
-@app.on_edited_message()(
+
+@app.on_message(
+
     filters.text
     & filters.group
     & filters.incoming
     & filters.reply
     & filters.regex(regex_downvote)
     & ~filters.via_bot
-    & ~filters.bot,
+    & ~filters.bot
+    & ~filters.edited,
     group=karma_negative_group,
 )
 @capture_err

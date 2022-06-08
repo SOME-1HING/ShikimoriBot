@@ -31,7 +31,9 @@ async def isPreviewUp(preview: str) -> bool:
     return False
 
 
-@pbot.on_edited_message()(filters.command("paste"))
+
+@pbot.on_message(filters.command("paste") & ~filters.edited)
+
 @capture_err
 async def paste_func(_, message):
     if not message.reply_to_message:
