@@ -118,12 +118,11 @@ def chatbot(update: Update, context: CallbackContext):
             return
         Message = message.text
         bot.send_chat_action(chat_id, action="typing")
-        kukiurl = requests.get('https://kukiapi.xyz/api/apikey=' + api + '/yuzuki/moezill/message=' + Message)
+        kukiurl = requests.get('http://itsprodev.cf/chatbot/?api=' + api + '&message=' + Message)
         Kuki = json.loads(kukiurl.text)
         kuki = Kuki['reply']
         sleep(0.3)
         message.reply_text(kuki, timeout=60)
-
 
 def list_all_chats(update: Update, context: CallbackContext):
     chats = sql.get_all_kuki_chats()
