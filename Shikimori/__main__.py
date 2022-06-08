@@ -178,7 +178,7 @@ def test(update: Update, context: CallbackContext):
     print(update.effective_message)
 
 
-def start(chat_id, update: Update, context: CallbackContext):
+def start(update: Update, context: CallbackContext):
     args = context.args
     uptime = get_readable_time((time.time() - StartTime))
     if update.effective_chat.type == "private":
@@ -220,6 +220,7 @@ def start(chat_id, update: Update, context: CallbackContext):
                 disable_web_page_preview=False,
             )
     else:
+        chat_id = update.effective_chat.id
         first_name = update.effective_user.first_name
         chat_name = dispatcher.bot.getChat(chat_id).title
         update.effective_message.reply_video(
