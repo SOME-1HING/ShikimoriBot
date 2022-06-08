@@ -45,7 +45,7 @@ __help__ = '''
 *Get waifu images*
 
    ➢ `/waifu`*:* Sends limited but best Waifu image. *RECOMMENDED*
-   ➢ `/waifus`*:* Gives random image of waifu with info. 
+   ➢ `/waifuinfo`*:* Gives random image of waifu with info. 
    ➢ `/waifus`*:* Sends Random Waifu image.
    ➢ `/swaifu`*:* Sends Random Waifu image.
 
