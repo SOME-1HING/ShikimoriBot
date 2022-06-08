@@ -78,7 +78,7 @@ async def is_nsfw(event):
     return is_nsfw
 
 
-@tbot.on(events.NewMessage(pattern="/gshield (.*)"))
+@tbot.on(events.NewMessage(pattern="/nsfwguardian (.*)"))
 async def nsfw_watch(event):
     if not event.is_group:
         await event.reply("You Can Only Nsfw Watch in Groups.")
@@ -432,7 +432,6 @@ __help__ = """
  
 *Commmands*
  - `/nsfwguardian` <i>on/off</i> - Enable|Disable Porn cleaning
- - `/globalmode` <i>on/off</i> - Enable|Disable English only mode
  - `/profanity` <i>on/off</i> - Enable|Disable slag word cleaning
  
 """
