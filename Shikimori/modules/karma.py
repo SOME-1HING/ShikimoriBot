@@ -24,7 +24,7 @@ regex_downvote = r"^(\-|\-\-|\-1|👎|noob|baka|idiot|chutiya|nub|noob|wrong|inc
 
 
 
-@app.on_edited_message(
+@app.on_edited_message()(
     filters.text
     & filters.group
     & filters.incoming
@@ -64,7 +64,7 @@ async def upvote(_, message):
     )
 
 
-@app.on_edited_message(
+@app.on_edited_message()(
     filters.text
     & filters.group
     & filters.incoming
@@ -100,7 +100,7 @@ async def upvote(_, message):
     )
 
 
-@app.on_edited_message(
+@app.on_edited_message()(
     filters.text
     & filters.group
     & filters.incoming
