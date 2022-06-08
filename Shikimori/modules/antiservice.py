@@ -5,7 +5,7 @@ from pyrogram import filters
 
 from Shikimori import app
 from Shikimori.core.decorators.permissions import adminsOnly
-from Shikimori.utils.functions import antiservice_off, antiservice_on, is_antiservice_on
+from Shikimori.ex_plugins.dbfunctions import antiservice_off, antiservice_on, is_antiservice_on
 
 __mod_name__ = "AntiService"
 __help__ = """
