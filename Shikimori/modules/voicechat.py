@@ -44,7 +44,7 @@ async def Lycia(_, message):
         )
         chatbot = L["message"]
         VoiceAi = f"https://lyciavoice.herokuapp.com/lycia?text={chatbot}&lang=hi"
-        name = "Shikimori"
+        name = "Shikimori"  
     except Exception as e:
         await m.edit(str(e))
         return
