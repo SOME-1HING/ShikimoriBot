@@ -100,7 +100,7 @@ async def ytmusic(client, message: Message):
             ytdl_data = ytdl.extract_info(mo, download=True)
 
     except Exception as e:
-        await pablo.edit(f"**Failed To Download** \n**Error :** `{str(e)}`")
+        await pablo.edit_text(f"**Failed To Download** \n**Error :** `{str(e)}`")
         # dl_limit = dl_limit-1
         return
     c_time = time.time()
@@ -171,7 +171,7 @@ def time_to_seconds(time):
 
 
 
-@Client.on_message(filters.command("saavn") & ~filters.edited)
+@Client.on_message(filters.command("saavn"))
 
 async def jssong(_, message):
     global is_downloading
@@ -201,15 +201,15 @@ async def jssong(_, message):
         sname = songs.result[0].song
         slink = songs.result[0].media_url
         ssingers = songs.result[0].singers
-        await m.edit("Downloading")
+        await m.edit_text("Downloading")
         song = await download_song(slink)
-        await m.edit("Uploading")
+        await m.edit_text("Uploading")
         await message.reply_audio(audio=song, title=sname, performer=ssingers)
         os.remove(song)
         await m.delete()
     except Exception as e:
         is_downloading = False
-        await m.edit(str(e))
+        await m.edit_text(str(e))
         return
     is_downloading = False
 
@@ -236,7 +236,7 @@ async def ytmusic(client, message: Message):
         message.chat.id, f"`Getting {urlissed} From Youtube Servers. Please Wait.`"
     )
     if not urlissed:
-        await pablo.edit("Invalid Command Syntax, Please Check Help Menu To Know More!")
+        await pablo.edit_text("Invalid Command Syntax, Please Check Help Menu To Know More!")
         return
 
     search = SearchVideos(f"{urlissed}", offset=1, mode="dict", max_results=1)
@@ -275,7 +275,7 @@ async def ytmusic(client, message: Message):
             duration = round(infoo["duration"] / 60)
 
             if duration > 8:
-                await pablo.edit(
+                await pablo.edit_text(
                     f"❌ Videos longer than 8 minute(s) aren t allowed, the provided video is {duration} minute(s)"
                 )
                 is_downloading = False
@@ -283,7 +283,7 @@ async def ytmusic(client, message: Message):
             ytdl_data = ytdl.extract_info(url, download=True)
 
     except Exception:
-        # await pablo.edit(event, f"**Failed To Download** \n**Error :** `{str(e)}`")
+        # await pablo.edit_text(event, f"**Failed To Download** \n**Error :** `{str(e)}`")
         is_downloading = False
         return
 

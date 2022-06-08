@@ -32,7 +32,7 @@ async def isPreviewUp(preview: str) -> bool:
 
 
 
-@pbot.on_message(filters.command("paste") & ~filters.edited)
+@pbot.on_message(filters.command("paste"))
 
 @capture_err
 async def paste_func(_, message):
@@ -46,11 +46,11 @@ async def paste_func(_, message):
     elif message.reply_to_message.document:
         document = message.reply_to_message.document
         if document.file_size > 1048576:
-            return await m.edit(
+            return await m.edit_text(
                 "You can only paste files smaller than 1MB."
             )
         if not pattern.search(document.mime_type):
-            return await m.edit("Only text files can be pasted.")
+            return await m.edit_text("Only text files can be pasted.")
         doc = await message.reply_to_message.download()
         async with aiofiles.open(doc, mode="r") as f:
             content = await f.read()
@@ -68,7 +68,7 @@ async def paste_func(_, message):
             return await m.delete()
         except Exception:
             pass
-    return await m.edit(link)
+    return await m.edit_text(link)
 
 
 

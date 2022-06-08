@@ -173,7 +173,7 @@ async def ws(event):
  
 """
  
-@pbot.on_message(filters.command("nsfwguardian") & ~filters.edited & ~filters.bot)
+@pbot.on_message(filters.command("nsfwguardian")& ~filters.bot)
 async def add_nsfw(client, message):
     if len(await member_permissions(message.chat.id, message.from_user.id)) < 1:
         await message.reply_text("**You don't have enough permissions**")
@@ -182,21 +182,21 @@ async def add_nsfw(client, message):
     if status == "on" or status == "ON" or status == "enable":
         pablo = await message.reply("`Processing..`")
         if is_chat_in_db(message.chat.id):
-            await pablo.edit("This Chat is Already In My DB")
+            await pablo.edit_text("This Chat is Already In My DB")
             return
         me = await client.get_me()
  
         add_chat(message.chat.id)
-        await pablo.edit("Successfully Added Chat To NSFW Watch.")
+        await pablo.edit_text("Successfully Added Chat To NSFW Watch.")
  
         
     elif status == "off" or status=="OFF" or status == "disable":
         pablo = await message.reply("`Processing..`")
         if not is_chat_in_db(message.chat.id):
-            await pablo.edit("This Chat is Not in dB.")
+            await pablo.edit_text("This Chat is Not in dB.")
             return
         rm_chat(message.chat.id)
-        await pablo.edit("Successfully Removed Chat From NSFW Watch service")
+        await pablo.edit_text("Successfully Removed Chat From NSFW Watch service")
     else:
         await message.reply(" I undestand only `/nsfwguardian on` or `/nsfwguardian off` only")
         

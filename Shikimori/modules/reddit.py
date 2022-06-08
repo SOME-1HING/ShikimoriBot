@@ -26,7 +26,7 @@ __mod_name__ = "Reddit"
 
 
 
-@app.on_message(filters.command("reddit") & ~filters.edited)
+@app.on_message(filters.command("reddit"))
 
 @capture_err
 async def reddit(_, message):
@@ -36,7 +36,7 @@ async def reddit(_, message):
     m = await message.reply_text("Searching")
     reddit = await arq.reddit(subreddit)
     if not reddit.ok:
-        return await m.edit(reddit.result)
+        return await m.edit_text(reddit.result)
     reddit = reddit.result
     nsfw = reddit.nsfw
     sreddit = reddit.subreddit
@@ -44,7 +44,7 @@ async def reddit(_, message):
     image = reddit.url
     link = reddit.postLink
     if nsfw:
-        return await m.edit("NSFW RESULTS COULD NOT BE SHOWN.")
+        return await m.edit_text("NSFW RESULTS COULD NOT BE SHOWN.")
 
     caption = f"""
 **Title:** `{title}`
@@ -54,7 +54,7 @@ async def reddit(_, message):
         await message.reply_photo(photo=image, caption=caption)
         await m.delete()
     except Exception as e:
-        await m.edit(e.MESSAGE)
+        await m.edit_text(e.MESSAGE)
 
 __mod_name__ = "Reddit"
 __help__ = """

@@ -69,7 +69,7 @@ def _onUnMuteRequest(client, cb):
 
 
 
-@pbot.on_message(filters.text & ~filters.private & ~filters.edited, group=1)
+@pbot.on_message(filters.text & ~filters.private, group=1)
 
 def _check_member(client, message):
     chat_id = message.chat.id
@@ -111,7 +111,7 @@ def _check_member(client, message):
                         chat_id, user_id, ChatPermissions(can_send_messages=False)
                     )
                 except ChatAdminRequired:
-                    sent_message.edit(
+                    sent_message.edit_text(
                         "😕 **Shikimori is not admin here..**\n__Give me ban permissions and retry.. \n#Ending FSub...__"
                     )
 
@@ -125,7 +125,7 @@ def _check_member(client, message):
 @pbot.on_message(filters.command(["forcesubscribe", "fsub"]) & ~filters.private)
 def config(client, message):
     user = client.get_chat_member(message.chat.id, message.from_user.id)
-    if user.status is "creator" or user.user.id in SUDO_USERS:
+    if user.status == "creator" or user.user.id in SUDO_USERS:
         chat_id = message.chat.id
         if len(message.command) > 1:
             input_str = message.command[1]
