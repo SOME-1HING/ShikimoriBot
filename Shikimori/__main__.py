@@ -224,8 +224,15 @@ def start(update: Update, context: CallbackContext):
         first_name = update.effective_user.first_name
         chat_name = dispatcher.bot.getChat(chat_id).title
         update.effective_message.reply_video(
-            ShikimoriSTART, caption= "*Hey {}, I'm here for you at {} from :* `{}`\n"
-            .format(escape_markdown(first_name), escape_markdown(chat_name), uptime),
+            ShikimoriSTART, caption= "*Hey {}, I'm here for you at {} since :* `{}`\n"
+            .format(escape_markdown(first_name), escape_markdown(chat_name), uptime), reply_markup=InlineKeyboardMarkup(
+                [
+                 [
+                    InlineKeyboardButton(text="🚨Support Grp", url="https://t.me/tyranteyeeee"),
+                    InlineKeyboardButton(text="❗Updates", url="https://t.me/Shikimori_bot_Updates")
+                 ]
+                ]
+            ),
             parse_mode=ParseMode.MARKDOWN)
 
 
