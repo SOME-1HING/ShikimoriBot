@@ -170,7 +170,7 @@ def time_to_seconds(time):
     return sum(int(x) * 60 ** i for i, x in enumerate(reversed(stringt.split(":"))))
 
 
-@Client.on_edited_message(filters.command("saavn"))
+@Client.on_message(filters.command("saavn") & ~filters.edited)
 async def jssong(_, message):
     global is_downloading
     global dl_limit

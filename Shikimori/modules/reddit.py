@@ -25,7 +25,7 @@ from Shikimori.utils.errors import capture_err
 __mod_name__ = "Reddit"
 
 
-@app.on_edited_message(filters.command("reddit"))
+@app.on_message(filters.command("reddit") & ~filters.edited)
 @capture_err
 async def reddit(_, message):
     if len(message.command) != 2:
