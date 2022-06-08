@@ -7,15 +7,11 @@ from telethon import events
 
 from Shikimori.pyrogramee.telethonbasics import is_admin
 from Shikimori import telethn as tbot
+from pyrogram import filters
+from Shikimori import pbot
 
 @tbot.on(events.NewMessage(pattern="/fakegen$"))
 async def hi(event):
-    if event.fwd_from:
-        return
-    if event.is_group:
-        if not await is_admin(event, event.message.sender_id):
-            await event.reply("`You Should Be Admin To Do This!`")
-            return
     fake = Faker()
     print("FAKE DETAILS GENERATED\n")
     name = str(fake.name())
@@ -32,23 +28,11 @@ async def hi(event):
         parse_mode="HTML",
     )
 
-
-@tbot.on(events.NewMessage(pattern="/picgen$"))
-async def _(event):
-    if event.fwd_from:
-        return
-    if await is_admin(event, event.message.sender_id):
-        url = "https://thispersondoesnotexist.com/image"
-        response = requests.get(url)
-        if response.status_code == 200:
-            with open("luna.jpg", "wb") as f:
-                f.write(response.content)
-
-        captin = f"Fake Image successfully generated."
-        fole = "luna.jpg"
-        await tbot.send_file(event.chat_id, fole, caption=captin)
-        await event.delete()
-        os.system("rm ./luna.jpg ")
+@pbot.on_message(filters.command('picgen'))
+async def picgen(_, message):
+    img = "https://thispersondoesnotexist.com/image"
+    text = f"Fake Image successfully generated."
+    await message.reply_photo(photo=img, caption=text)
 
 
 
@@ -58,5 +42,5 @@ __mod_name__ = "Fake info"
 __help__ = """
 *Commands:*
 - /fakegen : Generates Fake Information
-- /picgen : Generate a fake pic
+- /picgen : Generate a Fake pic
 """
