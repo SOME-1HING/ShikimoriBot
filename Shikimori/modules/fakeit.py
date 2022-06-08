@@ -1,11 +1,6 @@
-import os
-
-import requests
 from faker import Faker
 from faker.providers import internet
 from telethon import events
-
-from Shikimori.pyrogramee.telethonbasics import is_admin
 from Shikimori import telethn as tbot
 from pyrogram import filters
 from Shikimori import pbot
