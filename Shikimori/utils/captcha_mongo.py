@@ -1,6 +1,6 @@
 from pymongo import MongoClient
 
-from Nezuko import MONGO_DB_URI
+from Shikimori import MONGO_DB_URI
 
 
 class manage_db:
