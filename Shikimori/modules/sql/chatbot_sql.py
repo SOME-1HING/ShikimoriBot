@@ -1,42 +1,41 @@
 import threading
 from sqlalchemy import Column, String
 from Shikimori.modules.sql import BASE, SESSION
-class KukiChats(BASE):
-    __tablename__ = "kuki_chats"
+class ChatBot_chats(BASE):
+    __tablename__ = "chatbot_chats"
     chat_id = Column(String(14), primary_key=True)
 
     def __init__(self, chat_id):
         self.chat_id = chat_id
 
-KukiChats.__table__.create(checkfirst=True)
+ChatBot_chats.__table__.create(checkfirst=True)
 INSERTION_LOCK = threading.RLock()
 
-
-def is_kuki(chat_id):
+def is_chatbot(chat_id):
     try:
-        chat = SESSION.query(KukiChats).get(str(chat_id))
+        chat = SESSION.query(ChatBot_chats).get(str(chat_id))
         return bool(chat)
     finally:
         SESSION.close()
 
-def set_kuki(chat_id):
+def set_chatbot(chat_id):
     with INSERTION_LOCK:
-        kukichat = SESSION.query(KukiChats).get(str(chat_id))
-        if not kukichat:
-            kukichat = KukiChats(str(chat_id))
-        SESSION.add(kukichat)
+        ai_chats = SESSION.query(ChatBot_chats).get(str(chat_id))
+        if not ai_chats:
+            ai_chats = ChatBot_chats(str(chat_id))
+        SESSION.add(ai_chats)
         SESSION.commit()
 
-def rem_kuki(chat_id):
+def rem_chatbot(chat_id):
     with INSERTION_LOCK:
-        kukichat = SESSION.query(KukiChats).get(str(chat_id))
-        if kukichat:
-            SESSION.delete(kukichat)
+        ai_chats = SESSION.query(ChatBot_chats).get(str(chat_id))
+        if ai_chats:
+            SESSION.delete(ai_chats)
         SESSION.commit()
 
 
-def get_all_kuki_chats():
+def get_all_chatbot_chats():
     try:
-        return SESSION.query(KukiChats.chat_id).all()
+        return SESSION.query(ChatBot_chats.chat_id).all()
     finally:
         SESSION.close()
