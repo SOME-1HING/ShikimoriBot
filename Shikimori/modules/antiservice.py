@@ -4,7 +4,8 @@
 from pyrogram import filters
 
 from Shikimori import app
-from Shikimori.core.decorators.permissions import adminsOnly
+from Shikimori.utils.permissions import adminsOnly
+from Shikimori.utils.errors import capture_err
 from Shikimori.ex_plugins.dbfunctions import (
     antiservice_off,
     antiservice_on,
@@ -24,6 +25,7 @@ Plugin to delete service messages in a chat!
     & ~filters.private
     & ~filters.edited
 )
+@capture_err
 @adminsOnly("can_change_info")
 async def anti_service(_, message):
     if len(message.command) != 2:
