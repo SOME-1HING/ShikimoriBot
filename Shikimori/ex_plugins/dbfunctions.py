@@ -473,7 +473,9 @@ async def save_captcha_solved(chat_id: int, user_id: int):
 
 async def is_antiservice_on(chat_id: int) -> bool:
     chat = await antiservicedb.find_one({"chat_id": chat_id})
-    return not chat
+    if not chat:
+        return True
+    return False
 
 
 async def antiservice_on(chat_id: int):
