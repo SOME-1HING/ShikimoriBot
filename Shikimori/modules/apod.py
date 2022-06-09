@@ -10,13 +10,13 @@ async def apod(_, message):
     title = result['title']
     copyright = result['copyright']
     url = 'https://apod.nasa.gov/apod/'
-    text = f'*Title:* {title}\n\n*Credits:* {copyright}'
+    text = f'<b>Title:</b> {title}\n\n<b>Credits:</b> {copyright}'
     
     await message.reply_photo(img, caption=text, reply_markup=InlineKeyboardMarkup(
         [    
             [InlineKeyboardButton("More Info" , url=url)]
 
-        ]), parse_mode=enums.ParseMode.MARKDOWN, reply_to_message_id=message.id)
+        ]), parse_mode=enums.ParseMode.HTML, reply_to_message_id=message.id)
 
 __mod_name__ = "NASA"
 
