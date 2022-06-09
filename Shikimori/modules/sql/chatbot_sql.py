@@ -1,24 +1,42 @@
-from Shikimori.mongo import client as db
+import threading
+from sqlalchemy import Column, String
+from Shikimori.modules.sql import BASE, SESSION
+class KukiChats(BASE):
+    __tablename__ = "kuki_chats"
+    chat_id = Column(String(14), primary_key=True)
+
+    def __init__(self, chat_id):
+        self.chat_id = chat_id
+
+KukiChats.__table__.create(checkfirst=True)
+INSERTION_LOCK = threading.RLock()
 
 
-karmadb = db.karma
+def is_kuki(chat_id):
+    try:
+        chat = SESSION.query(KukiChats).get(str(chat_id))
+        return bool(chat)
+    finally:
+        SESSION.close()
 
-async def is_karma_on(chat_id: int) -> bool:
-    chat = karmadb.find_one({"chat_id_toggle": chat_id})
-    if not chat:
-        return True
-    return False
+def set_kuki(chat_id):
+    with INSERTION_LOCK:
+        kukichat = SESSION.query(KukiChats).get(str(chat_id))
+        if not kukichat:
+            kukichat = KukiChats(str(chat_id))
+        SESSION.add(kukichat)
+        SESSION.commit()
+
+def rem_kuki(chat_id):
+    with INSERTION_LOCK:
+        kukichat = SESSION.query(KukiChats).get(str(chat_id))
+        if kukichat:
+            SESSION.delete(kukichat)
+        SESSION.commit()
 
 
-async def karma_on(chat_id: int):
-    is_karma = await is_karma_on(chat_id)
-    if is_karma:
-        return
-    return karmadb.delete_one({"chat_id_toggle": chat_id})
-
-
-async def karma_off(chat_id: int):
-    is_karma = await is_karma_on(chat_id)
-    if not is_karma:
-        return
-    return karmadb.insert_one({"chat_id_toggle": chat_id})
+def get_all_kuki_chats():
+    try:
+        return SESSION.query(KukiChats.chat_id).all()
+    finally:
+        SESSION.close()
