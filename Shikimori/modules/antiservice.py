@@ -4,7 +4,7 @@
 from pyrogram import filters
 
 from Shikimori import pbot
-from Shikimori.core.decorators.permissions import adminsOnly
+from Shikimori.utils.permissions import adminsOnly
 from Shikimori.ex_plugins.dbfunctions import antiservice_off, antiservice_on, is_antiservice_on
 
 __mod_name__ = "AntiService"
@@ -15,7 +15,8 @@ Plugin to delete service messages in a chat!
 """
 
 
-@pbot.on_message(filters.command("antiservice"))
+@pbot.on_message(filters.command("antiservice") & ~filters.private)
+@adminsOnly("can_change_info")
 async def anti_service(_, message):
     await message.reply_text('pro coder')
     if len(message.command) != 2:
