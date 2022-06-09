@@ -127,6 +127,8 @@ if ENV:
     MAINDEV_ID = os.environ.get("MAINDEV_ID", None)
     REM_BG_API_KEY = os.environ.get("REM_BG_API_KEY", None)
     VIRUS_API_KEY = os.environ.get("VIRUS_API_KEY", None)
+    APOD_API_KEY = os.environ.get("APOD_API_KEY", None)
+    
 
 
     
@@ -211,6 +213,7 @@ else:
     MAINDEV_ID = Config.MAINDEV_ID
     REM_BG_API_KEY = Config.MAINDEV_ID
     VIRUS_API_KEY = Config.VIRUS_API_KEY
+    APOD_API_KEY = Config.APOD_API_KEY
 
 
 

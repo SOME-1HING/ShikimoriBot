@@ -1,26 +1,25 @@
-from Shikimori.events import register
-import requests as r
-from bs4 import BeautifulSoup as bs
+from pyrogram import filters,enums
+from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup  
+from Shikimori import pbot, APOD_API_KEY
+import requests
 
+@pbot.on_message(filters.command('apod'))
+async def apod(_, message):
+    result = requests.get('https://api.nasa.gov/planetary/apod?api_key=' + APOD_API_KEY).json()
+    img = result['hdurl']
+    title = result['title']
+    copyright = result['copyright']
+    url = 'https://apod.nasa.gov/apod/'
+    text = f'*Title:* {title}\n\n*Credits:* {copyright}'
+    
+    await message.reply_photo(img, caption=text, reply_markup=InlineKeyboardMarkup(
+        [    
+            [InlineKeyboardButton("More Info" , url=url)]
 
-@register(pattern="^/apod ?(.*)")
-async def aposj(e):
-    link = "https://apod.nasa.gov/apod/"
-    C = r.get(link).content
-    m = bs(C, "html.parser", from_encoding="utf-8")
-    try:
-        try:
-            img = m.find_all("img")[0]["src"]
-            img = link + img
-        except IndexError:
-            img = None
-        expla = m.find_all("p")[2].text.replace("\n", " ")
-        expla = expla.split("     ")[0]
-        if len(expla) > 3000:
-            expla = expla[:3000] + "..."
-        expla = "__" + expla + "__"
-        await e.reply(expla, file=img)
-        if e.out:
-            await e.delete()
-    except Exception as E:
-        return print(e, str(E))
+        ]), parse_mode=enums.ParseMode.MARKDOWN, reply_to_message_id=message.id)
+
+__mod_name__ = "NASA"
+
+__help__ = """
+Use `/apod` to get Picture of the Day by NASA.
+"""
