@@ -489,7 +489,6 @@ def stats(update, context):
                     )
                     + f"\n\n✦ [Support](https://t.me/tyranteyeeee) | ✦ [Updates](https://t.me/Shikimori_bot_Updates)\n\n"
                 )
-                + "╘══「 by [Sneha](https://t.me/Sneha_UwU_OwO) 」\n"
             ),
             parse_mode=ParseMode.MARKDOWN,
             reply_markup=InlineKeyboardMarkup(

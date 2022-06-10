@@ -1,10 +1,12 @@
-from pyrogram import filters
-from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup  
-from Shikimori import pbot, APOD_API_KEY
+from Shikimori import dispatcher, APOD_API_KEY
+from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update
+from telegram.ext import (
+    CallbackContext,
+    CommandHandler,
+)
 import requests
 
-@pbot.on_message(filters.command('apod'))
-async def apod(_, message):
+def apod(update: Update, context: CallbackContext):
     result = requests.get('https://api.nasa.gov/planetary/apod?api_key=' + APOD_API_KEY).json()
     img = result['hdurl']
     title = result['title']
@@ -12,11 +14,14 @@ async def apod(_, message):
     url = 'https://apod.nasa.gov/apod/'
     text = f'Title: {title}\n\nCredits: {copyright}'
     
-    await message.reply_photo(img, caption=text, reply_markup=InlineKeyboardMarkup(
+    update.effective_message.reply_photo(img, caption=text, reply_markup=InlineKeyboardMarkup(
         [    
             [InlineKeyboardButton("More Info" , url=url)]
 
-        ]), reply_to_message_id=message.id)
+        ]))
+
+apod_handler = CommandHandler("apod", apod, run_async = True)
+dispatcher.add_handler(apod_handler)
 
 __mod_name__ = "NASA"
 
