@@ -1,4 +1,4 @@
-from pyrogram import filters,enums
+from pyrogram import filters
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup  
 from Shikimori import pbot, APOD_API_KEY
 import requests
@@ -10,13 +10,13 @@ async def apod(_, message):
     title = result['title']
     copyright = result['copyright']
     url = 'https://apod.nasa.gov/apod/'
-    text = f'<b>Title:</b> {title}\n\n<b>Credits:</b> {copyright}'
+    text = f'Title: {title}\n\nCredits: {copyright}'
     
     await message.reply_photo(img, caption=text, reply_markup=InlineKeyboardMarkup(
         [    
             [InlineKeyboardButton("More Info" , url=url)]
 
-        ]), parse_mode=enums.ParseMode.HTML, reply_to_message_id=message.id)
+        ]), reply_to_message_id=message.id)
 
 __mod_name__ = "NASA"
 
