@@ -233,12 +233,13 @@ DRAGONS.add(OWNER_ID)
 DEV_USERS.add(OWNER_ID)
 DEV_USERS.add(769830161) 
 
-if not SPAMWATCH_API:
-    sw = None
-    LOGGER.warning("SpamWatch API key missing! recheck your config.")
-else:
-    sw = spamwatch.Client(SPAMWATCH_API)
+# if not SPAMWATCH_API:
+#     sw = None
+#     LOGGER.warning("SpamWatch API key missing! recheck your config.")
+# else:
+#     sw = spamwatch.Client(SPAMWATCH_API)
 
+sw = None
 
 REDIS = StrictRedis.from_url(REDIS_URL,decode_responses=True)
 try:
