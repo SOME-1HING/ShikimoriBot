@@ -1,6 +1,6 @@
 import os
 import sys
-from Shikimori  import LOGGER
+
 import yaml
 from envparse import env
 
@@ -39,13 +39,14 @@ def get_str_key(name, required=False):
     else:
         default = None
     if not (data := env.str(name, default=default)) and not required:
-        LOGGER.warn("No str key: " + name)
+        log.warn("No str key: " + name)
         return None
     elif not data:
-        LOGGER.critical("No str key: " + name)
+        log.critical("No str key: " + name)
         sys.exit(2)
     else:
         return data
+
 
 def get_int_key(name, required=False):
     if name in DEFAULTS:
@@ -53,13 +54,14 @@ def get_int_key(name, required=False):
     else:
         default = None
     if not (data := env.int(name, default=default)) and not required:
-        LOGGER.warn("No int key: " + name)
+        log.warn("No int key: " + name)
         return None
     elif not data:
-        LOGGER.critical("No int key: " + name)
+        log.critical("No int key: " + name)
         sys.exit(2)
     else:
         return data
+
 
 def get_list_key(name, required=False):
     if name in DEFAULTS:
