@@ -1,6 +1,6 @@
 import os
 import sys
-
+from Shikimori  import LOGGER
 import yaml
 from envparse import env
 
@@ -13,7 +13,7 @@ DEFAULTS = {
     "REDIS_PORT": 6379,
     "REDIS_DB_FSM": 1,
     "MONGODB_URI": "localhost",
-    "MONGO_DB": "DaisyX",
+    "MONGO_DB": "Shikimori",
     "API_PORT": 8080,
     "JOIN_CONFIRM_DURATION": "30m",
 }
@@ -39,14 +39,13 @@ def get_str_key(name, required=False):
     else:
         default = None
     if not (data := env.str(name, default=default)) and not required:
-        log.warn("No str key: " + name)
+        LOGGER.warn("No str key: " + name)
         return None
     elif not data:
-        log.critical("No str key: " + name)
+        LOGGER.critical("No str key: " + name)
         sys.exit(2)
     else:
         return data
-
 
 def get_int_key(name, required=False):
     if name in DEFAULTS:
@@ -54,14 +53,13 @@ def get_int_key(name, required=False):
     else:
         default = None
     if not (data := env.int(name, default=default)) and not required:
-        log.warn("No int key: " + name)
+        LOGGER.warn("No int key: " + name)
         return None
     elif not data:
-        log.critical("No int key: " + name)
+        LOGGER.critical("No int key: " + name)
         sys.exit(2)
     else:
         return data
-
 
 def get_list_key(name, required=False):
     if name in DEFAULTS:
