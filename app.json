@@ -45,7 +45,7 @@
       },    
       "SQLALCHEMY_DATABASE_URI": {
          "description": "Your postgres sql db, empty this field if you dont have one.",
-         "required": true,
+         "required": false,
          "value": "postgresql://username:pw@hostname:port/db_name"
       },      
       "OWNER_ID": {
