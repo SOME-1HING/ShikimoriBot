@@ -486,7 +486,7 @@ def get_help(update: Update, context: CallbackContext):
                 ),
             )
             return
-       update.effective_message.reply_text(
+        update.effective_message.reply_text(
             "Contact me in PM to get the list of possible commands.",
             reply_markup=InlineKeyboardMarkup(
                 [
