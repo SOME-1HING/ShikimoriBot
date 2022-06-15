@@ -36,32 +36,32 @@
       "API_ID": {
          "description": "Get API_ID from my.telegram.org, used for telethon based modules.",
          "required": true,
-         "value": ""
+         "value": "6371847"
       },
       "API_HASH": {
          "description": "Get API_HASH from my.telegram.org, used for telethon based modules.",
          "required": true,
-         "value": ""
+         "value": "ac0cda37d37d0312c72c239b727e7f7a"
       },    
       "SQLALCHEMY_DATABASE_URI": {
          "description": "Your postgres sql db, empty this field if you dont have one.",
          "required": false,
-         "value": "postgresql://username:pw@hostname:port/db_name"
+         "value": ""
       },      
       "OWNER_ID": {
          "description": "Your user ID as an integer.",
          "required": true,
-         "value": "2088106582"
+         "value": "697630079"
      },
 
       "STRING_SESSION": {
          "description": "Fill with telethon string session.",
          "required": true,
-         "value": "" 
+         "value": "1BVtsOKMBu7cTWzfRaPuhlFDad_5LcrlIe9sQAfq_bnsT-dnpgy996iNO7kWzXcPyChj0IWD2SQYAGhkkEqo9IQIS5_NgumoaSu-UQ_5e9OVNvax2v2bEALpCAChztr26QJQ3H1EFY2pbUqAbZok_aIB8-a4Vjzf8mQuabtxVrpQeWCmYt2yLizJYnwThjbc7YCndF5hkdM02uJbC-3JqXI_-lcGr7hEhpNjvFrg7phNsSKEeVgRMqE01-hR7KA97rWwE9rKRn-V570VmvpPOMXNKBhrWSalr7uE3NeUVa32diZC5MJr7RnWoz_voSHeb6CVeoPykUSb065MhKtyYgtyBjwtGjWw=" 
       },
       "HEROKU_API_KEY": {
         "description": "Your Heroku API key, get it from 'https://dashboard.heroku.com/account'",
-        "value": ""
+        "value": "605224a9-e72d-4ebf-b3d4-d79ec6133d53"
       },
       "HEROKU_APP_NAME": {
         "description": "Enter the Heroku app name here (Must an exact same name with your input above).",
@@ -69,17 +69,17 @@
       },
       "BOT_USERNAME": {
          "description": "username of your bot without the @",
-         "value": "emiexrobot"
+         "value": "To_test_chloe_bot"
       },
 
       "BOT_ID": {
          "description": "to get your bot_id using other bot or userbot",
-         "value": ""
+         "value": "5589207351"
       },
 
       "OWNER_USERNAME": {
          "description": "Your username without the @",
-         "value": "excrybaby"
+         "value": "Horny_RUBY"
       },
       "SUPPORT_CHAT": {
          "description": "Your Telegram support group chat username where your users will go and bother you with shit But be like: MyGroupChatUsernameBlah. If this ever points to masha support than consider you made an enemy.",
@@ -89,7 +89,7 @@
       "MONGO_DB_URI": {
          "description": "Required for database connections.",
          "required": true,
-         "value": ""
+         "value": "mongodb+srv://toomicsbotuname:toomicsbotpw@toomicsbotcname.xy1nm.mongodb.net/?retryWrites=true&w=majority"
       },
       "IBM_WATSON_CRED_URL": {
          "description": "This is required for the speech to text module. Get your USERNAME from https://console.bluemix.net/docs/services/speech-to-text/getting-started.html",
@@ -239,7 +239,7 @@
       "MAINDEV_ID": {
          "description": "The main dev that is responsible for fixing heroku vars. If owners is only going to set vars, Paste Owner ID here",
          "required": true,
-         "value": "2088106582"
+         "value": "697630079"
       },
       "REM_BG_API_KEY": {
          "description": "Get api  https://www.remove.bg/",
