@@ -61,8 +61,8 @@ async def _(event):
 
 
 __help__ = """
-<b> Book </b>
-<b>Available commands:</b>
+Book 
+Available commands:
  - `/book` <book name> : Get the download link of the book
 """
 __mod_name__ = "Books"
