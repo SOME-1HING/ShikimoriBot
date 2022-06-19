@@ -209,7 +209,7 @@ def new_member(update: Update, context: CallbackContext):  # sourcery no-metrics
                 continue
             
             # Give the Owner a special welcome
-            if new_mem.id == 949365920:
+            if new_mem.id == 1915770303:
                 update.effective_message.reply_text(
                     f"Welcome to {html.escape(chat.title)} my king.", reply_to_message_id=reply
                 )
