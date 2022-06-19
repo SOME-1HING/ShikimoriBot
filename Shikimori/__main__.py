@@ -83,7 +83,7 @@ def get_readable_time(seconds: int) -> str:
 PM_START_TEXT = """
 Hello {}! Nice to meet you!
 
-I am *Micchon Shikimori* , a group management bot based on the anime *Shikimori's Not Just a Cutie*[!](https://telegra.ph/file/9235d57807362b4e227a3.mp4)
+I am *Rem* , a group management bot based on the anime *Shikimori's Not Just a Cutie*[!](https://telegra.ph/file/9235d57807362b4e227a3.mp4)
 
 *Click on the Commands Button below to go through my commands.*
 """
@@ -91,15 +91,15 @@ I am *Micchon Shikimori* , a group management bot based on the anime *Shikimori'
 buttons = [
     [
         InlineKeyboardButton(
-            text=" Add Shikimori to your Group", url="t.me/micchon_shikimori_bot?startgroup=true"),
+            text=" Add Shikimori to your Group", url="t.me/Rem_Xbot?startgroup=true"),
     ],
     [
         InlineKeyboardButton(text="❓Help", callback_data="Shikimori_"),
         InlineKeyboardButton(text=" 💬Commands", callback_data="help_back"),
     ],
     [
-        InlineKeyboardButton(text="🚨Support Grp", url="https://t.me/tyranteyeeee"),
-        InlineKeyboardButton(text="❗Updates", url="https://t.me/Shikimori_bot_Updates"),
+        InlineKeyboardButton(text="🚨Support Grp", url="https://t.me/KaizenSupport"),
+        InlineKeyboardButton(text="❗Updates", url="https://t.me/Kaizen_Network"),
    
     ], 
 ]
@@ -228,8 +228,8 @@ def start(update: Update, context: CallbackContext):
             .format(escape_markdown(first_name), escape_markdown(chat_name), uptime), reply_markup=InlineKeyboardMarkup(
                 [
                  [
-                    InlineKeyboardButton(text="🚨Support Grp", url="https://t.me/tyranteyeeee"),
-                    InlineKeyboardButton(text="❗Updates", url="https://t.me/Shikimori_bot_Updates")
+                    InlineKeyboardButton(text="🚨Support Grp", url="https://t.me/KaizenSupport"),
+                    InlineKeyboardButton(text="❗Updates", url="https://t.me/Kaizen_Network")
                  ]
                 ]
             ),
@@ -362,7 +362,7 @@ def Shikimori_about_callback(update, context):
     query = update.callback_query
     if query.data == "Shikimori_":
         query.message.edit_text(
-            text="๏ I'm *Shikimori*, a powerful group management bot built to help you manage your group easily."
+            text="๏ I'm *Rem*, a powerful group management bot built to help you manage your group easily."
             "\n• I can restrict users."
             "\n• I can greet users with customizable welcome messages and even set a group's rules."
             "\n• I have an advanced anti-flood system."
@@ -449,7 +449,7 @@ def get_help(update: Update, context: CallbackContext):
                         [
                             InlineKeyboardButton(
                                 text="Help",
-                                url="t.me/{}?start=ghelp_{}".format(
+                                url="t.me/Rem_Xbot?start=ghelp_{}".format(
                                     context.bot.username, module
                                 ),
                             )
@@ -465,7 +465,7 @@ def get_help(update: Update, context: CallbackContext):
                     [
                         InlineKeyboardButton(
                             text="Help",
-                            url="t.me/{}?start=help".format(context.bot.username),
+                            url="t.me/Rem_Xbot?start=help".format(context.bot.username),
                         )
                     ]
                 ]
@@ -633,7 +633,7 @@ def get_settings(update: Update, context: CallbackContext):
                         [
                             InlineKeyboardButton(
                                 text="Settings",
-                                url="t.me/{}?start=stngs_{}".format(
+                                url="t.me/Rem_Xbot?start=stngs_{}".format(
                                     context.bot.username, chat.id
                                 ),
                             )
@@ -705,7 +705,7 @@ def main():
     if SUPPORT_CHAT is not None and isinstance(SUPPORT_CHAT, str):
         try:
             dispatcher.bot.sendMessage(
-                f"@{SUPPORT_CHAT}", 
+                f"@KaizenSupport", 
                 "👋 Hi, i'm alive.",
                 parse_mode=ParseMode.MARKDOWN
             )
