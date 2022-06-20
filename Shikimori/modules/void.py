@@ -31,7 +31,7 @@ def kaizen(update: Update, context: CallbackContext):
 
 
 void_handler = CommandHandler("kaizen", kaizen, run_async = True)
-dispatcher.add_handler(kaizen_handler)
+dispatcher.add_handler(void_handler)
 
 __help__ = """
  ──「Kaizen Network」──                         
