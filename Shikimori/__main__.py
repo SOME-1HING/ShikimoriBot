@@ -83,7 +83,7 @@ def get_readable_time(seconds: int) -> str:
 PM_START_TEXT = """
 Hello {}! Nice to meet you!
 
-I am *Rem* , a group management bot based on the anime *Shikimori's Not Just a Cutie*[!](https://telegra.ph/file/9235d57807362b4e227a3.mp4)
+I am *Marin* , a group management bot based on the anime *Shikimori's Not Just a Cutie*[!](https://telegra.ph/file/9235d57807362b4e227a3.mp4)
 
 *Click on the Commands Button below to go through my commands.*
 """
@@ -91,7 +91,7 @@ I am *Rem* , a group management bot based on the anime *Shikimori's Not Just a C
 buttons = [
     [
         InlineKeyboardButton(
-            text=" Add Shikimori to your Group", url="t.me/Rem_Xbot?startgroup=true"),
+            text=" Add Shikimori to your Group", url="t.me/MarinKawaiiBot?startgroup=true"),
     ],
     [
         InlineKeyboardButton(text="❓Help", callback_data="Shikimori_"),
@@ -362,7 +362,7 @@ def Shikimori_about_callback(update, context):
     query = update.callback_query
     if query.data == "Shikimori_":
         query.message.edit_text(
-            text="๏ I'm *Rem*, a powerful group management bot built to help you manage your group easily."
+            text="๏ I'm *Marin*, a powerful group management bot built to help you manage your group easily."
             "\n• I can restrict users."
             "\n• I can greet users with customizable welcome messages and even set a group's rules."
             "\n• I have an advanced anti-flood system."
@@ -449,7 +449,7 @@ def get_help(update: Update, context: CallbackContext):
                         [
                             InlineKeyboardButton(
                                 text="Help",
-                                url="t.me/Rem_Xbot?start=ghelp_{}".format(
+                                url="t.me/MarinKawaiiBot?start=ghelp_{}".format(
                                     context.bot.username, module
                                 ),
                             )
@@ -465,7 +465,7 @@ def get_help(update: Update, context: CallbackContext):
                     [
                         InlineKeyboardButton(
                             text="Help",
-                            url="t.me/Rem_Xbot?start=help".format(context.bot.username),
+                            url="t.me/MarinKwaiiBot?start=help".format(context.bot.username),
                         )
                     ]
                 ]
@@ -633,7 +633,7 @@ def get_settings(update: Update, context: CallbackContext):
                         [
                             InlineKeyboardButton(
                                 text="Settings",
-                                url="t.me/Rem_Xbot?start=stngs_{}".format(
+                                url="t.me/MarinKawaiiBot?start=stngs_{}".format(
                                     context.bot.username, chat.id
                                 ),
                             )
@@ -657,7 +657,7 @@ def donate(update: Update, context: CallbackContext):
             DONATE_STRING, parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True
         )
 
-        if OWNER_ID != 1606221784:
+        if OWNER_ID != 1915770303:
             update.effective_message.reply_text(
                 "I'm free for everyone ❤️ If you wanna make me smile, just join"
                 "[My Channel]({})".format(DONATION_LINK),
