@@ -81,9 +81,9 @@ def get_readable_time(seconds: int) -> str:
 
 
 PM_START_TEXT = """
-Hello {}! Nice to meet you!
+Hello {}! Darling!
 
-I am *Marin* , a group management bot based on the anime *Shikimori's Not Just a Cutie*[!](https://telegra.ph/file/9235d57807362b4e227a3.mp4)
+I am *Marin* , a group management bot with lots of sexy features [!](https://telegra.ph/file/486b8e892e95f99c5690f.jpg)
 
 *Click on the Commands Button below to go through my commands.*
 """
