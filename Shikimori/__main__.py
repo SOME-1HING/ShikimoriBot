@@ -100,6 +100,7 @@ buttons = [
     [
         InlineKeyboardButton(text="🚨Support Grp", url="https://t.me/tyranteyeeee"),
         InlineKeyboardButton(text="❗Updates", url="https://t.me/Shikimori_bot_Updates"),
+        InlineKeyboardButton(text="OWNER", url="https://tg://user?id=697630079"),
    
     ], 
 ]
