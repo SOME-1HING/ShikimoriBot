@@ -18,7 +18,7 @@ async def awake(event):
   TEXT += f"⚪ **My Owner : [【Sᴜᴍɪᴛ⁪⁬】](https://t.me/MrSumit004)** \n\n"
   TEXT += f"⚪ **I am Powered by : [【Kaizen】»Network«](https://t.me/Kaizen_Network)** \n\n"
   TEXT += "**Thanks For Adding Me Here ❤️**"
-  BUTTON = [Button.url("Support", "https://t.me/KaizenSupport")]
+  BUTTON = [[Button.url("Support", "https://t.me/KaizenSupport")]]
   await tbot.send_file(event.chat_id, PHOTO, caption=TEXT,  buttons=BUTTON)
 
 __mod_name__ = "Alive ✨"
