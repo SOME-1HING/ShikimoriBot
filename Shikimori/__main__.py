@@ -107,8 +107,8 @@ buttons = [
 HELP_STRINGS = """
 Click on the button bellow to get description about specifics command."""
 
-KURUMI_IMG = "https://telegra.ph/file/19b5a3970a0a416d05a4d.jpg"
-ShikimoriSTART = "https://telegra.ph/file/9235d57807362b4e227a3.mp4"
+KURUMI_IMG = "https://telegra.ph/file/f009244349f9e0434db2a.jpg"
+ShikimoriSTART = "https://telegra.ph/file/e684e2f5c8896d5d3cc1e.jpg"
 
 
 
