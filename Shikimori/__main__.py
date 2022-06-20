@@ -94,7 +94,7 @@ buttons = [
             text=" Add Shikimori to your Group", url="t.me/MarinKawaiiBot?startgroup=true"),
     ],
     [
-        InlineKeyboardButton(text="❓Help", callback_data="Shikimori_"),
+
         InlineKeyboardButton(text=" 💬Commands", callback_data="help_back"),
     ],
     [
