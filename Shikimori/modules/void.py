@@ -10,7 +10,7 @@ PHOTO = "https://telegra.ph/file/ef075f11c9d091b1cafa0.jpg"
 
 
 
-def void(update: Update, context: CallbackContext):
+def kaizen(update: Update, context: CallbackContext):
 
     TEXT = f"Welcome to **[【ᴋᴀɪᴢᴇɴ】 ✧Network✧](https://t.me/Kaizen_Network)** \n\n◈ Kaizen is an anime based Community with a motive to spread love and peace around telegram. Go through the channel and join the Community if it draws your attention. ◈"
 
@@ -30,8 +30,8 @@ def void(update: Update, context: CallbackContext):
     )
 
 
-void_handler = CommandHandler("void", void, run_async = True)
-dispatcher.add_handler(void_handler)
+void_handler = CommandHandler("kaizen", kaizen, run_async = True)
+dispatcher.add_handler(kaizen_handler)
 
 __help__ = """
  ──「Kaizen Network」──                         
