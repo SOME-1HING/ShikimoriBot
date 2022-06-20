@@ -41,13 +41,13 @@ def kukirm(update: Update, context: CallbackContext) -> str:
             )
         else:
             update.effective_message.edit_text(
-                "Shikimori Chatbot disable by {}.".format(mention_html(user.id, user.first_name)),
+                "Yor chatbot disabled by {}.".format(mention_html(user.id, user.first_name)),
                 parse_mode=ParseMode.HTML,
             )
 
     return ""
 
-
+@run_async
 @user_admin_no_reply
 @gloggable
 def kukiadd(update: Update, context: CallbackContext) -> str:
@@ -67,19 +67,19 @@ def kukiadd(update: Update, context: CallbackContext) -> str:
             )
         else:
             update.effective_message.edit_text(
-                "Shikimori Chatbot enable by {}.".format(mention_html(user.id, user.first_name)),
+                "Yor chatbot enabled by {}.".format(mention_html(user.id, user.first_name)),
                 parse_mode=ParseMode.HTML,
             )
 
     return ""
 
-
+@run_async
 @user_admin
 @gloggable
 def kuki(update: Update, context: CallbackContext):
     user = update.effective_user
     message = update.effective_message
-    msg = "Choose an option"
+    msg = "🤖 Choose an option to enable/disable chatbot"
     keyboard = InlineKeyboardMarkup([[
         InlineKeyboardButton(
             text="Enable",
@@ -96,7 +96,7 @@ def kuki(update: Update, context: CallbackContext):
 
 def kuki_message(context: CallbackContext, message):
     reply_message = message.reply_to_message
-    if message.text.lower() == "Yuzuki":
+    if message.text.lower() == "kuki":
         return True
     if reply_message:
         if reply_message.from_user.id == context.bot.get_me().id:
@@ -116,17 +116,18 @@ def chatbot(update: Update, context: CallbackContext):
     if message.text and not message.document:
         if not kuki_message(context, message):
             return
-        Message = message.text
+        ruby = message.text
         bot.send_chat_action(chat_id, action="typing")
-        kukiurl = requests.get('http://itsprodev.cf/chatbot/?api=' + api + '&message=' + Message)
-        Kuki = json.loads(kukiurl.text)
-        kuki = Kuki['reply']
+        url = f"https://www.kukiapi.xyz/api/apikey=697630079-KUKIGx5lAF5RE8/Chloe/Ruby/message={ruby}" 
+        request = requests.get(url) 
+        results = json.loads(request.text) 
+        result = f"{results['reply']}"
         sleep(0.3)
-        message.reply_text(kuki, timeout=60)
+        message.reply_text(result)
 
 def list_all_chats(update: Update, context: CallbackContext):
     chats = sql.get_all_kuki_chats()
-    text = "<b>CHATBOT-Enabled Chats</b>\n"
+    text = "<b>Ⲥⲏʟⲟⲉ Enabled Chats</b>\n"
     for chat in chats:
         try:
             x = context.bot.get_chat(int(*chat))
@@ -138,16 +139,23 @@ def list_all_chats(update: Update, context: CallbackContext):
             sleep(e.retry_after)
     update.effective_message.reply_text(text, parse_mode="HTML")
 
+__help__ = """
+*Admins only Commands*:
+ ‣ /chatbot : Shows chatbot control panel
+
+"""
+
+__mod_name__ = "Chatbot"
 
 
-CHATBOTK_HANDLER = CommandHandler("chatbot", kuki, run_async = True)
-ADD_CHAT_HANDLER = CallbackQueryHandler(kukiadd, pattern=r"add_chat", run_async = True)
-RM_CHAT_HANDLER = CallbackQueryHandler(kukirm, pattern=r"rm_chat", run_async = True)
+CHATBOTK_HANDLER = CommandHandler("chatbot", kuki )
+ADD_CHAT_HANDLER = CallbackQueryHandler(kukiadd, pattern=r"add_chat" )
+RM_CHAT_HANDLER = CallbackQueryHandler(kukirm, pattern=r"rm_chat" )
 CHATBOT_HANDLER = MessageHandler(
     Filters.text & (~Filters.regex(r"^#[^\s]+") & ~Filters.regex(r"^!")
-                    & ~Filters.regex(r"^\/")), chatbot, run_async = True)
+                    & ~Filters.regex(r"^\/")), chatbot, )
 LIST_ALL_CHATS_HANDLER = CommandHandler(
-    "allchats", list_all_chats, filters=CustomFilters.dev_filter, run_async = True)
+    "allchats", list_all_chats, filters=CustomFilters.dev_filter, )
 
 dispatcher.add_handler(ADD_CHAT_HANDLER)
 dispatcher.add_handler(CHATBOTK_HANDLER)
@@ -162,12 +170,3 @@ __handlers__ = [
     LIST_ALL_CHATS_HANDLER,
     CHATBOT_HANDLER,
 ]
-
-__mod_name__ = "ChatBot 🤖"
-
-__help__ = """
-*Admins only Commands*:
-  ➢ `/Chatbot`*:* Shows chatbot control panel
-
-*Thx @mizuhara_chan1 for the API*
-"""
