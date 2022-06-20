@@ -6,13 +6,13 @@ from telegram.ext import (
     CommandHandler,
 )
 
-PHOTO = "https://telegra.ph/file/f9b0895ae78578fda9202.jpg"
+PHOTO = "https://telegra.ph/file/ef075f11c9d091b1cafa0.jpg"
 
 
 
 def void(update: Update, context: CallbackContext):
 
-    TEXT = f"Welcome to **[【V๏ɪ፝֟𝔡】 ✧Network✧](https://t.me/voidxnetwork)** \n\n◈ Void is an anime based Community with a motive to spread love and peace around telegram. Go through the channel and join the Community if it draws your attention. ◈"
+    TEXT = f"Welcome to **[【ᴋᴀɪᴢᴇɴ】 ✧Network✧](https://t.me/Kaizen_Network)** \n\n◈ Kaizen is an anime based Community with a motive to spread love and peace around telegram. Go through the channel and join the Community if it draws your attention. ◈"
 
     update.effective_message.reply_photo(
         PHOTO, caption= TEXT,
@@ -21,10 +21,10 @@ def void(update: Update, context: CallbackContext):
             reply_markup=InlineKeyboardMarkup(
             [
                 [
-                InlineKeyboardButton(text="【Usertag】", url="https://t.me/void_network/103"),
-                InlineKeyboardButton(text="【Owner Sama】", url="https://t.me/voidxtoxic")
+                InlineKeyboardButton(text="【About ᴋᴀɪᴢᴇɴ】", url="https://t.me/Kaizen_Network/8"),
+                InlineKeyboardButton(text="【Owner Sama】", url="https://t.me/Just_itachi_uchiha")
                 ],
-                [InlineKeyboardButton(text="【V๏ɪ፝֟𝔡】Network", url="https://t.me/voidxnetwork")]
+                [InlineKeyboardButton(text="【ᴋᴀɪᴢᴇɴ】Network", url="https://t.me/Kaizen_Network")]
             ]
         ),
     )
@@ -34,8 +34,8 @@ void_handler = CommandHandler("void", void, run_async = True)
 dispatcher.add_handler(void_handler)
 
 __help__ = """
- ──「Void Network」──                         
+ ──「Kaizen Network」──                         
  
-❂ /void: Get information about our community! using it in groups may create promotion so we don't support using it in groups."""
+❂ /Kaizen: Get information about our community! using it in groups may create promotion so we don't support using it in groups."""
    
-__mod_name__ = "【ᴠᴏɪᴅ】"
+__mod_name__ = "【Kaizen】"
