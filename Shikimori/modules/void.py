@@ -36,6 +36,6 @@ dispatcher.add_handler(void_handler)
 __help__ = """
  ──「Kaizen Network」──                         
  
-❂ /Kaizen: Get information about our community! using it in groups may create promotion so we don't support using it in groups."""
+❂ /kaizen: Get information about our community! using it in groups may create promotion so we don't support using it in groups."""
    
 __mod_name__ = "【Kaizen】"
