@@ -162,7 +162,7 @@ Note: the restart bat requires that User account control be disabled.
 ## How to setup on Heroku 
 For starters click on this button 
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/asadali32117/ShikimoriIshigamiPTB.git) 
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/Imran95942/ShikimoriBot.git) 
 
 
 ## Credits
