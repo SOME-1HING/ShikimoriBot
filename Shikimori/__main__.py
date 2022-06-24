@@ -83,7 +83,7 @@ def get_readable_time(seconds: int) -> str:
 PM_START_TEXT = """
 Hello {}! Nice to meet you!
 
-I am *Micchon Shikimori* , a group management bot based on the anime *Shikimori's Not Just a Cutie*[!](https://telegra.ph/file/9235d57807362b4e227a3.mp4)
+I am *Pirate Hunter Zoro* , a group management bot based on the anime *One Piece*[!](https://telegra.ph/file/914840dd6bb35fbb6271b.mp4)
 
 *Click on the Commands Button below to go through my commands.*
 """
@@ -91,15 +91,15 @@ I am *Micchon Shikimori* , a group management bot based on the anime *Shikimori'
 buttons = [
     [
         InlineKeyboardButton(
-            text=" Add Shikimori to your Group", url="t.me/micchon_shikimori_bot?startgroup=true"),
+            text="🙃 Add Zoro to your Group 🙃", url="t.me/Hunter_Zoro_Robot?startgroup=true"),
     ],
     [
         InlineKeyboardButton(text="❓Help", callback_data="Shikimori_"),
         InlineKeyboardButton(text=" 💬Commands", callback_data="help_back"),
     ],
     [
-        InlineKeyboardButton(text="🚨Support Grp", url="https://t.me/tyranteyeeee"),
-        InlineKeyboardButton(text="❗Updates", url="https://t.me/Shikimori_bot_Updates"),
+        InlineKeyboardButton(text="🚨Support Grp", url="https://t.me/rukaxSuport"),
+        InlineKeyboardButton(text="❗Updates", url="https://t.me/rukaxUpdates"),
    
     ], 
 ]
@@ -108,7 +108,7 @@ HELP_STRINGS = """
 Click on the button bellow to get description about specifics command."""
 
 KURUMI_IMG = "https://telegra.ph/file/19b5a3970a0a416d05a4d.jpg"
-ShikimoriSTART = "https://telegra.ph/file/9235d57807362b4e227a3.mp4"
+ShikimoriSTART = "https://telegra.ph/file/1fe351c183106e9d249c0.mp4"
 
 
 
