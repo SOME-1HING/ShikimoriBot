@@ -55,7 +55,7 @@ async def lego(event):
     if os.path.exists(fname2):
             os.remove(fname2)
  except Exception as e:
-   await event.reply(f'Error Go to Help From  @tyranteyeeee, {e}')
+   await event.reply(f'Error Go to Help From  @KaizenSupport, {e}')
 
 
 
@@ -94,7 +94,7 @@ async def lego(event):
     if os.path.exists(fname2):
             os.remove(fname2)
  except Exception as e:
-   await event.reply(f'Error Go to Help From  @tyranteyeeee, {e}')
+   await event.reply(f'Error Go to Help From  @KaizenSupport, {e}')
 
 
 
@@ -133,7 +133,7 @@ async def lego(event):
     if os.path.exists(fname2):
             os.remove(fname2)
  except Exception as e:
-   await event.reply(f'Error Go to Help From  @tyranteyeeee, {e}')
+   await event.reply(f'Error Go to Help From  @KaizenSupport, {e}')
 
 
 @register(pattern="^/logo ?(.*)")
@@ -171,7 +171,7 @@ async def lego(event):
     if os.path.exists(fname2):
             os.remove(fname2)
  except Exception as e:
-   await event.reply(f'Error Go to Help From  @tyranteyeeee , {e}')
+   await event.reply(f'Error Go to Help From  @KaizenSupport , {e}')
 
 @register(pattern="^/biglogo ?(.*)")
 async def lego(event):
@@ -208,7 +208,7 @@ async def lego(event):
     if os.path.exists(fname2):
             os.remove(fname2)
  except Exception as e:
-   await event.reply(f'Error Go to Help From  @tyranteyeeee, {e}')
+   await event.reply(f'Error Go to Help From  @KaizenSupport, {e}')
 
    
 @register(pattern="^/wlogo ?(.*)")
@@ -246,7 +246,7 @@ async def lego(event):
     if os.path.exists(fname2):
             os.remove(fname2)
  except Exception as e:
-   await event.reply(f'Error Go to Help From  @tyranteyeeee, {e}')
+   await event.reply(f'Error Go to Help From  @KaizenSupport, {e}')
 
 
 
@@ -524,7 +524,7 @@ async def lego(event):
     if os.path.exists(fname):
             os.remove(fname)
  except Exception as e:
-    await event.reply(f'Error, Report @tyranteyeeee')
+    await event.reply(f'Error, Report @KaizenSupport)
 
 
 file_help = os.path.basename(__file__)
