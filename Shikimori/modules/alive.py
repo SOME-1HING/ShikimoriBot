@@ -9,16 +9,16 @@ from Shikimori.events import register
 from Shikimori import telethn as tbot
 
 
-PHOTO = "https://telegra.ph/file/2b04f7812f22b983f8a10.mp4"
+PHOTO = "https://telegra.ph/file/b7759b3636989914441fc.mp4"
 
 @register(pattern=("/alive"))
 async def awake(event):
-  TEXT = f"**Hi [{event.sender.first_name}](tg://user?id={event.sender.id}), I'm Shikomori Robot.** \n\n"
+  TEXT = f"**Hi [{event.sender.first_name}](tg://user?id={event.sender.id}), I'm Zoro Robot.** \n\n"
   TEXT += "⚪ **I'm Working Properly** \n\n"
-  TEXT += f"⚪ **My Owner : [【V๏ɪ፝֟𝔡】](https://t.me/VoidAryan)** \n\n"
-  TEXT += f"⚪ **I am Powered by : [【V๏ɪ፝֟𝔡】»Network«](https://t.me/VoidxNetwork)** \n\n"
+  TEXT += f"⚪ **My Owner : [【🌀 长工尺工丅口 🌀】](https://t.me/asta_est)** \n\n"
+  TEXT += f"⚪ **I am Powered by : [【XYZ】»Network«](https://t.me/TeamXYZNetwork)** \n\n"
   TEXT += "**Thanks For Adding Me Here ❤️**"
-  BUTTON = [[Button.url("Updates", "https://t.me/Shikimori_bot_Updates"), Button.url("Support", "https://t.me/tyranteyeeee")]]
+  BUTTON = [[Button.url("Updates", "https://t.me/rukaxUpdates"), Button.url("Support", "https://t.me/tyranteyeeee")]]
   await tbot.send_file(event.chat_id, PHOTO, caption=TEXT,  buttons=BUTTON)
 
 __mod_name__ = "Alive ✨"
