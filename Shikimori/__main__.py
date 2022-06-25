@@ -91,7 +91,7 @@ I am *Marin* , a group management bot with lots of sexy features [!](https://tel
 buttons = [
     [
         InlineKeyboardButton(
-            text=" Add Shikimori to your Group", url="t.me/MarinKawaiiBot?startgroup=true"),
+            text=" Add Marin to your Group", url="t.me/MarinKawaiiBot?startgroup=true"),
     ],
     [
 
