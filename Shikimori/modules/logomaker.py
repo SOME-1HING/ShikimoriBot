@@ -55,7 +55,7 @@ async def lego(event):
     if os.path.exists(fname2):
             os.remove(fname2)
  except Exception as e:
-   await event.reply(f'Error Go to Help From  @KaizenSupport, {e}')
+   await event.reply(f'Error Go to Help From  @tyranteyeeee, {e}')
 
 
 
@@ -94,7 +94,7 @@ async def lego(event):
     if os.path.exists(fname2):
             os.remove(fname2)
  except Exception as e:
-   await event.reply(f'Error Go to Help From  @KaizenSupport, {e}')
+   await event.reply(f'Error Go to Help From  @tyranteyeeee, {e}')
 
 
 
@@ -133,7 +133,7 @@ async def lego(event):
     if os.path.exists(fname2):
             os.remove(fname2)
  except Exception as e:
-   await event.reply(f'Error Go to Help From  @KaizenSupport, {e}')
+   await event.reply(f'Error Go to Help From  @tyranteyeeee, {e}')
 
 
 @register(pattern="^/logo ?(.*)")
@@ -171,7 +171,7 @@ async def lego(event):
     if os.path.exists(fname2):
             os.remove(fname2)
  except Exception as e:
-   await event.reply(f'Error Go to Help From  @KaizenSupport , {e}')
+   await event.reply(f'Error Go to Help From  @tyranteyeeee , {e}')
 
 @register(pattern="^/biglogo ?(.*)")
 async def lego(event):
@@ -208,7 +208,7 @@ async def lego(event):
     if os.path.exists(fname2):
             os.remove(fname2)
  except Exception as e:
-   await event.reply(f'Error Go to Help From  @KaizenSupport, {e}')
+   await event.reply(f'Error Go to Help From  @tyranteyeeee, {e}')
 
    
 @register(pattern="^/wlogo ?(.*)")
@@ -246,7 +246,7 @@ async def lego(event):
     if os.path.exists(fname2):
             os.remove(fname2)
  except Exception as e:
-   await event.reply(f'Error Go to Help From  @KaizenSupport, {e}')
+   await event.reply(f'Error Go to Help From  @tyranteyeeee, {e}')
 
 
 
@@ -519,12 +519,12 @@ async def lego(event):
     draw.text((x, y), text, font=font, fill="white", stroke_width=1, stroke_fill="black")
     fname = "rikka.png"
     img.save(fname, "png")
-    await tbot.send_file(event.chat_id, file=fname, caption = f"Made by [Marin ✨](https://t.me/MarinKawaiiBot)")         
+    await tbot.send_file(event.chat_id, file=fname, caption = f"Made by [Shikimori ✨](https://t.me/micchon_shikimori_bot)")         
     await pesan.delete()
     if os.path.exists(fname):
             os.remove(fname)
  except Exception as e:
-    await event.reply(f'Error, Report @KaizenSupport)
+    await event.reply(f'Error, Report @KaizenSupport')
 
 
 file_help = os.path.basename(__file__)
