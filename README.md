@@ -1,5 +1,5 @@
-![Shikimori](https://telegra.ph/file/c40f4f6f39cfcef0c7040.jpg)
-# Shikimori
+![Rose Izumi](https://telegra.ph/file/c40f4f6f39cfcef0c7040.jpg)
+# Rose Izumi
 [![Open Source Love svg2](https://badges.frapsoft.com/os/v2/open-source.svg?v=103)](https://github.com/ellerbrock/open-source-badges/)!]
 
 
