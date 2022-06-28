@@ -228,8 +228,8 @@ def start(update: Update, context: CallbackContext):
             .format(escape_markdown(first_name), escape_markdown(chat_name), uptime), reply_markup=InlineKeyboardMarkup(
                 [
                  [
-                    InlineKeyboardButton(text="🚨Support Grp", url="https://t.me/tyranteyeeee"),
-                    InlineKeyboardButton(text="❗Updates", url="https://t.me/Shikimori_bot_Updates")
+                    InlineKeyboardButton(text="🚨sᴜᴘᴘᴏʀᴛ ɢʀᴏᴜᴘ", url="https://t.me/tyranteyeeee"),
+                    InlineKeyboardButton(text="ᴜᴘᴅᴀᴛᴇ", url="https://t.me/Shikimori_bot_Updates")
                  ]
                 ]
             ),
@@ -362,7 +362,7 @@ def Shikimori_about_callback(update, context):
     query = update.callback_query
     if query.data == "Shikimori_":
         query.message.edit_text(
-            text="๏ I'm *Shikimori*, a powerful group management bot built to help you manage your group easily."
+            text="๏ I'm *ɪᴢᴜɪ*, a powerful group management bot built to help you manage your group easily."
             "\n• I can restrict users."
             "\n• I can greet users with customizable welcome messages and even set a group's rules."
             "\n• I have an advanced anti-flood system."
@@ -376,7 +376,7 @@ def Shikimori_about_callback(update, context):
             reply_markup=InlineKeyboardMarkup(
                 [
                  [
-                    InlineKeyboardButton(text="Back", callback_data="Shikimori_back")
+                    InlineKeyboardButton(text="ʙᴀᴄᴋ", callback_data="Shikimori_back")
                  ]
                 ]
             ),
@@ -415,7 +415,7 @@ def Source_about_callback(update, context):
             reply_markup=InlineKeyboardMarkup(
                 [
                  [
-                    InlineKeyboardButton(text="Go Back", callback_data="Shikimori")
+                    InlineKeyboardButton(text="ɢᴏ ʙᴀᴄᴋ", callback_data="Shikimori")
                  ]
                 ]
             ),
@@ -448,7 +448,7 @@ def get_help(update: Update, context: CallbackContext):
                     [
                         [
                             InlineKeyboardButton(
-                                text="Help",
+                                text="ʜᴇʟᴘ",
                                 url="t.me/{}?start=ghelp_{}".format(
                                     context.bot.username, module
                                 ),
@@ -464,7 +464,7 @@ def get_help(update: Update, context: CallbackContext):
                 [
                     [
                         InlineKeyboardButton(
-                            text="Help",
+                            text="ʜᴇʟᴘ",
                             url="t.me/{}?start=help".format(context.bot.username),
                         )
                     ]
@@ -485,7 +485,7 @@ def get_help(update: Update, context: CallbackContext):
             chat.id,
             text,
             InlineKeyboardMarkup(
-                [[InlineKeyboardButton(text="Go Back", callback_data="help_back")]]
+                [[InlineKeyboardButton(text="ʙᴀᴄᴋ", callback_data="help_back")]]
             ),
         )
 
@@ -557,7 +557,7 @@ def settings_button(update: Update, context: CallbackContext):
                     [
                         [
                             InlineKeyboardButton(
-                                text="Go Back",
+                                text="ɢᴏ ʙᴀᴄᴋ",
                                 callback_data="stngs_back({})".format(chat_id),
                             )
                         ]
@@ -632,7 +632,7 @@ def get_settings(update: Update, context: CallbackContext):
                     [
                         [
                             InlineKeyboardButton(
-                                text="Settings",
+                                text="sᴇᴛᴛɪɴɢs",
                                 url="t.me/{}?start=stngs_{}".format(
                                     context.bot.username, chat.id
                                 ),
