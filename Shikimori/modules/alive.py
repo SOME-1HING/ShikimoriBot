@@ -15,13 +15,12 @@ PHOTO = "https://telegra.ph/file/c16d6967b48496237d5d5.jpg"
 async def awake(event):
   TEXT = f"**Hi [{event.sender.first_name}](tg://user?id={event.sender.id}), I'm Rose Izumi bot.** \n\n"
   TEXT += "⚪ **I'm Working Properly** \n\n"
-  TEXT += f"⚪ **My Owner : [【Skull】](https://t.me/iAmLiKu1)** \n\n"
-  TEXT += f"⚪ **My Dev : [【长工尺工丅口】](https://t.me/asta_est)** \n\n"
+  TEXT += f"⚪ **My Owner : [【❥ℭ𝐒 ‣ ᏂᎧᏇᏝ⚡//】](https://t.me/iAmLiKu1)** \n\n"
   TEXT += "**Thanks For Adding Me Here ❤️**"
   BUTTON = [[Button.url("Updates", "https://t.me/Crimz_Bots"), Button.url("Support", "https://t.me/Crimz_Bots")]]
   await tbot.send_file(event.chat_id, PHOTO, caption=TEXT,  buttons=BUTTON)
 
-__mod_name__ = "Alive ✨"
+__mod_name__ = "ᴀʟɪᴠᴇ ✨"
 __help__ = """
 *ALIVE*
  ❍ `/alive` :Check BOT status
