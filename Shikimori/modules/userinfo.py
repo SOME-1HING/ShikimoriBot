@@ -469,15 +469,7 @@ def stats(update, context):
             + "\n𝕭𝖔𝖙 𝖘𝖙𝖆𝖙𝖎𝖘𝖙𝖎𝖈𝖘:\n"
             + "\n".join([mod.__stats__() for mod in STATS]),
             parse_mode=ParseMode.MARKDOWN,
-            reply_markup=InlineKeyboardMarkup(
-                [
-                    [                  
-                        InlineKeyboardButton(
-                                text="Dev's Github Profile",
-                                url="github.com/SOME-1HING"),
-                    ]
-                ]
-            ),
+            
         )
     except BaseException:
         update.effective_message.reply_text(
