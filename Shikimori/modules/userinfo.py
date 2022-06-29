@@ -46,7 +46,7 @@ from Shikimori.modules.helper_funcs.chat_status import sudo_plus
 from Shikimori.modules.helper_funcs.extraction import extract_user
 from Shikimori import telethn
 
-SHIKI_IMG = "https://telegra.ph/file/fa1acd48ae767baa02e3f.jpg"
+SHIKI_IMG = "https://telegra.ph/file/e7136e6741bd73104ffae.jpg"
 
 def no_by_per(totalhp, percentage):
     """
@@ -315,10 +315,10 @@ def info(update: Update, context: CallbackContext):
 
     if user.id == OWNER_ID:
         text += "\n\nThis person is my 'Owner'."
-    elif user.id == 949365920:
+    elif user.id == 1915770303:
         text += "\n\nThis is my VC player assistant to play music."
         disaster_level_present = True
-    elif user.id == 2119580786:
+    elif user.id == 5105084757:
         text += "\n\nThis person is my 'Manager' and My 'Best Friend'."
         disaster_level_present = True
     elif user.id in DEV_USERS:
@@ -487,7 +487,7 @@ def stats(update, context):
                         "\n*Bot statistics*:\n"
                         + "\n".join(mod.__stats__() for mod in STATS)
                     )
-                    + f"\n\n✦ [Support](https://t.me/tyranteyeeee) | ✦ [Updates](https://t.me/Shikimori_bot_Updates)\n\n"
+                    + f"\n\n✦ [Support](https://t.me/KaizenSupport) | ✦ [Updates](https://t.me/Shikimori_bot_Updates)\n\n"
                 )
             ),
             parse_mode=ParseMode.MARKDOWN,
