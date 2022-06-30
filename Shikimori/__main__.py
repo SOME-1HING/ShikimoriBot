@@ -229,7 +229,7 @@ def start(update: Update, context: CallbackContext):
                 [
                  [
                     InlineKeyboardButton(text="🚨Support Grp", url="https://t.me/KaizenSupport"),
-                    InlineKeyboardButton(text="❗Updates", url="https://t.me/Kaizen_Network")
+                    InlineKeyboardButton(text="My Home", url="https://t.me/Kaizen_Network")
                  ]
                 ]
             ),
