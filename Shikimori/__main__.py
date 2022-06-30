@@ -223,7 +223,7 @@ def start(update: Update, context: CallbackContext):
         chat_id = update.effective_chat.id
         first_name = update.effective_user.first_name
         chat_name = dispatcher.bot.getChat(chat_id).title
-        update.effective_message.reply_video(
+        update.effective_message.reply_photo(
             ShikimoriSTART, caption= "*Hey {}, I'm here for you at {} since :* `{}`\n"
             .format(escape_markdown(first_name), escape_markdown(chat_name), uptime), reply_markup=InlineKeyboardMarkup(
                 [
