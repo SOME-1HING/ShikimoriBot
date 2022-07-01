@@ -1,11 +1,34 @@
 ![Shikimori](https://telegra.ph/file/c40f4f6f39cfcef0c7040.jpg)
-# Shikimori
-[![Open Source Love svg2](https://badges.frapsoft.com/os/v2/open-source.svg?v=103)](https://github.com/ellerbrock/open-source-badges/)!]
 
+<h2 align="center">
+    ──「 SHIKIMORI IS A MODULAR BOT WITH ANIME THEME 」──
+</h2>
 
-A modular Telegram Group Management bot, can be found on telegram as [Shikimori](https://t.me/tyranteyeeee).
+<p align="center">
+  <a href="https://github.com/SOME-1HING/ShikimoriBot/blob/master/LICENSE"> <img src="https://img.shields.io/badge/License-GPLv3-blueviolet?style=for-the-badge" alt="License" /> </a>
+  <a href="https://makeapullrequest.com"> <img src="https://img.shields.io/badge/PRs-Welcome-yellow?style=for-the-badge" alt="PRs" /></a></br>
+  <a href="https://www.python.org/"> <img src="https://img.shields.io/badge/Made%20With-Python-orange?style=for-the-badge&logo=python" alt="Python" /> </a>
+  <a href="https://github.com/SOME-1HING/ShikimoriBot"> <img src="https://img.shields.io/badge/Maintained-Yes-lightgrey?style=for-the-badge" alt="Maintenance" /> </a>
+</p>
 
-The Support group can be reached out to at [Support](https://t.me/micchon_shikimori_bot), where you can ask for help about Shikimori Bot, discover/request new features, report bugs, and stay in the loop whenever a new update is available. 
+<h2 align="center">
+    ──「 SUPPORT 」──
+</h2>
+
+<p align="center">
+<a href= "https://t.me/micchon_shikimori_bot"> <img src="https://img.shields.io/badge/Shikimori-Bot-green?style=for-the-badge&logo=telegram" alt=Yor_Forger on Telegram" /> </a>
+<a href= "https://t.me/tyranteyeeee"> <img src="https://img.shields.io/badge/Support-Chat-green?style=for-the-badge&logo=telegram" alt="Support Chat" /> </a>
+<a href="https://t.me/SOME1_HING"> <img src="https://img.shields.io/badge/SOME1HING-Channel-green?style=for-the-badge&logo=telegram" alt="Update Channel" /> </a>
+</p>
+
+<h2 align="center">
+    ──「 CREDIT 」──
+</h2>
+
+<p align="center">
+<a href="https://github.com/SOME-1HING"> <img src="https://img.shields.io/badge/SOME1HING-Github-magenta?style=for-the-badge&logo=github" alt="SOME-1HING Github" /> </a>
+<a href="https://github.com/asadali32117"> <img src="https://img.shields.io/badge/asadali32117-Github-magenta?style=for-the-badge&logo=github" alt="Ryu120 Github" /> </a>
+</p>
 
 ## How to setup/deploy.
 
@@ -22,7 +45,11 @@ REMEMBER: Turn on worker dyno (Don't worry It's free :D) & Webhook
 Now send the bot /start, If it doesn't respond go to https://dashboard.heroku.com/apps/(app-name)/settings and remove webhook and port.
 ```
 
-  [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/SOME-1HING/ShikimoriBot.git)
+  <h2 align="center">
+    ──「 DEPLOY ON HEROKU 」──
+</h2>
+
+<p align="center"><a href="https://heroku.com/deploy?template=https://github.com/SOME-1HING/ShikimoriBot"> <img src="https://img.shields.io/badge/Deploy%20To%20Heroku-purple?style=for-the-badge&logo=heroku" width="220" height="38.45"/></a></p>
 
 </details>  
 <details>
@@ -162,8 +189,5 @@ Note: the restart bat requires that User account control be disabled.
 ## How to setup on Heroku 
 For starters click on this button 
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/asadali32117/ShikimoriIshigamiPTB.git) 
+<p align="center"><a href="https://heroku.com/deploy?template=https://github.com/SOME-1HING/ShikimoriBot"> <img src="https://img.shields.io/badge/Deploy%20To%20Heroku-purple?style=for-the-badge&logo=heroku" width="220" height="38.45"/></a></p>
 
-
-## Credits
-Check commit history for credits.
