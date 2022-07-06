@@ -5,7 +5,6 @@ import importlib
 import time
 import re
 import sys
-from tkinter.tix import TEXT
 import traceback
 import Shikimori.modules.sql.users_sql as sql
 from sys import argv
