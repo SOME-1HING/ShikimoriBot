@@ -276,6 +276,11 @@
          "description": "Paste link of your media(img, video or gif) that you want to show in /alive. Otherwise put None.",
          "required": false,
          "value": "https://telegra.ph/file/2b04f7812f22b983f8a10.mp4"
+      },
+      "AI_API_KEY": {
+         "description": "AI api key, get from @Kukichatbot",
+         "required": false,
+         "value": ""
       }
    }
 }
