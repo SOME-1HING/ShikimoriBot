@@ -1,5 +1,5 @@
 {
-      "name": "Emiko Robot",
+      "name": "Shikimori Bot",
       "description": "A Powerful  Telegram group management bot with anime theme.",
       "keywords": [
          "telegram",
@@ -9,8 +9,8 @@
          "naorobot"
       ],
     
-   "logo":    "https://telegra.ph/file/35e56ba7eace7332356ad.jpg",  
-   "repository": "https://github.com/kennedy-ex/https://github.com/kennedy-ex/EmikoRobot",
+   "logo":    "https://telegra.ph/file/05fabeb65cd4c1a80c079.jpg",  
+   "repository": "https://github.com/SOME-1HING/ShikimoriBot",
    "buildpacks": [
     {
       "url": "https://github.com/heroku/heroku-buildpack-python"
