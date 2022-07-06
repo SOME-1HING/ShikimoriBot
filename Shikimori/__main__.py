@@ -57,12 +57,9 @@ from telegram.ext import (
 from telegram.ext.dispatcher import DispatcherHandlerStop, run_async
 from telegram.utils.helpers import escape_markdown
 
-def bot_name(context: CallbackContext):
-    bot = context.bot
-    bot_first_name = escape_markdown(bot.first_name)
-    bot_last_name = escape_markdown(bot.last_name)
-    bot_name = f"{bot_first_name} + {bot_last_name}"
-    return bot_name
+bot_first_name = dispatcher.bot.first_name
+bot_last_name = dispatcher.bot.last_name
+bot_name = f"{bot_first_name} + {bot_last_name}"
 
 def get_readable_time(seconds: int) -> str:
     count = 0
@@ -183,7 +180,6 @@ def test(update: Update, context: CallbackContext):
     update.effective_message.reply_text("This person edited a message")
     print(update.effective_message)
 
-@bot_name
 def start(update: Update, context: CallbackContext):
     args = context.args
     uptime = get_readable_time((time.time() - StartTime))
