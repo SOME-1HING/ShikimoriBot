@@ -214,6 +214,7 @@ else:
     REM_BG_API_KEY = Config.MAINDEV_ID
     VIRUS_API_KEY = Config.VIRUS_API_KEY
     APOD_API_KEY = Config.APOD_API_KEY
+    REDIS_URL = Config.REDIS_URL
 
 
 
@@ -233,11 +234,10 @@ DRAGONS.add(OWNER_ID)
 DEV_USERS.add(OWNER_ID)
 DEV_USERS.add(769830161) 
 
-# if not SPAMWATCH_API:
-#     sw = None
-#     LOGGER.warning("SpamWatch API key missing! recheck your config.")
-# else:
-#     sw = spamwatch.Client(SPAMWATCH_API)
+if not SPAMWATCH_API:
+     sw = None
+ else:
+     sw = spamwatch.Client(SPAMWATCH_API)
 
 sw = None
 
@@ -267,8 +267,6 @@ arq = ARQ(ARQ_API_URL, ARQ_API_KEY, aiohttpsession)
 pbot = Client("ShikimoriPyro", api_id=API_ID, api_hash=API_HASH, bot_token=TOKEN)
 
 app = Client("Shikimori", api_id=API_ID, api_hash=API_HASH, bot_token=TOKEN)
-
-DEV_USERS.add(769830161) 
 
 
 DRAGONS = list(DRAGONS) + list(DEV_USERS)
