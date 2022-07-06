@@ -5,6 +5,7 @@ import importlib
 import time
 import re
 import sys
+from tkinter.tix import TEXT
 import traceback
 import Shikimori.modules.sql.users_sql as sql
 from sys import argv
@@ -57,9 +58,7 @@ from telegram.ext import (
 from telegram.ext.dispatcher import DispatcherHandlerStop, run_async
 from telegram.utils.helpers import escape_markdown
 
-bot_first_name = dispatcher.bot.first_name
-bot_last_name = dispatcher.bot.last_name
-bot_name = f"{bot_first_name} + {bot_last_name}"
+bot_name = f"{dispatcher.bot.first_name}"
 
 def get_readable_time(seconds: int) -> str:
     count = 0
@@ -86,10 +85,8 @@ def get_readable_time(seconds: int) -> str:
     return ping_time
 
 
-PM_START_TEXT = """
-Hello *{}*! Nice to meet you!
-
-I am *{}* , a group management bot based on the anime *{ANIME_NAME}*![ ]({START_MEDIA})
+PM_START_TEXT = f"""
+\n\nI am *{bot_name}* , a group management bot based on the anime *{ANIME_NAME}*![ ]({START_MEDIA})
 
 *Click on the Commands Button below to go through my commands.*
 """
@@ -213,11 +210,11 @@ def start(update: Update, context: CallbackContext):
 
         else:
             first_name = update.effective_user.first_name
+            hmm = "Hello *{}*! Nice to meet you!".format(escape_markdown(first_name))
+            TEXT = hmm + PM_START_TEXT
+
             update.effective_message.reply_text(
-                PM_START_TEXT.format(
-                    escape_markdown(first_name),
-                    bot_name,
-                    ANIME_NAME),                        
+                TEXT,                        
                 reply_markup=InlineKeyboardMarkup(buttons),
                 parse_mode=ParseMode.MARKDOWN,
                 timeout=60,
@@ -387,10 +384,11 @@ def Shikimori_about_callback(update, context):
     elif query.data == "Shikimori_back":
         first_name = update.effective_user.first_name
         uptime = get_readable_time((time.time() - StartTime))
+        hmm = "Hello *{}*! Nice to meet you!".format(escape_markdown(first_name))
+        TEXT = hmm + PM_START_TEXT
+     
         query.message.edit_text(
-                PM_START_TEXT.format(
-                    escape_markdown(first_name),
-                    bot_name),
+                TEXT,
                 reply_markup=InlineKeyboardMarkup(buttons),
                 parse_mode=ParseMode.MARKDOWN,
                 timeout=60,
