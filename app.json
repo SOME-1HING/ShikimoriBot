@@ -114,7 +114,7 @@
          "value": "-xyz"
      }, 
 
-      "API_OPENWEATHER": {
+      "API_WEATHER": {
         "description": "Get your own APPID from https://api.openweathermap.org/data/2.5/weather",
         "value": "",
         "required": false
@@ -266,6 +266,11 @@
          "description": "Leave it as it is, or if you have your own update channel, put channel username without @.",
          "required": true,
          "value": "Shikimori_bot_Updates"
+      },
+      "APOD_API_KEY": {
+         "description": "Get yours from https://api.nasa.gov/",
+         "required": false,
+         "value": ""
       },
       "ALIVE_MEDIA": {
          "description": "Paste link of your media(img, video or gif) that you want to show in /alive. Otherwise put None.",
