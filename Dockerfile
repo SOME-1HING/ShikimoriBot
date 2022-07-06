@@ -1,6 +1,6 @@
 
 
-FROM python:3.10.1-buster
+FROM python:3.10.5-buster
 
 WORKDIR /root/Shikimori
 
