@@ -1,25 +1,13 @@
 
 import html
-import re
-import os
 import requests
-import importlib
-import datetime
-import platform
-import time
-from typing import List
 
-from psutil import cpu_percent, virtual_memory, disk_usage, boot_time
-from platform import python_version
 from telethon.tl.functions.channels import GetFullChannelRequest
 from telethon.tl.types import ChannelParticipantsAdmins
 from telethon import events
-from pyrogram import filters
 
-from telegram import MAX_MESSAGE_LENGTH, ParseMode, Update, MessageEntity, __version__ as ptbver, InlineKeyboardButton, InlineKeyboardMarkup
-from telegram.ext import (CallbackContext, CallbackQueryHandler, CommandHandler,
-                          Filters, MessageHandler)
-from telegram.ext.dispatcher import run_async
+from telegram import MAX_MESSAGE_LENGTH, ParseMode, Update, MessageEntity, InlineKeyboardButton, InlineKeyboardMarkup
+from telegram.ext import (CallbackContext, CommandHandler)
 from telegram.error import BadRequest
 from telegram.utils.helpers import escape_markdown, mention_html
     
@@ -28,14 +16,10 @@ from Shikimori import (
     OWNER_ID,
     DRAGONS,
     DEMONS,
-    SUPPORT_CHAT,
-    UPDATE_CHANNEL,
     TIGERS,
-    UPDATE_CHANNEL,
     WOLVES,
     dispatcher,
     sw,
-    StartTime,
 )
 from Shikimori.__main__ import STATS, TOKEN, USER_INFO
 from Shikimori.modules.sql import SESSION
@@ -47,8 +31,6 @@ from Shikimori.modules.sql.users_sql import get_user_num_chats
 from Shikimori.modules.helper_funcs.chat_status import sudo_plus
 from Shikimori.modules.helper_funcs.extraction import extract_user
 from Shikimori import telethn
-
-SHIKI_IMG = "https://telegra.ph/file/fa1acd48ae767baa02e3f.jpg"
 
 def no_by_per(totalhp, percentage):
     """
@@ -435,67 +417,6 @@ def set_about_me(update: Update, context: CallbackContext):
                     len(info[1]),
                 ),
             )
-
-@sudo_plus
-def stats(update, context):
-    uptime = datetime.datetime.fromtimestamp(boot_time()).strftime("%Y-%m-%d %H:%M:%S")
-    botuptime = get_readable_time((time.time() - StartTime))
-    status = "*╒═══「 System statistics 」*\n\n"
-    status += "*➢ System Start time:* " + str(uptime) + "\n"
-    uname = platform.uname()
-    status += "*➢ System:* " + str(uname.system) + "\n"
-    status += "*➢ Node name:* " + escape_markdown(str(uname.node)) + "\n"
-    status += "*➢ Release:* " + escape_markdown(str(uname.release)) + "\n"
-    status += "*➢ Machine:* " + escape_markdown(str(uname.machine)) + "\n"
-    mem = virtual_memory()
-    cpu = cpu_percent()
-    disk = disk_usage("/")
-    status += "*➢ CPU:* " + str(cpu) + " %\n"
-    status += "*➢ RAM:* " + str(mem[2]) + " %\n"
-    status += "*➢ Storage:* " + str(disk[3]) + " %\n\n"
-    status += "*➢ Python Version:* " + python_version() + "\n"
-    status += "*➢ python-Telegram-Bot:* " + str(ptbver) + "\n"
-    status += "*➢ Uptime:* " + str(botuptime) + "\n"
-    try:
-        update.effective_message.reply_photo(
-            SHIKI_IMG,
-            status
-            + "\n𝕭𝖔𝖙 𝖘𝖙𝖆𝖙𝖎𝖘𝖙𝖎𝖈𝖘:\n"
-            + "\n".join([mod.__stats__() for mod in STATS]),
-            parse_mode=ParseMode.MARKDOWN,
-            reply_markup=InlineKeyboardMarkup(
-                [
-                    [                  
-                        InlineKeyboardButton(
-                                text="REPO",
-                                url="https://github.com/SOME-1HING/ShikimoriBot"),
-                    ]
-                ]
-            ),
-        )
-    except BaseException:
-        update.effective_message.reply_text(
-            (
-                (
-                    (
-                        "\n*Bot statistics*:\n"
-                        + "\n".join(mod.__stats__() for mod in STATS)
-                    )
-                    + f"\n\n✦ [Support](https://t.me/{SUPPORT_CHAT}) | ✦ [Updates](https://t.me/{UPDATE_CHANNEL})\n\n"
-                )
-            ),
-            parse_mode=ParseMode.MARKDOWN,
-            reply_markup=InlineKeyboardMarkup(
-                [
-                  [                  
-                       InlineKeyboardButton(
-                                text="REPO",
-                                url="https://github.com/SOME-1HING/ShikimoriBot"),
-                     ] 
-                ]
-            ),
-        )
-        
         
 def about_bio(update: Update, context: CallbackContext):
     bot, args = context.bot, context.args
@@ -600,16 +521,12 @@ Examples:
 
 SET_BIO_HANDLER = DisableAbleCommandHandler("setbio", set_about_bio, run_async=True)
 GET_BIO_HANDLER = DisableAbleCommandHandler("bio", about_bio, run_async=True)
-
-STATS_HANDLER = CommandHandler(["stats", "statistics"], stats, run_async=True)
 ID_HANDLER = DisableAbleCommandHandler("id", get_id, run_async=True)
 GIFID_HANDLER = DisableAbleCommandHandler("gifid", gifid, run_async=True)
 INFO_HANDLER = DisableAbleCommandHandler("info", info, run_async=True)
-
 SET_ABOUT_HANDLER = DisableAbleCommandHandler("setme", set_about_me, run_async=True)
 GET_ABOUT_HANDLER = DisableAbleCommandHandler("me", about_me, run_async=True)
 
-dispatcher.add_handler(STATS_HANDLER)
 dispatcher.add_handler(ID_HANDLER)
 dispatcher.add_handler(GIFID_HANDLER)
 dispatcher.add_handler(INFO_HANDLER)
@@ -627,6 +544,5 @@ __handlers__ = [
     SET_BIO_HANDLER,
     GET_BIO_HANDLER,
     SET_ABOUT_HANDLER,
-    GET_ABOUT_HANDLER,
-    STATS_HANDLER,
+    GET_ABOUT_HANDLER
 ]

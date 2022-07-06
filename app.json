@@ -281,6 +281,11 @@
          "description": "AI api key, get from @Kukichatbot",
          "required": false,
          "value": ""
+      },
+      "STATS_IMG": {
+         "description": "Paste image link for /stats. Otherwise keep it blank.",
+         "required": false,
+         "value": "https://telegra.ph/file/fa1acd48ae767baa02e3f.jpg"
       }
    }
 }

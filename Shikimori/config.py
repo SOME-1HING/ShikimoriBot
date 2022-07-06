@@ -89,6 +89,7 @@ class Config(object):
     UPDATE_CHANNEL = "Shikimori_bot_Updates"
     ALIVE_MEDIA = "https://telegra.ph/file/2b04f7812f22b983f8a10.mp4"
     BOT_ID = 5169508699
+    STATS_IMG = "awoo"
 
 class Production(Config):
     LOGGER = True
