@@ -361,7 +361,6 @@ def help_button(update, context):
     except BadRequest:
         pass
 
-@bot_name
 def Shikimori_about_callback(update, context):
     query = update.callback_query
     if query.data == "Shikimori_":
