@@ -211,10 +211,10 @@ def start(update: Update, context: CallbackContext):
         else:
             first_name = update.effective_user.first_name
             hmm = "Hello *{}*! Nice to meet you!".format(escape_markdown(first_name))
-            TEXT = hmm + PM_START_TEXT
+            HMM = hmm + PM_START_TEXT
 
             update.effective_message.reply_text(
-                TEXT,                        
+                HMM,                        
                 reply_markup=InlineKeyboardMarkup(buttons),
                 parse_mode=ParseMode.MARKDOWN,
                 timeout=60,
@@ -385,10 +385,10 @@ def Shikimori_about_callback(update, context):
         first_name = update.effective_user.first_name
         uptime = get_readable_time((time.time() - StartTime))
         hmm = "Hello *{}*! Nice to meet you!".format(escape_markdown(first_name))
-        TEXT = hmm + PM_START_TEXT
+        HMM = hmm + PM_START_TEXT
      
         query.message.edit_text(
-                TEXT,
+                HMM,
                 reply_markup=InlineKeyboardMarkup(buttons),
                 parse_mode=ParseMode.MARKDOWN,
                 timeout=60,
