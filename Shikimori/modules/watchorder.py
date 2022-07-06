@@ -4,7 +4,7 @@ from Shikimori import BOT_USERNAME, pbot as pgram
 from pyrogram import filters
 from bs4 import BeautifulSoup
 
-from Shikimori BOT_USERNAME
+from Shikimori import BOT_USERNAME
 
 @pgram.on_message(filters.command("watchorder", f"watchorder@{BOT_USERNAME}"))
 def watchorderx(_,message):
