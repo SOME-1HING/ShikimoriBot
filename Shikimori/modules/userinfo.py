@@ -33,7 +33,6 @@ from Shikimori import (
     TIGERS,
     UPDATE_CHANNEL,
     WOLVES,
-    INFOPIC,
     dispatcher,
     sw,
     StartTime,
