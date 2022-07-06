@@ -7,6 +7,7 @@ import html, os
 from countryinfo import CountryInfo
 from Shikimori import telethn as borg
 from Shikimori.events import register
+from Shikimori.__main__ import bot_name
 
 
 @register(pattern="^/country (.*)")
@@ -101,7 +102,7 @@ Time Zones:- {tom}
 Top Level Domain:- {lanester}
 wikipedia:- {wiki}</b>
 
-Gathered By Shikimori Robot ✨.</b>
+Gathered By {bot_name} ✨.</b>
 """
 
     await borg.send_message(

@@ -1,7 +1,7 @@
 from telegram import InlineKeyboardButton
 from Shikimori.modules.animedev import client as animedev_client, exceptions
 from Shikimori.events import register
-from Shikimori import telethn
+from Shikimori import telethn, SUPPORT_CHAT
 from telethon import Button
 
 
@@ -18,7 +18,7 @@ async def animelink(event):
         await event.reply('Anime not found.')
         return
     except Exception as e:
-        await event.reply(f'*Error*: Contact @tyranteyeeee.\nERROR: {e}')
+        await event.reply(f'*Error*: Contact @{SUPPORT_CHAT}.\nERROR: {e}')
         return
     text = f'''
 <b>Anime Title:</b> <code>{anime['AnimeTitle']}</code>

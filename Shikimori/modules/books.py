@@ -9,7 +9,7 @@ from bs4 import BeautifulSoup
 from telethon import events
 
 from Shikimori import telethn as tbot
-
+from Shikimori import BOT_USERNAME
 
 @tbot.on(events.NewMessage(pattern="^/book (.*)"))
 async def _(event):
@@ -48,7 +48,7 @@ async def _(event):
                 f.write("\n" + title)
                 f.write("\nBook link:- " + link + "\n\n")
 
-        f.write("By @micchon_shikimori_bot")
+        f.write(f"By @{BOT_USERNAME}")
         f.close()
 
         await tbot.send_file(

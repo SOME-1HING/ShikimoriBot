@@ -47,9 +47,6 @@ if sys.version_info[0] < 3 or sys.version_info[1] < 6:
         "You MUST have a python version of at least 3.6! Multiple features depend on this. Bot quitting."
     )
     quit(1)
- 
-BOT_ID = 5169508699
-BOT_USERNAME = "micchon_shikimori_bot"
 
 ENV = bool(os.environ.get("ENV", False))
 
@@ -128,9 +125,12 @@ if ENV:
     REM_BG_API_KEY = os.environ.get("REM_BG_API_KEY", None)
     VIRUS_API_KEY = os.environ.get("VIRUS_API_KEY", None)
     APOD_API_KEY = os.environ.get("APOD_API_KEY", None)
-    
-
-
+    ANIME_NAME = os.environ.get("ANIME_NAME", "Shikimori's Not Just a Cutie")
+    START_MEDIA = os.environ.get("START_MEDIA", "https://telegra.ph/file/9235d57807362b4e227a3.mp4")
+    BOT_USERNAME = os.environ.get("BOT_USERNAME", "micchon_shikimori_bot")
+    UPDATE_CHANNEL = os.environ.get("UPDATE_CHANNEL", "Shikimori_bot_Updates")
+    ALIVE_MEDIA = os.environ.get("ALIVE_MEDIA", "https://telegra.ph/file/2b04f7812f22b983f8a10.mp4")
+    BOT_ID = os.environ.get("BOT_ID", "5169508699")
     
     try:
         WHITELIST_CHATS = {int(x) for x in os.environ.get('WHITELIST_CHATS', "").split()}
@@ -215,8 +215,12 @@ else:
     VIRUS_API_KEY = Config.VIRUS_API_KEY
     APOD_API_KEY = Config.APOD_API_KEY
     REDIS_URL = Config.REDIS_URL
-
-
+    ANIME_NAME = Config.ANIME_NAME
+    START_MEDIA = Config.START_MEDIA
+    BOT_USERNAME = Config.BOT_USERNAME
+    UPDATE_CHANNEL = Config.UPDATE_CHANNEL
+    ALIVE_MEDIA = Config.ALIVE_MEDIA
+    BOT_ID = Config.BOT_ID
 
     try:
         WHITELIST_CHATS = {int(x) for x in os.environ.get('WHITELIST_CHATS', "").split()}
@@ -287,8 +291,3 @@ tg.CommandHandler = CustomCommandHandler
 tg.MessageHandler = CustomMessageHandler
 
 
-# if "@NekoXRobot" not in PM_START_TEXT:
-#     LOGGER.critical(f"{OWNER_ID} Is Cheating. Add `Thanks To @NekoXRobot For Repo` In PM_START_TEXT To Fix This")
-#     sys.exit(1)
-# else:
-#     LOGGER.info("Your Bot Is Ready")

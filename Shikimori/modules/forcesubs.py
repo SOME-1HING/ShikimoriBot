@@ -13,6 +13,7 @@ from pyrogram.types import ChatPermissions, InlineKeyboardButton, InlineKeyboard
 from Shikimori import DRAGONS as SUDO_USERS
 from Shikimori import pbot
 from Shikimori.modules.sql import forceSubscribe_sql as sql
+from Shikimori.__main__ import bot_name
 
 logging.basicConfig(level=logging.INFO)
 
@@ -112,7 +113,7 @@ def _check_member(client, message):
                     )
                 except ChatAdminRequired:
                     sent_message.edit_text(
-                        "😕 **Shikimori is not admin here..**\n__Give me ban permissions and retry.. \n#Ending FSub...__"
+                        f"😕 **{bot_name} is not admin here..**\n__Give me ban permissions and retry.. \n#Ending FSub...__"
                     )
 
             except ChatAdminRequired:
@@ -183,7 +184,7 @@ def config(client, message):
 __help__ = """
 *Force Subscribe:*
 
-❂ Shikimori can mute members who are not subscribed your channel until they subscribe
+❂ I can mute members who are not subscribed your channel until they subscribe
 ❂ When enabled I will mute unsubscribed members and show them a unmute button. When they pressed the button I will unmute them
 ❂*Setup*
 *Only creator*

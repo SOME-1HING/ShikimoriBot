@@ -20,7 +20,7 @@ from Shikimori.modules.helper_funcs.filters import CustomFilters
 from Shikimori.modules.helper_funcs.chat_status import user_admin, user_admin_no_reply
 from Shikimori import  dispatcher, updater, SUPPORT_CHAT
 from Shikimori.modules.log_channel import gloggable
-
+from Shikimori.__main__ import bot_name
 
 @user_admin_no_reply
 @gloggable
@@ -41,7 +41,7 @@ def kukirm(update: Update, context: CallbackContext) -> str:
             )
         else:
             update.effective_message.edit_text(
-                "Shikimori Chatbot disable by {}.".format(mention_html(user.id, user.first_name)),
+                f"{bot_name} Chatbot disable by {}.".format(mention_html(user.id, user.first_name)),
                 parse_mode=ParseMode.HTML,
             )
 
@@ -67,7 +67,7 @@ def kukiadd(update: Update, context: CallbackContext) -> str:
             )
         else:
             update.effective_message.edit_text(
-                "Shikimori Chatbot enable by {}.".format(mention_html(user.id, user.first_name)),
+                f"{bot_name} Chatbot enable by {}.".format(mention_html(user.id, user.first_name)),
                 parse_mode=ParseMode.HTML,
             )
 

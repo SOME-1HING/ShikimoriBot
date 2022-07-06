@@ -7,9 +7,10 @@ from telethon import __version__ as tlhver
 from pyrogram import __version__ as pyrover
 from Shikimori.events import register
 from Shikimori import telethn as tbot
+from Shikimori import ALIVE_MEDIA, UPDATE_CHANNEL, SUPPORT_CHAT
 
 
-PHOTO = "https://telegra.ph/file/2b04f7812f22b983f8a10.mp4"
+PHOTO = ALIVE_MEDIA
 
 @register(pattern=("/alive"))
 async def awake(event):
@@ -18,7 +19,7 @@ async def awake(event):
   TEXT += f"⚪ **My Owner : [【V๏ɪ፝֟𝔡】](https://t.me/VoidAryan)** \n\n"
   TEXT += f"⚪ **I am Powered by : [【V๏ɪ፝֟𝔡】»Network«](https://t.me/VoidxNetwork)** \n\n"
   TEXT += "**Thanks For Adding Me Here ❤️**"
-  BUTTON = [[Button.url("Updates", "https://t.me/Shikimori_bot_Updates"), Button.url("Support", "https://t.me/tyranteyeeee")]]
+  BUTTON = [[Button.url("Updates", f"https://t.me/{UPDATE_CHANNEL}"), Button.url("Support", f"https://t.me/{SUPPORT_CHAT}")]]
   await tbot.send_file(event.chat_id, PHOTO, caption=TEXT,  buttons=BUTTON)
 
 __mod_name__ = "Alive ✨"

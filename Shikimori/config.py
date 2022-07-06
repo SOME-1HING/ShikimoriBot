@@ -2,7 +2,7 @@
 import json
 import os
 
-from Shikimori import HEROKU_API_KEY, HEROKU_APP_NAME, SS_TOKEN, SS_USERNAME
+from Shikimori import HEROKU_API_KEY, HEROKU_APP_NAME, REDIS_URL, SS_TOKEN, SS_USERNAME
 
 
 def get_user_list(config, key):
@@ -20,8 +20,8 @@ class Config(object):
     API_HASH = "awoo"
     TOKEN = "BOT_TOKEN"  # This var used to be API_KEY but it is now TOKEN, adjust accordingly.
     OWNER_ID = 1606221784  # If you dont know, run the bot and do /id in your private chat with it, also an integer
-    OWNER_USERNAME = "excrybaby"
-    SUPPORT_CHAT = "emikosupport"  # Your own group for support, do not add the @
+    OWNER_USERNAME = "SOME1HING"
+    SUPPORT_CHAT = "tyranteyeeee"  # Your own group for support, do not add the @
     JOIN_LOGGER = (
         -1001432609692
     )  # Prints any new group the bot is added to, prints just the name and ID.
@@ -83,7 +83,13 @@ class Config(object):
     )
     ARQ_API = "awoo"
     APOD_API_KEY = "awoo"
-
+    REDIS_URL = "awoo"
+    ANIME_NAME = "Shikimori's Not Just a Cutie"
+    START_MEDIA = "https://telegra.ph/file/9235d57807362b4e227a3.mp4"
+    BOT_USERNAME = "micchon_shikimori_bot"
+    UPDATE_CHANNEL = "Shikimori_bot_Updates"
+    ALIVE_MEDIA = "https://telegra.ph/file/2b04f7812f22b983f8a10.mp4"
+    BOT_ID = 5169508699
 
 class Production(Config):
     LOGGER = True

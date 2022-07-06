@@ -67,7 +67,8 @@
 
       "BOT_ID": {
          "description": "to get your bot_id using other bot or userbot",
-         "value": ""
+         "value": "5169508699",
+         "required": true
       },
 
       "OWNER_USERNAME": {
@@ -250,6 +251,26 @@
          "description": "Paste your redis url in format redis://<username of admin role>:<password of admin role>@<endoint url>/<database name>",
          "required": true,
          "value": "redis://SOME1HING:some1hing123@redis-11054.c9.us-east-1-4.ec2.cloud.redislabs.com:11054/shikimori-db"
-      }  
+      },  
+      "ANIME_NAME": {
+         "description": "If your bot is based on some anime, type the name of anime. Otherwise, manually edit PM_START_TEXT in main.py",
+         "required": false,
+         "value": "Shikimori's Not Just a Cutie"
+      },
+      "START_MEDIA": {
+         "description": "Paste link of your media(img, video or gif) that you want to show in /start. Otherwise put None.",
+         "required": false,
+         "value": "https://telegra.ph/file/9235d57807362b4e227a3.mp4"
+      },
+      "UPDATE_CHANNEL": {
+         "description": "Leave it as it is, or if you have your own update channel, put channel username without @.",
+         "required": true,
+         "value": "Shikimori_bot_Updates"
+      },
+      "ALIVE_MEDIA": {
+         "description": "Paste link of your media(img, video or gif) that you want to show in /alive. Otherwise put None.",
+         "required": false,
+         "value": "https://telegra.ph/file/2b04f7812f22b983f8a10.mp4"
+      }
    }
 }

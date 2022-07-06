@@ -6,6 +6,7 @@ import aiofiles
 import aiohttp
 from pyrogram import filters
 
+from Shikimori.__main__ import bot_name
 from Shikimori import pbot as LYCIA
 
 
@@ -56,8 +57,8 @@ async def Lycia(_, message):
 
 
 
-__help__ = """
- • `/voicebot` <msg> : Shikimori replies to your chat.
+__help__ = f"""
+ • `/voicebot` <msg> : {bot_name} replies to your chat.
 
  Made By @SimpleBoy787
 """

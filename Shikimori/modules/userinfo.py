@@ -28,7 +28,10 @@ from Shikimori import (
     OWNER_ID,
     DRAGONS,
     DEMONS,
+    SUPPORT_CHAT,
+    UPDATE_CHANNEL,
     TIGERS,
+    UPDATE_CHANNEL,
     WOLVES,
     INFOPIC,
     dispatcher,
@@ -487,7 +490,7 @@ def stats(update, context):
                         "\n*Bot statistics*:\n"
                         + "\n".join(mod.__stats__() for mod in STATS)
                     )
-                    + f"\n\n✦ [Support](https://t.me/tyranteyeeee) | ✦ [Updates](https://t.me/Shikimori_bot_Updates)\n\n"
+                    + f"\n\n✦ [Support](https://t.me/{SUPPORT_CHAT}) | ✦ [Updates](https://t.me/{UPDATE_CHANNEL})\n\n"
                 )
             ),
             parse_mode=ParseMode.MARKDOWN,

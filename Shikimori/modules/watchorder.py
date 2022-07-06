@@ -1,10 +1,12 @@
 import requests
 
-from Shikimori import pbot as pgram
+from Shikimori import BOT_USERNAME, pbot as pgram
 from pyrogram import filters
 from bs4 import BeautifulSoup
 
-@pgram.on_message(filters.command("watchorder", f"watchorder@micchon_shikimori_bot"))
+from Shikimori BOT_USERNAME
+
+@pgram.on_message(filters.command("watchorder", f"watchorder@{BOT_USERNAME}"))
 def watchorderx(_,message):
 
 	anime = message.text.replace(message.text.split(' ')[0], '')

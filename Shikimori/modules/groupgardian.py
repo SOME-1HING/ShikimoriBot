@@ -428,7 +428,7 @@ async def del_profanity(event):
  
 __help__ = """
 *Group Guardian:*
-✪ Shikimori can protect your group from NSFW senders, Slag word users and also can force members to use English
+✪ I can protect your group from NSFW senders, Slag word users and also can force members to use English
  
 *Commmands*
  - `/nsfwguardian` <i>on/off</i> - Enable|Disable Porn cleaning

@@ -1,4 +1,4 @@
-from Shikimori.events import register
+from Shikimori.events import bot, register
 from Shikimori import MAINDEV_ID, OWNER_ID
 from Shikimori import telethn as tbot
 import os 
@@ -10,6 +10,7 @@ import io
 import glob
 import time
 from telethon.tl.types import InputMessagesFilterPhotos
+from Shikimori.__main__ import bot_name, BOT_USERNAME, SUPPORT_CHAT
 
 
 FONT_FILE_TO_USE = "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"
@@ -55,7 +56,7 @@ async def lego(event):
     if os.path.exists(fname2):
             os.remove(fname2)
  except Exception as e:
-   await event.reply(f'Error Go to Help From  @tyranteyeeee, {e}')
+   await event.reply(f'Error Go to Help From  @{SUPPORT_CHAT}, {e}')
 
 
 
@@ -94,7 +95,7 @@ async def lego(event):
     if os.path.exists(fname2):
             os.remove(fname2)
  except Exception as e:
-   await event.reply(f'Error Go to Help From  @tyranteyeeee, {e}')
+   await event.reply(f'Error Go to Help From  @{SUPPORT_CHAT}, {e}')
 
 
 
@@ -133,7 +134,7 @@ async def lego(event):
     if os.path.exists(fname2):
             os.remove(fname2)
  except Exception as e:
-   await event.reply(f'Error Go to Help From  @tyranteyeeee, {e}')
+   await event.reply(f'Error Go to Help From  @{SUPPORT_CHAT}, {e}')
 
 
 @register(pattern="^/logo ?(.*)")
@@ -171,7 +172,7 @@ async def lego(event):
     if os.path.exists(fname2):
             os.remove(fname2)
  except Exception as e:
-   await event.reply(f'Error Go to Help From  @tyranteyeeee , {e}')
+   await event.reply(f'Error Go to Help From  @{SUPPORT_CHAT} , {e}')
 
 @register(pattern="^/biglogo ?(.*)")
 async def lego(event):
@@ -208,7 +209,7 @@ async def lego(event):
     if os.path.exists(fname2):
             os.remove(fname2)
  except Exception as e:
-   await event.reply(f'Error Go to Help From  @tyranteyeeee, {e}')
+   await event.reply(f'Error Go to Help From  @{SUPPORT_CHAT}, {e}')
 
    
 @register(pattern="^/wlogo ?(.*)")
@@ -246,7 +247,7 @@ async def lego(event):
     if os.path.exists(fname2):
             os.remove(fname2)
  except Exception as e:
-   await event.reply(f'Error Go to Help From  @tyranteyeeee, {e}')
+   await event.reply(f'Error Go to Help From  @{SUPPORT_CHAT}, {e}')
 
 
 
@@ -519,12 +520,12 @@ async def lego(event):
     draw.text((x, y), text, font=font, fill="white", stroke_width=1, stroke_fill="black")
     fname = "rikka.png"
     img.save(fname, "png")
-    await tbot.send_file(event.chat_id, file=fname, caption = f"Made by [Shikimori ✨](https://t.me/micchon_shikimori_bot)")         
+    await tbot.send_file(event.chat_id, file=fname, caption = f"Made by [{bot_name} ✨](https://t.me/{BOT_USERNAME})")         
     await pesan.delete()
     if os.path.exists(fname):
             os.remove(fname)
  except Exception as e:
-    await event.reply(f'Error, Report @tyranteyeeee')
+    await event.reply(f'Error, Report @{SUPPORT_CHAT}')
 
 
 file_help = os.path.basename(__file__)

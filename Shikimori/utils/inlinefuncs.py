@@ -26,8 +26,10 @@ from Shikimori import (
     DEV_USERS,
     EVENT_LOGS, 
     BOT_USERNAME,
+    SUPPORT_CHAT,
     ubot2,
 )
+from Shikimori.__main__ import bot_name
 from Shikimori import pbot as app 
 from Shikimori import arq
 from Shikimori.services.keyboard import Ikb
@@ -115,14 +117,14 @@ async def alive_function(answers):
     bot_state = "Dead" if not await app.get_me() else "Alive"
     ubot_state = "Dead" if not await ubot2.get_me() else "Alive"
     buttons.add(
-        InlineKeyboardButton("Main bot", url="https://t.me/EmiexRobot"),
+        InlineKeyboardButton("Main bot", url=f"https://t.me/{BOT_USERNAME}"),
         InlineKeyboardButton(
             "Go Inline!", switch_inline_query_current_chat=""
         ),
     )
 
     msg = f"""
-**[Shikimori Bot ❤️](https://t.me/tyranteyeeee):**
+**[{bot_name} Bot ❤️](https://t.me/{SUPPORT_CHAT}):**
 **MainBot:** `{bot_state}`
 **UserBot:** `{ubot_state}`
 **Python:** `{pyver.split()[0]}`

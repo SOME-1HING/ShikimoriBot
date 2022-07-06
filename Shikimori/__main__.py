@@ -13,8 +13,10 @@ from telegram import __version__ as peler
 from platform import python_version as memek
 from Shikimori import (
     ALLOW_EXCL,
+    BOT_USERNAME,
     CERT_PATH,
     DONATION_LINK,
+    UPDATE_CHANNEL,
     LOGGER,
     OWNER_ID,
     PORT,
@@ -22,11 +24,12 @@ from Shikimori import (
     TOKEN,
     URL,
     WEBHOOK,
-    SUPPORT_CHAT,
     dispatcher,
     StartTime,
     telethn,
     pbot,
+    ANIME_NAME,
+    START_MEDIA,
     updater,
 )
 
@@ -89,7 +92,7 @@ def get_readable_time(seconds: int) -> str:
 PM_START_TEXT = """
 Hello *{}*! Nice to meet you!
 
-I am *{}* , a group management bot based on the anime *Shikimori's Not Just a Cutie*[!](https://telegra.ph/file/9235d57807362b4e227a3.mp4)
+I am *{}* , a group management bot based on the anime *{ANIME_NAME}*![ ]({START_MEDIA})
 
 *Click on the Commands Button below to go through my commands.*
 """
@@ -97,15 +100,15 @@ I am *{}* , a group management bot based on the anime *Shikimori's Not Just a Cu
 buttons = [
     [
         InlineKeyboardButton(
-            text=" Add Shikimori to your Group", url="t.me/micchon_shikimori_bot?startgroup=true"),
+            text=f" Add {bot_name} to your Group", url=f"t.me/{BOT_USERNAME}?startgroup=true"),
     ],
     [
         InlineKeyboardButton(text="❓Help", callback_data="Shikimori_"),
         InlineKeyboardButton(text=" 💬Commands", callback_data="help_back"),
     ],
     [
-        InlineKeyboardButton(text="🚨Support Grp", url="https://t.me/tyranteyeeee"),
-        InlineKeyboardButton(text="❗Updates", url="https://t.me/Shikimori_bot_Updates"),
+        InlineKeyboardButton(text="🚨Support Grp", url=f"https://t.me/{SUPPORT_CHAT}"),
+        InlineKeyboardButton(text="❗Updates", url=f"https://t.me/{UPDATE_CHANNEL}"),
    
     ], 
 ]
@@ -113,10 +116,7 @@ buttons = [
 HELP_STRINGS = """
 Click on the button bellow to get description about specifics command."""
 
-KURUMI_IMG = "https://telegra.ph/file/19b5a3970a0a416d05a4d.jpg"
-ShikimoriSTART = "https://telegra.ph/file/9235d57807362b4e227a3.mp4"
-
-
+ShikimoriSTART = START_MEDIA
 
 IMPORTED = {}
 MIGRATEABLE = []
@@ -220,7 +220,8 @@ def start(update: Update, context: CallbackContext):
             update.effective_message.reply_text(
                 PM_START_TEXT.format(
                     escape_markdown(first_name),
-                    bot_name),                        
+                    bot_name,
+                    ANIME_NAME),                        
                 reply_markup=InlineKeyboardMarkup(buttons),
                 parse_mode=ParseMode.MARKDOWN,
                 timeout=60,
@@ -235,8 +236,8 @@ def start(update: Update, context: CallbackContext):
             .format(escape_markdown(first_name), escape_markdown(chat_name), uptime), reply_markup=InlineKeyboardMarkup(
                 [
                  [
-                    InlineKeyboardButton(text="🚨Support Grp", url="https://t.me/tyranteyeeee"),
-                    InlineKeyboardButton(text="❗Updates", url="https://t.me/Shikimori_bot_Updates")
+                    InlineKeyboardButton(text="🚨Support Grp", url=f"https://t.me/{SUPPORT_CHAT}"),
+                    InlineKeyboardButton(text="❗Updates", url=f"https://t.me/{UPDATE_CHANNEL}")
                  ]
                 ]
             ),
@@ -364,20 +365,20 @@ def help_button(update, context):
     except BadRequest:
         pass
 
-
+@bot_name
 def Shikimori_about_callback(update, context):
     query = update.callback_query
     if query.data == "Shikimori_":
         query.message.edit_text(
-            text="๏ I'm *Shikimori*, a powerful group management bot built to help you manage your group easily."
+            text=f"๏ I'm *{bot_name}*, a powerful group management bot built to help you manage your group easily."
             "\n• I can restrict users."
             "\n• I can greet users with customizable welcome messages and even set a group's rules."
             "\n• I have an advanced anti-flood system."
             "\n• I can warn users until they reach max warns, with each predefined actions such as ban, mute, kick, etc."
             "\n• I have a note keeping system, blacklists, and even predetermined replies on certain keywords."
             "\n• I check for admins' permissions before executing any command and more stuffs"
-            "\n\n_Shikimori's licensed under the GNU General Public License v3.0_"
-            "\n\n Click on button bellow to get basic help for ShikimoriBot.",
+            f"\n\n_{bot_name}'s licensed under the GNU General Public License v3.0_"
+            f"\n\n Click on button bellow to get basic help for {bot_name}.",
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(
@@ -393,7 +394,8 @@ def Shikimori_about_callback(update, context):
         uptime = get_readable_time((time.time() - StartTime))
         query.message.edit_text(
                 PM_START_TEXT.format(
-                    escape_markdown(first_name)),
+                    escape_markdown(first_name),
+                    bot_name),
                 reply_markup=InlineKeyboardMarkup(buttons),
                 parse_mode=ParseMode.MARKDOWN,
                 timeout=60,
@@ -429,6 +431,7 @@ def Source_about_callback(update, context):
         )
     elif query.data == "source_back":
         first_name = update.effective_user.first_name
+        uptime = get_readable_time((time.time() - StartTime))
         query.message.edit_text(
                 PM_START_TEXT.format(
                     escape_markdown(first_name),
@@ -661,7 +664,7 @@ def donate(update: Update, context: CallbackContext):
     bot = context.bot
     if chat.type == "private":
         update.effective_message.reply_text(
-            DONATE_STRING, parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True
+            DONATION_LINK, parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True
         )
 
         if OWNER_ID != 1606221784:
@@ -674,7 +677,7 @@ def donate(update: Update, context: CallbackContext):
         try:
             bot.send_message(
                 user.id,
-                DONATE_STRING,
+                DONATION_LINK,
                 parse_mode=ParseMode.MARKDOWN,
                 disable_web_page_preview=True,
             )
