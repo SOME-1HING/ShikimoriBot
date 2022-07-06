@@ -61,7 +61,7 @@
       },
       "BOT_USERNAME": {
          "description": "Username of your bot without the @",
-         "value": "micchon_shikimori_bot"
+         "value": "micchon_shikimori_bot",
          "required": true
       },
 
@@ -130,14 +130,10 @@
          "required": false,
          "value": ""
      },
-        "ARQ_API": {
-            "description": "Get this from @ARQRobot.",
-            "required": true
-        },
 
       "SPAMWATCH_API": {
          "description": "Spamwatch API Token, Get one from @SpamWatchBot.",
-         "required": true,
+         "required": false,
          "value": ""
       }, 
       "STRICT_GBAN": {
@@ -249,7 +245,7 @@
          "description": "Get api  https://www.virustotal.com/gui/my-apikey",
          "required": false,
          "value": ""
-      }  
+      },  
       "REDIS_URL": {
          "description": "Paste your redis url in format redis://<username of admin role>:<password of admin role>@<endoint url>/<database name>",
          "required": true,
