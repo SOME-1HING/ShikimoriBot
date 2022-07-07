@@ -78,7 +78,7 @@ def study(update: Update, context: CallbackContext):
     try:
         update.effective_message.reply_animation(
             IMG_study, caption = f"*jaPadle* {user1}",
-            parse_mode=ParseMode.Markdown,
+            parse_mode=ParseMode.MARKDOWN,
         )
         
 
