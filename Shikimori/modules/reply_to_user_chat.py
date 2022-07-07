@@ -9,9 +9,9 @@ from Shikimori.modules.disable import DisableAbleMessageHandler
 from telegram import ParseMode, Update
 from telegram.ext import CallbackContext, Filters
 
-IMG_GM = "https://telegra.ph/file/fff37608fa21d9d3d0b39.jpg"
-IMG_GN = "https://telegra.ph/file/1862c7260109e24ed4715.jpg"
-IMG_HELLO = "https://telegra.ph/file/f3f2dc386a33e37f6cb05.png"
+IMG_GM = "https://telegra.ph/file/0f920c5890032f5e38881.mp4"
+IMG_GN = "https://telegra.ph/file/ee8fceaa26a6e061d2f58.mp4"
+IMG_HELLO = "https://telegra.ph/file/a68ebbc06cc628d9a5f35.mp4"
 IMG_BYE = "https://te.legra.ph/file/9d570141d0b411f2b77bc.mp4"
 
 def goodnight(update: Update, context: CallbackContext):
