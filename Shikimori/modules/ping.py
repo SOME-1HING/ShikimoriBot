@@ -20,7 +20,6 @@ import time
 from platform import python_version
 
 import requests
-import speedtest
 import telegram
 from psutil import cpu_percent, virtual_memory, disk_usage, boot_time
 from spamwatch import __version__ as __sw__
@@ -139,7 +138,7 @@ IP_HANDLER = CommandHandler(
     "ip", get_bot_ip, filters=Filters.chat(OWNER_ID), run_async=True
 )
 PING_HANDLER = CommandHandler(
-    "ping", ping, filters=CustomFilters.dev_filter, run_async=True
+    "ping", ping, run_async=True
 )
 SYS_STATUS_HANDLER = CommandHandler(
     "sysinfo", system_status, filters=CustomFilters.dev_filter, run_async=True
@@ -152,6 +151,7 @@ dispatcher.add_handler(SYS_STATUS_HANDLER)
 __mod_name__ = "Ping 🏓"
 __help__ = """
 *Ping ⚡️*
- ❍ `/ping` :  Sends ping
-
+ ❍ `/ping` : Sends ping
+ ❍ `/sysinfo` : Shows system information. *Dev and Owner only cmd*
+ ❍ `/ip` : Shares ip of Bot. *Owner only cmd*
 """
