@@ -82,7 +82,8 @@ def study(update: Update, context: CallbackContext):
         )
     except:
         reply = f"*jaPadle!!* {user1}"
-        message.reply_text(reply)   
+        message.reply_text(reply) 
+        ) 
 
 
 GDMORNING_HANDLER = DisableAbleMessageHandler(
