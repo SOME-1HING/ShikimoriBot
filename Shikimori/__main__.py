@@ -375,13 +375,12 @@ def Shikimori_about_callback(update, context):
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(
                 [
-                 [
-                    InlineKeyboardButton(text="Repo", url="https://github.com/SOME-1HING/ShikimoriBot")
-                 ]
-                 [
-                    InlineKeyboardButton(text="Back", callback_data="Shikimori_back")
-                 ]
-                ]
+                    InlineKeyboardButton(
+                        text="Repo", url="https://github.com/SOME-1HING/ShikimoriBot"),
+                ],
+                [
+                    InlineKeyboardButton(text="Back", callback_data="Shikimori_back"),
+                ],
             ),
         )
     elif query.data == "Shikimori_back":
