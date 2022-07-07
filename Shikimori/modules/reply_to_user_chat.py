@@ -66,7 +66,8 @@ def bye(update: Update, context: CallbackContext):
         
 
 def amazing(update: Update, context: CallbackContext):
-    
+    message = update.effective_message
+    try:   
         update.effective_message.reply_animation(
             IMG_AMAZING,
             parse_mode=ParseMode.MARKDOWN,
