@@ -17,34 +17,19 @@ GIF_ID = "CgACAgQAAx0CSVUvGgAC7KpfWxMrgGyQs-GUUJgt-TSO8cOIDgACaAgAAlZD0VHT3Zynpr
 def runs(update: Update, context: CallbackContext):
     update.effective_message.reply_text(random.choice(ExtraGifs_strings.RUN_STRINGS))
 
-# def sanitize(update: Update, context: CallbackContext):
-#     message = update.effective_message
-#     name = (
-#         message.reply_to_message.from_user.first_name
-#         if message.reply_to_message
-#         else message.from_user.first_name
-#     )
-#     reply_animation = (
-#         message.reply_to_message.reply_animation
-#         if message.reply_to_message
-#         else message.reply_animation
-#     )
-#     reply_animation(GIF_ID, caption=f"*Sanitizes {name}*")
-
-
-# def sanitize(update: Update, context: CallbackContext):
-#     message = update.effective_message
-#     name = (
-#         message.reply_to_message.from_user.first_name
-#         if message.reply_to_message
-#         else message.from_user.first_name
-#     )
-#     reply_animation = (
-#         message.reply_to_message.reply_animation
-#         if message.reply_to_message
-#         else message.reply_animation
-#     )
-#     reply_animation(random.choice(ExtraGifs_strings.GIFS), caption=f"*Sanitizes {name}*")
+def sanitize(update: Update, context: CallbackContext):
+    message = update.effective_message
+    name = (
+        message.reply_to_message.from_user.first_name
+        if message.reply_to_message
+        else message.from_user.first_name
+    )
+    reply_animation = (
+        message.reply_to_message.reply_animation
+        if message.reply_to_message
+        else message.reply_animation
+    )
+    reply_animation(random.choice(ExtraGifs_strings.GIFS), caption=f"*Sanitizes {name}*")
 
 
 def slap(update: Update, context: CallbackContext):
@@ -305,11 +290,7 @@ def weebify(update: Update, context: CallbackContext):
     else:
         message.reply_text(string)
 
-    
-
-
-
-#SANITIZE_HANDLER = DisableAbleCommandHandler("sanitize", sanitize, run_async=True)
+SANITIZE_HANDLER = DisableAbleCommandHandler("sanitize", sanitize, run_async=True)
 RUNS_HANDLER = DisableAbleCommandHandler("runs", runs, run_async=True)
 SLAP_HANDLER = DisableAbleCommandHandler("slap", slap, run_async=True)
 PAT_HANDLER = DisableAbleCommandHandler("pat", pat, run_async=True)
@@ -326,7 +307,7 @@ WEEBIFY_HANDLER = DisableAbleCommandHandler("weebify", weebify, run_async=True)
 
 dispatcher.add_handler(WEEBIFY_HANDLER)
 dispatcher.add_handler(SHOUT_HANDLER)
-#dispatcher.add_handler(SANITIZE_HANDLER)
+dispatcher.add_handler(SANITIZE_HANDLER)
 dispatcher.add_handler(RUNS_HANDLER)
 dispatcher.add_handler(SLAP_HANDLER)
 dispatcher.add_handler(PAT_HANDLER)
@@ -367,7 +348,7 @@ __handlers__ = [
     RLG_HANDLER,
     DECIDE_HANDLER,
     TABLE_HANDLER,
-    #SANITIZE_HANDLER,
+    SANITIZE_HANDLER,
     SHOUT_HANDLER,
     WEEBIFY_HANDLER,
     EIGHTBALL_HANDLER,
