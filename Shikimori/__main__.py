@@ -85,7 +85,7 @@ def get_readable_time(seconds: int) -> str:
 
 
 PM_START_TEXT = f"""
-\nI am *{bot_name}* , a group management bot based on the anime *{ANIME_NAME}*![ ]({START_MEDIA})
+\nI am *Hinata Shoyo Bot* , a group management bot based on the anime *Haikyuu*![ ](https://telegra.ph/file/1ca43f21f05d6e1d57272.mp4)
 
 *Click on the Commands Button below to go through my commands.*
 """
