@@ -78,13 +78,10 @@ def study(update: Update, context: CallbackContext):
         message.reply_text(reply)
 
 def amazing(update: Update, context: CallbackContext):
-    message = update.effective_message
-    user1 = message.from_user.first_name
-    try:
-        update.effective_message.reply_animation(
-            IMG_AMAZING,
-            parse_mode=ParseMode.MARKDOWN,
-        )
+    update.effective_message.reply_animation(
+        IMG_AMAZING,
+        parse_mode=ParseMode.MARKDOWN,
+    )    
 
 
 GDMORNING_HANDLER = DisableAbleMessageHandler(
