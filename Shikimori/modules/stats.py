@@ -7,6 +7,8 @@ from platform import python_version
 from telegram import ParseMode, __version__ as ptbver, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import CommandHandler
 from telegram.utils.helpers import escape_markdown
+from telethon import __version__ as tlhver
+from pyrogram import __version__ as pyrover
     
 from Shikimori import (
     SUPPORT_CHAT,
@@ -61,7 +63,9 @@ def stats(update, context):
     status += "*➢ RAM:* " + str(mem[2]) + " %\n"
     status += "*➢ Storage:* " + str(disk[3]) + " %\n\n"
     status += "*➢ Python Version:* " + python_version() + "\n"
-    status += "*➢ python-Telegram-Bot:* " + str(ptbver) + "\n"
+    status += "*➢ Python-Telegram-Bot:* " + str(ptbver) + "\n"
+    status += "*➢ Telethon Version:* " + str(tlhver) + "\n"
+    status += "*➢ Pyrogram Version:* " + str(pyrover) + "\n"
     status += "*➢ Uptime:* " + str(botuptime) + "\n"
     try:
         if STATS_IMG:
