@@ -73,6 +73,8 @@ def amazing(update: Update, context: CallbackContext):
             IMG_AMAZING,
             parse_mode=ParseMode.MARKDOWN,
         ) 
+        
+        
 def study(update: Update, context: CallbackContext):
     message = update.effective_message
     try:
