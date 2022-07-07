@@ -378,8 +378,6 @@ def Shikimori_about_callback(update, context):
                  [
                     InlineKeyboardButton(text="Repo", url="https://github.com/SOME-1HING/ShikimoriBot")
                  ]
-                ]
-                [
                  [
                     InlineKeyboardButton(text="Back", callback_data="Shikimori_back")
                  ]
