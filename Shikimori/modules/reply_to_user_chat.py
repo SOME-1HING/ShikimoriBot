@@ -13,6 +13,7 @@ IMG_GM = "https://telegra.ph/file/fff37608fa21d9d3d0b39.jpg"
 IMG_GN = "https://telegra.ph/file/1862c7260109e24ed4715.jpg"
 IMG_HELLO = "https://telegra.ph/file/f3f2dc386a33e37f6cb05.png"
 IMG_BYE = "https://te.legra.ph/file/9d570141d0b411f2b77bc.mp4"
+IMG_STUDY = "https://te.legra.ph/file/78e4a71f186031e3e16ee.mp4"
 
 def goodnight(update: Update, context: CallbackContext):
     message = update.effective_message
@@ -63,6 +64,17 @@ def bye(update: Update, context: CallbackContext):
         reply = f"*Bye!!* {user1}"
         message.reply_text(reply)
 
+def study(update: Update, context: CallbackContext):
+    message = update.effective_message
+    user1 = message.from_user.first_name
+    try:
+        update.effective_message.reply_animation(
+            IMG_STUDY, caption = f"*JaPadle!!* {user1}",
+            parse_mode=ParseMode.MARKDOWN,
+        )
+    except:
+        reply = f"*JaPadle!!* {user1}"
+        message.reply_text(reply)
 
 
 GDMORNING_HANDLER = DisableAbleMessageHandler(
@@ -77,15 +89,20 @@ BYE_HANDLER = DisableAbleMessageHandler(
 HELLO_HANDLER = DisableAbleMessageHandler(
     Filters.regex(r"(?i)(hello)"), hello, friendly="hello", run_async = True
 )
+STUDY_HANDLER = DisableAbleMessageHandler(
+    Filters.regex(r"(?i)(study)"), study, friendly="study", run_async = True
+)
 
 dispatcher.add_handler(GDMORNING_HANDLER)
 dispatcher.add_handler(GDNIGHT_HANDLER)
 dispatcher.add_handler(HELLO_HANDLER)
 dispatcher.add_handler(BYE_HANDLER)
+dispatcher.add_handler(STUDY_HANDLER)
 
 __handlers__ = [
     GDMORNING_HANDLER,
     GDNIGHT_HANDLER,
     HELLO_HANDLER,
-    BYE_HANDLER
+    BYE_HANDLER, 
+    STUDY_HANDLER
 ]
