@@ -77,10 +77,12 @@ def study(update: Update, context: CallbackContext):
     message = update.effective_message
     try:
         update.effective_message.reply_animation(
-            IMG_STUDY, caption = f"*jaPadle!!* {user1}",
+            IMG_STUDY, caption = f"*jaPadle* {user1}",
             parse_mode=ParseMode.MARKDOWN,
         )
-        
+    except:
+        reply = f"*jaPadle!!* {user1}"
+        message.reply_text(reply)   
 
 
 GDMORNING_HANDLER = DisableAbleMessageHandler(
