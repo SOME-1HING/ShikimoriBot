@@ -14,10 +14,9 @@ PHOTO = ALIVE_MEDIA
 
 @register(pattern=("/alive"))
 async def awake(event):
-  TEXT = f"**Hi [{event.sender.first_name}](tg://user?id={event.sender.id}), I'm Shikomori Robot.** \n\n"
+  TEXT = f"**Hi [{event.sender.first_name}](tg://user?id={event.sender.id}), I'm Hinata Shoyo Robot.** \n\n"
   TEXT += "⚪ **I'm Working Properly** \n\n"
-  TEXT += f"⚪ **My Owner : [【V๏ɪ፝֟𝔡】](https://t.me/VoidAryan)** \n\n"
-  TEXT += f"⚪ **I am Powered by : [【V๏ɪ፝֟𝔡】»Network«](https://t.me/VoidxNetwork)** \n\n"
+  TEXT += f"⚪ **My Owner : [Himanshu Mishra](https://t.me/madarauchiha_TheSageOfSixPaths)** \n\n"
   TEXT += "**Thanks For Adding Me Here ❤️**"
   BUTTON = [[Button.url("Updates", f"https://t.me/{UPDATE_CHANNEL}"), Button.url("Support", f"https://t.me/{SUPPORT_CHAT}")]]
   await tbot.send_file(event.chat_id, PHOTO, caption=TEXT,  buttons=BUTTON)
