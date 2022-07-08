@@ -21,12 +21,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 """
-import asyncio
 
 from pyrogram import filters
 from pyrogram.types import Message
 
-from Shikimori import BOT_ID, DRAGONS, app
+from Shikimori import DRAGONS, app
 from Shikimori.core.decorators.errors import capture_err
 
 __mod_name__ = "Pipes"
@@ -36,7 +35,7 @@ __help__ = """
 Use this module to create a pipe that will forward messages of one chat/channel to another.
 
 
-/activate_pipe [FROM_CHAT_ID] [TO_CHAT_ID] [BOT|USERBOT]
+`/activate_pipe` [FROM_CHAT_ID] [TO_CHAT_ID] [BOT|USERBOT]
 
     Active a pipe.
 
@@ -45,11 +44,11 @@ Use this module to create a pipe that will forward messages of one chat/channel 
     message from 'FROM_CHAT'.
 
 
-/deactivate_pipe [FROM_CHAT_ID]
+`/deactivate_pipe` [FROM_CHAT_ID]
     Deactivete a pipe.
 
 
-/show_pipes
+`/show_pipes`
     Show all the active pipes.
 
 **NOTE:**

@@ -5,7 +5,7 @@ from io import BytesIO
 
 from PIL import Image
 from telegram import Update
-from telegram.ext import CallbackContext, run_async
+from telegram.ext import CallbackContext
 
 from Shikimori import dispatcher
 from Shikimori.modules.disable import DisableAbleCommandHandler

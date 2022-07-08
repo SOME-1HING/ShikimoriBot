@@ -1,15 +1,12 @@
 from PIL import Image, ImageDraw, ImageFont, ImageOps
 from telethon.tl import types, functions
 from fontTools.ttLib import TTFont 
-from fontTools.unicode import Unicode 
 import emoji
 import textwrap
 import urllib
-import logging
 import random
 import json
 import os
-import re
 from telethon import events
 from Shikimori import telethn
 
@@ -392,6 +389,6 @@ async def q(event):
 __mod_name__ = "Quotly"
 
 __help__ = """
-> /q *:* To quote a message.
+> `/q` *:* To quote a message.
 """
 

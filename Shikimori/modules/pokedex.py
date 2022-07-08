@@ -1,4 +1,3 @@
-
 import aiohttp
 from pyrogram import filters
 from Shikimori import pbot
@@ -49,6 +48,6 @@ __mod_name__ = "Pokedex"
 __help__ = """
 Here is help for Pokedex
 
-/pokedex <pokemon name> - Get information about the pokemon.
-/pokemon <pokemon name> - Get information about the pokemon.
+`/pokedex` <pokemon name> - Get information about the pokemon.
+`/pokemon` <pokemon name> - Get information about the pokemon.
 """
