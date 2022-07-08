@@ -126,6 +126,8 @@ dispatcher.add_handler(BYE_HANDLER)
 dispatcher.add_handler(STUDY_HANDLER)
 dispatcher.add_handler(WELCOME_HANDLER)
 dispatcher.add_handler(AMAZING_HANDLER)
+
+
 __handlers__ = [
     GDMORNING_HANDLER,
     GDNIGHT_HANDLER,
