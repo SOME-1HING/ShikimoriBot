@@ -24,20 +24,19 @@ def awake(update: Update, context: CallbackContext):
     user = message.from_user
 
     TEXT = f"""
-    <b>Hi [{first_name}](tg://user?id={user.id}), I'm Shikomori Robot.
+    <b>Hi <a href="tg://user?id={user.id}">{first_name}</a>, I'm Shikomori Robot.
 
     ⚪ I'm Working Properly
 
-    ⚪ My Owner : [{OWNER_USERNAME}](https://t.me/{OWNER_USERNAME})</b>
+    ⚪ My Owner : <a href="https://t.me/{OWNER_USERNAME}">{OWNER_USERNAME}</a></b>
     """
     if NETWORK:
-        TEXT = TEXT + f"\n\n⚪ <b>I am Powered by : [{NETWORK}](https://t.me/{NETWORK_USERNAME}) \n\n" + "Thanks For Adding Me Here ❤️</b>"
+        TEXT = TEXT + f'\n\n⚪ <b>I am Powered by : <a href="https://t.me/{NETWORK_USERNAME}">{NETWORK}</a> \n\n" + "Thanks For Adding Me Here ❤️</b>'
     
     else:
         TEXT = TEXT + "\n\n<b>Thanks For Adding Me Here ❤️</b>"
 
-    message.reply_text(
-        TEXT, reply_markup=InlineKeyboardMarkup(buttons),parse_mode=ParseMode.HTML)
+    message.reply_animation(PHOTO, caption=TEXT, reply_markup=InlineKeyboardMarkup(buttons),parse_mode=ParseMode.HTML)
 
 ALIVE_HANDLER = DisableAbleCommandHandler("alive", awake, run_async=True)
 dispatcher.add_handler(ALIVE_HANDLER)
