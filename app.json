@@ -286,6 +286,16 @@
          "description": "Paste image link for /stats. Otherwise keep it blank.",
          "required": false,
          "value": "https://telegra.ph/file/fa1acd48ae767baa02e3f.jpg"
+      },
+      "NETWORK": {
+         "description": "If your bot is connected to a network, Type the Network name. Only type one Network name. Otherwise leave it blank, or just leave【V๏ɪ፝֟𝔡】»Network«",
+         "required": false,
+         "value": "【V๏ɪ፝֟𝔡】»Network«"
+      },
+      "NETWORK_USERNAME": {
+         "description": "If you have put a netowrk name, you alsohave to put its username without @",
+         "required": false,
+         "value": "VoidxNetwork"
       }
    }
 }

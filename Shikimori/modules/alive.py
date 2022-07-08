@@ -1,26 +1,54 @@
-import os
-import re
-from platform import python_version as kontol
-from telethon import events, Button
-from telegram import __version__ as telever
-from telethon import __version__ as tlhver
-from pyrogram import __version__ as pyrover
-from Shikimori.events import register
-from Shikimori import telethn as tbot
-from Shikimori import ALIVE_MEDIA, UPDATE_CHANNEL, SUPPORT_CHAT
-
+import html
+from Shikimori import OWNER_ID
+from Shikimori import ALIVE_MEDIA, UPDATE_CHANNEL, SUPPORT_CHAT, OWNER_USERNAME, dispatcher, NETWORK, NETWORK_USERNAME
+from Shikimori.modules.disable import DisableAbleCommandHandler
+from telegram import ParseMode, Update,InlineKeyboardButton, InlineKeyboardMarkup
+from telegram.ext import CallbackContext
+from Shikimori.modules.helper_funcs.extraction import extract_user
 
 PHOTO = ALIVE_MEDIA
 
-@register(pattern=("/alive"))
-async def awake(event):
-  TEXT = f"**Hi [{event.sender.first_name}](tg://user?id={event.sender.id}), I'm Shikomori Robot.** \n\n"
-  TEXT += "⚪ **I'm Working Properly** \n\n"
-  TEXT += f"⚪ **My Owner : [【V๏ɪ፝֟𝔡】](https://t.me/VoidAryan)** \n\n"
-  TEXT += f"⚪ **I am Powered by : [【V๏ɪ፝֟𝔡】»Network«](https://t.me/VoidxNetwork)** \n\n"
-  TEXT += "**Thanks For Adding Me Here ❤️**"
-  BUTTON = [[Button.url("Updates", f"https://t.me/{UPDATE_CHANNEL}"), Button.url("Support", f"https://t.me/{SUPPORT_CHAT}")]]
-  await tbot.send_file(event.chat_id, PHOTO, caption=TEXT,  buttons=BUTTON)
+def awake(update: Update, context: CallbackContext):
+    bot, args = context.bot, context.args
+    message = update.effective_message
+    buttons = [
+        [
+        InlineKeyboardButton(
+            text="Updates",
+            url=f"https://t.me/{UPDATE_CHANNEL}"),
+        InlineKeyboardButton(
+            text="Support",
+            url=f"https://t.me/{SUPPORT_CHAT}"),
+        ],
+     ]
+    
+    user_id = extract_user(update.effective_message, args)
+    first_name = update.effective_user.first_name
+    user = bot.get_chat(user_id)
+    owner = OWNER_ID
+
+    TEXT = f"""
+    <b>Hi [{first_name}](tg://user?id={user.id}), I'm Shikomori Robot.
+
+    ⚪ I'm Working Properly
+
+    ⚪ My Owner : [{html.escape(owner.first_name)}](https://t.me/{OWNER_USERNAME})</b>
+    """
+    if NETWORK:
+        TEXT = TEXT + f"\n\n⚪ <b>I am Powered by : [{NETWORK}](https://t.me/{NETWORK_USERNAME}) \n\n" + "Thanks For Adding Me Here ❤️</b>"
+    
+    else:
+        TEXT = TEXT + "\n\n<b>Thanks For Adding Me Here ❤️</b>"
+
+    message.reply_text(
+        TEXT, reply_markup=InlineKeyboardMarkup(buttons),parse_mode=ParseMode.HTML)
+
+ALIVE_HANDLER = DisableAbleCommandHandler("alive", awake, run_async=True)
+dispatcher.add_handler(ALIVE_HANDLER)
+__command_list__ = ["alive"]
+__handlers__ = [
+    ALIVE_HANDLER,
+]
 
 __mod_name__ = "Alive ✨"
 __help__ = """

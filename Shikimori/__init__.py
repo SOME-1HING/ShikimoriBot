@@ -132,6 +132,8 @@ if ENV:
     ALIVE_MEDIA = os.environ.get("ALIVE_MEDIA", "https://telegra.ph/file/2b04f7812f22b983f8a10.mp4")
     BOT_ID = os.environ.get("BOT_ID", "5169508699")
     STATS_IMG = os.environ.get("STATS_IMG", None)
+    NETWORK = os.environ.get("NETWORK", None)
+    NETWORK_USERNAME = os.environ.get("NETWORK_USERNAME", None)
     
     try:
         WHITELIST_CHATS = {int(x) for x in os.environ.get('WHITELIST_CHATS', "").split()}
@@ -222,6 +224,8 @@ else:
     ALIVE_MEDIA = Config.ALIVE_MEDIA
     BOT_ID = Config.BOT_ID
     STATS_IMG = Config.STATS_IMG
+    NETWORK = Config.NETWORK
+    NETWORK_USERNAME = Config.NETWORK_USERNAME
 
     try:
         WHITELIST_CHATS = {int(x) for x in os.environ.get('WHITELIST_CHATS', "").split()}

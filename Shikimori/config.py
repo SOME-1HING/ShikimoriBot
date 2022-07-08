@@ -90,6 +90,8 @@ class Config(object):
     ALIVE_MEDIA = "https://telegra.ph/file/2b04f7812f22b983f8a10.mp4"
     BOT_ID = 5169508699
     STATS_IMG = "awoo"
+    NETWORK_USERNAME = "VoidxNetwork"
+    NETWORK = "【V๏ɪ፝֟𝔡】»Network«"
 
 class Production(Config):
     LOGGER = True
