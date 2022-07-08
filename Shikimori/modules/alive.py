@@ -32,7 +32,7 @@ def awake(update: Update, context: CallbackContext):
 
     ⚪ I'm Working Properly
 
-    ⚪ My Owner : [{html.escape(owner.first_name)}](https://t.me/{OWNER_USERNAME})</b>
+    ⚪ My Owner : [VOID](https://t.me/{OWNER_USERNAME})</b>
     """
     if NETWORK:
         TEXT = TEXT + f"\n\n⚪ <b>I am Powered by : [{NETWORK}](https://t.me/{NETWORK_USERNAME}) \n\n" + "Thanks For Adding Me Here ❤️</b>"
