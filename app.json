@@ -293,9 +293,29 @@
          "value": "【V๏ɪ፝֟𝔡】»Network«"
       },
       "NETWORK_USERNAME": {
-         "description": "If you have put a netowrk name, you alsohave to put its username without @",
+         "description": "If you have put a netowrk name, you also have to put its username without @",
          "required": false,
          "value": "VoidxNetwork"
+      },
+      "MEDIA_GM": {
+         "description": "URL of media that you want to show when user types (good morning or goodmorning). Supported file types ()",
+         "required": false,
+         "value": "https://telegra.ph/file/fff37608fa21d9d3d0b39.jpg"
+      },
+      "MEDIA_GN": {
+         "description": "If you have put a netowrk name, you alsohave to put its username without @",
+         "required": false,
+         "value": "https://telegra.ph/file/1862c7260109e24ed4715.jpg"
+      },
+      "MEDIA_HELLO": {
+         "description": "If you have put a netowrk name, you alsohave to put its username without @",
+         "required": false,
+         "value": "https://telegra.ph/file/f3f2dc386a33e37f6cb05.png"
+      },
+      "MEDIA_BYE": {
+         "description": "If you have put a netowrk name, you alsohave to put its username without @",
+         "required": false,
+         "value": "https://telegra.ph/file/061054c8f73fe7ffbf6aa.mp4"
       }
    }
 }

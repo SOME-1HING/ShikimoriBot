@@ -92,6 +92,10 @@ class Config(object):
     STATS_IMG = "awoo"
     NETWORK_USERNAME = "VoidxNetwork"
     NETWORK = "【V๏ɪ፝֟𝔡】»Network«"
+    MEDIA_GM = "https://telegra.ph/file/fff37608fa21d9d3d0b39.jpg"
+    MEDIA_GN = "https://telegra.ph/file/1862c7260109e24ed4715.jpg"
+    MEDIA_HELLO = "https://telegra.ph/file/f3f2dc386a33e37f6cb05.png"
+    MEDIA_BYE = "https://telegra.ph/file/061054c8f73fe7ffbf6aa.mp4"
 
 class Production(Config):
     LOGGER = True

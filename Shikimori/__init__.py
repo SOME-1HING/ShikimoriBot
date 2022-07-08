@@ -134,6 +134,10 @@ if ENV:
     STATS_IMG = os.environ.get("STATS_IMG", None)
     NETWORK = os.environ.get("NETWORK", None)
     NETWORK_USERNAME = os.environ.get("NETWORK_USERNAME", None)
+    MEDIA_GM = os.environ.get("MEDIA_GM", None)
+    MEDIA_GN = os.environ.get("MEDIA_GN", None)
+    MEDIA_HELLO = os.environ.get("MEDIA_HELLO", None)
+    MEDIA_BYE = os.environ.get("MEDIA_BYE", None)
     
     try:
         WHITELIST_CHATS = {int(x) for x in os.environ.get('WHITELIST_CHATS', "").split()}
@@ -226,6 +230,10 @@ else:
     STATS_IMG = Config.STATS_IMG
     NETWORK = Config.NETWORK
     NETWORK_USERNAME = Config.NETWORK_USERNAME
+    MEDIA_GM = Config.MEDIA_GM
+    MEDIA_GN = Config.MEDIA_GN
+    MEDIA_HELLO = Config.MEDIA_HELLO
+    MEDIA_BYE = Config.MEDIA_BYE
 
     try:
         WHITELIST_CHATS = {int(x) for x in os.environ.get('WHITELIST_CHATS', "").split()}

@@ -2,12 +2,10 @@ from Shikimori import ALIVE_MEDIA, UPDATE_CHANNEL, SUPPORT_CHAT, OWNER_USERNAME,
 from Shikimori.modules.disable import DisableAbleCommandHandler
 from telegram import ParseMode, Update,InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import CallbackContext
-from Shikimori.modules.helper_funcs.extraction import extract_user
 
 PHOTO = ALIVE_MEDIA
 
 def awake(update: Update, context: CallbackContext):
-    bot, args = context.bot, context.args
     message = update.effective_message
     buttons = [
         [
@@ -31,7 +29,7 @@ def awake(update: Update, context: CallbackContext):
 ⚪ My Owner : <a href="https://t.me/{OWNER_USERNAME}">{OWNER_USERNAME}</a></b>
     """
     if NETWORK:
-        TEXT = TEXT + f'\n\n⚪ <b>I am Powered by : <a href="https://t.me/{NETWORK_USERNAME}">{NETWORK}</a> \n' + 'Thanks For Adding Me Here ❤️</b>'
+        TEXT = TEXT + f'\n⚪ <b>I am Powered by : <a href="https://t.me/{NETWORK_USERNAME}">{NETWORK}</a>\n\n' + 'Thanks For Adding Me Here ❤️</b>'
     
     else:
         TEXT = TEXT + "\n<b>Thanks For Adding Me Here ❤️</b>"
