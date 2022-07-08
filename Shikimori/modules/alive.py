@@ -26,9 +26,9 @@ def awake(update: Update, context: CallbackContext):
     TEXT = f"""
     <b>Hi <a href="tg://user?id={user.id}">{first_name}</a>, I'm Shikomori Robot.
 
-    ⚪ I'm Working Properly
+⚪ I'm Working Properly
 
-    ⚪ My Owner : <a href="https://t.me/{OWNER_USERNAME}">{OWNER_USERNAME}</a></b>
+⚪ My Owner : <a href="https://t.me/{OWNER_USERNAME}">{OWNER_USERNAME}</a></b>
     """
     if NETWORK:
         TEXT = TEXT + f'\n\n⚪ <b>I am Powered by : <a href="https://t.me/{NETWORK_USERNAME}">{NETWORK}</a> \n\n" + "Thanks For Adding Me Here ❤️</b>'
