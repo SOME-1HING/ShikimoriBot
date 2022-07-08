@@ -190,7 +190,7 @@ PAT_GIFS = (
 PAT_STICKERS = (
     "CAACAgQAAxkBAALRWV9Xs4HH0XaXfhZe-jWaZoXfs-IsAAJYAwACdDgSEHYOt4KvL02oGwQ",
     "CAACAgQAAxkBAALRXF9Xs6XmIeDbnoL1wiDky0TdX-CvAAKKAQAC1TMzC9A3CtiT2rqVGwQ",
-    https://telegra.ph/file/86ceb317683ea29d6cef9.mp4,
+    "https://telegra.ph/file/86ceb317683ea29d6cef9.mp4",
 )
 
 PING_STRING = (
