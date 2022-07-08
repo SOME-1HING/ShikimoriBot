@@ -1,4 +1,3 @@
-
 import html
 import requests
 
@@ -7,7 +6,7 @@ from telethon.tl.types import ChannelParticipantsAdmins
 from telethon import events
 
 from telegram import MAX_MESSAGE_LENGTH, ParseMode, Update, MessageEntity, InlineKeyboardButton, InlineKeyboardMarkup
-from telegram.ext import (CallbackContext, CommandHandler)
+from telegram.ext import CallbackContext
 from telegram.error import BadRequest
 from telegram.utils.helpers import escape_markdown, mention_html
     
@@ -21,14 +20,12 @@ from Shikimori import (
     dispatcher,
     sw,
 )
-from Shikimori.__main__ import STATS, TOKEN, USER_INFO
-from Shikimori.modules.sql import SESSION
+from Shikimori.__main__ import TOKEN, USER_INFO
 import Shikimori.modules.sql.userinfo_sql as sql
 from Shikimori.modules.disable import DisableAbleCommandHandler
 from Shikimori.modules.sql.global_bans_sql import is_user_gbanned
 from Shikimori.modules.redis.afk_redis import is_user_afk, afk_reason
 from Shikimori.modules.sql.users_sql import get_user_num_chats
-from Shikimori.modules.helper_funcs.chat_status import sudo_plus
 from Shikimori.modules.helper_funcs.extraction import extract_user
 from Shikimori import telethn
 
@@ -514,6 +511,7 @@ Examples:
 Examples:
  `/bio @username(defaults to yours if not specified).`
  `/setbio This user is a wolf` (reply to the user)
+• `/pfp`*:* Reply to user to get profile picture of that user.
 
 *Overall Information about you:*
 • `/info`*:* get information about a user. 

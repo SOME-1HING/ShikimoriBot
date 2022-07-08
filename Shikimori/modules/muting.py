@@ -12,7 +12,6 @@ from Shikimori.modules.helper_funcs.chat_status import (
     user_admin_no_reply,
 )
 from Shikimori.modules.helper_funcs.extraction import (
-    extract_user,
     extract_user_and_text,
 )
 from Shikimori.modules.helper_funcs.string_handling import extract_time
@@ -29,7 +28,7 @@ from telegram import (
     InlineKeyboardMarkup
 )
 from telegram.error import BadRequest
-from telegram.ext import CallbackContext, CommandHandler, run_async, CallbackQueryHandler
+from telegram.ext import CallbackContext, CommandHandler, CallbackQueryHandler
 from telegram.utils.helpers import mention_html
 
 
@@ -282,12 +281,12 @@ def button(update: Update, context: CallbackContext) -> str:
         )                
         unmuted = bot.restrict_chat_member(chat.id, int(user_id), chat_permissions)
         if unmuted:
-        	update.effective_message.edit_text(
+            update.effective_message.edit_text(
         	    f"{mention_html(member.user.id, member.user.first_name)} [<code>{member.user.id}</code>] Now can 🔊 speak again.",
         	    parse_mode=ParseMode.HTML,
         	)
-        	query.answer("Unmuted!")
-        	return (
+            query.answer("Unmuted!")
+            return (
                     f"<b>{html.escape(chat.title)}:</b>\n" 
                     f"#UNMUTE\n" 
                     f"<b>Admin:</b> {mention_html(user.id, user.first_name)}\n"

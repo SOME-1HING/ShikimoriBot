@@ -1,8 +1,4 @@
-import time
-import os
 import re
-import codecs
-from typing import List
 from random import randint
 from Shikimori.modules.helper_funcs.chat_status import user_admin
 from Shikimori.modules.disable import DisableAbleCommandHandler
@@ -12,24 +8,16 @@ from Shikimori import (
 )
 import requests as r
 import wikipedia
-from requests import get, post
 from telegram import (
-    Chat,
     ChatAction,
     Update,
     InlineKeyboardButton,
     InlineKeyboardMarkup,
     ParseMode,
-    Message,
-    MessageEntity,
-    TelegramError,
 )
 from telegram.error import BadRequest
-from telegram.ext.dispatcher import run_async
 from telegram.ext import CallbackContext, Filters, CommandHandler
-from Shikimori import StartTime
-from Shikimori.modules.helper_funcs.chat_status import sudo_plus
-from Shikimori.modules.helper_funcs.alternate import send_action, typing_action
+from Shikimori.modules.helper_funcs.alternate import send_action
 
 MARKDOWN_HELP = f"""
 Markdown is a very powerful formatting tool supported by telegram. {dispatcher.bot.first_name} has some enhancements, to make sure that \
@@ -184,14 +172,14 @@ def wall(update: Update, context: CallbackContext):
 __help__ = """
 *Available commands:*
 
-❂ /markdownhelp*:* quick summary of how markdown works in telegram - can only be called in private chats
-❂ /paste*:* Saves replied content to `nekobin.com` and replies with a url
-❂ /react*:* Reacts with a random reaction 
-❂ /ud <word>*:* Type the word or expression you want to search use
-❂ /reverse*:* Does a reverse image search of the media which it was replied to.
-❂ /wiki <query>*:* wikipedia your query
-❂ /wall <query>*:* get a wallpaper from wall.alphacoders.com
-❂ /cash*:* currency converter
+❂ `/markdownhelp`*:* quick summary of how markdown works in telegram - can only be called in private chats
+❂ `/paste`*:* Saves replied content to `nekobin.com` and replies with a url
+❂ `/react`*:* Reacts with a random reaction 
+❂ `/ud` <word>*:* Type the word or expression you want to search use
+❂ `/reverse`*:* Does a reverse image search of the media which it was replied to.
+❂ `/wiki` <query>*:* wikipedia your query
+❂ `/wall` <query>*:* get a wallpaper from wall.alphacoders.com
+❂ `/cash`*:* currency converter
  Example:
  `/cash 1 USD INR`  
       _OR_
