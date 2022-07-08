@@ -1,18 +1,11 @@
-
-
 import json
 import requests
-import html
 import random
-import time
 
 from Shikimori import dispatcher
 from Shikimori.modules.disable import DisableAbleCommandHandler
-from telegram.ext import CallbackContext, CommandHandler, Filters, run_async, CallbackQueryHandler
-from Shikimori.modules.helper_funcs.chat_status import (is_user_admin)
-from Shikimori.modules.helper_funcs.extraction import extract_user
-from telegram import ParseMode, Update, InlineKeyboardMarkup, InlineKeyboardButton, replymarkup, ChatPermissions
-from telegram.error import BadRequest
+from telegram.ext import CallbackContext, CallbackQueryHandler
+from telegram import ParseMode, Update, InlineKeyboardMarkup, InlineKeyboardButton
 
 def anime_quote():
     url = "https://animechan.vercel.app/api/random"
@@ -43,8 +36,6 @@ def quotes(update: Update, context: CallbackContext):
     )
 
 def change_quote(update: Update, context: CallbackContext):
-    query = update.callback_query
-    chat = update.effective_chat
     message = update.effective_message
     quote, character, anime = anime_quote()
     msg = f"<i>❝{quote}❞</i>\n\n<b>{character} from {anime}</b>"
@@ -58,13 +49,10 @@ def change_quote(update: Update, context: CallbackContext):
  
 def animequotes(update: Update, context: CallbackContext):
     message = update.effective_message
-    name = message.reply_to_message.from_user.first_name if message.reply_to_message else message.from_user.first_name
     keyboard = [[InlineKeyboardButton(text="Change", callback_data="changek_quote")]]
     message.reply_photo(random.choice(QUOTES_IMG),reply_markup=InlineKeyboardMarkup(keyboard))
 
 def changek_quote(update: Update, context: CallbackContext):
-    query = update.callback_query
-    chat = update.effective_chat
     message = update.effective_message
     keyboard = [[InlineKeyboardButton(text="Change", callback_data="quotek_change")]]
     message.reply_photo(random.choice(QUOTES_IMG),reply_markup=InlineKeyboardMarkup(keyboard))
@@ -176,6 +164,6 @@ __mod_name__ = "AnimeQuotes"
 __help__ = """
 *Anime Quotes & Quotes*
 
-/animequotes - gives a random anime quote
-/quote - gives a random quote
+ ❍ `/animequotes` - gives a random anime quote
+ ❍ `/quote` - gives a random quote
 """

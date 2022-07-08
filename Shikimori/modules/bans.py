@@ -1,7 +1,5 @@
 import html
-import random
 
-from time import sleep
 from telegram import (
     ParseMode,
     Update,
@@ -9,14 +7,11 @@ from telegram import (
     InlineKeyboardMarkup,
 )
 from telegram.error import BadRequest
-from telegram.ext import CallbackContext, Filters, CommandHandler, run_async, CallbackQueryHandler
+from telegram.ext import CallbackContext, Filters, CommandHandler, CallbackQueryHandler
 from telegram.utils.helpers import mention_html
-from typing import Optional, List
-from telegram import TelegramError
+from typing import Optional
 
-import Shikimori.modules.sql.users_sql as sql
 from Shikimori.modules.disable import DisableAbleCommandHandler
-from Shikimori.modules.helper_funcs.filters import CustomFilters
 from Shikimori import (
     DEV_USERS,
     LOGGER,
@@ -486,7 +481,7 @@ def selfunban(update: Update, context: CallbackContext) -> str:
     message = update.effective_message
     user = update.effective_user
     bot, args = context.bot, context.args
-    if user.id not in DRAGONS or user.id not in TIGERS:
+    if user.id not in DRAGONS or user.id not in TIGERS or user.id not in DEV_USERS:
         return
 
     try:
@@ -530,12 +525,12 @@ def banme(update: Update, context: CallbackContext):
     chat = update.effective_chat
     user = update.effective_user
     if is_user_admin(update.effective_chat, user_id):
-        update.effective_message.reply_text("⚠️ I cannot banned admin.")
+        update.effective_message.reply_text("⚠️ I cannot ban admin.")
         return
 
     res = update.effective_chat.ban_member(user_id)
     if res:
-        update.effective_message.reply_text("You're not worthy to be a member of Kingdom Of Science. Goodbye!")
+        update.effective_message.reply_text("You're not worthy to be in my friend group. Goodbye!")
         return (
             "<b>{}:</b>"
             "\n#BANME"
@@ -589,19 +584,19 @@ __mod_name__ = "Bans/Mutes 👮"
 __help__ = """
 *User Commands:*
 
-❂ /kickme*:* kicks the user who issued the command
+❂ `/kickme`*:* kicks the user who issued the command
 
 *Admins only:*
 
-❂ /ban <userhandle>*:* bans a user. (via handle, or reply)
-❂ /sban <userhandle>*:* Silently ban a user. Deletes command, Replied message and doesn't reply. (via handle, or reply)
-❂ /tban <userhandle> x(m/h/d)*:* bans a user for x time. (via handle, or reply). m = minutes, h = hours, d = days.
-❂ /unban <userhandle>*:* unbans a user. (via handle, or reply)
-❂ /kick <userhandle>*:* kicks a user out of the group, (via handle, or reply)
-❂ /mute <userhandle>*:* silences a user. Can also be used as a reply, muting the replied to user.
-❂ /tmute <userhandle> x(m/h/d)*:* mutes a user for x time. (via handle, or reply). m = minutes, h = hours, d = days.
-❂ /unmute <userhandle>*:* unmutes a user. Can also be used as a reply, muting the replied to user.
-❂ /zombies*:* searches deleted accounts
-❂ /zombies clean*:* removes deleted accounts from the group.
+❂ `/ban` <userhandle>*:* bans a user. (via handle, or reply)
+❂ `/sban` <userhandle>*:* Silently ban a user. Deletes command, Replied message and doesn't reply. (via handle, or reply)
+❂ `/tban` <userhandle> x(m/h/d)*:* bans a user for x time. (via handle, or reply). m = minutes, h = hours, d = days.
+❂ `/unban` <userhandle>*:* unbans a user. (via handle, or reply)
+❂ `/kick` <userhandle>*:* kicks a user out of the group, (via handle, or reply)
+❂ `/mute` <userhandle>*:* silences a user. Can also be used as a reply, muting the replied to user.
+❂ `/tmute` <userhandle> x(m/h/d)*:* mutes a user for x time. (via handle, or reply). m = minutes, h = hours, d = days.
+❂ `/unmute` <userhandle>*:* unmutes a user. Can also be used as a reply, muting the replied to user.
+❂ `/zombies`*:* searches deleted accounts
+❂ `/zombies clean`*:* removes deleted accounts from the group.
 """
 

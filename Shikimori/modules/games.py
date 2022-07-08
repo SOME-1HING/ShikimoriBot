@@ -8,12 +8,12 @@ from Shikimori import pbot as app
 __mod_name__ = "Games 🎮"
 __help__ = """
 Use these commands and try to score.\n\n
-/dice - Dice 🎲\n
-/dart - Dart 🎯\n
-/basket - Basket Ball 🏀\n
-/bowling - Bowling Ball 🎳\n
-/football - Football ⚽\n
-/slot - Spin slot machine 🎰
+ ❍ `/dice` - Dice 🎲\n
+ ❍ `/dart` - Dart 🎯\n
+ ❍ `/basket` - Basket Ball 🏀\n
+ ❍ `/bowling` - Bowling Ball 🎳\n
+ ❍ `/football` - Football ⚽\n
+ ❍ `/slot` - Spin slot machine 🎰
 """
 
 @app.on_message(filters.command("dice"))

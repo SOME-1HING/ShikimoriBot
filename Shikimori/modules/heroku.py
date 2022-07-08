@@ -24,7 +24,7 @@ import os
 import heroku3
 import requests
 
-from Shikimori import telethn as borg, HEROKU_APP_NAME, HEROKU_API_KEY, MAINDEV_ID
+from Shikimori import telethn as HEROKU_APP_NAME, HEROKU_API_KEY, MAINDEV_ID
 from Shikimori.events import register
 
 heroku_api = "https://api.heroku.com"

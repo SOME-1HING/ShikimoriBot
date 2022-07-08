@@ -1,4 +1,3 @@
-from telegram import InlineKeyboardButton
 from Shikimori.modules.animedev import client as animedev_client, exceptions
 from Shikimori.events import register
 from Shikimori import telethn, SUPPORT_CHAT

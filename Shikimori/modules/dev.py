@@ -5,8 +5,6 @@ import sys
 from contextlib import suppress
 from time import sleep
 
-import Shikimori
-
 from Shikimori import dispatcher
 from Shikimori.modules.helper_funcs.chat_status import dev_plus
 from telegram import TelegramError, Update
@@ -77,9 +75,9 @@ Here is help for Dev Commands.
 
 Note: Consult with other devs before performing any actions.
 
-/leave <chat id> - Bot leaves the group.
-/reboot - To restart Bot.
-/gitpull - Pull changes from github and redeploys the bot. [Must have github connected with Heroku]
+❂ `/leave` <chat id> - Bot leaves the group.
+❂ `/reboot` - To restart Bot.
+❂ `/gitpull` - Pull changes from github and redeploys the bot. [Must have github connected with Heroku]
 """
 
 

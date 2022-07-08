@@ -2397,9 +2397,9 @@ def fed_user_help(update: Update, context: CallbackContext):
     update.effective_message.reply_text(
         """*🎩 Any user:*
 
-❂ /fbanstat*:* Shows if you/or the user you are replying to or their username is fbanned somewhere or not
-❂ /fednotif <on/off>*:* Federation settings not in PM when there are users who are fbaned/unfbanned
-❂ /frules*:* See Federation regulations\n""",
+❂ `/fbanstat`*:* Shows if you/or the user you are replying to or their username is fbanned somewhere or not
+❂ `/fednotif <on/off>`*:* Federation settings not in PM when there are users who are fbaned/unfbanned
+❂ `/frules`*:* See Federation regulations\n""",
         parse_mode=ParseMode.MARKDOWN,
     )
 

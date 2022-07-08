@@ -589,14 +589,13 @@ __mod_name__ = "Anime ⛩️"
 
 __help__ = """
                        
-> /anime <anime>: returns information about the anime.
-> /whatanime: returns source of anime when replied to photo or gif.                                                          
+> `/anime` <anime>: returns information about the anime.
+> `/whatanime`: returns source of anime when replied to photo or gif.                                                          
 > `/character` <character>: returns information about the character.
 > `/manga` <manga>: returns information about the manga.
 > `/user` <user>: returns information about a MyAnimeList user.
 > `/upcoming`: returns a list of new anime in the upcoming seasons.
 > `/airing` <anime>: returns anime airing info.
-> `/whatanime` <anime>: reply to gif or photo.
 > `/kaizoku` <anime>: search an anime on animekaizoku.com
 > `/kayo` <anime>: search an anime on animekayo.com
 > `/latest` : Get list of animes airing today

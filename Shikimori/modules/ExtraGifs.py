@@ -4,12 +4,11 @@ import time
 
 import Shikimori.modules.ExtraGifs_strings as ExtraGifs_strings
 from Shikimori import dispatcher
-from Shikimori.modules.disable import DisableAbleCommandHandler, DisableAbleMessageHandler
+from Shikimori.modules.disable import DisableAbleCommandHandler
 from Shikimori.modules.helper_funcs.chat_status import is_user_admin
 from Shikimori.modules.helper_funcs.extraction import extract_user
 from telegram import ChatPermissions, ParseMode, Update
 from telegram.error import BadRequest
-from telegram.ext import CallbackContext, run_async, CommandHandler, Filters
 
 GIF_ID = "CgACAgQAAx0CSVUvGgAC7KpfWxMrgGyQs-GUUJgt-TSO8cOIDgACaAgAAlZD0VHT3Zynpr5nGxsE"
 

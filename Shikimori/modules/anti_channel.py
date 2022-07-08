@@ -1,6 +1,6 @@
 from telegram.ext.filters import Filters
 from Shikimori.modules.helper_funcs.decorators import Shikimoricmd, Shikimorimsg
-from telegram import Update, message
+from telegram import Update
 from telegram.ext import CallbackContext
 from Shikimori.modules.helper_funcs.anonymous import user_admin, AdminPerms
 import html

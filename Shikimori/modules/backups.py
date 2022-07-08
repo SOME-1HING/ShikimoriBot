@@ -116,6 +116,9 @@ def import_data(update, context):
             text = "Backup fully restored"
         msg.reply_text(text, parse_mode="markdown")
 
+    else:
+        msg.reply_text("Reply to a .backup file made from the command '/export'", parse_mode="markdown")
+
 
 @user_admin
 def export_data(update, context):
@@ -385,3 +388,11 @@ EXPORT_HANDLER = CommandHandler(
 
 dispatcher.add_handler(IMPORT_HANDLER)
 dispatcher.add_handler(EXPORT_HANDLER)
+
+
+__help__ = """
+*Backup and restore chat backup*
+
+ ❍ `/export` - Sends backup file of the chat.
+ ❍ `/import` - Reply to a backup file to restore the chat.
+"""

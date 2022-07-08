@@ -1,8 +1,7 @@
 import time
-from typing import List
 
 from telegram import Update
-from telegram.ext import run_async, CallbackContext
+from telegram.ext import CallbackContext
 
 from Shikimori import dispatcher
 from Shikimori.modules.disable import DisableAbleCommandHandler
@@ -317,11 +316,11 @@ __handlers__ = [
 __mod_name__ = "Animation 🎬"
 
 __help__ = """
-- /love ❣️
-- /hack 👨‍💻
-- /bombs 💣
-- /moon 🌖
-- /clock 🕑 
-- /earth 🌏
-- /kill 💀
+- `/love` ❣️
+- `/hack` 👨‍💻
+- `/bombs` 💣
+- `/moon` 🌖
+- `/clock` 🕑 
+- `/earth` 🌏
+- `/kill` 💀
 """

@@ -2,8 +2,8 @@
 # You are free to use this module. But don't delete this commented text. Thank you.
 
 from Shikimori import dispatcher, MEDIA_BYE, MEDIA_GM, MEDIA_GN, MEDIA_HELLO
-from telegram import ParseMode, Update
-from telegram.ext import CallbackContext, Filters, MessageHandler
+from telegram import ParseMode
+from telegram.ext import Filters, MessageHandler
 import time
 
 IMG_GM = MEDIA_GM.split(".")

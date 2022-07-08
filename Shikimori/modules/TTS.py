@@ -3,8 +3,6 @@ import os
 from gtts import gTTS
 from gtts import gTTSError
 from telethon import *
-from telethon.tl import functions
-from telethon.tl import types
 from telethon.tl.types import *
 
 from Shikimori import *

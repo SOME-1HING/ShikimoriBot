@@ -1,6 +1,5 @@
 from Shikimori.core.sections import section
 import requests
-from Shikimori.utils.http import get
 from Shikimori import dispatcher
 from telegram.ext import CommandHandler, CallbackContext
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, ParseMode

@@ -22,8 +22,6 @@ import json
 import requests
 from PyDictionary import PyDictionary
 from telethon import *
-import re
-import aiohttp
 
 from telethon.tl.types import *
 
@@ -107,4 +105,4 @@ __help__ = """
 • `/spell`*:* while replying to a message, will reply with a grammar corrected version.
 """
 
-__mod_name__ = "Grammar"
+__mod_name__ = "Grammar/ English"

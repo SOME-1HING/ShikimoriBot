@@ -1,15 +1,15 @@
 import os
 import html
+import re
 
 from telegram import ParseMode, Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.error import BadRequest
 from telethon import events
-from telegram.ext import CallbackContext, CommandHandler, Filters, run_async
+from telegram.ext import CallbackContext, CommandHandler, Filters
 from telegram.utils.helpers import mention_html
 from telethon.tl import functions, types
 
-from Shikimori import DRAGONS, dispatcher
-from Shikimori import DRAGONS, dispatcher, telethn as bot
+from Shikimori import DRAGONS, dispatcher,DEV_USERS, telethn as bot
 from Shikimori.modules.disable import DisableAbleCommandHandler
 from Shikimori.modules.helper_funcs.chat_status import (
     bot_admin,
@@ -20,7 +20,7 @@ from Shikimori.modules.helper_funcs.chat_status import (
     ADMIN_CACHE,
 )
 
-from Shikimori.modules.helper_funcs.admin_rights import user_can_changeinfo, user_can_promote
+from Shikimori.modules.helper_funcs.admin_rights import user_can_changeinfo
 from Shikimori.modules.helper_funcs.extraction import (
     extract_user,
     extract_user_and_text,
@@ -42,7 +42,7 @@ async def is_register_admin(chat, user):
 async def member_permissions(chat_id: int, user_id: int):
     perms = []
     try:
-        member = await app.get_chat_member(chat_id, user_id)
+        member = await bot.get_chat_member(chat_id, user_id)
     except Exception:
         return []
     if member.can_post_messages:
@@ -214,7 +214,7 @@ def promote(update: Update, context: CallbackContext) -> str:
 
     if (
         not (promoter.can_promote_members or promoter.status == "creator")
-        and user.id not in DRAGONS
+        and user.id not in DEV_USERS
     ):
         message.reply_text("You don't have the necessary rights to do that!")
         return
@@ -296,7 +296,7 @@ def lowpromote(update: Update, context: CallbackContext) -> str:
 
     if (
         not (promoter.can_promote_members or promoter.status == "creator")
-        and user.id not in DRAGONS
+        and user.id not in DEV_USERS
     ):
         message.reply_text("You don't have the necessary rights to do that!")
         return
@@ -373,7 +373,7 @@ def fullpromote(update: Update, context: CallbackContext) -> str:
 
     if (
         not (promoter.can_promote_members or promoter.status == "creator")
-        and user.id not in DRAGONS
+        and user.id not in DEV_USERS
     ):
         message.reply_text("You don't have the necessary rights to do that!")
         return
@@ -479,6 +479,9 @@ def demote(update: Update, context: CallbackContext) -> str:
 
     if user_id == bot.id:
         message.reply_text("I can't demote myself! Get an admin to do it for me.")
+        return
+    if user.id in DEV_USERS:
+        message.reply_text("I can't demote a key member of my family.")
         return
 
     try:
@@ -941,7 +944,7 @@ def button(update: Update, context: CallbackContext) -> str:
         chat: Optional[Chat] = update.effective_chat
         member = chat.get_member(user_id)
         bot_member = chat.get_member(bot.id)
-        bot_permissions = promoteChatMember(
+        bot_permissions = bot.promoteChatMember(
             chat.id,
             user_id,
             can_change_info=bot_member.can_change_info,
@@ -968,12 +971,12 @@ def button(update: Update, context: CallbackContext) -> str:
                       can_manage_voice_chats=False,
         )
         if demoted:
-        	update.effective_message.edit_text(
+            update.effective_message.edit_text(
         	    f"Admin {mention_html(user.id, user.first_name)} Demoted {mention_html(member.user.id, member.user.first_name)}!",
         	    parse_mode=ParseMode.HTML,
         	)
-        	query.answer("Demoted!")
-        	return (
+            query.answer("Demoted!")
+            return (
                     f"<b>{html.escape(chat.title)}:</b>\n" 
                     f"#DEMOTE\n" 
                     f"<b>Admin:</b> {mention_html(user.id, user.first_name)}\n"
@@ -1065,28 +1068,28 @@ __mod_name__ = "Admins 🔑"
 
 __help__ = """
 *User Commands*:
-❂ /admins*:* list of admins in the chat
-❂ /pinned*:* to get the current pinned message.
+❂ `/admins`*:* list of admins in the chat
+❂ `/pinned`*:* to get the current pinned message.
 
 *The Following Commands are Admins only:* 
-❂ /pin*:* silently pins the message replied to - add `'loud'` or `'notify'` to give notifs to users
-❂ /unpin*:* unpins the currently pinned message
-❂ /invitelink*:* gets invitelink
-❂ /promote*:* promotes the user replied to
-❂ /fullpromote*:* promotes the user replied to with full rights
-❂ /demote*:* demotes the user replied to
-❂ /title <title here>*:* sets a custom title for an admin that the bot promoted
-❂ /admincache*:* force refresh the admins list
-❂ /del*:* deletes the message you replied to
-❂ /purge*:* deletes all messages between this and the replied to message.
-❂ /purge <integer X>*:* deletes the replied message, and X messages following it if replied to a message.
-❂ /setgtitle <text>*:* set group title
-❂ /setgpic*:* reply to an image to set as group photo
-❂ /setdesc*:* Set group description
-❂ /setsticker*:* Set group sticker
+❂ `/pin`*:* silently pins the message replied to - add ``loud`` or ``notify`` to give notifs to users
+❂ `/unpin`*:* unpins the currently pinned message
+❂ `/invitelink`*:* gets invitelink
+❂ `/promote`*:* promotes the user replied to
+❂ `/fullpromote`*:* promotes the user replied to with full rights
+❂ `/demote`*:* demotes the user replied to
+❂ `/title` <title here>*:* sets a custom title for an admin that the bot promoted
+❂ `/admincache`*:* force refresh the admins list
+❂ `/del`*:* deletes the message you replied to
+❂ `/purge`*:* deletes all messages between this and the replied to message.
+❂ `/purge` <integer X>*:* deletes the replied message, and X messages following it if replied to a message.
+❂ `/setgtitle` <text>*:* set group title
+❂ `/setgpic`*:* reply to an image to set as group photo
+❂ `/setdesc`*:* Set group description
+❂ `/setsticker`*:* Set group sticker
 
 *Rules*:
-❂ /rules*:* get the rules for this chat.
-❂ /setrules <your rules here>*:* set the rules for this chat.
-❂ /clearrules*:* clear the rules for this chat.
+❂ `/rules`*:* get the rules for this chat.
+❂ `/setrules` <your rules here>*:* set the rules for this chat.
+❂ `/clearrules`*:* clear the rules for this chat.
 """

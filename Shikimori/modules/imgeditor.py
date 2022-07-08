@@ -16,7 +16,7 @@ from Shikimori.Extras.ImageEditor.edit_1 import (  # pylint:disable=import-error
     bright,
     g_blur,
     mix,
-    normal_blur,
+    normal_blur,    
 )
 from Shikimori.Extras.ImageEditor.edit_2 import (  # pylint:disable=import-error
     cartoon,
@@ -62,6 +62,7 @@ lel = 00000000
 # pylint:disable=import-error
 @pbot.on_message(filters.command(["edit", "editor"]))
 async def photo(client: pbot, message: Message):
+    msg_id = message.reply_to_message.message_id
     try:
         if not message.reply_to_message.photo:
             await client.send_message(message.chat.id, "Reply to an image man!ㅤㅤ")
@@ -113,7 +114,7 @@ async def photo(client: pbot, message: Message):
                     ],
                 ]
             ),
-            reply_to_message_id=message.reply_to_message.message_id,
+            reply_to_message_id= msg_id,
         )
     except Exception as e:
         print("photomarkup error - " + str(e))

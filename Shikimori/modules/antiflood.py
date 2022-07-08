@@ -1,5 +1,5 @@
 import html
-from typing import Optional, List
+from typing import Optional
 import re
 
 from telegram import Message, Chat, Update, User, ChatPermissions

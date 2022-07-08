@@ -1,6 +1,6 @@
 import requests
 from telegram import ParseMode, Update
-from telegram.ext import CallbackContext, run_async
+from telegram.ext import CallbackContext
 
 from Shikimori import dispatcher
 from Shikimori.modules.disable import DisableAbleCommandHandler
@@ -26,6 +26,6 @@ dispatcher.add_handler(COVID_HANDLER)
 __mod_name__ = "COVID 19 🦠"
 __help__ = """
 *COVID 19*
-/corona - Gives information regarding covid 19 cases
-/covid - Gives information regarding covid 19 cases
+`/corona` - Gives information regarding covid 19 cases
+`/covid` - Gives information regarding covid 19 cases
 """

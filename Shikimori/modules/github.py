@@ -1,4 +1,3 @@
-
 import aiohttp
 from pyrogram import filters
 from Shikimori import pbot
@@ -53,6 +52,6 @@ __mod_name__ = "Github 🐱‍💻"
 __help__ = """
 Here is help for Github
 
-/github <username> - Get information from a profile on GitHub.
-/git <username> - Get information from a profile on GitHub.
+ ❍ `/github` <username> - Get information from a profile on GitHub.
+ ❍ `/git` <username> - Get information from a profile on GitHub.
 """
