@@ -18,7 +18,7 @@ hello_id = IMG_HELLO[-1]
 IMG_BYE = MEDIA_BYE.split(".")
 bye_id = IMG_BYE[-1]
 
-def goodnight(update: Update, context: CallbackContext):
+def goodnight(update, context):
     message = update.effective_message
     user1 = message.from_user.first_name
     try:
@@ -76,7 +76,7 @@ def goodmorning(update, context):
     
     time.sleep(5)
 
-def hello(update: Update, context: CallbackContext):
+def hello(update, context):
     message = update.effective_message
     user1 = message.from_user.first_name
     try:
@@ -104,14 +104,10 @@ def hello(update: Update, context: CallbackContext):
 
     time.sleep(5)
 
-def bye(update: Update, context: CallbackContext):
+def bye(update, context):
     message = update.effective_message
     user1 = message.from_user.first_name
     try:
-        update.effective_message.reply_animation(
-            MEDIA_BYE, caption = f"*Bye!!* {user1}",
-            parse_mode=ParseMode.MARKDOWN,
-        )
         if bye_id in ("jpeg", "jpg", "png"):
             update.effective_message.reply_photo(
             MEDIA_BYE, caption = f"*Bye!!* {user1}",
@@ -155,10 +151,3 @@ dispatcher.add_handler(GDMORNING_HANDLER)
 dispatcher.add_handler(GDNIGHT_HANDLER)
 dispatcher.add_handler(HELLO_HANDLER)
 dispatcher.add_handler(BYE_HANDLER)
-
-__handlers__ = [
-    GDMORNING_HANDLER,
-    GDNIGHT_HANDLER,
-    HELLO_HANDLER,
-    BYE_HANDLER
-]
