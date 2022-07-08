@@ -9,9 +9,9 @@ from Shikimori.modules.disable import DisableAbleMessageHandler
 from telegram import ParseMode, Update
 from telegram.ext import CallbackContext, Filters
 
-IMG_GM = "https://telegra.ph/file/fff37608fa21d9d3d0b39.jpg"
-IMG_GN = "https://telegra.ph/file/1862c7260109e24ed4715.jpg"
-IMG_HELLO = "https://telegra.ph/file/f3f2dc386a33e37f6cb05.png"
+IMG_GM = "https://te.legra.ph/file/e792aa171c43494aff9ef.mp4"
+IMG_GN = "https://te.legra.ph/file/13abc99652b2cfea4411d.mp4"
+IMG_HELLO = "https://telegra.ph/file/c8efe8c740430f7436d19.mp4"
 IMG_BYE = "https://te.legra.ph/file/9d570141d0b411f2b77bc.mp4"
 IMG_STUDY = "https://te.legra.ph/file/78e4a71f186031e3e16ee.mp4"
 IMG_AMAZING = "https://te.legra.ph/file/9d570141d0b411f2b77bc.mp4"
