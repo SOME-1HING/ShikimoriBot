@@ -112,7 +112,7 @@ HELLO_HANDLER = DisableAbleMessageHandler(
 STUDY_HANDLER = DisableAbleMessageHandler(
     Filters.regex(r"(?i)(study)"), study, friendly="study", run_async = True
 )
-WELCONE_HANDLER = DisableAbleMessageHandler(
+WELCOME_HANDLER = DisableAbleMessageHandler(
     Filters.regex(r"(?i)(welcome)"), welcome, friendly="welcome", run_async = True
 )
 AMAZING_HANDLER = DisableAbleMessageHandler(
