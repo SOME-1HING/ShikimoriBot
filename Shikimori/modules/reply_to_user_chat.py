@@ -4,6 +4,7 @@
 from Shikimori import dispatcher, MEDIA_BYE, MEDIA_GM, MEDIA_GN, MEDIA_HELLO
 from telegram import ParseMode, Update
 from telegram.ext import CallbackContext, Filters, MessageHandler
+import time
 
 IMG_GM = MEDIA_GM.split(".")
 gm_id = IMG_GM[-1]
@@ -44,6 +45,8 @@ def goodnight(update: Update, context: CallbackContext):
         reply = f"*Good Night:* {user1}"
         message.reply_text(reply)
 
+    time.sleep(5)
+
 
 def goodmorning(update, context):
     message = update.effective_message
@@ -70,6 +73,8 @@ def goodmorning(update, context):
     except:
         reply = f"*Good Morning:* {user1}"
         message.reply_text(reply)
+    
+    time.sleep(5)
 
 def hello(update: Update, context: CallbackContext):
     message = update.effective_message
@@ -96,6 +101,8 @@ def hello(update: Update, context: CallbackContext):
     except:
         reply = f"*Hello* {user1}"
         message.reply_text(reply)
+
+    time.sleep(5)
 
 def bye(update: Update, context: CallbackContext):
     message = update.effective_message
@@ -126,6 +133,8 @@ def bye(update: Update, context: CallbackContext):
     except:
         reply = f"*Bye!!* {user1}"
         message.reply_text(reply)
+    
+    time.sleep(5)
 
 
 
