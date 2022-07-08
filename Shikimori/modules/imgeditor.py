@@ -62,7 +62,6 @@ lel = 00000000
 # pylint:disable=import-error
 @pbot.on_message(filters.command(["edit", "editor"]))
 async def photo(client: pbot, message: Message):
-    msg_id = message.reply_to_message.message_id
     try:
         if not message.reply_to_message.photo:
             await client.send_message(message.chat.id, "Reply to an image man!ㅤㅤ")
@@ -113,8 +112,7 @@ async def photo(client: pbot, message: Message):
                         InlineKeyboardButton(text="❌ CLOSE", callback_data="close_e"),
                     ],
                 ]
-            ),
-            reply_to_message_id= msg_id,
+            )
         )
     except Exception as e:
         print("photomarkup error - " + str(e))
