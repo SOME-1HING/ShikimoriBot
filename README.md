@@ -1,4 +1,4 @@
-![Shikimori](https://telegra.ph/file/c40f4f6f39cfcef0c7040.jpg)
+![Shikimori](https://telegra.ph/file/d0c1cd93423c66c099b48.jpg)
 
 <h2 align="center">
     ──「 SHIKIMORI IS A MODULAR BOT WITH ANIME THEME 」──
@@ -9,6 +9,14 @@
   <a href="https://makeapullrequest.com"> <img src="https://img.shields.io/badge/PRs-Welcome-yellow?style=for-the-badge" alt="PRs" /></a></br>
   <a href="https://www.python.org/"> <img src="https://img.shields.io/badge/Made%20With-Python-orange?style=for-the-badge&logo=python" alt="Python" /> </a>
   <a href="https://github.com/SOME-1HING/ShikimoriBot"> <img src="https://img.shields.io/badge/Maintained-Yes-lightgrey?style=for-the-badge" alt="Maintenance" /> </a>
+</p>
+
+<h2 align="center">
+    ──「 DOCUMENTATION 」──
+</h2>
+
+<p align="center">
+<p align="center"><a href="https://some1hing.gitbook.io/shikimori-bot/"> <img src="https://img.shields.io/badge/DOCUMENTATION-grey?style=for-the-badge&logo=gitbook" width="220" height="38.45"/></a>
 </p>
 
 <h2 align="center">
