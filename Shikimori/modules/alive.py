@@ -1,5 +1,3 @@
-import html
-from Shikimori import OWNER_ID
 from Shikimori import ALIVE_MEDIA, UPDATE_CHANNEL, SUPPORT_CHAT, OWNER_USERNAME, dispatcher, NETWORK, NETWORK_USERNAME
 from Shikimori.modules.disable import DisableAbleCommandHandler
 from telegram import ParseMode, Update,InlineKeyboardButton, InlineKeyboardMarkup
@@ -24,14 +22,13 @@ def awake(update: Update, context: CallbackContext):
     
     first_name = update.effective_user.first_name
     user = message.from_user
-    owner = OWNER_ID
 
     TEXT = f"""
     <b>Hi [{first_name}](tg://user?id={user.id}), I'm Shikomori Robot.
 
     ⚪ I'm Working Properly
 
-    ⚪ My Owner : [{html.escape(owner.first_name)}](https://t.me/{OWNER_USERNAME})</b>
+    ⚪ My Owner : [{OWNER_USERNAME}](https://t.me/{OWNER_USERNAME})</b>
     """
     if NETWORK:
         TEXT = TEXT + f"\n\n⚪ <b>I am Powered by : [{NETWORK}](https://t.me/{NETWORK_USERNAME}) \n\n" + "Thanks For Adding Me Here ❤️</b>"
