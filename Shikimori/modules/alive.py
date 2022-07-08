@@ -22,9 +22,8 @@ def awake(update: Update, context: CallbackContext):
         ],
      ]
     
-    user_id = extract_user(update.effective_message, args)
     first_name = update.effective_user.first_name
-    user = bot.get_chat(user_id)
+    user = message.from_user
     owner = OWNER_ID
 
     TEXT = f"""
@@ -32,7 +31,7 @@ def awake(update: Update, context: CallbackContext):
 
     ⚪ I'm Working Properly
 
-    ⚪ My Owner : [VOID](https://t.me/{OWNER_USERNAME})</b>
+    ⚪ My Owner : [{html.escape(owner.first_name)}](https://t.me/{OWNER_USERNAME})</b>
     """
     if NETWORK:
         TEXT = TEXT + f"\n\n⚪ <b>I am Powered by : [{NETWORK}](https://t.me/{NETWORK_USERNAME}) \n\n" + "Thanks For Adding Me Here ❤️</b>"
