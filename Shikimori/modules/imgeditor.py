@@ -16,7 +16,7 @@ from Shikimori.Extras.ImageEditor.edit_1 import (  # pylint:disable=import-error
     bright,
     g_blur,
     mix,
-    normal_blur,    
+    normal_blur,
 )
 from Shikimori.Extras.ImageEditor.edit_2 import (  # pylint:disable=import-error
     cartoon,
