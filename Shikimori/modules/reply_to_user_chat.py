@@ -15,7 +15,7 @@ IMG_HELLO = "https://telegra.ph/file/c8efe8c740430f7436d19.mp4"
 IMG_BYE = "https://te.legra.ph/file/9d570141d0b411f2b77bc.mp4"
 IMG_STUDY = "https://te.legra.ph/file/78e4a71f186031e3e16ee.mp4"
 IMG_WELCOME = "https://te.legra.ph/file/bdeaae4056038863afe32.mp4"
-IMG_AMAZING = "https://te.legra.ph/file/9d570141d0b411f2b77bc.mp4
+IMG_AMAZING = "https://te.legra.ph/file/9d570141d0b411f2b77bc.mp4"
 
 def goodnight(update: Update, context: CallbackContext):
     message = update.effective_message
