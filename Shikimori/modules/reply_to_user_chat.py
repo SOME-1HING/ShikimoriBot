@@ -2,9 +2,8 @@
 # You are free to use this module. But don't delete this commented text. Thank you.
 
 from Shikimori import dispatcher, MEDIA_BYE, MEDIA_GM, MEDIA_GN, MEDIA_HELLO
-from Shikimori.modules.disable import DisableAbleMessageHandler
 from telegram import ParseMode, Update
-from telegram.ext import CallbackContext, Filters
+from telegram.ext import CallbackContext, Filters, MessageHandler
 
 IMG_GM = MEDIA_GM.split(".")
 gm_id = IMG_GM[-1]
@@ -130,17 +129,17 @@ def bye(update: Update, context: CallbackContext):
 
 
 
-GDMORNING_HANDLER = DisableAbleMessageHandler(
-    Filters.regex(r"(?i)(good morning|goodmorning)"), goodmorning, friendly="goodmorning", run_async = True
+GDMORNING_HANDLER = MessageHandler(
+    Filters.regex("(?i)(good morning|goodmorning)"), goodmorning, friendly="goodmorning", run_async = True
 )
-GDNIGHT_HANDLER = DisableAbleMessageHandler(
-    Filters.regex(r"(?i)(good night|goodnight)"), goodnight, friendly="goodnight", run_async = True
+GDNIGHT_HANDLER = MessageHandler(
+    Filters.regex("(?i)(good night|goodnight)"), goodnight, friendly="goodnight", run_async = True
 )
-BYE_HANDLER = DisableAbleMessageHandler(
-    Filters.regex(r"(?i)(bye|brb|afk)"), bye, friendly="bye", run_async = True
+BYE_HANDLER = MessageHandler(
+    Filters.regex("(?i)(bye|brb|afk)"), bye, friendly="bye", run_async = True
 )
-HELLO_HANDLER = DisableAbleMessageHandler(
-    Filters.regex(r"(?i)(hello)"), hello, friendly="hello", run_async = True
+HELLO_HANDLER = MessageHandler(
+    Filters.regex("(?i)(hello)"), hello, friendly="hello", run_async = True
 )
 
 dispatcher.add_handler(GDMORNING_HANDLER)
