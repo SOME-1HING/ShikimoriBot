@@ -14,8 +14,8 @@ IMG_GN = "https://te.legra.ph/file/13abc99652b2cfea4411d.mp4"
 IMG_HELLO = "https://telegra.ph/file/c8efe8c740430f7436d19.mp4"
 IMG_BYE = "https://te.legra.ph/file/9d570141d0b411f2b77bc.mp4"
 IMG_STUDY = "https://te.legra.ph/file/78e4a71f186031e3e16ee.mp4"
-IMG_WELCOME = "https://te.legra.ph/file/bdeaae4056038863afe32.mp4"
-IMG_AMAZING = "https://te.legra.ph/file/9d570141d0b411f2b77bc.mp4"
+IMG_WELLCOME = "https://te.legra.ph/file/bdeaae4056038863afe32.mp4"
+IMG_AMAZING = "https://te.legra.ph/file/c03742d7d1063eb910a17.mp4"
 
 def goodnight(update: Update, context: CallbackContext):
     message = update.effective_message
@@ -78,12 +78,12 @@ def study(update: Update, context: CallbackContext):
         reply = f"*JaPadle!!* {user1}"
         message.reply_text(reply)
    
-def welcome(update: Update, context: CallbackContext):
+def wellcome(update: Update, context: CallbackContext):
     message = update.effective_message
     user1 = message.from_user.first_name
     try:
         update.effective_message.reply_animation(
-            IMG_WELCOME, caption = f"*Ab mai itna be khash nahi!!!!* {user1}",
+            IMG_WELLCOME, caption = f"*Ab mai itna be khash nahi!!!!* {user1}",
             parse_mode=ParseMode.MARKDOWN,
         )
     except:
@@ -112,8 +112,8 @@ HELLO_HANDLER = DisableAbleMessageHandler(
 STUDY_HANDLER = DisableAbleMessageHandler(
     Filters.regex(r"(?i)(study)"), study, friendly="study", run_async = True
 )
-WELCOME_HANDLER = DisableAbleMessageHandler(
-    Filters.regex(r"(?i)(welcome)"), welcome, friendly="welcome", run_async = True
+WELLCOME_HANDLER = DisableAbleMessageHandler(
+    Filters.regex(r"(?i)(wellcome)"), wellcome, friendly="wellcome", run_async = True
 )
 AMAZING_HANDLER = DisableAbleMessageHandler(
     Filters.regex(r"(?i)(amazing)"), amazing, friendly="amazing", run_async = True
@@ -124,7 +124,7 @@ dispatcher.add_handler(GDNIGHT_HANDLER)
 dispatcher.add_handler(HELLO_HANDLER)
 dispatcher.add_handler(BYE_HANDLER)
 dispatcher.add_handler(STUDY_HANDLER)
-dispatcher.add_handler(WELCOME_HANDLER)
+dispatcher.add_handler(WELLCOME_HANDLER)
 dispatcher.add_handler(AMAZING_HANDLER)
 
 
@@ -134,6 +134,6 @@ __handlers__ = [
     HELLO_HANDLER,
     BYE_HANDLER, 
     STUDY_HANDLER,
-    WELCOME_HANDLER,
+    WELLCOME_HANDLER,
     AMAZING_HANDLER
 ]
