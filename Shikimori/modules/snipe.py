@@ -1,19 +1,11 @@
 
-from time import sleep
-from typing import Optional, List
 from telegram import TelegramError
 from telegram import Update
-from telegram.error import BadRequest
-from telegram.ext import Filters, CommandHandler
-from telegram.ext.dispatcher import run_async, CallbackContext
+from telegram.ext import CommandHandler
+from telegram.ext.dispatcher import CallbackContext
 
-import random
-import Shikimori.modules.sql.users_sql as sql
 from Shikimori.modules.helper_funcs.filters import CustomFilters
-from Shikimori import dispatcher, DEV_USERS, LOGGER
-from Shikimori.modules.disable import DisableAbleCommandHandler
-
-
+from Shikimori import dispatcher, LOGGER
 
 def snipe(update: Update, context: CallbackContext):
     args = context.args
@@ -36,7 +28,7 @@ def snipe(update: Update, context: CallbackContext):
 
 __help__ = """
 *Dev  only:* 
-❂ /snipe <chatid> <string>*:* Make me send a message to a specific chat.
+❂ `/snipe` <chatid> <string>*:* Make me send a message to a specific chat.
 Make me send a message to a specific chat.
 """
 

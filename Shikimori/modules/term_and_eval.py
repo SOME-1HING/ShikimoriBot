@@ -4,7 +4,7 @@ import os
 import re
 import html
 import subprocess
-from io import StringIO, BytesIO
+from io import StringIO
 from Shikimori import pbot, OWNER_ID
 from pyrogram import filters
 

@@ -1,6 +1,3 @@
-import asyncio
-from telethon import events
-from telethon.tl.types import ChannelParticipantsAdmins
 from Shikimori import telethn
 from Shikimori.events import register as tomori
 

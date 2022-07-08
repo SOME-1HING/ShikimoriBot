@@ -1,6 +1,5 @@
 import os
 import math
-import requests
 import cloudscraper
 import textwrap
 import urllib.request as urllib
@@ -10,14 +9,12 @@ from bs4 import BeautifulSoup as bs
 
 from telegram import ParseMode, InlineKeyboardMarkup, InlineKeyboardButton
 from telegram import TelegramError, Update
-from telegram.ext import run_async, CallbackContext
+from telegram.ext import CallbackContext
 from telegram.utils.helpers import mention_html
 
 from Shikimori import dispatcher
 from Shikimori.modules.disable import DisableAbleCommandHandler
 from Shikimori.events import register as Shikimori
-from Shikimori import LOGGER
-from Shikimori import TEMP_DOWNLOAD_DIRECTORY
 from Shikimori import telethn as bot
 
 combot_stickers_url = "https://combot.org/telegram/stickers?q="
@@ -603,7 +600,7 @@ __help__ = """
  • `/stickers` : Find stickers for given term on combot sticker catalogue
  • `/delsticker` : To remove sticker from the kanged pack.
  • `/mmf <upper text>;<lower text>` : To add text to a sticker. NOTE- <upper text> or <lower text> maybe blank.
- • `/tiny : reply to a sticker to make it small.
+ • `/tiny` : reply to a sticker to make it small.
 """
 
 __mod_name__ = "Stickers"

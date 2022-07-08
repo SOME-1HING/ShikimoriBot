@@ -4,8 +4,6 @@ from Shikimori import LOGGER, dispatcher
 from Shikimori.modules.helper_funcs.chat_status import dev_plus
 from telegram import ParseMode, Update
 from telegram.ext import CallbackContext, CommandHandler
-from telegram.ext.dispatcher import run_async
-
 
 @dev_plus
 def shell(update: Update, context: CallbackContext):

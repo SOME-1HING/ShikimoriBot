@@ -20,7 +20,7 @@ def send(update, context):
 		
 
 __help__ = """The Send Module Allows you to send a custom message to users in a chat
-/snd :Send the given message
+`/snd` :Send the given message
 Note - /snd Hi will send the message hi to the chat"""
 
 __mod_name__ = "Send"

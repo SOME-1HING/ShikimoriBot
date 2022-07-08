@@ -45,6 +45,7 @@ from telegram.ext import (
     MessageHandler,
 )
 from telegram.utils.helpers import escape_markdown, mention_html, mention_markdown
+from multicolorcaptcha import CaptchaGenerator
 
 VALID_WELCOME_FORMATTERS = [
     "first",
@@ -70,8 +71,6 @@ ENUM_FUNC_MAP = {
 
 VERIFIED_USER_WAITLIST = {}
 CAPTCHA_ANS_DICT = {}
-
-from multicolorcaptcha import CaptchaGenerator
 
 # do not async
 def send(update, message, keyboard, backup_message):

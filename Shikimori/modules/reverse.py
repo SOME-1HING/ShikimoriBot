@@ -9,7 +9,7 @@ from bs4 import BeautifulSoup
 
 from telegram import InputMediaPhoto, TelegramError
 from telegram import Update
-from telegram.ext import CallbackContext, run_async
+from telegram.ext import CallbackContext
 
 from Shikimori import dispatcher
 from Shikimori.modules.disable import DisableAbleCommandHandler
