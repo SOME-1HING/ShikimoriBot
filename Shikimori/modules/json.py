@@ -2,7 +2,6 @@ import io
 from Shikimori.events import register
 from Shikimori import telethn as tbot
 from telethon import types
-from telethon import events
 from telethon.tl import functions
 from telethon.tl.types import *
 

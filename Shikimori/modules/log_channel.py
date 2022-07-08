@@ -8,7 +8,7 @@ FILENAME = __name__.rsplit(".", 1)[-1]
 if is_module_loaded(FILENAME):
     from telegram import ParseMode, Update
     from telegram.error import BadRequest, Unauthorized
-    from telegram.ext import CommandHandler, JobQueue, run_async
+    from telegram.ext import CommandHandler, JobQueue
     from telegram.utils.helpers import escape_markdown
 
     from Shikimori import EVENT_LOGS, LOGGER, dispatcher
@@ -191,9 +191,9 @@ if is_module_loaded(FILENAME):
     __help__ = """
 ──「 Log channel 」──
 
-❂ /logchannel*:* get log channel info
-❂ /setlog*:* set the log channel.
-❂ /unsetlog*:* unset the log channel.
+❂ `/logchannel`*:* get log channel info
+❂ `/setlog`*:* set the log channel.
+❂ `/unsetlog`*:* unset the log channel.
 
 *Setting the log channel is done by*:
 

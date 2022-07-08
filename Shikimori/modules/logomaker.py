@@ -1,15 +1,12 @@
-from Shikimori.events import bot, register
+from Shikimori.events import register
 from Shikimori import MAINDEV_ID, OWNER_ID
 from Shikimori import telethn as tbot
 import os 
 from PIL import Image, ImageDraw, ImageFont
-import shutil 
-import random, re
+import random
 import requests
 import io
 import glob
-import time
-from telethon.tl.types import InputMessagesFilterPhotos
 from Shikimori.__main__ import bot_name, BOT_USERNAME, SUPPORT_CHAT
 
 

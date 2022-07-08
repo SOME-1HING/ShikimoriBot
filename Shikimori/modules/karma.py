@@ -1,7 +1,5 @@
 import asyncio
 from pyrogram import filters
-from aiohttp import ClientSession
-from Python_ARQ import ARQ
 
 from Shikimori import pbot as app, BOT_ID
 from Shikimori.utils.errors import capture_err

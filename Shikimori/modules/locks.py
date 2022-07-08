@@ -6,10 +6,9 @@ from telegram import Message, Chat, ParseMode, MessageEntity
 from telegram import TelegramError, ChatPermissions
 from telegram.error import BadRequest
 from telegram.ext import CommandHandler, MessageHandler, Filters
-from telegram.ext.dispatcher import run_async
 from telegram.utils.helpers import mention_html
 from alphabet_detector import AlphabetDetector
-from Shikimori import dispatcher, DRAGONS, LOGGER
+from Shikimori import dispatcher, LOGGER
 from Shikimori.modules.disable import DisableAbleCommandHandler
 from Shikimori.modules.helper_funcs.chat_status import (
     can_delete,
@@ -541,12 +540,12 @@ You're in the right place!
 The locks module allows you to lock away some common items in the \
 telegram world; the bot will automatically delete them!
 
-❂ /locktypes*:* Lists all possible locktypes
+❂ `/locktypes`*:* Lists all possible locktypes
 
 *Admins only:*
-❂ /lock <type>*:* Lock items of a certain type (not available in private)
-❂ /unlock <type>*:* Unlock items of a certain type (not available in private)
-❂ /locks*:* The current list of locks in this chat.
+❂ `/lock` <type>*:* Lock items of a certain type (not available in private)
+❂ `/unlock` <type>*:* Unlock items of a certain type (not available in private)
+❂ `/locks`*:* The current list of locks in this chat.
 
 Locks can be used to restrict a group's users.
 eg:
