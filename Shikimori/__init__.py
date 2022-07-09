@@ -3,6 +3,7 @@ import os
 import sys
 import time
 from pyrogram.types import Message
+from inspect import getfullargspec
 from pyrogram import Client, filters
 from redis import StrictRedis
 from aiohttp import ClientSession
@@ -16,13 +17,19 @@ StartTime = time.time()
 USE_JOIN_LOGGER = True
 
 # enable logging
+FORMAT = "[Shikimori] %(message)s"
 logging.basicConfig(
-    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
     handlers=[logging.FileHandler("log.txt"), logging.StreamHandler()],
     level=logging.INFO,
+    format=FORMAT,
+    datefmt="[%X]",
 )
+logging.getLogger("pyrogram").setLevel(logging.INFO)
+logging.getLogger('ptbcontrib.postgres_persistence.postgrespersistence').setLevel(logging.WARNING)
 
-LOGGER = logging.getLogger(__name__)
+LOGGER = logging.getLogger('[Shikimori]')
+LOGGER.info("Shikimori is starting. | Built by SOME1HING. | Licensed under GPLv3.")
+LOGGER.info("Handled by: github.com/SOME-1HING (t.me/SOME1HING)")
 
 async def eor(msg: Message, **kwargs):
     func = (
