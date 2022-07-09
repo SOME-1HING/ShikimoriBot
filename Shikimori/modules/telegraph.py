@@ -41,7 +41,7 @@ async def _(event):
                 end = datetime.now()
                 ms_two = (end - start).seconds
                 os.remove(downloaded_file_name)
-                await h.edit("[Telegraph Link](https://telegra.ph{}) `https://telegra.ph{}`".format(media_urls[0]), link_preview=True, parse_mode=ParseMode.MARKDOWN)
+                await h.edit("[Telegraph Link](https://telegra.ph{}) `https://telegra.ph{}`".format(media_urls[0], media_urls[0]), link_preview=True, parse_mode=ParseMode.MARKDOWN)
         elif input_str == "gt":
             user_object = await tbot.get_entity(r_message.sender_id)
             title_of_page = user_object.first_name # + " " + user_object.last_name
