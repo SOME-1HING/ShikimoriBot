@@ -15,8 +15,6 @@ from telethon.sessions import MemorySession
 
 StartTime = time.time()
 USE_JOIN_LOGGER = True
-WELCOME_DELAY_KICK_SEC = WELCOME_DELAY_KICK_SEC
-
 
 # enable logging
 logging.basicConfig(
