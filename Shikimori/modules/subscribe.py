@@ -1,5 +1,4 @@
 import html
-from tkinter import Button
 from feedparser import parse
 from Shikimori import dispatcher, updater, SUPPORT_CHAT
 from Shikimori.modules.helper_funcs.chat_status import user_admin
