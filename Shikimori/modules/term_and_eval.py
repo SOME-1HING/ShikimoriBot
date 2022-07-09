@@ -123,6 +123,6 @@ async def terminal(client, message):
             )
             os.remove("tg_bot/output.txt")
             return
-        await message.reply(f"**Output:**\n`{output}`", parse_mode="markdown")
+        await message.reply(f"<b>Output:</b>\n<tt>{output}</tt>", parse_mode="HTML")
     else:
         await message.reply("**Output:**\n`No Output`")
