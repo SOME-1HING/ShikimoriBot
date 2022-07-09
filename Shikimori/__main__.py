@@ -702,11 +702,17 @@ def main():
 
     if SUPPORT_CHAT is not None and isinstance(SUPPORT_CHAT, str):
         try:
-            dispatcher.bot.sendMessage(
-                f"@{SUPPORT_CHAT}", 
-                "👋 Hi, i'm alive.",
+            msg = dispatcher.bot.send_photo(
+                f"@{SUPPORT_CHAT}",
+                photo="https://telegra.ph/file/ec749863aaffc3dbaff1a.jpg",
+                caption="👋 Hi, i'm alive.",
                 parse_mode=ParseMode.MARKDOWN
             )
+            time.sleep(5)
+            try:
+                msg.delete()
+            except BadRequest:
+                pass
         except Unauthorized:
             LOGGER.warning(
                 "Bot isnt able to send message to support_chat, go and check!"

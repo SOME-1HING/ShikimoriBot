@@ -211,10 +211,10 @@ def rss_update(context: CallbackContext):
                         text="<b>Warning:</b> The message is too long to be sent",
                         parse_mode=ParseMode.HTML)
         else:
-            for link, title in zip(
+            for link, title, description in zip(
                     reversed(new_entry_links[-5:]),
                     reversed(new_entry_titles[-5:]),
-                    reversed(new_entry_titles[-5:])):
+                    reversed(new_entry_description[-5:])):
                 final_message = '💫<b>{}</b>💫\n\n<i>{}</i>\n<a href="{}"> </a>'.format(
                     html.escape(title), html.escape(description), html.escape(link))
                 buttons = [[InlineKeyboardButton("More Info", url=link)]]
