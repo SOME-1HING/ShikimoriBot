@@ -45,12 +45,6 @@
          "required": true,
          "value": "2088106582"
       },
-
-      "STRING_SESSION": {
-         "description": "Fill with telethon string session. Only if you want to use it for userbot purpose. Your account may get banned if you use try to get your sting session. So, it is recommended to skip it.",
-         "required": false,
-         "value": "" 
-      },
       "HEROKU_API_KEY": {
         "description": "Your Heroku API key, get it from 'https://dashboard.heroku.com/account'",
         "value": ""
@@ -183,11 +177,6 @@
          "description": "Set this to True if you want ! to be a command prefix along with /. Recommended is True",
          "value": "True"
       },
-      "DONATION_LINK": {
-         "description": "Optional: link where you would like to receive donations. If you are a noob, better leave it linking to paul",
-         "required": false,
-         "value": "https://www.paypal.me/PaulSonOfLars"
-      },
       "DEL_CMDS": {
          "description": "Set this to True if you want to delete command messages from users who don't have the perms to run that command.",
          "value": "True"
@@ -210,11 +199,6 @@
          "description": "Event logs channel to note down important bot level events, recommend to make this public. ex: '-123456'",
          "required": true,
          "value": "-1001599383497"
-      },
-      "MAINDEV_ID": {
-         "description": "The main dev that is responsible for fixing heroku vars. If owners is only going to set vars, Paste Owner ID here",
-         "required": true,
-         "value": "2088106582"
       },
       "REDIS_URL": {
          "description": "Paste your redis url in format redis://<username of admin role>:<password of admin role>@<endoint url>/<database name>",

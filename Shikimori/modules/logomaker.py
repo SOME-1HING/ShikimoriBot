@@ -1,5 +1,5 @@
 from Shikimori.events import register
-from Shikimori import MAINDEV_ID, OWNER_ID
+from Shikimori import OWNER_ID
 from Shikimori import telethn as tbot
 import os 
 from PIL import Image, ImageDraw, ImageFont
@@ -21,8 +21,7 @@ async def lego(event):
  quew = event.pattern_match.group(1)
  if event.sender_id == OWNER_ID:
      pass
- elif event.sender_id == MAINDEV_ID:
-     pass
+
  else:
      
     if not quew:

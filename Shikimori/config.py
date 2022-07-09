@@ -48,7 +48,6 @@ class Config(object):
     # List of id's (not usernames) for users which WONT be banned/kicked by the bot.
     TIGERS = get_user_list("elevated_users.json", "tigers")
     WOLVES = get_user_list("elevated_users.json", "whitelists")
-    DONATION_LINK = None  # EG, paypal
     CERT_PATH = None
     PORT = 5000
     DEL_CMDS = True  # Delete commands that users dont have access to, like delete /ban if a non admin uses it.
@@ -68,14 +67,7 @@ class Config(object):
     AI_API_KEY = "awoo"  # For chatbot, get one from https://coffeehouse.intellivoid.net/dashboard
     BL_CHATS = []  # List of groups that you want blacklisted.
     SPAMMERS = None
-    SS_TOKEN = (
-        "awoo"  # Required for taking screenshot. Get your's from https://nocodeapi.com/docs/screenshot-api
-    )
-    SS_USERNAME = (
-        "awoo"  # Required for taking screenshot. Get your's from https://nocodeapi.com/docs/screenshot-api
-    )
     MESSAGE_DUMP = -1001501815938  # needed to make sure 'save from' messages persist
-    MAINDEV_ID = 2088106582  # The main dev that is responsible for fixing heroku vars. If owners is only going to set vars, Paste Owner ID here
     HEROKU_API_KEY = 2088106582  # Your Heroku API key, get it from 'https://dashboard.heroku.com/account
     HEROKU_APP_NAME = (
         "awoo"  # Enter the Heroku app name here (Must an exact same name with your input above)
@@ -96,6 +88,7 @@ class Config(object):
     MEDIA_GN = "https://telegra.ph/file/1862c7260109e24ed4715.jpg"
     MEDIA_HELLO = "https://telegra.ph/file/f3f2dc386a33e37f6cb05.png"
     MEDIA_BYE = "https://telegra.ph/file/061054c8f73fe7ffbf6aa.mp4"
+    API_WEATHER = "awoo"
 
 class Production(Config):
     LOGGER = True

@@ -24,7 +24,7 @@ import os
 import heroku3
 import requests
 
-from Shikimori import telethn as HEROKU_APP_NAME, HEROKU_API_KEY, MAINDEV_ID
+from Shikimori import DEV_USERS, telethn as HEROKU_APP_NAME, HEROKU_API_KEY
 from Shikimori.events import register
 
 heroku_api = "https://api.heroku.com"
@@ -35,7 +35,7 @@ Heroku = heroku3.from_key(HEROKU_API_KEY)
 async def variable(var):
     if var.fwd_from:
         return
-    if var.sender_id == MAINDEV_ID:
+    if var.sender_id == DEV_USERS:
         pass
     else:
         return
@@ -124,7 +124,7 @@ async def variable(var):
 async def dyno_usage(dyno):
     if dyno.fwd_from:
         return
-    if dyno.sender_id == MAINDEV_ID:
+    if dyno.sender_id == DEV_USERS:
         pass
     else:
         return
@@ -191,7 +191,7 @@ async def dyno_usage(dyno):
 async def _(dyno):
     if dyno.fwd_from:
         return
-    if dyno.sender_id == MAINDEV_ID:
+    if dyno.sender_id == DEV_USERS:
         pass
     else:
         return

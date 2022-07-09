@@ -12,10 +12,8 @@ from typing import Optional
 from telegram import __version__ as peler
 from platform import python_version as memek
 from Shikimori import (
-    ALLOW_EXCL,
     BOT_USERNAME,
     CERT_PATH,
-    DONATION_LINK,
     UPDATE_CHANNEL,
     LOGGER,
     OWNER_ID,
@@ -660,20 +658,14 @@ def donate(update: Update, context: CallbackContext):
     bot = context.bot
     if chat.type == "private":
         update.effective_message.reply_text(
-            DONATION_LINK, parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True
+            "https://www.paypal.me/PaulSonOfLars", parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True
         )
 
-        if OWNER_ID != 1606221784:
-            update.effective_message.reply_text(
-                "I'm free for everyone ❤️ If you wanna make me smile, just join"
-                "[My Channel]({})".format(DONATION_LINK),
-                parse_mode=ParseMode.MARKDOWN,
-            )
     else:
         try:
             bot.send_message(
                 user.id,
-                DONATION_LINK,
+                "https://www.paypal.me/PaulSonOfLars",
                 parse_mode=ParseMode.MARKDOWN,
                 disable_web_page_preview=True,
             )
