@@ -96,6 +96,7 @@ class Config(object):
     MEDIA_GN = "https://telegra.ph/file/1862c7260109e24ed4715.jpg"
     MEDIA_HELLO = "https://telegra.ph/file/f3f2dc386a33e37f6cb05.png"
     MEDIA_BYE = "https://telegra.ph/file/061054c8f73fe7ffbf6aa.mp4"
+    WELCOME_DELAY_KICK_SEC = 300
 
 class Production(Config):
     LOGGER = True

@@ -1,26 +1,21 @@
-from distutils.command.config import config
 import logging
 import os
 import sys
-import asyncio
 import time
 import spamwatch
-from motor.motor_asyncio import AsyncIOMotorClient as MongoClient
 from pyrogram.types import Message
-from pyrogram import Client, errors
+from pyrogram import Client, filters
 from redis import StrictRedis
-from Shikimori.confing import get_bool_key, get_int_key, get_list_key, get_str_key
-from Shikimori.utils.logger import log
 from aiohttp import ClientSession
 import telegram.ext as tg
 from telethon import TelegramClient
 from Python_ARQ import ARQ
-from telethon.sessions import StringSession
 from telethon.sessions import MemorySession
 
 
 StartTime = time.time()
 USE_JOIN_LOGGER = True
+WELCOME_DELAY_KICK_SEC = WELCOME_DELAY_KICK_SEC
 
 
 # enable logging
@@ -138,6 +133,7 @@ if ENV:
     MEDIA_GN = os.environ.get("MEDIA_GN", None)
     MEDIA_HELLO = os.environ.get("MEDIA_HELLO", None)
     MEDIA_BYE = os.environ.get("MEDIA_BYE", None)
+    WELCOME_DELAY_KICK_SEC = os.environ.get("WELCOME_DELAY_KICK_SEC", None)
     
     try:
         WHITELIST_CHATS = {int(x) for x in os.environ.get('WHITELIST_CHATS', "").split()}
@@ -234,6 +230,7 @@ else:
     MEDIA_GN = Config.MEDIA_GN
     MEDIA_HELLO = Config.MEDIA_HELLO
     MEDIA_BYE = Config.MEDIA_BYE
+    WELCOME_DELAY_KICK_SEC = Config.WELCOME_DELAY_KICK_SEC
 
     try:
         WHITELIST_CHATS = {int(x) for x in os.environ.get('WHITELIST_CHATS', "").split()}
@@ -249,6 +246,7 @@ else:
 
 DRAGONS.add(OWNER_ID)
 DEV_USERS.add(OWNER_ID)
+SUDOERS = filters.user()
 
 if not SPAMWATCH_API:
     sw = None
