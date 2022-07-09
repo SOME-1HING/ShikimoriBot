@@ -1,12 +1,11 @@
 import requests
-
-from Shikimori import BOT_USERNAME, pbot as pgram
 from pyrogram import filters
+from Shikimori import BOT_USERNAME, pbot
 from bs4 import BeautifulSoup
 
 from Shikimori import BOT_USERNAME
 
-@pgram.on_message(filters.command("watchorder", f"watchorder@{BOT_USERNAME}"))
+@pbot.on_message(filters.command("watchorder", f"watchorder@{BOT_USERNAME}"))
 def watchorderx(_,message):
 
 	anime = message.text.replace(message.text.split(' ')[0], '')
@@ -27,15 +26,4 @@ def watchorderx(_,message):
 
 		data = f"{data}\n{x.text}" if data else x.text
 	message.reply_text(f'Watchorder of {anime}: \n```{data}```')
-
-__mod_name__ = "VC Player 🎧"
-__help__ = """
-*VC Player*
- • `/pause` - To pause the playback.
- • `/resume` - To resuming the playback You've paused.
- • `/skip` - To skipping the player.
- • `/end` - For end the playback.
- • `/play` <query /reply audio> - Playing music via YouTube.
- • `/playlist` - To playing a playlist of groups or your personal playlist
-"""
 

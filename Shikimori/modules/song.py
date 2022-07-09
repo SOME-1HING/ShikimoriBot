@@ -170,52 +170,6 @@ def time_to_seconds(time):
     return sum(int(x) * 60 ** i for i, x in enumerate(reversed(stringt.split(":"))))
 
 
-
-@Client.on_message(filters.command("saavn"))
-
-async def jssong(_, message):
-    global is_downloading
-    global dl_limit
-    if len(message.command) < 2:
-        await message.reply_text("/saavn requires an argument.")
-        return
-    if dl_limit >= 3:
-        await message.reply_text(
-            "Too many requests, please try again after sometime."
-        )
-        return
-    if is_downloading:
-        await message.reply_text(
-            "Another download is in progress, try again after sometime."
-        )
-        return
-    is_downloading = True
-    text = message.text.split(None, 1)[1]
-    query = text.replace(" ", "%20")
-    m = await message.reply_text("Searching...")
-    try:
-        songs = await arq.saavn(query)
-        if not songs.ok:
-            await message.reply_text(songs.result)
-            return
-        sname = songs.result[0].song
-        slink = songs.result[0].media_url
-        ssingers = songs.result[0].singers
-        await m.edit_text("Downloading")
-        song = await download_song(slink)
-        await m.edit_text("Uploading")
-        await message.reply_audio(audio=song, title=sname, performer=ssingers)
-        os.remove(song)
-        await m.delete()
-    except Exception as e:
-        is_downloading = False
-        await m.edit_text(str(e))
-        return
-    is_downloading = False
-
-
-
-
 @Client.on_message(filters.command(["vsong", "video"]))
 async def ytmusic(client, message: Message):
     global is_downloading
@@ -315,11 +269,8 @@ async def ytmusic(client, message: Message):
 __mod_name__ = "Song 🎵"
 
 __help__ = """
-Note: Refer to VC player module help in /help to see commands for music player.
-
 > `/song` <songname> *:* To download a song. (Works with Youtube link too)
 > `/music` <songname> *:* To download a song. (Works with Youtube link too)
 > `/video` <videoname> or Youtube Link> *:* To download a video.
 > `/vsong` <videoname> or Youtube Link> *:* To download a video.
-> `/saavn` <songname> *:* To download a song
 """

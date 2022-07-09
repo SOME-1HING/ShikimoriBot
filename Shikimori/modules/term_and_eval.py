@@ -5,7 +5,7 @@ import re
 import html
 import subprocess
 from io import StringIO
-from Shikimori import pbot, OWNER_ID
+from Shikimori import pbot, OWNER_ID, DEV_USERS
 from pyrogram import filters
 
 
@@ -17,7 +17,7 @@ async def aexec(code, client, message):
     return await locals()["__aexec"](client, message)
 
 
-@pbot.on_message(filters.user(OWNER_ID) & filters.command("eval"))
+@pbot.on_message(filters.user(OWNER_ID, DEV_USERS) & filters.command("eval"))
 async def evaluate(client, message):
     status_message = await message.reply_text("`Running ...`")
     try:
@@ -66,7 +66,7 @@ async def evaluate(client, message):
         await status_message.edit(evaluation)
 
 
-@pbot.on_message(filters.user(OWNER_ID) & filters.command("term"))
+@pbot.on_message(filters.user(OWNER_ID, DEV_USERS) & filters.command("term"))
 async def terminal(client, message):
     if len(message.text.split()) == 1:
         await message.reply("Usage: `/term echo owo`")
