@@ -104,7 +104,6 @@ if ENV:
     REDIS_URL = os.environ.get("REDIS_URL")
     SUPPORT_CHAT = os.environ.get("SUPPORT_CHAT", None)
     SPAMWATCH_SUPPORT_CHAT = os.environ.get("SPAMWATCH_SUPPORT_CHAT", None)
-    SPAMWATCH_API = os.environ.get("SPAMWATCH_API", None)
     ARQ_API_URL = "https://arq.hamker.in"
     ARQ_API_KEY = os.environ.get("ARQ_API", None)
     HEROKU_APP_NAME = os.environ.get("HEROKU_APP_NAME", None)
@@ -195,7 +194,6 @@ else:
     WALL_API = Config.WALL_API
     SUPPORT_CHAT = Config.SUPPORT_CHAT
     SPAMWATCH_SUPPORT_CHAT = Config.SPAMWATCH_SUPPORT_CHAT
-    SPAMWATCH_API = Config.SPAMWATCH_API
     APOD_API_KEY = Config.APOD_API_KEY
     REDIS_URL = Config.REDIS_URL
     ANIME_NAME = Config.ANIME_NAME
@@ -227,11 +225,6 @@ else:
 DRAGONS.add(OWNER_ID)
 DEV_USERS.add(OWNER_ID)
 SUDOERS = filters.user()
-
-if not SPAMWATCH_API:
-    sw = None
-else:
-    sw = spamwatch.Client(SPAMWATCH_API)
 
 
 REDIS = StrictRedis.from_url(REDIS_URL,decode_responses=True)
