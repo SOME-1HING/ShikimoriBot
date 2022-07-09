@@ -384,55 +384,68 @@ def Shikimori_about_callback(update, context):
                 ]
             ),
         )
-    elif query.data == "license_":
-        query.message.edit_text(
-            text=f"\n\n_{bot_name}'s licensed under the GNU General Public License v3.0_",
-            parse_mode=ParseMode.MARKDOWN,
-            disable_web_page_preview=True,
-            reply_markup=InlineKeyboardMarkup(
+        if query.data == "license_":
+            query.message.edit_text(
+                text=f"\n\n_{bot_name}'s licensed under the GNU General Public License v3.0_",
+                parse_mode=ParseMode.MARKDOWN,
+                disable_web_page_preview=True,
+                reply_markup=InlineKeyboardMarkup(
+                    [
+                        [
+                        InlineKeyboardButton(text="License", url="https://github.com/SOME-1HING/ShikimoriBot/blob/master/LICENSE"),
+                        ],
+                        [
+                        InlineKeyboardButton(text="Back", callback_data="Shikimori_"),
+                        ],
+                    ]
+                ),
+            )
+        elif query.data == "github_":
+            query.message.edit_text(
+                text=f"Orginal Repositiory created by [SOME1HING](https://github.com/SOME-1HING) on [github](https://github.com/SOME-1HING/ShikimoriBot) for [Shikimori Bot](https://t.me/micchon_shikimori_bot)",
+                parse_mode=ParseMode.MARKDOWN,
+                disable_web_page_preview=True,
+                reply_markup=InlineKeyboardMarkup(
+                    [
+                        [
+                        InlineKeyboardButton(text="Repo", url="https://github.com/SOME-1HING/ShikimoriBot"),
+                        InlineKeyboardButton(text="Creator", url="https://github.com/SOME-1HING"),
+                        ],
+                        [
+                        InlineKeyboardButton(text="Back", callback_data="Shikimori_"),
+                        ],
+                    ]
+                ),
+            )
+        elif query.data == "void_":
+            query.message.edit_text(
+                text=f"Welcome to **[【V๏ɪ፝֟𝔡】 ✧Network✧](https://t.me/voidxnetwork)** \n\n◈ Void is an anime based Community with a motive to spread love and peace around telegram. Go through the channel and join the Community if it draws your attention. ◈",
+                parse_mode=ParseMode.MARKDOWN,
+                disable_web_page_preview=False,
+                reply_markup=InlineKeyboardMarkup(
                 [
                     [
-                    InlineKeyboardButton(text="License", url="https://github.com/SOME-1HING/ShikimoriBot/blob/master/LICENSE"),
+                    InlineKeyboardButton(text="【Usertag】", url="https://t.me/void_network/103"),
+                    InlineKeyboardButton(text="【Owner Sama】", url="https://t.me/voidxtoxic")
                     ],
-                    [
-                    InlineKeyboardButton(text="Back", callback_data="Shikimori_"),
-                    ],
+                    [InlineKeyboardButton(text="【V๏ɪ፝֟𝔡】Network", url="https://t.me/voidxnetwork")],
+                    [InlineKeyboardButton(text="Back", callback_data="Shikimori_")]
                 ]
-            ),
-        )
-    elif query.data == "github_":
-        query.message.edit_text(
-            text=f"Orginal Repositiory created by [SOME1HING](https://github.com/SOME-1HING) on [github](https://github.com/SOME-1HING/ShikimoriBot) for [Shikimori Bot](https://t.me/micchon_shikimori_bot)",
-            parse_mode=ParseMode.MARKDOWN,
-            disable_web_page_preview=True,
-            reply_markup=InlineKeyboardMarkup(
-                [
-                    [
-                    InlineKeyboardButton(text="Repo", url="https://github.com/SOME-1HING/ShikimoriBot"),
-                    InlineKeyboardButton(text="Creator", url="https://github.com/SOME-1HING"),
-                    ],
-                    [
-                    InlineKeyboardButton(text="Back", callback_data="Shikimori_"),
-                    ],
-                ]
-            ),
-        )
-    elif query.data == "void_":
-        query.message.edit_text(
-            text=f"Welcome to **[【V๏ɪ፝֟𝔡】 ✧Network✧](https://t.me/voidxnetwork)** \n\n◈ Void is an anime based Community with a motive to spread love and peace around telegram. Go through the channel and join the Community if it draws your attention. ◈",
-            parse_mode=ParseMode.MARKDOWN,
-            disable_web_page_preview=False,
-            reply_markup=InlineKeyboardMarkup(
-            [
-                [
-                InlineKeyboardButton(text="【Usertag】", url="https://t.me/void_network/103"),
-                InlineKeyboardButton(text="【Owner Sama】", url="https://t.me/voidxtoxic")
-                ],
-                [InlineKeyboardButton(text="【V๏ɪ፝֟𝔡】Network", url="https://t.me/voidxnetwork")],
-                [InlineKeyboardButton(text="Back", callback_data="Shikimori_")]
-            ]
-            ),
-        )
+                ),
+            )
+        elif query.data == "Shikimori_back":
+            first_name = update.effective_user.first_name
+            uptime = get_readable_time((time.time() - StartTime))
+            hmm = "Hello *{}*! Nice to meet you!".format(escape_markdown(first_name))
+            HMM = hmm + PM_START_TEXT
+        
+            query.message.edit_text(
+                    HMM,
+                    reply_markup=InlineKeyboardMarkup(buttons),
+                    parse_mode=ParseMode.MARKDOWN,
+                    timeout=60,
+                    disable_web_page_preview=False,
+            )
 
     elif query.data == "Shikimori_back":
         first_name = update.effective_user.first_name
