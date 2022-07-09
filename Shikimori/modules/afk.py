@@ -1,20 +1,15 @@
-import random, html
-
-from typing import Optional
 import time
 
-from telegram import Message, User
 from telegram import MessageEntity, ParseMode
 from telegram.error import BadRequest
-from telegram.ext import Filters, MessageHandler, run_async
+from telegram.ext import Filters, MessageHandler
 
 from Shikimori import dispatcher
-from Shikimori.modules.disable import DisableAbleCommandHandler, DisableAbleMessageHandler
+from Shikimori.modules.disable import DisableAbleCommandHandler
 from Shikimori.modules.redis.afk_redis import start_afk, end_afk, is_user_afk, afk_reason
 from Shikimori import REDIS
 from Shikimori.modules.users import get_user_id
 
-from Shikimori.modules.helper_funcs.alternate import send_message
 from Shikimori.modules.helper_funcs.readable_time import get_readable_time
 
 AFK_GROUP = 7
@@ -26,8 +21,6 @@ def afk(update, context):
     if not user:  # ignore channels
         return
 
-    if user.id == 777000:
-        return
     start_afk_time = time.time()
     if len(args) >= 2:
         reason = args[1]
