@@ -227,22 +227,22 @@
          "value": "VoidxNetwork"
       },
       "MEDIA_GM": {
-         "description": "URL of media that you want to show when user types (good morning or goodmorning). Supported file types ()",
+         "description": "URL of media that you want to show when user types (good morning or goodmorning). Supported file types (jpg, png, gif, webp, mkv, mp4)",
          "required": false,
          "value": "https://telegra.ph/file/fff37608fa21d9d3d0b39.jpg"
       },
       "MEDIA_GN": {
-         "description": "If you have put a netowrk name, you alsohave to put its username without @",
+         "description": "URL of media that you want to show when user types (good night or goodnight). Supported file types (jpg, png, gif, webp, mkv, mp4)",
          "required": false,
          "value": "https://telegra.ph/file/1862c7260109e24ed4715.jpg"
       },
       "MEDIA_HELLO": {
-         "description": "If you have put a netowrk name, you alsohave to put its username without @",
+         "description": "URL of media that you want to show when user types (hello). Supported file types (jpg, png, gif, webp, mkv, mp4)",
          "required": false,
          "value": "https://telegra.ph/file/f3f2dc386a33e37f6cb05.png"
       },
       "MEDIA_BYE": {
-         "description": "If you have put a netowrk name, you alsohave to put its username without @",
+         "description": "URL of media that you want to show when user types (bye or afk). Supported file types (jpg, png, gif, webp, mkv, mp4)",
          "required": false,
          "value": "https://telegra.ph/file/061054c8f73fe7ffbf6aa.mp4"
       }
