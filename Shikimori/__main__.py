@@ -708,7 +708,7 @@ def main():
                 caption="👋 Hi, i'm alive.",
                 parse_mode=ParseMode.MARKDOWN
             )
-            time.sleep(5)
+            time.sleep(15)
             try:
                 msg.delete()
             except BadRequest:
