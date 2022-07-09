@@ -704,7 +704,7 @@ def main():
         try:
             msg = dispatcher.bot.send_photo(
                 f"@{SUPPORT_CHAT}",
-                photo="https://telegra.ph/file/ec749863aaffc3dbaff1a.jpg",
+                photo="https://telegra.ph/file/90e964c7cf8aac5fd65ab.jpg",
                 caption="👋 Hi, i'm alive.",
                 parse_mode=ParseMode.MARKDOWN
             )
