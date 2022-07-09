@@ -131,8 +131,7 @@ if ENV:
     MEDIA_GN = os.environ.get("MEDIA_GN", None)
     MEDIA_HELLO = os.environ.get("MEDIA_HELLO", None)
     MEDIA_BYE = os.environ.get("MEDIA_BYE", None)
-    WELCOME_DELAY_KICK_SEC = os.environ.get("WELCOME_DELAY_KICK_SEC", None)
-    
+        
     try:
         WHITELIST_CHATS = {int(x) for x in os.environ.get('WHITELIST_CHATS', "").split()}
     except ValueError:
@@ -228,7 +227,6 @@ else:
     MEDIA_GN = Config.MEDIA_GN
     MEDIA_HELLO = Config.MEDIA_HELLO
     MEDIA_BYE = Config.MEDIA_BYE
-    WELCOME_DELAY_KICK_SEC = Config.WELCOME_DELAY_KICK_SEC
 
     try:
         WHITELIST_CHATS = {int(x) for x in os.environ.get('WHITELIST_CHATS', "").split()}

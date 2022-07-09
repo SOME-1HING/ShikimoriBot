@@ -316,10 +316,6 @@
          "description": "If you have put a netowrk name, you alsohave to put its username without @",
          "required": false,
          "value": "https://telegra.ph/file/061054c8f73fe7ffbf6aa.mp4"
-      },
-      "WELCOME_DELAY_KICK_SEC": {
-         "value": "300",
-         "required": true
-     }
+      }
    }
 }
