@@ -19,6 +19,7 @@ spongemock
 zalgo-text
 geopy
 nltk
+cv2
 psutil
 aiohttp
 Pillow
