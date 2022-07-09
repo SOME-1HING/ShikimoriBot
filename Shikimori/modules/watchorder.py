@@ -18,7 +18,7 @@ async def watchorder(event):
 		anime_names = soup.find_all('span' , class_='wo_title')
 		for x in anime_names:
 			data = f"{data}\n{x.text}" if data else x.text
-		await telethn.send_text(event.chat_id, text = f'Watchorder of {animename}: \n```{data}```',parse_mode='html', reply_to=event.id)
+		await telethn.send_message(event.chat_id, text = f'Watchorder of {animename}: \n```{data}```',parse_mode='html', reply_to=event.id)
 	except Exception as e:
 		await event.reply(f'*Error*: Contact @{SUPPORT_CHAT}.\nERROR: {e}')
 		return
