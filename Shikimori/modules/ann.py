@@ -33,11 +33,13 @@ ANN_HANDLER = CommandHandler('ann', ann, run_async=True)
 dispatcher.add_handler(ANN_HANDLER)
 
 #  Buttons for /help .
-__mod_name__ = 'Anime News'  # *IF YOU WANT* EDIT NAME OF BUTTON IN '/help'
+__mod_name__ = 'Anime News Network'  # *IF YOU WANT* EDIT NAME OF BUTTON IN '/help'
 
 # *IF YOU WANT* EDIT MESSAGE FOR HELP OF THIS MODULE.
 __help__ = '''
 ❍ `/ann` : Gives latest Anime news.
+❍ `/subscribe` : Suscribes to Anime News Network feeds.
+❍ `/unsubscribe` : Suscribes to Anime News Network feeds.
 '''
 
 # DON'T EDIT
