@@ -107,7 +107,6 @@ def rss_update(context: CallbackContext):
                         chat_id=tg_chat_id,
                         text=final_message,
                         reply_markup=InlineKeyboardMarkup(buttons),
-                        link_preview=True,
                         parse_mode=ParseMode.HTML)
                 else:
                     bot.send_message(
@@ -128,7 +127,6 @@ def rss_update(context: CallbackContext):
                         chat_id=tg_chat_id,
                         text=final_message,
                         reply_markup=InlineKeyboardMarkup(buttons),
-                        link_preview=True,
                         parse_mode=ParseMode.HTML)
                 else:
                     bot.send_message(
