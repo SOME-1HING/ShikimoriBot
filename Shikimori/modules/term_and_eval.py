@@ -25,9 +25,6 @@ async def evaluate(client, message):
     except IndexError:
         await status_message.delete()
         return
-    reply_to_id = message.message_id
-    if message.reply_to_message:
-        reply_to_id = message.reply_to_message.message_id
     old_stderr = sys.stderr
     old_stdout = sys.stdout
     redirected_output = sys.stdout = StringIO()
@@ -125,6 +122,6 @@ async def terminal(client, message):
             )
             os.remove("tg_bot/output.txt")
             return
-        await message.reply(f"**Output:**\n`{output}`", parse_mode="markdown")
+        await message.reply(f"**Output:**\n`{output}`")
     else:
         await message.reply("**Output:**\n`No Output`")
