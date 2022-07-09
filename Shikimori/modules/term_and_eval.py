@@ -58,6 +58,7 @@ async def evaluate(client, message):
             document=filename,
             caption=cmd,
             disable_notification=True,
+            reply_to_message_id=message.id,
         )
         os.remove(filename)
         await status_message.delete()
@@ -119,10 +120,11 @@ async def terminal(client, message):
             await client.send_document(
                 message.chat.id,
                 "tg_bot/output.txt",
+                reply_to_message_id=message.id,
                 caption="`Output file`",
             )
             os.remove("tg_bot/output.txt")
             return
-        await message.reply(f"<b>Output:</b>\n<tt>{output}</tt>", parse_mode="HTML")
+        await message.reply(f"**Output:**\n`{output}`", parse_mode="markdown")
     else:
         await message.reply("**Output:**\n`No Output`")
