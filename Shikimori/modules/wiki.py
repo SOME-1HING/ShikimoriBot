@@ -57,7 +57,7 @@ dispatcher.add_handler(WIKI_HANDLER)
 __help__ = """
 Wiki module:
 
-× /wiki <query>: Gets Wikipedia article about query
+× `/wiki` <query>: Gets Wikipedia article about query
 
 """ 
 

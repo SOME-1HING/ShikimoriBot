@@ -210,9 +210,9 @@ def get_lst_of_files(input_directory, output_lst):
 
 
 __help__ = """
- - /zip  :  Reply to a telegram file to compress it in .zip format
- - /unzip :  reply to a telegram file to decompress it from the .zip
- - /encrypt: Encrypts The Given Text
- - /decrypt: Decrypts Previously Encrypted Text
+ - `/zip`  :  Reply to a telegram file to compress it in .zip format
+ - `/unzip` :  reply to a telegram file to decompress it from the .zip
+ - `/encrypt`: Encrypts The Given Text
+ - `/decrypt`: Decrypts Previously Encrypted Text
  """
 __mod_name__ = "Zip"
