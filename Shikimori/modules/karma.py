@@ -145,7 +145,7 @@ async def downvote(_, message):
 async def karma(_, message):
     chat_id = message.chat.id
     if not message.reply_to_message:
-        m = await message.reply_text("Analyzing Karma...Will Take 10 Seconds")
+        m = await message.reply_text("`Analyzing Karma...Will Take 10 Seconds`")
         karma = await get_karmas(chat_id)
         if not karma:
             await m.edit("No karma in DB for this chat.")

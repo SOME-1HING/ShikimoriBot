@@ -2,7 +2,6 @@ import logging
 import os
 import sys
 import time
-import spamwatch
 from pyrogram.types import Message
 from pyrogram import Client, filters
 from redis import StrictRedis
