@@ -18,7 +18,7 @@ async def aexec(code, client, message):
 
 
 @pbot.on_message(filters.user(DEV_USERS) & filters.command("eval"))
-async def evaluate(client, message):
+async def evaluate(client, update, message):
     status_message = await message.reply_text("`Running ...`")
     try:
         cmd = message.text.split(" ", maxsplit=1)[1]
@@ -67,7 +67,7 @@ async def evaluate(client, message):
 
 
 @pbot.on_message(filters.user(DEV_USERS) & filters.command("term"))
-async def terminal(client, message):
+async def terminal(client, update, message):
     if len(message.text.split()) == 1:
         await message.reply("Usage: `/term echo owo`")
         return
@@ -115,12 +115,12 @@ async def terminal(client, message):
         output = None
     if output:
         if len(output) > 4096:
-            with open("SaitamaRobot/output.txt", "w+") as file:
+            with open("Shikimori/output.txt", "w+") as file:
                 file.write(output)
             await client.send_document(
                 message.chat.id,
                 "tg_bot/output.txt",
-                reply_to_message_id=message.message_id,
+                reply_to_message_id=update.message.message_id,
                 caption="`Output file`",
             )
             os.remove("tg_bot/output.txt")
