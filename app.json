@@ -44,7 +44,7 @@
          "description": "Your user ID as an integer.",
          "required": true,
          "value": "2088106582"
-     },
+      },
 
       "STRING_SESSION": {
          "description": "Fill with telethon string session. Only if you want to use it for userbot purpose. Your account may get banned if you use try to get your sting session. So, it is recommended to skip it.",
@@ -85,14 +85,6 @@
          "required": true,
          "value": "mongodb+srv://SOME1HING:some1hing123@some1hing-db.hfyyfjfh.mongodb.net/?retryWrites=true&w=majorityPYTHONPATH=/app"
       },
-      "IBM_WATSON_CRED_URL": {
-         "description": "This is required for the speech to text module. Get your USERNAME from https://console.bluemix.net/docs/services/speech-to-text/getting-started.html",
-         "required": false
-     },
-     "IBM_WATSON_CRED_PASSWORD": {
-        "description": "This is required for the speech to text module. Get your PASSWORD from https://console.bluemix.net/docs/services/speech-to-text/getting-started.html",
-        "required": false
-     },
      "EVENT_LOGS": {
          "description": "Event logs channel to note down important bot level events, recommend to make this public. ex: '-123456'",
          "required": true,
@@ -112,25 +104,22 @@
          "description": "Required for timezone information. Get yours from https://timezonedb.com/api",
          "required": false,
          "value": "-xyz"
-     }, 
-
+      }, 
       "API_WEATHER": {
         "description": "Get your own APPID from https://api.openweathermap.org/data/2.5/weather",
         "value": "",
         "required": false
       },
-         
       "DATABASE_URL": {
         "description": "Put sql based database link. Recommended to use Elephant SQL.",
         "value": "postgres://dsnjbjab:saifhsudfasfihaif@sdsfs.db.elephantsql.com/dsnjbjab",
         "required": true
       },
-
       "DEV_USERS": {
          "description": "ID of users who are Devs of your bot (can use /py etc.). If you are a noob and would come and bother Masha support then keep the current ID's here at they are and add yours.",
          "required": false,
          "value": ""
-     },
+      },
 
       "SPAMWATCH_API": {
          "description": "Spamwatch API Token, Get one from @SpamWatchBot.",
@@ -217,16 +206,6 @@
          "required": false,
          "value": ""
       },
-      "SS_USERNAME": {
-         "description": "Required for taking screenshot. Get your's from https://nocodeapi.com/docs/screenshot-api",
-         "required": false,
-         "value": ""
-      },
-      "SS_TOKEN": {
-         "description": "Required for taking screenshot. Get your's from https://nocodeapi.com/docs/screenshot-api",
-         "required": false,
-         "value": ""
-      },
       "MESSAGE_DUMP": {
          "description": "Event logs channel to note down important bot level events, recommend to make this public. ex: '-123456'",
          "required": true,
@@ -237,16 +216,6 @@
          "required": true,
          "value": "2088106582"
       },
-      "REM_BG_API_KEY": {
-         "description": "Get api  https://www.remove.bg/",
-         "required": false,
-         "value": ""
-      },
-      "VIRUS_API_KEY": {
-         "description": "Get api  https://www.virustotal.com/gui/my-apikey",
-         "required": false,
-         "value": ""
-      },  
       "REDIS_URL": {
          "description": "Paste your redis url in format redis://<username of admin role>:<password of admin role>@<endoint url>/<database name>",
          "required": true,
