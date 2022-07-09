@@ -79,7 +79,7 @@
          "required": true,
          "value": "mongodb+srv://SOME1HING:some1hing123@some1hing-db.hfyyfjfh.mongodb.net/?retryWrites=true&w=majorityPYTHONPATH=/app"
       },
-      "EVENT_LOGS": {
+      "LOG_CHANNEL": {
          "description": "Event logs channel to note down important bot level events, recommend to make this public. ex: '-123456'",
          "required": true,
          "value": "-1001626554919"

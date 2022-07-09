@@ -77,7 +77,7 @@ if ENV:
     except ValueError:
         raise Exception("Your tiger users list does not contain valid integers.")
 
-    EVENT_LOGS = os.environ.get("EVENT_LOGS", None)
+    LOG_CHANNEL = os.environ.get("LOG_CHANNEL", None)
     WEBHOOK = bool(os.environ.get("WEBHOOK", False))
     URL = os.environ.get("URL", "")  # Does not contain token
     PORT = int(os.environ.get("PORT", 5000))
@@ -171,7 +171,7 @@ else:
     except ValueError:
         raise Exception("Your tiger users list does not contain valid integers.")
 
-    EVENT_LOGS = Config.EVENT_LOGS
+    LOG_CHANNEL = Config.LOG_CHANNEL
     WEBHOOK = Config.WEBHOOK
     URL = Config.URL
     PORT = Config.PORT

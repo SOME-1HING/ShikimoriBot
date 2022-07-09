@@ -11,7 +11,7 @@ if is_module_loaded(FILENAME):
     from telegram.ext import CommandHandler, JobQueue
     from telegram.utils.helpers import escape_markdown
 
-    from Shikimori import EVENT_LOGS, LOGGER, dispatcher
+    from Shikimori import LOG_CHANNEL, LOGGER, dispatcher
     from Shikimori.modules.helper_funcs.chat_status import user_admin
     from Shikimori.modules.sql import log_channel_sql as sql
 
@@ -61,7 +61,7 @@ if is_module_loaded(FILENAME):
 
                 if message.chat.type == chat.SUPERGROUP and message.chat.username:
                     result += f'\n<b>Link:</b> <a href="https://t.me/{chat.username}/{message.message_id}">click here</a>'
-                log_chat = str(EVENT_LOGS)
+                log_chat = str(LOG_CHANNEL)
                 if log_chat:
                     send_log(context, log_chat, chat.id, result)
 

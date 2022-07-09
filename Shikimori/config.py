@@ -25,7 +25,7 @@ class Config(object):
     JOIN_LOGGER = (
         -1001432609692
     )  # Prints any new group the bot is added to, prints just the name and ID.
-    EVENT_LOGS = (
+    LOG_CHANNEL = (
         -1001150905176
     )  # Prints information like gbans, sudo promotes, AI enabled disable states that may help in debugging and shit
 

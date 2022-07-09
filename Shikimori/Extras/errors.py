@@ -2,7 +2,7 @@ import sys
 import traceback
 from functools import wraps
 from pyrogram.errors.exceptions.forbidden_403 import ChatWriteForbidden
-from Shikimori import EVENT_LOGS, pbot as app
+from Shikimori import LOG_CHANNEL, pbot as app
 
 
 def split_limits(text):
@@ -48,7 +48,7 @@ def capture_err(func):
                 ),
             )
             for x in error_feedback:
-                await app.send_message(EVENT_LOGS, x)
+                await app.send_message(LOG_CHANNEL, x)
             raise err
 
     return capture

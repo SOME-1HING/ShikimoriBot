@@ -24,7 +24,7 @@ from search_engine_parser import GoogleSearch
 
 from Shikimori import (
     DEV_USERS,
-    EVENT_LOGS, 
+    LOG_CHANNEL, 
     BOT_USERNAME,
     SUPPORT_CHAT,
     ubot2,
@@ -41,7 +41,7 @@ from Shikimori.modules.music import download_youtube_audio
 from Shikimori.utils.functions import test_speedtest
 from Shikimori.utils.pastebin import paste
 
-MESSAGE_DUMP_CHAT = EVENT_LOGS
+MESSAGE_DUMP_CHAT = LOG_CHANNEL
 
 keywords_list = [
     "alive",

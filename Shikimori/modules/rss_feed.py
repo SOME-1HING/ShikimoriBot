@@ -6,7 +6,7 @@ from Shikimori import dispatcher, updater
 from Shikimori.modules.helper_funcs.chat_status import user_admin
 from Shikimori.modules.sql import rss_sql as sql
 from telegram import ParseMode, Update, constants
-from telegram.ext import CallbackContext, CommandHandler
+from telegram.ext import CallbackContext, CommandHandler, InlineKeyboardButton, InlineKeyboardMarkup
 
 
 def show_url(update: Update, context: CallbackContext):
@@ -172,6 +172,7 @@ def rss_update(context: CallbackContext):
 
         new_entry_links = []
         new_entry_titles = []
+        new_entry_description = []
 
         # this loop checks for every entry from the RSS Feed link from the DB row
         for entry in feed_processed.entries:
@@ -179,6 +180,7 @@ def rss_update(context: CallbackContext):
             if entry.link != tg_old_entry_link:
                 new_entry_links.append(entry.link)
                 new_entry_titles.append(entry.title)
+                new_entry_description.append(entry.description)
             else:
                 break
 
@@ -190,15 +192,17 @@ def rss_update(context: CallbackContext):
 
         if len(new_entry_links) < 5:
             # this loop sends every new update to each user from each group based on the DB entries
-            for link, title in zip(
-                    reversed(new_entry_links), reversed(new_entry_titles)):
-                final_message = "<b>{}</b>\n\n{}".format(
-                    html.escape(title), html.escape(link))
+            for link, title, description in zip(
+                    reversed(new_entry_links), reversed(new_entry_titles), reversed(new_entry_description)):
+                final_message = "💫<b>{}</b>💫\n\n<i>{}</i>".format(
+                    html.escape(title), html.escape(description))
+                buttons = [[InlineKeyboardButton("More Info", url=link)]]
 
                 if len(final_message) <= constants.MAX_MESSAGE_LENGTH:
                     bot.send_message(
                         chat_id=tg_chat_id,
                         text=final_message,
+                        reply_markup=InlineKeyboardMarkup(buttons),
                         parse_mode=ParseMode.HTML)
                 else:
                     bot.send_message(
@@ -208,14 +212,17 @@ def rss_update(context: CallbackContext):
         else:
             for link, title in zip(
                     reversed(new_entry_links[-5:]),
+                    reversed(new_entry_titles[-5:]),
                     reversed(new_entry_titles[-5:])):
-                final_message = "<b>{}</b>\n\n{}".format(
-                    html.escape(title), html.escape(link))
+                final_message = "💫<b>{}</b>💫\n\n<i>{}</i>".format(
+                    html.escape(title), html.escape(description))
+                buttons = [[InlineKeyboardButton("More Info", url=link)]]
 
                 if len(final_message) <= constants.MAX_MESSAGE_LENGTH:
                     bot.send_message(
                         chat_id=tg_chat_id,
                         text=final_message,
+                        reply_markup=InlineKeyboardMarkup(buttons),
                         parse_mode=ParseMode.HTML)
                 else:
                     bot.send_message(
@@ -243,6 +250,7 @@ def rss_set(context: CallbackContext):
 
         new_entry_links = []
         new_entry_titles = []
+        new_entry_description = []
 
         # this loop checks for every entry from the RSS Feed link from the DB row
         for entry in feed_processed.entries:
@@ -250,6 +258,7 @@ def rss_set(context: CallbackContext):
             if entry.link != tg_old_entry_link:
                 new_entry_links.append(entry.link)
                 new_entry_titles.append(entry.title)
+                new_entry_description.append(entry.description)
             else:
                 break
 

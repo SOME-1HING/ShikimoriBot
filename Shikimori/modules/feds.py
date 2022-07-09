@@ -9,7 +9,7 @@ from io import BytesIO
 
 import Shikimori.modules.sql.feds_sql as sql
 from Shikimori import (
-    EVENT_LOGS,
+    LOG_CHANNEL,
     LOGGER,
     SUPPORT_CHAT,
     OWNER_ID,
@@ -123,12 +123,12 @@ def new_fed(update: Update, context: CallbackContext):
         )
         try:
             bot.send_message(
-                EVENT_LOGS,
+                LOG_CHANNEL,
                 "New Federation: <b>{}</b>\nID: <pre>{}</pre>".format(fed_name, fed_id),
                 parse_mode=ParseMode.HTML,
             )
         except:
-            LOGGER.warning("Cannot send a message to EVENT_LOGS")
+            LOGGER.warning("Cannot send a message to LOG_CHANNEL")
     else:
         update.effective_message.reply_text(
             "Please write down the name of the federation",

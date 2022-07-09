@@ -17,7 +17,7 @@ import Shikimori.modules.sql.global_bans_sql as sql
 from Shikimori.modules.sql.users_sql import get_user_com_chats
 from Shikimori import (
     DEV_USERS,
-    EVENT_LOGS,
+    LOG_CHANNEL,
     OWNER_ID,
     STRICT_GBAN,
     DRAGONS,
@@ -189,12 +189,12 @@ def gban(update: Update, context: CallbackContext):
         else:
             log_message += f"\n<b>Reason:</b> <code>{reason}</code>"
 
-    if EVENT_LOGS:
+    if LOG_CHANNEL:
         try:
-            log = bot.send_message(EVENT_LOGS, log_message, parse_mode=ParseMode.HTML)
+            log = bot.send_message(LOG_CHANNEL, log_message, parse_mode=ParseMode.HTML)
         except BadRequest as excp:
             log = bot.send_message(
-                EVENT_LOGS,
+                LOG_CHANNEL,
                 log_message
                 + "\n\nFormatting has been disabled due to an unexpected error.",
             )
@@ -223,9 +223,9 @@ def gban(update: Update, context: CallbackContext):
                 pass
             else:
                 message.reply_text(f"Could not gban due to: {excp.message}")
-                if EVENT_LOGS:
+                if LOG_CHANNEL:
                     bot.send_message(
-                        EVENT_LOGS,
+                        LOG_CHANNEL,
                         f"Could not gban due to {excp.message}",
                         parse_mode=ParseMode.HTML,
                     )
@@ -240,7 +240,7 @@ def gban(update: Update, context: CallbackContext):
         except TelegramError:
             pass
 
-    if EVENT_LOGS:
+    if LOG_CHANNEL:
         log.edit_text(
             log_message + f"\n<b>Chats affected:</b> <code>{gbanned_chats}</code>",
             parse_mode=ParseMode.HTML,
@@ -320,12 +320,12 @@ def ungban(update: Update, context: CallbackContext):
         f"<b>Event Stamp:</b> <code>{current_time}</code>"
     )
 
-    if EVENT_LOGS:
+    if LOG_CHANNEL:
         try:
-            log = bot.send_message(EVENT_LOGS, log_message, parse_mode=ParseMode.HTML)
+            log = bot.send_message(LOG_CHANNEL, log_message, parse_mode=ParseMode.HTML)
         except BadRequest as excp:
             log = bot.send_message(
-                EVENT_LOGS,
+                LOG_CHANNEL,
                 log_message
                 + "\n\nFormatting has been disabled due to an unexpected error.",
             )
@@ -353,9 +353,9 @@ def ungban(update: Update, context: CallbackContext):
                 pass
             else:
                 message.reply_text(f"Could not un-gban due to: {excp.message}")
-                if EVENT_LOGS:
+                if LOG_CHANNEL:
                     bot.send_message(
-                        EVENT_LOGS,
+                        LOG_CHANNEL,
                         f"Could not un-gban due to: {excp.message}",
                         parse_mode=ParseMode.HTML,
                     )
@@ -370,7 +370,7 @@ def ungban(update: Update, context: CallbackContext):
 
     sql.ungban_user(user_id)
 
-    if EVENT_LOGS:
+    if LOG_CHANNEL:
         log.edit_text(
             log_message + f"\n<b>Chats affected:</b> {ungbanned_chats}",
             parse_mode=ParseMode.HTML,
