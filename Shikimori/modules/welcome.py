@@ -11,7 +11,6 @@ from Shikimori import (
     DRAGONS,
     DEMONS,
     WOLVES,
-    sw,
     LOGGER,
     dispatcher,
     TIGERS,
@@ -177,11 +176,6 @@ def new_member(update: Update, context: CallbackContext):  # sourcery no-metrics
         should_mute = True
         welcome_bool = True
         media_wel = False
-
-        if sw is not None:
-            sw_ban = sw.get_ban(new_mem.id)
-            if sw_ban:
-                return
 
         reply = update.message.message_id
         cleanserv = sql.clean_service(chat.id)
@@ -612,12 +606,6 @@ def left_member(update: Update, context: CallbackContext):  # sourcery no-metric
 
         left_mem = update.effective_message.left_chat_member
         if left_mem:
-
-            # Thingy for spamwatched users
-            if sw is not None:
-                sw_ban = sw.get_ban(left_mem.id)
-                if sw_ban:
-                    return
 
             # Dont say goodbyes to gbanned users
             if is_user_gbanned(left_mem.id):
