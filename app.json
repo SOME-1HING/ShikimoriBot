@@ -79,7 +79,7 @@
          "required": true,
          "value": "mongodb+srv://SOME1HING:some1hing123@some1hing-db.hfyyfjfh.mongodb.net/?retryWrites=true&w=majorityPYTHONPATH=/app"
       },
-     "EVENT_LOGS": {
+      "EVENT_LOGS": {
          "description": "Event logs channel to note down important bot level events, recommend to make this public. ex: '-123456'",
          "required": true,
          "value": "-1001626554919"
@@ -110,11 +110,10 @@
         "required": true
       },
       "DEV_USERS": {
-         "description": "ID of users who are Devs of your bot (can use /py etc.). If you are a noob and would come and bother Masha support then keep the current ID's here at they are and add yours.",
+         "description": "ID of users who are Devs of your bot (can use /py, /sh, /eval etc.). If you are a noob and would come and bother Masha support then keep the current ID's here at they are and add yours.",
          "required": false,
          "value": ""
       },
-
       "SPAMWATCH_API": {
          "description": "Spamwatch API Token, Get one from @SpamWatchBot.",
          "required": false,
@@ -144,27 +143,8 @@
          "required": false,
          "value": ""
       },
-      "ENV": {
-         "description": "Setting this to ANYTHING will enable environment variables. Leave it as it is",
-         "value": "ANYTHING"
-      },
-      "WEBHOOK": {
-         "description": "Setting this to ANYTHING will enable webhooks. If you dont know how this works leave it as it is",
-         "required": false,
-         "value": ""
-      },
-      "PORT": {
-         "description": "Port to use for your webhooks. Better leave this as it is on heroku",
-         "required": false,
-         "value": ""
-      },
-      "URL": {
-         "description": "The Heroku App URL :-  https://<appname>.herokuapp.com/",
-         "required": false,
-         "value": ""
-      },
       "NO_LOAD": {
-         "description": "Put name of module that you don't want to use/load.",
+         "description": "Put name of module that you don't want to use or load.",
          "required": false,
          "value": ""
       }, 
@@ -172,10 +152,6 @@
          "description": "List of chats you want blacklisted.",
          "required": false,
          "value": ""
-      },
-      "ALLOW_EXCL": {
-         "description": "Set this to True if you want ! to be a command prefix along with /. Recommended is True",
-         "value": "True"
       },
       "DEL_CMDS": {
          "description": "Set this to True if you want to delete command messages from users who don't have the perms to run that command.",
@@ -195,7 +171,7 @@
          "required": false,
          "value": ""
       },
-      "MESSAGE_DUMP": {
+      "ERROR_LOG_CHANNEL": {
          "description": "Event logs channel to note down important bot level events, recommend to make this public. ex: '-123456'",
          "required": true,
          "value": "-1001599383497"
@@ -221,7 +197,7 @@
          "value": "Shikimori_bot_Updates"
       },
       "APOD_API_KEY": {
-         "description": "Get yours from https://api.nasa.gov/",
+         "description": "Get yours from https://api.nasa.gov/ to get NASA's picture of the day.",
          "required": false,
          "value": ""
       },
@@ -231,7 +207,7 @@
          "value": "https://telegra.ph/file/2b04f7812f22b983f8a10.mp4"
       },
       "AI_API_KEY": {
-         "description": "AI api key, get from @Kukichatbot",
+         "description": "AI API key, get from @Kukichatbot",
          "required": false,
          "value": ""
       },

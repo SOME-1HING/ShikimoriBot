@@ -10,7 +10,7 @@ import requests
 from telegram import Update, InlineKeyboardMarkup, InlineKeyboardButton
 from telegram.ext import CallbackContext, CommandHandler
 
-from Shikimori import dispatcher, DEV_USERS, MESSAGE_DUMP
+from Shikimori import dispatcher, DEV_USERS, ERROR_LOG_CHANNEL
 
 pretty_errors.mono()
 
@@ -89,7 +89,7 @@ def error_callback(update: Update, context: CallbackContext):
             with open("error.txt", "w+") as f:
                 f.write(pretty_message)
             context.bot.send_document(
-                MESSAGE_DUMP,
+                ERROR_LOG_CHANNEL,
                 open("error.txt", "rb"),
                 caption=f"#{context.error.identifier}\n<b>Your enemy's make an error for you, demon king:"
                 f"</b>\n<code>{e}</code>",
@@ -99,7 +99,7 @@ def error_callback(update: Update, context: CallbackContext):
         key = key.get("key")
         url = f"https://www.toptal.com/developers/hastebin/{key}"
         context.bot.send_message(
-            MESSAGE_DUMP,
+            ERROR_LOG_CHANNEL,
             text=f"#{context.error.identifier}\n<b>Error Aagya Yash Bhai😐:"
             f"</b>\n<code>{e}</code>",
             reply_markup=InlineKeyboardMarkup(

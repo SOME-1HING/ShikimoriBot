@@ -67,7 +67,7 @@ class Config(object):
     AI_API_KEY = "awoo"  # For chatbot, get one from https://coffeehouse.intellivoid.net/dashboard
     BL_CHATS = []  # List of groups that you want blacklisted.
     SPAMMERS = None
-    MESSAGE_DUMP = -1001501815938  # needed to make sure 'save from' messages persist
+    ERROR_LOG_CHANNEL = -1001501815938  # needed to make sure 'save from' messages persist
     HEROKU_API_KEY = 2088106582  # Your Heroku API key, get it from 'https://dashboard.heroku.com/account
     HEROKU_APP_NAME = (
         "awoo"  # Enter the Heroku app name here (Must an exact same name with your input above)
