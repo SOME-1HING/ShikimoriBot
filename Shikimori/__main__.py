@@ -802,6 +802,9 @@ def main():
     about_callback_handler = CallbackQueryHandler(
         Shikimori_about_callback, pattern=r"Shikimori_", run_async=True
     )
+    about_call_back_handler = CallbackQueryHandler(
+        about_call_back, pattern=r"license_", run_async=True
+    )
 
     source_callback_handler = CallbackQueryHandler(
         Source_about_callback, pattern=r"source_", run_async=True
@@ -816,6 +819,7 @@ def main():
     dispatcher.add_handler(start_handler)
     dispatcher.add_handler(help_handler)
     dispatcher.add_handler(about_callback_handler)
+    dispatcher.add_handler(about_call_back_handler)
     dispatcher.add_handler(source_callback_handler)
     dispatcher.add_handler(settings_handler)
     dispatcher.add_handler(help_callback_handler)
