@@ -20,7 +20,6 @@ async def aexec(code, client, message):
 @pbot.on_message(filters.user(DEV_USERS) & filters.command("eval"))
 async def evaluate(client, message):
     status_message = await message.reply_text("`Running ...`")
-    kk = message.reply_to_message.message_id
     try:
         cmd = message.text.split(" ", maxsplit=1)[1]
     except IndexError:
@@ -59,7 +58,6 @@ async def evaluate(client, message):
             document=filename,
             caption=cmd,
             disable_notification=True,
-            reply_to_message_id=kk,
         )
         os.remove(filename)
         await status_message.delete()
@@ -69,7 +67,6 @@ async def evaluate(client, message):
 
 @pbot.on_message(filters.user(DEV_USERS) & filters.command("term"))
 async def terminal(client, message):
-    kk = message.reply_to_message.message_id
     if len(message.text.split()) == 1:
         await message.reply("Usage: `/term echo owo`")
         return
@@ -117,12 +114,11 @@ async def terminal(client, message):
         output = None
     if output:
         if len(output) > 4096:
-            with open("Shikimori/output.txt", "w+") as file:
+            with open("ShikimoriBot/output.txt", "w+") as file:
                 file.write(output)
             await client.send_document(
                 message.chat.id,
                 "tg_bot/output.txt",
-                eply_to_message_id=kk,
                 caption="`Output file`",
             )
             os.remove("tg_bot/output.txt")
