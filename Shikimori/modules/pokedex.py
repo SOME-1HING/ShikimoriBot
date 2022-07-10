@@ -30,34 +30,35 @@ async def PokeDex(_, message):
                 gender = result['gender']
                 stats = result['stats']
                 description = result['description']
+                stats = stats.replace("hp", "**HP = **")
+                stats = stats.replace("attack", "**Attack = **")
+                stats = stats.replace("defense", "**Defense = **")
+                stats = stats.replace("sp_atk", "**Special Attack = **")
+                stats = stats.replace("sp_def", "**Special Defanse = **")
+                stats = stats.replace("speed", "**Speed = **")
+                stats = stats.replace("total", "**Total = **")
                 caption = f"""
-**Pokemon:** {pokemon.upper()}
-**Pokedex:** `{pokedex}`
-**Type:** {type}
-**Abilities:** {abilities}
-**Height:** `{height}`
-**Weight:** `{weight}`
-**Gender:** {gender}
-**Stats:** 
+**Pokemon =>** {pokemon.upper()}
+**Pokedex =>** `{pokedex}`
+**Type =>** {type}
+**Abilities =>** {abilities}
+**Height =>** `{height}`
+**Weight =>** `{weight}`
+**Gender =>** {gender}
+**Stats =>** 
 {stats}
 
-**Description:** __{description}__"""
+**Description =>** __{description}__"""
             except Exception as e:
                 print(str(e))
                 pass
-    for ch in ["[", "]", "{", "}"]:
+    for ch in ["[", "]", "{", "}", ":"]:
         if ch in caption:
             caption = caption.replace(ch, "") 
 
 
     caption = caption.replace("'", "`")
-    caption = caption.replace("hp", "**HP = **")
-    caption = caption.replace("attack", "**Attack = **")
-    caption = caption.replace("defense", "**Defense = **")
-    caption = caption.replace("sp_atk", "**Special Attack = **")
-    caption = caption.replace("sp_def", "**Special Defanse = **")
-    caption = caption.replace("speed", "**Speed = **")
-    caption = caption.replace("total", "**Total = **")
+    
 
     try:
         link = f"https://www.pokemon.com/us/pokedex/{pokemon}"
