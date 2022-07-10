@@ -3,7 +3,7 @@ import datetime
 import time
 
 from telethon import events
-from telegram import Update
+from telegram import Update, ParseMode
 from telegram.ext import CallbackContext, CommandHandler
 from telegram.error import BadRequest
 
@@ -58,10 +58,10 @@ def logs(update: Update, context: CallbackContext):
         context.bot.send_document(document=f, filename=f.name, chat_id=user.id)
     if chat.type != chat.PRIVATE:
         msg = update.effective_message
-        msg.reply_text("`Logs sent. Check your pm.`")
-        time.sleep(15)
+        hmm = msg.reply_text("`Logs sent. Check your pm.`", parse_mode=ParseMode.MARKDOWN)
+        time.sleep(10)
         try:
-            msg.delete()
+            hmm.delete()
         except BadRequest:
             pass
 
