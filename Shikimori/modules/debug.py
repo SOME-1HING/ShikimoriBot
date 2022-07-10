@@ -4,7 +4,8 @@ import time
 
 from telethon import events
 from telegram import Update
-from telegram.ext import CallbackContext, CommandHandler, BadRequest
+from telegram.ext import CallbackContext, CommandHandler
+from telegram.error import BadRequest
 
 from Shikimori import telethn, dispatcher
 from Shikimori.modules.helper_funcs.chat_status import dev_plus
