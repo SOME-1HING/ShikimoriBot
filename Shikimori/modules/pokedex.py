@@ -50,16 +50,16 @@ async def PokeDex(_, message):
 
 **Description =>** __{description}__
 """
+                for ch in ["[", "]", "{", "}", ":"]:
+                    if ch in caption:
+                        caption = caption.replace(ch, "") 
+
+
+                caption = caption.replace("'", "`")
+
             except Exception as e:
                 print(str(e))
                 pass
-    for ch in ["[", "]", "{", "}", ":"]:
-        if ch in caption:
-            caption = caption.replace(ch, "") 
-
-
-    caption = caption.replace("'", "`")
-    
 
     try:
         link = f"https://www.pokemon.com/us/pokedex/{pokemon}"
