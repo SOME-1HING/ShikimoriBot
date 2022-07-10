@@ -368,9 +368,6 @@ def reply_filter(update: Update, context: CallbackContext) -> str:
 
     if not user:  # Ignore channel
         return
-
-    if user.id == 777000:
-        return
     if is_approved(chat.id, user.id):
         return
     chat_warn_filters = sql.get_chat_warn_triggers(chat.id)

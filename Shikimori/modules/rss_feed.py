@@ -2,12 +2,65 @@ import html
 import re
 
 from feedparser import parse
-from Shikimori import dispatcher, updater
+from Shikimori import dispatcher, updater, SUPPORT_CHAT
 from Shikimori.modules.helper_funcs.chat_status import user_admin
 from Shikimori.modules.sql import rss_sql as sql
 from telegram import ParseMode, Update, constants, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import CallbackContext, CommandHandler
 
+@user_admin
+def subscribe(update: Update, context: CallbackContext):
+    tg_chat_id = str(update.effective_chat.id)
+
+    tg_feed_link = "https://www.animenewsnetwork.com/all/rss.xml?ann-edition=in"
+
+    link_processed = parse(tg_feed_link)
+
+    # check if link is a valid RSS Feed link
+    if link_processed.bozo == 0:
+        if len(link_processed.entries[0]) >= 1:
+            tg_old_entry_link = link_processed.entries[0].link
+        else:
+            tg_old_entry_link = ""
+
+        # gather the row which contains exactly that telegram group ID and link for later comparison
+        row = sql.check_url_availability(tg_chat_id, tg_feed_link)
+
+        # check if there's an entry already added to DB by the same user in the same group with the same link
+        if row:
+            update.effective_message.reply_text(
+                "You have already subscribed to Anime News Network.")
+        else:
+            sql.add_url(tg_chat_id, tg_feed_link, tg_old_entry_link)
+
+            update.effective_message.reply_text("Added Anime News Network to subscription")
+    else:
+        update.effective_message.reply_text(
+            f"Something went worng. Contact {SUPPORT_CHAT}")
+
+@user_admin
+def unsubscribe(update: Update, context: CallbackContext):
+    tg_chat_id = str(update.effective_chat.id)
+
+    tg_feed_link = "https://www.animenewsnetwork.com/all/rss.xml?ann-edition=in"
+
+    link_processed = parse(tg_feed_link)
+
+    if link_processed.bozo == 0:
+        user_data = sql.check_url_availability(tg_chat_id, tg_feed_link)
+
+        if user_data:
+            sql.remove_url(tg_chat_id, tg_feed_link)
+
+            update.effective_message.reply_text(
+                "Removed Anime News Network from subscription")
+        else:
+            update.effective_message.reply_text(
+                "You haven't subscribed to this Anime News Subscription yet")
+    
+    else:
+        update.effective_message.reply_text(
+            f"Something went worng. Contact {SUPPORT_CHAT}")
 
 def show_url(update: Update, context: CallbackContext):
     tg_chat_id = str(update.effective_chat.id)
@@ -275,7 +328,9 @@ __help__ = """
  • `/addrss <link>`*:* add an RSS link to the subscriptions.
  • `/removerss <link>`*:* removes the RSS link from the subscriptions.
  • `/rss <link>`*:* shows the link's data and the last entry, for testing purposes.
- • `/listrss`*:* shows the list of rss feeds that the chat is currently subscribed to.
+ • `/listrss`*:* shows the list of rss feeds that the chat is currently subscribed to
+ • `/subscribe` : Suscribes to Anime News Network feeds.
+ • `/unsubscribe` : Suscribes to Anime News Network feeds..
 
 *NOTE:* In groups, only admins can add/remove RSS links to the group's subscription
 """
@@ -293,7 +348,11 @@ SHOW_URL_HANDLER = CommandHandler("rss", show_url)
 ADD_URL_HANDLER = CommandHandler("addrss", add_url)
 REMOVE_URL_HANDLER = CommandHandler("removerss", remove_url)
 LIST_URLS_HANDLER = CommandHandler("listrss", list_urls)
+SUBSCRIBE_HANDLER = CommandHandler("subscribe", subscribe)
+UNSUBSCRIBE_HANDLER = CommandHandler("unsubscribe", unsubscribe)
 
+dispatcher.add_handler(SUBSCRIBE_HANDLER)
+dispatcher.add_handler(UNSUBSCRIBE_HANDLER)
 dispatcher.add_handler(SHOW_URL_HANDLER)
 dispatcher.add_handler(ADD_URL_HANDLER)
 dispatcher.add_handler(REMOVE_URL_HANDLER)
