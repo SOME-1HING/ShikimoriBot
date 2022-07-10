@@ -12,10 +12,6 @@ from Shikimori.__main__ import bot_name, BOT_USERNAME, SUPPORT_CHAT
 
 FONT_FILE_TO_USE = "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"
 
-
-
-
-
 @register(pattern="^/ylogo ?(.*)")
 async def lego(event):
  quew = event.pattern_match.group(1)

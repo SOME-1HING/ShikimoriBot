@@ -41,6 +41,11 @@ Description: {description}"""
             except Exception as e:
                 print(str(e))
                 pass
+    for ch in ["[", "]", "{", "}"]:
+       if ch in caption:
+          caption = caption.replace(ch, "") 
+    caption = caption.replace("'", "`")
+
     await message.reply_photo(photo=poke_img, caption=caption)
 
 

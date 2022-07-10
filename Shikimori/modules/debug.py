@@ -54,11 +54,11 @@ support_chat = os.getenv("SUPPORT_CHAT")
 @dev_plus
 def logs(update: Update, context: CallbackContext):
     user = update.effective_user
-    with open("log.txt", "rb") as f:
+    with open("shikimori_logs.txt", "rb") as f:
         context.bot.send_document(document=f, filename=f.name, chat_id=user.id)
 
 
-LOG_HANDLER = CommandHandler("logs", logs, run_async=True)
+LOG_HANDLER = CommandHandler(("logs", "log"), logs, run_async=True)
 dispatcher.add_handler(LOG_HANDLER)
 
 DEBUG_HANDLER = CommandHandler("debug", debug, run_async=True)

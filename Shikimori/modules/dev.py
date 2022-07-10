@@ -76,8 +76,10 @@ Here is help for Dev Commands.
 Note: Consult with other devs before performing any actions.
 
 ❂ `/leave` <chat id> - Bot leaves the group.
+
+**Only for self hosted bots.**
 ❂ `/reboot` - To restart Bot.
-❂ `/gitpull` - Pull changes from github and redeploys the bot. [Must have github connected with Heroku]
+❂ `/gitpull` - Pull changes from github and redeploys the bot.
 """
 
 
