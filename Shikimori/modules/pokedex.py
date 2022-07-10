@@ -48,7 +48,8 @@ async def PokeDex(_, message):
 **Stats =>** 
 {stats}
 
-**Description =>** __{description}__"""
+**Description =>** __{description}__
+"""
             except Exception as e:
                 print(str(e))
                 pass
