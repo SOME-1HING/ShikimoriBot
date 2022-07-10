@@ -43,13 +43,6 @@ async def PokeDex(_, message):
 
 **Description =>** __{description}__
 """
-                caption = caption.replace(", `hp`", "HP = ")
-                caption = caption.replace(", `attack`", "\nAttack = ")
-                caption = caption.replace(", `defense`", "\nDefense = ")
-                caption = caption.replace(", `sp_atk`", "\nSpecial Attack = ")
-                caption = caption.replace(", `sp_def`", "\nSpecial Defanse = ")
-                caption = caption.replace(", `speed`", "\nSpeed = ")
-                caption = caption.replace(", `total`", "\nTotal = ")
 
                 for ch in ["[", "]", "{", "}", ":"]:
                     if ch in caption:
@@ -57,6 +50,13 @@ async def PokeDex(_, message):
 
 
                 caption = caption.replace("'", "`")
+                caption = caption.replace(", `hp`", "HP = ")
+                caption = caption.replace(", `attack`", "\nAttack = ")
+                caption = caption.replace(", `defense`", "\nDefense = ")
+                caption = caption.replace(", `sp_atk`", "\nSpecial Attack = ")
+                caption = caption.replace(", `sp_def`", "\nSpecial Defanse = ")
+                caption = caption.replace(", `speed`", "\nSpeed = ")
+                caption = caption.replace(", `total`", "\nTotal = ")
 
                 try:
                     link = f"https://www.pokemon.com/us/pokedex/{pokemon}"
