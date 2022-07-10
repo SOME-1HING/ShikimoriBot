@@ -12,6 +12,7 @@ from typing import Optional
 from telegram import __version__ as peler
 from platform import python_version as memek
 from Shikimori import (
+    ALIVE_MEDIA,
     BOT_USERNAME,
     CERT_PATH,
     UPDATE_CHANNEL,
@@ -802,7 +803,7 @@ def main():
         try:
             msg = dispatcher.bot.send_photo(
                 f"@{SUPPORT_CHAT}",
-                photo="https://telegra.ph/file/90e964c7cf8aac5fd65ab.jpg",
+                photo=ALIVE_MEDIA,
                 caption="👋 Hi, i'm alive.",
                 parse_mode=ParseMode.MARKDOWN
             )

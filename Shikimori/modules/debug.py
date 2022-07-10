@@ -1,15 +1,15 @@
 import os
 import datetime
+import time
 
 from telethon import events
 from telegram import Update
-from telegram.ext import CallbackContext, CommandHandler
+from telegram.ext import CallbackContext, CommandHandler, BadRequest
 
 from Shikimori import telethn, dispatcher
 from Shikimori.modules.helper_funcs.chat_status import dev_plus
 
 DEBUG_MODE = False
-
 
 @dev_plus
 def debug(update: Update, context: CallbackContext):
@@ -47,16 +47,22 @@ async def i_do_nothing_yes(event):
                     f"- {event.from_id} ({event.chat_id}) : {event.text} | {datetime.datetime.now()}",
                 )
 
-
 support_chat = os.getenv("SUPPORT_CHAT")
-
 
 @dev_plus
 def logs(update: Update, context: CallbackContext):
+    chat = update.effective_chat
     user = update.effective_user
     with open("shikimori_logs.txt", "rb") as f:
         context.bot.send_document(document=f, filename=f.name, chat_id=user.id)
-
+    if chat.type != chat.PRIVATE:
+        msg = update.effective_message
+        msg.reply_text("`Logs sent. Check your pm.`")
+        time.sleep(15)
+        try:
+            msg.delete()
+        except BadRequest:
+            pass
 
 LOG_HANDLER = CommandHandler(("logs", "log"), logs, run_async=True)
 dispatcher.add_handler(LOG_HANDLER)

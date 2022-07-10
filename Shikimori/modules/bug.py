@@ -1,13 +1,15 @@
 from datetime import datetime
+from email import message
 
 from pyrogram import filters
 from pyrogram.types import (
+    CallbackQuery,
     InlineKeyboardButton,
     InlineKeyboardMarkup,
     Message,
 )
 
-from Shikimori import OWNER_ID, pbot
+from Shikimori import DEV_USERS, OWNER_ID, STATS_IMG, pbot
 from Shikimori import (
     OWNER_ID,
     OWNER_USERNAME,
@@ -43,9 +45,6 @@ async def bug(_, msg: Message):
     mention = "["+msg.from_user.first_name+"](tg://user?id="+str(msg.from_user.id)+")"
     datetimes_fmt = "%d-%m-%Y"
     datetimes = datetime.utcnow().strftime(datetimes_fmt)
-
-    thumb = "https://telegra.ph/file/ec749863aaffc3dbaff1a.jpg"
-    
     bug_report = f"""
 **#BUG : ** **@{OWNER_USERNAME}**
 **From User : ** **{mention}**
@@ -55,37 +54,34 @@ async def bug(_, msg: Message):
 **Event Stamp : ** **{datetimes}**"""
 
     
-    if msg.chat.type == "private":
-        await msg.reply_text("❎ <b>This command only works in groups.</b>")
-        return
-
-    if user_id == OWNER_ID:
-        if bugs:
-            await msg.reply_text(
-                "❎ <b>Why owner of bot reporting a bug?? Go fix yourself</b>",
-            )
-            return
-        else:
-            await msg.reply_text(
-                "❎ <b>Why owner of bot reporting a bug?? Go fix yourself</b>"
-            )
-    elif user_id != OWNER_ID:
-        if bugs:
-            await msg.reply_text(
-                f"<b>Bug Report : {bugs}</b>\n\n"
-                "✅ <b>The bug was successfully reported to the support group!</b>",
-                reply_markup=InlineKeyboardMarkup(
-                    [
-                        [
-                            InlineKeyboardButton(
-                                "Close", callback_data=f"close_reply")
-                        ]
-                    ]
+    if msg.chat.type != "private":
+        if user_id == OWNER_ID:
+            if bugs:
+                await msg.reply_text(
+                    "❎ <b>Why owner of bot reporting a bug?? Go fix yourself</b>",
                 )
-            )
+                return
+            else:
+                await msg.reply_text(
+                    "❎ <b>Why owner of bot reporting a bug?? Go fix yourself</b>"
+                )
+        elif user_id != OWNER_ID:
+            if bugs:
+                await msg.reply_text(
+                    f"<b>Bug Report : {bugs}</b>\n\n"
+                    "✅ <b>The bug was successfully reported to the support group!</b>",
+                    reply_markup=InlineKeyboardMarkup(
+                        [
+                            [
+                                InlineKeyboardButton(
+                                    "Close", callback_data=f"close_reply")
+                            ]
+                        ]
+                    )
+                )
             await pbot.send_photo(
                 SUPPORT_CHAT,
-                photo=thumb,
+                photo=STATS_IMG,
                 caption=f"{bug_report}",
                 reply_markup=InlineKeyboardMarkup(
                     [
@@ -104,23 +100,22 @@ async def bug(_, msg: Message):
             await msg.reply_text(
                 f"❎ <b>No bug to Report!</b> Use `/bug <information>`",
             )
-        
+    else:
+        await msg.reply_text(f"❎ <b>This command only works in groups.</b>\n\n Visit @{SUPPORT_CHAT} to report bugs related to bot's pm.")
 
 @pbot.on_callback_query(filters.regex("close_reply"))
-async def close_reply(msg, CallbackQuery):
-    await CallbackQuery.message.delete()
+async def close_reply(client: pbot, query: CallbackQuery):
+    await query.message.delete()
 
 @pbot.on_callback_query(filters.regex("close_send_photo"))
-async def close_send_photo(_, CallbackQuery):
-    is_Admin = await pbot.get_chat_member(
-        CallbackQuery.message.chat.id, CallbackQuery.from_user.id
-    )
-    if not is_Admin.can_delete_messages:
-        return await CallbackQuery.answer(
-            "You're not allowed to close this.", show_alert=True
+async def close_send_photo(client: pbot, query: CallbackQuery):
+    user_id = query.from_user.id
+    if user_id not in DEV_USERS :
+        return await query.message(
+            "Only developers can close Bug reports.", show_alert=True
         )
     else:
-        await CallbackQuery.message.delete()
+        await query.message.delete()
         
 
 __mod_name__ = "Bug"
