@@ -30,13 +30,13 @@ async def PokeDex(_, message):
                 gender = result['gender']
                 stats = result['stats']
                 description = result['description']
-                stats = stats.replace(", hp", "**HP = **")
-                stats = stats.replace(", attack", "\n**Attack = **")
-                stats = stats.replace(", defense", "\n**Defense = **")
-                stats = stats.replace(", sp_atk", "\n**Special Attack = **")
-                stats = stats.replace(", sp_def", "\n**Special Defanse = **")
-                stats = stats.replace(", speed", "\n**Speed = **")
-                stats = stats.replace(", total", "\n**Total = **")
+                stats = stats.replace(", `hp`", "**HP = **")
+                stats = stats.replace(", `attack`", "\n**Attack = **")
+                stats = stats.replace(", `defense`", "\n**Defense = **")
+                stats = stats.replace(", `sp_atk`", "\n**Special Attack = **")
+                stats = stats.replace(", `sp_def`", "\n**Special Defanse = **")
+                stats = stats.replace(", `speed`", "\n**Speed = **")
+                stats = stats.replace(", `total`", "\n**Total = **")
                 caption = f"""
 **Pokemon =>** {pokemon.upper()}
 **Pokedex =>** `{pokedex}`
