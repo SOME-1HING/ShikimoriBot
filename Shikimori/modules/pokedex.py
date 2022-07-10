@@ -1,5 +1,7 @@
 import aiohttp
+from pykeyboard import InlineKeyboard
 from pyrogram import filters
+from pyrogram.types import InlineKeyboardButton
 from Shikimori import pbot
 from Shikimori.Extras.errors import capture_err
 
@@ -29,29 +31,47 @@ async def PokeDex(_, message):
                 stats = result['stats']
                 description = result['description']
                 caption = f"""
-Pokemon: {pokemon}
-Pokedex: {pokedex}
-Type: {type}
-Abilities: {abilities}
-Height: {height}
-Weight: {weight}
-Gender: {gender}
-Stats: {stats}
-Description: {description}"""
+**Pokemon:** {pokemon.upper()}
+**Pokedex:** `{pokedex}`
+**Type:** {type}
+**Abilities:** {abilities}
+**Height:** `{height}`
+**Weight:** `{weight}`
+**Gender:** {gender}
+**Stats:** 
+{stats}
+
+**Description:** __{description}__"""
             except Exception as e:
                 print(str(e))
                 pass
     for ch in ["[", "]", "{", "}"]:
-       if ch in caption:
-          caption = caption.replace(ch, "") 
-    caption = caption.replace("'", "`")
+        if ch in caption:
+            caption = caption.replace(ch, "") 
 
-    await message.reply_photo(photo=poke_img, caption=caption)
+
+    caption = caption.replace("'", "`")
+    caption = caption.replace("hp", "**HP = **")
+    caption = caption.replace("attack", "**Attack = **")
+    caption = caption.replace("defense", "**Defense = **")
+    caption = caption.replace("sp_atk", "**Special Attack = **")
+    caption = caption.replace("sp_def", "**Special Defanse = **")
+    caption = caption.replace("speed", "**Speed = **")
+    caption = caption.replace("total", "**Total = **")
+
+    try:
+        link = f"https://www.pokemon.com/us/pokedex/{pokemon}"
+        button = InlineKeyboard(row_width=1)
+        button.add(InlineKeyboardButton(text="More Info", url=link))
+        await message.reply_photo(photo=poke_img, caption=caption)
+
+    except:
+        await message.reply_photo(photo=poke_img, caption=caption)
 
 
 __mod_name__ = "Pokedex"
 __help__ = """
-Here is help for Pokedex
+**Here is help for Pokedex**
 
 `/pokedex` <pokemon name> - Get information about the pokemon.
 `/pokemon` <pokemon name> - Get information about the pokemon.
