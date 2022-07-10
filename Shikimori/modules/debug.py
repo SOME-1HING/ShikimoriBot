@@ -61,6 +61,7 @@ def logs(update: Update, context: CallbackContext):
         hmm = msg.reply_text("`Logs sent. Check your pm.`", parse_mode=ParseMode.MARKDOWN)
         time.sleep(10)
         try:
+            msg.delete()
             hmm.delete()
         except BadRequest:
             pass

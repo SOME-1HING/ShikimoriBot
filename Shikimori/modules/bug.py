@@ -1,5 +1,4 @@
 from datetime import datetime
-from email import message
 
 from pyrogram import filters
 from pyrogram.types import (
@@ -54,31 +53,34 @@ async def bug(_, msg: Message):
 **Event Stamp : ** **{datetimes}**"""
 
     
-    if msg.chat.type != "private":
-        if user_id == OWNER_ID:
-            if bugs:
-                await msg.reply_text(
-                    "❎ <b>Why owner of bot reporting a bug?? Go fix yourself</b>",
-                )
-                return
-            else:
-                await msg.reply_text(
-                    "❎ <b>Why owner of bot reporting a bug?? Go fix yourself</b>"
-                )
-        elif user_id != OWNER_ID:
-            if bugs:
-                await msg.reply_text(
-                    f"<b>Bug Report : {bugs}</b>\n\n"
-                    "✅ <b>The bug was successfully reported to the support group!</b>",
-                    reply_markup=InlineKeyboardMarkup(
+    if msg.chat.type == "private":
+        await msg.reply_text(f"❎ <b>This command only works in groups.</b>\n\n Visit @{SUPPORT_CHAT} to report bugs related to bot's pm.")
+        return
+
+    if user_id == OWNER_ID:
+        if bugs:
+            await msg.reply_text(
+                "❎ <b>Why owner of bot reporting a bug?? Go fix yourself</b>",
+            )
+            return
+        else:
+            await msg.reply_text(
+                "❎ <b>Why owner of bot reporting a bug?? Go fix yourself</b>"
+            )
+    elif user_id != OWNER_ID:
+        if bugs:
+            await msg.reply_text(
+                f"<b>Bug Report : {bugs}</b>\n\n"
+                "✅ <b>The bug was successfully reported to the support group!</b>",
+                reply_markup=InlineKeyboardMarkup(
+                    [
                         [
-                            [
-                                InlineKeyboardButton(
-                                    "Close", callback_data=f"close_reply")
-                            ]
+                            InlineKeyboardButton(
+                                "Close", callback_data=f"close_reply")
                         ]
-                    )
+                    ]
                 )
+            )
             await pbot.send_photo(
                 SUPPORT_CHAT,
                 photo=STATS_IMG,
@@ -100,8 +102,22 @@ async def bug(_, msg: Message):
             await msg.reply_text(
                 f"❎ <b>No bug to Report!</b> Use `/bug <information>`",
             )
-    else:
-        await msg.reply_text(f"❎ <b>This command only works in groups.</b>\n\n Visit @{SUPPORT_CHAT} to report bugs related to bot's pm.")
+        
+# @pbot.on_callback_query(filters.regex("close_reply"))
+# async def close_reply(msg, CallbackQuery):
+#     await CallbackQuery.message.delete()
+
+# @pbot.on_callback_query(filters.regex("close_send_photo"))
+# async def close_send_photo(_, CallbackQuery):
+#     is_Admin = await pbot.get_chat_member(
+#         CallbackQuery.message.chat.id, CallbackQuery.from_user.id
+#     )
+#     if not is_Admin.can_delete_messages:
+#         return await CallbackQuery.answer(
+#             "You're not allowed to close this.", show_alert=True
+#         )
+#     else:
+#         await CallbackQuery.message.delete()
 
 @pbot.on_callback_query(filters.regex("close_reply"))
 async def close_reply(client: pbot, query: CallbackQuery):
@@ -116,7 +132,6 @@ async def close_send_photo(client: pbot, query: CallbackQuery):
         )
     else:
         await query.message.delete()
-        
 
 __mod_name__ = "Bug"
 
