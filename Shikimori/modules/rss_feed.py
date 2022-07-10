@@ -247,6 +247,7 @@ def rss_update(context: CallbackContext):
             # this loop sends every new update to each user from each group based on the DB entries
             for link, title, description in zip(
                     reversed(new_entry_links), reversed(new_entry_titles), reversed(new_entry_description)):
+                description = description.replace("cite", "b")
                 final_message = '💫<b>{}</b>💫\n\n<i>{}</i>\n<a href="{}">_</a>'.format(
                     html.escape(title), html.escape(description), html.escape(link))
                 buttons = [[InlineKeyboardButton("More Info", url=link)]]
@@ -268,6 +269,7 @@ def rss_update(context: CallbackContext):
                     reversed(new_entry_links[-5:]),
                     reversed(new_entry_titles[-5:]),
                     reversed(new_entry_description[-5:])):
+                description = description.replace("cite", "b")
                 final_message = '💫<b>{}</b>💫\n\n<i>{}</i>\n<a href="{}">_</a>'.format(
                     html.escape(title), html.escape(description), html.escape(link))
                 buttons = [[InlineKeyboardButton("More Info", url=link)]]
