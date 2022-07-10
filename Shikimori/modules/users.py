@@ -8,7 +8,6 @@ from telegram.ext import (
     CommandHandler,
     Filters,
     MessageHandler,
-    run_async,
 )
 
 import Shikimori.modules.sql.users_sql as sql

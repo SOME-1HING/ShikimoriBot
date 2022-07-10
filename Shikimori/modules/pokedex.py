@@ -31,17 +31,21 @@ async def PokeDex(_, message):
                 stats = result['stats']
                 description = result['description']
                 caption = f"""
-**Pokemon =>** {pokemon.upper()}
-**Pokedex =>** `{pokedex}`
-**Type =>** {type}
-**Abilities =>** {abilities}
-**Height =>** `{height}`
-**Weight =>** `{weight}`
-**Gender =>** {gender}
-**Stats =>** 
+======[ 【Ｐｏｋéｄｅｘ】 ]======
+
+╒═══「 **{pokemon.upper()}** 」
+
+**Pokedex ➢** `{pokedex}`
+**Type ➢** {type}
+**Abilities ➢** {abilities}
+**Height ➢** `{height}`
+**Weight ➢** `{weight}`
+**Gender ➢** {gender}
+
+**Stats ➢** 
 {stats}
 
-**Description =>** __{description}__
+**Description ➢** __{description}__
 """
 
                 for ch in ["[", "]", "{", "}", ":"]:
@@ -50,13 +54,13 @@ async def PokeDex(_, message):
 
 
                 caption = caption.replace("'", "`")
-                caption = caption.replace(", `hp`", "HP = ")
-                caption = caption.replace(", `attack`", "\nAttack = ")
-                caption = caption.replace(", `defense`", "\nDefense = ")
-                caption = caption.replace(", `sp_atk`", "\nSpecial Attack = ")
-                caption = caption.replace(", `sp_def`", "\nSpecial Defanse = ")
-                caption = caption.replace(", `speed`", "\nSpeed = ")
-                caption = caption.replace(", `total`", "\nTotal = ")
+                caption = caption.replace("`hp`", "× HP : ")
+                caption = caption.replace(", `attack`", "\n× Attack : ")
+                caption = caption.replace(", `defense`", "\n× Defense : ")
+                caption = caption.replace(", `sp_atk`", "\n× Special Attack : ")
+                caption = caption.replace(", `sp_def`", "\n× Special Defanse : ")
+                caption = caption.replace(", `speed`", "\n× Speed : ")
+                caption = caption.replace(", `total`", "\n× Total : ")
 
                 try:
                     link = f"https://www.pokemon.com/us/pokedex/{pokemon}"

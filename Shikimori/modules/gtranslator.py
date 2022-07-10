@@ -7,7 +7,7 @@ from telegram import (
     InlineKeyboardButton,
 )
 from Shikimori import dispatcher, pbot
-from pyrogram import filters
+from pyrogram import filters, enums
 from Shikimori.modules.disable import DisableAbleCommandHandler
 
 
@@ -65,7 +65,7 @@ async def translate(_, message: Message) -> None:
         f"<code>{translation.text}</code>"
     )
 
-    await message.reply_text(reply, parse_mode="html")
+    await message.reply_text(reply, parse_mode= enums.ParseMode.HTML)
 
 
 def languages(update: Update, context: CallbackContext) -> None:
