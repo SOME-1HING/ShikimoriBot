@@ -30,13 +30,6 @@ async def PokeDex(_, message):
                 gender = result['gender']
                 stats = result['stats']
                 description = result['description']
-                stats = stats.replace(", `hp`", "HP = ")
-                stats = stats.replace(", `attack`", "\nAttack = ")
-                stats = stats.replace(", `defense`", "\nDefense = ")
-                stats = stats.replace(", `sp_atk`", "\nSpecial Attack = ")
-                stats = stats.replace(", `sp_def`", "\nSpecial Defanse = ")
-                stats = stats.replace(", `speed`", "\nSpeed = ")
-                stats = stats.replace(", `total`", "\nTotal = ")
                 caption = f"""
 **Pokemon =>** {pokemon.upper()}
 **Pokedex =>** `{pokedex}`
@@ -50,6 +43,14 @@ async def PokeDex(_, message):
 
 **Description =>** __{description}__
 """
+                caption = caption.replace(", `hp`", "HP = ")
+                caption = caption.replace(", `attack`", "\nAttack = ")
+                caption = caption.replace(", `defense`", "\nDefense = ")
+                caption = caption.replace(", `sp_atk`", "\nSpecial Attack = ")
+                caption = caption.replace(", `sp_def`", "\nSpecial Defanse = ")
+                caption = caption.replace(", `speed`", "\nSpeed = ")
+                caption = caption.replace(", `total`", "\nTotal = ")
+
                 for ch in ["[", "]", "{", "}", ":"]:
                     if ch in caption:
                         caption = caption.replace(ch, "") 
@@ -61,7 +62,7 @@ async def PokeDex(_, message):
                     link = f"https://www.pokemon.com/us/pokedex/{pokemon}"
                     button = InlineKeyboard(row_width=1)
                     button.add(InlineKeyboardButton(text="More Info", url=link))
-                    await message.reply_photo(photo=poke_img, caption=caption)
+                    await message.reply_photo(photo=poke_img, caption=caption, reply_markup=button)
 
                 except:
                     await message.reply_photo(photo=poke_img, caption=caption)
