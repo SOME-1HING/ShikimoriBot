@@ -57,18 +57,18 @@ async def PokeDex(_, message):
 
                 caption = caption.replace("'", "`")
 
+                try:
+                    link = f"https://www.pokemon.com/us/pokedex/{pokemon}"
+                    button = InlineKeyboard(row_width=1)
+                    button.add(InlineKeyboardButton(text="More Info", url=link))
+                    await message.reply_photo(photo=poke_img, caption=caption)
+
+                except:
+                    await message.reply_photo(photo=poke_img, caption=caption)
+
             except Exception as e:
                 print(str(e))
                 pass
-
-            try:
-                link = f"https://www.pokemon.com/us/pokedex/{pokemon}"
-                button = InlineKeyboard(row_width=1)
-                button.add(InlineKeyboardButton(text="More Info", url=link))
-                await message.reply_photo(photo=poke_img, caption=caption)
-
-            except:
-                await message.reply_photo(photo=poke_img, caption=caption)
 
 
 __mod_name__ = "Pokedex"
