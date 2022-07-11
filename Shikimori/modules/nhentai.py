@@ -13,22 +13,6 @@ from janda import Nhentai, resolve
 import json
 from Shikimori import pbot, dispatcher
 from math import ceil
-from telegram import InlineKeyboardButton, InlineKeyboardMarkup, ParseMode, Update
-from telegram.error import (
-    BadRequest,
-    ChatMigrated,
-    NetworkError,
-    TelegramError,
-    TimedOut,
-    Unauthorized,
-)
-from telegram.ext import (
-    CallbackContext,
-    CallbackQueryHandler,
-    CommandHandler,
-    Filters,
-    MessageHandler,
-)
 
 @pbot.on_message(filters.command("sauce"))
 async def sauce(_, message):
