@@ -27,6 +27,9 @@ def content(msg: Message) -> [None, str]:
 
 @capture_err
 def bug(update: Update, context: CallbackContext):
+    if update.effective_chat.type == "private":
+        update.effective_message.reply_text(f"❎ <b>This command only works in groups.</b>\n\n Visit @{SUPPORT_CHAT} to report bugs related to bot's pm.")
+        return
     args = context.args
     user_id = update.effective_message.from_user.id
     message = update.effective_message
@@ -48,9 +51,6 @@ def bug(update: Update, context: CallbackContext):
 **Bug Report : ** **{bugs}**
 **Event Stamp : ** **{datetimes}**"""
 
-    if update.effective_chat.type == "private":
-        update.effective_message.reply_text(f"❎ <b>This command only works in groups.</b>\n\n Visit @{SUPPORT_CHAT} to report bugs related to bot's pm.")
-        return
     if user_id == OWNER_ID:
         if bugs:
             message.reply_text(
