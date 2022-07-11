@@ -31,6 +31,8 @@ def bug(update: Update, context: CallbackContext):
                 link_chat_id = message.chat.username
                 message_link = f"https://t.me/{link_chat_id}/{msg_id}"
                 message.reply_text(message_link)
+            else:
+                message.reply_text("hmm")
         else:
             message.reply_text(
                     f"❎ **No bug to Report!** Use `/bug <information>`", parse_mode=ParseMode.MARKDOWN
