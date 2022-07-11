@@ -129,4 +129,8 @@ If you don't have an exception set for your chat, it'll send it to you in your p
 __mod_name__ = "Nhentai"
 
 # create handlers
-dispatcher.add_handler(CommandHandler("sauce", sauce, run_async=True))
+SAUCE_HANDLER = CommandHandler("sauce", sauce, run_async = True)
+
+dispatcher.add_handler(SAUCE_HANDLER)
+__command_list__ = ["sauce"]
+__handlers__ = [SAUCE_HANDLER]
