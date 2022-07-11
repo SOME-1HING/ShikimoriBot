@@ -1,4 +1,3 @@
-from turtle import up
 from hentai import Hentai, Format, Tag
 from telegram import Update, ParseMode, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import CommandHandler, CallbackContext
