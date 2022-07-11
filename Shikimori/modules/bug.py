@@ -39,8 +39,9 @@ def bug(update: Update, context: CallbackContext):
                 )
             return
             
-
-        mention = f"[{message.first_name}](tg://user?id={user_id})"
+        first_name = update.effective_user.first_name
+        user = message.from_user
+        mention = f"[{first_name}](tg://user?id={user.id})"
         datetimes_fmt = "%d-%m-%Y"
         datetimes = datetime.utcnow().strftime(datetimes_fmt)
         bug_report = f"""
