@@ -12,38 +12,31 @@ from telegram.ext import CallbackContext, CallbackQueryHandler, CommandHandler
 
 def bug(update: Update, context: CallbackContext):
     try:
+        if user_id == OWNER_ID:
+            message.reply_text(
+                    "❎ **Why owner of bot reporting a bug?? Go fix yourself**", parse_mode=ParseMode.MARKDOWN
+                )
+            return
         if update.effective_chat.type == "private":
-            update.effective_message.reply_text(f"❎ <b>This command only works in groups.</b>\n\n Visit @{SUPPORT_CHAT} to report bugs related to bot's pm.")
+            update.effective_message.reply_text(f"❎ **This command only works in groups.**\n\n Visit @{SUPPORT_CHAT} to report bugs related to bot's pm.", parse_mode=ParseMode.MARKDOWN)
             return
         args = update.effective_message.text.split(None, 1)
         user_id = update.effective_message.from_user.id
         message = update.effective_message
-        chat = update.effective_chat
         msg_id = message.reply_to_message.message_id if message.reply_to_message else message.message_id
-
-        if user_id == OWNER_ID:
-            if bugs:
-                message.reply_text(
-                    "❎ <b>Why owner of bot reporting a bug?? Go fix yourself</b>",
-                )
-                return
-            else:
-                message.reply_text(
-                    "❎ <b>Why owner of bot reporting a bug?? Go fix yourself</b>"
-                )
-                return
-
-        if message.chat.username:
-            link_chat_id = message.chat.username
-            message_link = f"https://t.me/{link_chat_id}/{msg_id}"
         
         if len(args) >= 2:
             bugs = args[1]
+            if message.chat.username:
+                link_chat_id = message.chat.username
+                message_link = f"https://t.me/{link_chat_id}/{msg_id}"
+                message.reply_text(message_link)
         else:
             message.reply_text(
-                    f"❎ <b>No bug to Report!</b> Use `/bug <information>`",
+                    f"❎ **No bug to Report!** Use `/bug <information>`", parse_mode=ParseMode.MARKDOWN
                 )
             return
+            
 
         mention = "["+update.effective_user.first_name+"](tg://user?id="+str(message.from_user.id)+")"
         datetimes_fmt = "%d-%m-%Y"
@@ -57,40 +50,46 @@ def bug(update: Update, context: CallbackContext):
     **Event Stamp : ** **{datetimes}**"""
 
         if user_id != OWNER_ID:
-            if bugs:
-                message.reply_text(
-                    f"<b>Bug Report : {bugs}</b>\n\n"
-                    "✅ <b>The bug was successfully reported to the support group!</b>",
-                    reply_markup=InlineKeyboardMarkup(
+            message.reply_text(
+                f"**Bug Report : {bugs}**\n\n"
+                "✅ **The bug was successfully reported to the support group!**",
+                reply_markup=InlineKeyboardMarkup(
+                    [
                         [
-                            [
-                                InlineKeyboardButton(
-                                    "Close", callback_data=f"close_reply")
-                            ]
+                            InlineKeyboardButton(
+                                text="❌ Close",
+                                callback_data="close_reply_"
+                            )
                         ]
-                    )
-                )
-
-                message.reply_photo(
-                    SUPPORT_CHAT,
-                    photo=STATS_IMG,
-                    caption=f"{bug_report}",
-                    reply_markup=InlineKeyboardMarkup(
+                    ]
+                ),
+                parse_mode=ParseMode.MARKDOWN
+            )
+            dispatcher.bot.send_photo(
+                f"@{SUPPORT_CHAT}",
+                photo=STATS_IMG,
+                caption=f"{bug_report}",
+                reply_markup=InlineKeyboardMarkup(
+                    [
                         [
-                            [
-                                InlineKeyboardButton(
-                                    "➡ View Bug", url=f"{message_link}")
-                            ],
-                            [
-                                InlineKeyboardButton(
-                                    "❌ Close", callback_data="close_send_photo")
-                            ]
+                            InlineKeyboardButton(
+                                text="➡ View Bug",
+                                url=f"{message_link}",
+                            )
+                        ],
+                        [
+                            InlineKeyboardButton(
+                                text="❌ Close",
+                                callback_data="close_send_photo"
+                            )
                         ]
-                    )
-                )
+                    ]
+            ),
+            parse_mode=ParseMode.MARKDOWN,
+            )
     except:
         update.effective_message.reply_text(
-            f"*ERROR!!! Contact @{SUPPORT_CHAT}",
+            f"**ERROR!!! Contact @{SUPPORT_CHAT}**",
             parse_mode=ParseMode.MARKDOWN,
         )
 
