@@ -60,6 +60,7 @@ countryinfo
 html2text
 bs4
 redis
+hentai
 pySmartDL
 bing_image_downloader
 search_engine_parser
