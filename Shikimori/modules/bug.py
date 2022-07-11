@@ -7,88 +7,94 @@ from Shikimori import (
     dispatcher
 )
 import time
-from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update
+from telegram import InlineKeyboardButton, ParseMode, InlineKeyboardMarkup, Update
 from telegram.ext import CallbackContext, CallbackQueryHandler, CommandHandler
 from Shikimori.utils.errors import capture_err
 
 @capture_err
 def bug(update: Update, context: CallbackContext):
-    if update.effective_chat.type == "private":
-        update.effective_message.reply_text(f"❎ <b>This command only works in groups.</b>\n\n Visit @{SUPPORT_CHAT} to report bugs related to bot's pm.")
-        return
-    args = update.effective_message.text.split(None, 1)
-    user_id = update.effective_message.from_user.id
-    message = update.effective_message
-    chat = update.effective_chat
-    msg_id = message.reply_to_message.message_id if message.reply_to_message else message.message_id
-
-    if user_id == OWNER_ID:
-        if bugs:
-            message.reply_text(
-                "❎ <b>Why owner of bot reporting a bug?? Go fix yourself</b>",
-            )
+    try:
+        if update.effective_chat.type == "private":
+            update.effective_message.reply_text(f"❎ <b>This command only works in groups.</b>\n\n Visit @{SUPPORT_CHAT} to report bugs related to bot's pm.")
             return
+        args = update.effective_message.text.split(None, 1)
+        user_id = update.effective_message.from_user.id
+        message = update.effective_message
+        chat = update.effective_chat
+        msg_id = message.reply_to_message.message_id if message.reply_to_message else message.message_id
+
+        if user_id == OWNER_ID:
+            if bugs:
+                message.reply_text(
+                    "❎ <b>Why owner of bot reporting a bug?? Go fix yourself</b>",
+                )
+                return
+            else:
+                message.reply_text(
+                    "❎ <b>Why owner of bot reporting a bug?? Go fix yourself</b>"
+                )
+                return
+
+        if message.chat.username:
+            link_chat_id = message.chat.username
+            message_link = f"https://t.me/{link_chat_id}/{msg_id}"
+        
+        if len(args) >= 2:
+            bugs = args[1]
         else:
             message.reply_text(
-                "❎ <b>Why owner of bot reporting a bug?? Go fix yourself</b>"
-            )
+                    f"❎ <b>No bug to Report!</b> Use `/bug <information>`",
+                )
             return
 
-    if message.chat.username:
-        link_chat_id = message.chat.username
-        message_link = f"https://t.me/{link_chat_id}/{msg_id}"
-    
-    if len(args) >= 2:
-        bugs = args[1]
-    else:
-        message.reply_text(
-                f"❎ <b>No bug to Report!</b> Use `/bug <information>`",
-            )
-        return
+        mention = "["+update.effective_user.first_name+"](tg://user?id="+str(message.from_user.id)+")"
+        datetimes_fmt = "%d-%m-%Y"
+        datetimes = datetime.utcnow().strftime(datetimes_fmt)
+        bug_report = f"""
+    **#BUG : ** **@{OWNER_USERNAME}**
+    **From User : ** **{mention}**
+    **User ID : ** **{user_id}**
+    **Group : ** **{link_chat_id}**
+    **Bug Report : ** **{bugs}**
+    **Event Stamp : ** **{datetimes}**"""
 
-    mention = "["+update.effective_user.first_name+"](tg://user?id="+str(message.from_user.id)+")"
-    datetimes_fmt = "%d-%m-%Y"
-    datetimes = datetime.utcnow().strftime(datetimes_fmt)
-    bug_report = f"""
-**#BUG : ** **@{OWNER_USERNAME}**
-**From User : ** **{mention}**
-**User ID : ** **{user_id}**
-**Group : ** **{link_chat_id}**
-**Bug Report : ** **{bugs}**
-**Event Stamp : ** **{datetimes}**"""
-
-    if user_id != OWNER_ID:
-        if bugs:
-            message.reply_text(
-                f"<b>Bug Report : {bugs}</b>\n\n"
-                "✅ <b>The bug was successfully reported to the support group!</b>",
-                reply_markup=InlineKeyboardMarkup(
-                    [
+        if user_id != OWNER_ID:
+            if bugs:
+                message.reply_text(
+                    f"<b>Bug Report : {bugs}</b>\n\n"
+                    "✅ <b>The bug was successfully reported to the support group!</b>",
+                    reply_markup=InlineKeyboardMarkup(
                         [
-                            InlineKeyboardButton(
-                                "Close", callback_data=f"close_reply")
+                            [
+                                InlineKeyboardButton(
+                                    "Close", callback_data=f"close_reply")
+                            ]
                         ]
-                    ]
+                    )
                 )
-            )
 
-            message.reply_photo(
-                SUPPORT_CHAT,
-                photo=STATS_IMG,
-                caption=f"{bug_report}",
-                reply_markup=InlineKeyboardMarkup(
-                    [
+                message.reply_photo(
+                    SUPPORT_CHAT,
+                    photo=STATS_IMG,
+                    caption=f"{bug_report}",
+                    reply_markup=InlineKeyboardMarkup(
                         [
-                            InlineKeyboardButton(
-                                "➡ View Bug", url=f"{message_link}")
-                        ],
-                        [
-                            InlineKeyboardButton(
-                                "❌ Close", callback_data="close_send_photo")
+                            [
+                                InlineKeyboardButton(
+                                    "➡ View Bug", url=f"{message_link}")
+                            ],
+                            [
+                                InlineKeyboardButton(
+                                    "❌ Close", callback_data="close_send_photo")
+                            ]
                         ]
-                    ]
+                    )
                 )
-            )
+    except:
+        update.effective_message.reply_text(
+            f"*ERROR!!! Contact @{SUPPORT_CHAT}",
+            parse_mode=ParseMode.MARKDOWN,
+        )
 
 def close_reply(update: Update, context: CallbackContext):
     query = update.callback_query
