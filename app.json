@@ -85,7 +85,7 @@
          "value": "-1001626554919"
       },
       "JOIN_LOGGER": {
-         "description": "A channel where bot will print who added it to what group, useful during debugging or spam handling.",
+         "description": "A channel where bot will print who added it to what group, useful during debugging or spam handling. Have it same as LOG_CHANNEL if you don't want a seprate group/channel for it.",
          "required": true,
          "value": "-1001626554919"
       },      
