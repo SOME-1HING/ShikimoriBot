@@ -6,6 +6,7 @@ from Shikimori import (
     SUPPORT_CHAT,
     dispatcher
 )
+from pyrogram.types import Message
 import time
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update
 from telegram.ext import CallbackContext, CallbackQueryHandler
