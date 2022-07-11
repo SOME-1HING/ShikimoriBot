@@ -2,12 +2,19 @@ from pykeyboard import InlineKeyboard
 from pyrogram import filters
 from pyrogram.types import InlineKeyboardButton
 import asyncio
+import Shikimori.modules.sql.nsfw_sql as sql
 from janda import Nhentai, resolve
 import json
 from Shikimori import pbot
 
 @pbot.on_message(filters.command("sauce"))
 async def sauce(_, message):
+    chat_id = message.chat.id
+    if not message.chat.type == "private":
+        is_nsfw = sql.is_nsfw(chat_id)
+        if not is_nsfw:
+            message.reply_text("NSFW is not activated")
+            return
     if len(message.command) != 2:
         await message.reply_text("/sauce code")
         return
