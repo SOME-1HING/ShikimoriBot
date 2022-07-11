@@ -30,7 +30,6 @@ def bug(update: Update, context: CallbackContext):
             if message.chat.username:
                 link_chat_id = message.chat.username
                 message_link = f"https://t.me/{link_chat_id}/{msg_id}"
-                message.reply_text(message_link)
             else:
                 update.effective_message.reply_text(f"❎ **This command only works in public groups.**\n\n Visit @{SUPPORT_CHAT} to report bugs related to bot's pm.", parse_mode=ParseMode.MARKDOWN)
                 return
@@ -106,17 +105,15 @@ def close_send_photo(update: Update, context: CallbackContext):
     query = update.callback_query
     if query.data == "close_send_photo_":
         user = update.effective_user
-        msg = message = update.effective_message
-        if user.id not in DEV_USERS :
-            msg.reply_text(
+        if user.id in DEV_USERS:
+            query.message.delete()
+        else:
+            msg = update.effective_message.reply_text(
             "Only developers can close Bug reports."
         )
             time.sleep(10)
             msg.delete()
             return
-
-        else:
-            query.message.delete()
 
 close_reply_handler = CallbackQueryHandler(
         close_reply, pattern=r"close_reply_", run_async=True
