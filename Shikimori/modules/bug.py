@@ -44,12 +44,12 @@ def bug(update: Update, context: CallbackContext):
         datetimes_fmt = "%d-%m-%Y"
         datetimes = datetime.utcnow().strftime(datetimes_fmt)
         bug_report = f"""
-*#BUG : * *@{OWNER_USERNAME}*
-*From User : * *{mention}*
-*User ID : * *{user_id}*
-*Group : * *@{link_chat_id}*
-*Bug Report : * *{bugs}*
-*Event Stamp : * *{datetimes}*
+*#BUG :  @{OWNER_USERNAME}
+From User :  {mention}
+User ID :  {user_id}
+Group :  @{link_chat_id}
+Bug Report :  {bugs}
+Event Stamp :  {datetimes}*
 """
 
         if user_id != OWNER_ID:
