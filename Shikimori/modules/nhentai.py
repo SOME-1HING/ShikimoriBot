@@ -91,7 +91,7 @@ Tags ➢** `{tags}`
 
 
 @pbot.on_callback_query()
-async def close_(client: pbot, query: CallbackQuery):
+async def close_n(client: pbot, query: CallbackQuery):
     if query.data == "close_n":
         await query.message.delete()
 
@@ -102,7 +102,6 @@ async def button_n(client: pbot, query: CallbackQuery):
     i = 1
     while i != (int(sauce.num_pages)-1):
         if next_n:
-            await query.message.edit_photo(photo= f"{sauce.img_url}/{i}.jpg", )
             source = sauce.source_button
             buttons = [
             [
@@ -113,10 +112,10 @@ async def button_n(client: pbot, query: CallbackQuery):
             [
                 source
             ],
+            await query.message.edit_message_media(photo= f"{sauce.img_url}/{i}.jpg", reply_markup=InlineKeyboardMarkup(buttons))
             ]
             i = i+1
         elif back_n:
-            await query.message.edit_photo(photo= f"{sauce.img_url}/{i}.jpg", )
             source = sauce.source_button
             buttons = [
             [
@@ -128,4 +127,5 @@ async def button_n(client: pbot, query: CallbackQuery):
                 source
             ],
             ]
+            await query.message.edit_message_media(photo= f"{sauce.img_url}/{i}.jpg", reply_markup=InlineKeyboardMarkup(buttons))
             i = i-1
