@@ -59,7 +59,7 @@ countryinfo
 html2text
 bs4
 redis
-NHentai-API
+janda
 pySmartDL
 bing_image_downloader
 search_engine_parser

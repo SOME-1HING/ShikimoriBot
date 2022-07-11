@@ -1,84 +1,48 @@
-
-from telegram import Update, ParseMode, InlineKeyboardButton, InlineKeyboardMarkup
-from telegram.ext import CommandHandler, CallbackContext
-from telegraph import Telegraph
-from Shikimori import pbot
 from pyrogram import filters
-from Shikimori.Extras.errors import capture_err
-from Shikimori import SUPPORT_CHAT, dispatcher
-
-from NHentai import NHentai, NHentaiAsync
-
-nhentai = NHentai()
-
-nhentai_async = NHentaiAsync()
+import asyncio
+from janda import Nhentai, resolve
+import json
+from Shikimori import pbot
 
 @pbot.on_message(filters.command("sauce"))
 async def sauce(_, message):
-    try:
-        popular = nhentai.get_random()
-        return await message.reply_text(popular)
-    except:
-        return await message.reply_text("LUL ERROR")
+    if len(message.command) != 2:
+        await message.reply_text("/sauce code")
+        return
+    nh = Nhentai()
+    code = message.text.split(None, 1)[1]
+    code = int(code)
+    data = await nh.get(code)
+    json_acceptable_string = data.replace("'", "\"")
+    d = json.loads(json_acceptable_string)
+    await asyncio.sleep(0.6)
+    res = d["data"]
+    artist = res["artist"]
+    id = res["id"]
+    image = res["image"]
+    language = res["language"]
+    num_favorites = res["num_favorites"]
+    num_pages = res["num_pages"]
+    title = res["title"]
+    source = d["source"]
+    parodies = res["parodies"]
 
-# def sauce(update: Update, context: CallbackContext):
-#     try:
-#         args = update.effective_message.text.split(None, 1)
-#         user_id = update.effective_message.from_user.id
-#         message = update.effective_message
-#         Doujin = nhentai.get_random()
-#     except:
-#         update.effective_message.reply_text(
-#             f"*ERROR!!! Contact @{SUPPORT_CHAT}*",
-#             parse_mode=ParseMode.MARKDOWN,
-#         )
+    if parodies== None:
+        parodies ="Original"
 
-__help__ = """
-- /sauce `<digits list>` : Read a doujin from nhentai.net in telegram instant preview by giving it's code. 
-You can give multiple codes, and it will fetch all those doujins. 
-If you don't have an exception set for your chat, it'll send it to you in your private chat.
-"""
+    artist= str(artist)
 
-__mod_name__ = "Nhentai"
+    for ch in ["[", "]", "'"]:
+        artist = artist.replace(ch, "")
 
-
-
-
-
-
-
-
-
-# try:
-#         args = update.effective_message.text.split(None, 1)
-#         user_id = update.effective_message.from_user.id
-#         message = update.effective_message
-#         if len(args) >= 2:
-#             for digits in context.args:
-#                 try:
-#                     code = int(digits)
-#                 except ValueError:
-#                     update.effective_message.reply_text(
-#                         f"If you don't know that sauce codes must be only digits, you shouldn't be using this command. \n`{digits}` is not a sauce, just a sign of your ignorance.", parse_mode=ParseMode.MARKDOWN
-#                     )
-#                     continue
-#                 doujin = Hentai(code)
-#                 if not Hentai.exists(doujin.id):
-#                     update.effective_message.reply_text(
-#                         f"Doujin for `{code}` doesn't exist, Donald... Please don't use your nuclear launch codes here 😿", parse_mode=ParseMode.MARKDOWN
-#                     )
-#                     continue
-
-                
-#                 update.effective_message.reply_text(f"{doujin.artist}")
-
-#         else:
-#             message.reply_text(
-#                     f"*No code input!* Use `/sauce <code>`", parse_mode=ParseMode.MARKDOWN
-#                 )
-#             return
-#     except:
-#         update.effective_message.reply_text(
-#             f"*ERROR!!! Contact @{SUPPORT_CHAT}*",
-#             parse_mode=ParseMode.MARKDOWN,
-#         )
+    caption=f"""
+Title➢ {title}
+id ➢ {id}
+Artist ➢ {artist}
+Lang ➢ {language}
+Parodies ➢ {parodies}
+Source ➢ {source}
+Fav➢ {num_favorites}
+Pages ➢ {num_pages}
+    """
+    return await message.reply_text(caption)
