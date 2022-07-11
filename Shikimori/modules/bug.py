@@ -18,11 +18,11 @@ def bug(update: Update, context: CallbackContext):
         msg_id = message.reply_to_message.message_id if message.reply_to_message else message.message_id
         if user_id == OWNER_ID:
             message.reply_text(
-                    "❎ **Why owner of bot reporting a bug?? Go fix yourself**", parse_mode=ParseMode.MARKDOWN
+                    "❎ *Why owner of bot reporting a bug?? Go fix yourself*", parse_mode=ParseMode.MARKDOWN
                 )
             return
         if update.effective_chat.type == "private":
-            update.effective_message.reply_text(f"❎ **This command only works in public groups.**\n\n Visit @{SUPPORT_CHAT} to report bugs related to bot's pm.", parse_mode=ParseMode.MARKDOWN)
+            update.effective_message.reply_text(f"❎ *This command only works in public groups.*\n\n Visit @{SUPPORT_CHAT} to report bugs related to bot's pm.", parse_mode=ParseMode.MARKDOWN)
             return
         
         if len(args) >= 2:
@@ -31,11 +31,11 @@ def bug(update: Update, context: CallbackContext):
                 link_chat_id = message.chat.username
                 message_link = f"https://t.me/{link_chat_id}/{msg_id}"
             else:
-                update.effective_message.reply_text(f"❎ **This command only works in public groups.**\n\n Visit @{SUPPORT_CHAT} to report bugs related to bot's pm.", parse_mode=ParseMode.MARKDOWN)
+                update.effective_message.reply_text(f"❎ *This command only works in public groups.*\n\n Visit @{SUPPORT_CHAT} to report bugs related to bot's pm.", parse_mode=ParseMode.MARKDOWN)
                 return
         else:
             message.reply_text(
-                    f"❎ **No bug to Report!** Use `/bug <information>`", parse_mode=ParseMode.MARKDOWN
+                    f"❎ *No bug to Report!* Use `/bug <information>`", parse_mode=ParseMode.MARKDOWN
                 )
             return
             
@@ -44,18 +44,18 @@ def bug(update: Update, context: CallbackContext):
         datetimes_fmt = "%d-%m-%Y"
         datetimes = datetime.utcnow().strftime(datetimes_fmt)
         bug_report = f"""
-**#BUG : ** **@{OWNER_USERNAME}**
-**From User : ** **{mention}**
-**User ID : ** **{user_id}**
-**Group : ** **{link_chat_id}**
-**Bug Report : ** **{bugs}**
-**Event Stamp : ** **{datetimes}**
+*#BUG : * *@{OWNER_USERNAME}*
+*From User : * *{mention}*
+*User ID : * *{user_id}*
+*Group : * *{link_chat_id}*
+*Bug Report : * *{bugs}*
+*Event Stamp : * *{datetimes}*
 """
 
         if user_id != OWNER_ID:
             message.reply_text(
-                f"**Bug Report : {bugs}**\n\n"
-                "✅ **The bug was successfully reported to the support group!**",
+                f"*Bug Report : {bugs}*\n\n"
+                "✅ *The bug was successfully reported to the support group!*",
                 reply_markup=InlineKeyboardMarkup(
                     [
                         [
@@ -83,7 +83,7 @@ def bug(update: Update, context: CallbackContext):
                         [
                             InlineKeyboardButton(
                                 text="❌ Close",
-                                callback_data="close_send_photo"
+                                callback_data="close_send_photo_"
                             )
                         ]
                     ]
@@ -92,7 +92,7 @@ def bug(update: Update, context: CallbackContext):
             )
     except:
         update.effective_message.reply_text(
-            f"**ERROR!!! Contact @{SUPPORT_CHAT}**",
+            f"*ERROR!!! Contact @{SUPPORT_CHAT}*",
             parse_mode=ParseMode.MARKDOWN,
         )
 
