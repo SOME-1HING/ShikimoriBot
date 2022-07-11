@@ -48,6 +48,7 @@ Source ➢ {source}
 Fav➢ {num_favorites}
 Pages ➢ {num_pages}
     """
-    button= InlineKeyboardButton(text="Visit", url=source)
+    button = InlineKeyboard(row_width=1)
+    button.add(InlineKeyboardButton(text="Visit", url=source))
 
     return await message.reply_photo(photo=cover,caption=caption, reply_markup=button)
