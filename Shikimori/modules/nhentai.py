@@ -36,6 +36,7 @@ async def sauce(_, message):
     source = d["source"]
     parodies = res["parodies"]
     tags = res["tags"]
+    tags = tags.replace("'", "")
     j = res["optional_title"]
     title = j["english"]
 
@@ -49,15 +50,17 @@ async def sauce(_, message):
         artist = artist.replace(ch, "")
 
     caption=f"""
-Title➢ {title}
-id ➢ {id}
-Artist ➢ {artist}
-Lang ➢ {language}
-Parodies ➢ {parodies}
-Source ➢ {source}
-Tags ➢ {tags}
-Fav➢ {num_favorites}
-Pages ➢ {num_pages}
+**Title➢ {title}**
+
+**id ➢** `{id}`
+**Artist ➢ {artist.capitalize()}
+Lang ➢ {language.capitalize()}
+
+Parodies ➢ `{parodies}`
+Tags ➢** `{tags}`
+
+**Fav ➢** `{num_favorites}`
+**Pages ➢** `{num_pages}`
     """
     button = InlineKeyboard(row_width=1)
     button.add(InlineKeyboardButton(text="Visit", url=source))
