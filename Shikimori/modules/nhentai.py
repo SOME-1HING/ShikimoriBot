@@ -71,13 +71,9 @@ Tags ➢** `{tags}`
 **Fav ➢** ❤️`{num_favorites}`
 **Pages ➢** `{num_pages}`
     """
-    img_url = f"https://i.nhentai.net/galleries/{id}/"
-
-    source_button = InlineKeyboardButton(text="Visit", url=source)
-
     buttons = [
     [
-        source_button,
+        InlineKeyboardButton(text="Visit", url=source),
     ],
     [
         InlineKeyboardButton(text="❌ Close", callback_data="close_n"),
@@ -89,4 +85,5 @@ Tags ➢** `{tags}`
 @pbot.on_callback_query()
 async def close_n(client: pbot, query: CallbackQuery):
     if query.data == "close_n":
-        await query.message.delete()
+        msg = await query.edit_message_text() 
+        msg.delete()
