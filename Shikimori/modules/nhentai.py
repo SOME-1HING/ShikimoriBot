@@ -82,15 +82,17 @@ Tags ➢** `{tags}`
 **Pages ➢** `{num_pages}`
     """
 
-    source_button = [InlineKeyboardButton(text="Visit", url=source)]
+    source_button = InlineKeyboardButton(text="Visit", url=source)
 
-    buttons =[
-            [
-                InlineKeyboardButton(text="❮", callback_data="bright"),
-                InlineKeyboardButton(text="CLOSE", callback_data="close_"),
-                InlineKeyboardButton(text="❯", callback_data="b|w"),
-            ],
-            source_button
+    buttons = [
+    [
+        InlineKeyboardButton(text="❮", callback_data="bright"),
+        InlineKeyboardButton(text="CLOSE", callback_data="close_"),
+        InlineKeyboardButton(text="❯", callback_data="b|w"),
+    ],
+    [
+        source_button
+    ],
     ]
 
     return await message.reply_photo(photo=cover,caption=caption, reply_markup=buttons)
