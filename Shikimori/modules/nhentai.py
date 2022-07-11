@@ -2,7 +2,9 @@
 from telegram import Update, ParseMode, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import CommandHandler, CallbackContext
 from telegraph import Telegraph
-
+from Shikimori import pbot
+from pyrogram import filters
+from Shikimori.Extras.errors import capture_err
 from Shikimori import SUPPORT_CHAT, dispatcher
 
 from NHentai import NHentai, NHentaiAsync
@@ -11,9 +13,11 @@ nhentai = NHentai()
 
 nhentai_async = NHentaiAsync()
 
-async def sauce(update: Update, context: CallbackContext):
+@pbot.on_message(filters.command("sauce"))
+@capture_err
+async def sauce(_, message):
     popular = await nhentai_async.get_popular_now()
-    await update.effective_message.reply_text(popular)
+    return await message.reply_text(popular)
 
 # def sauce(update: Update, context: CallbackContext):
 #     try:
@@ -35,12 +39,6 @@ If you don't have an exception set for your chat, it'll send it to you in your p
 
 __mod_name__ = "Nhentai"
 
-# create handlers
-SAUCE_HANDLER = CommandHandler("sauce", sauce, run_async = True)
-
-dispatcher.add_handler(SAUCE_HANDLER)
-__command_list__ = ["sauce"]
-__handlers__ = [SAUCE_HANDLER]
 
 
 
