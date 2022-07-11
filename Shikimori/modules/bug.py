@@ -5,51 +5,21 @@ from Shikimori import (
     OWNER_USERNAME,
     SUPPORT_CHAT,
 )
-from pyrogram.types import Message
 import time
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update
 from telegram.ext import CallbackContext, CallbackQueryHandler
 from Shikimori.utils.errors import capture_err
 
 @capture_err
-def content(msg: Message) -> [None, str]:
-    text_to_return = msg.text
-
-    if msg.text is None:
-        return None
-    if " " in text_to_return:
-        try:
-            return msg.text.split(None, 1)[1]
-        except IndexError:
-            return None
-    else:
-        return None
-
-@capture_err
 def bug(update: Update, context: CallbackContext):
     if update.effective_chat.type == "private":
         update.effective_message.reply_text(f"❎ <b>This command only works in groups.</b>\n\n Visit @{SUPPORT_CHAT} to report bugs related to bot's pm.")
         return
-    args = context.args
+    args = update.effective_message.text.split(None, 1)
     user_id = update.effective_message.from_user.id
     message = update.effective_message
     chat = update.effective_chat
     msg_id = message.reply_to_message.message_id if message.reply_to_message else message.message_id
-
-    if message.chat.username:
-        link_chat_id = message.chat.username
-        message_link = f"https://t.me/{link_chat_id}/{msg_id}"
-    bugs = content(message)
-    mention = "["+update.effective_user.first_name+"](tg://user?id="+str(message.from_user.id)+")"
-    datetimes_fmt = "%d-%m-%Y"
-    datetimes = datetime.utcnow().strftime(datetimes_fmt)
-    bug_report = f"""
-**#BUG : ** **@{OWNER_USERNAME}**
-**From User : ** **{mention}**
-**User ID : ** **{user_id}**
-**Group : ** **{link_chat_id}**
-**Bug Report : ** **{bugs}**
-**Event Stamp : ** **{datetimes}**"""
 
     if user_id == OWNER_ID:
         if bugs:
@@ -61,7 +31,32 @@ def bug(update: Update, context: CallbackContext):
             message.reply_text(
                 "❎ <b>Why owner of bot reporting a bug?? Go fix yourself</b>"
             )
-    elif user_id != OWNER_ID:
+            return
+
+    if message.chat.username:
+        link_chat_id = message.chat.username
+        message_link = f"https://t.me/{link_chat_id}/{msg_id}"
+    
+    if len(args) >= 2:
+        bugs = args[1]
+    else:
+        message.reply_text(
+                f"❎ <b>No bug to Report!</b> Use `/bug <information>`",
+            )
+        return
+
+    mention = "["+update.effective_user.first_name+"](tg://user?id="+str(message.from_user.id)+")"
+    datetimes_fmt = "%d-%m-%Y"
+    datetimes = datetime.utcnow().strftime(datetimes_fmt)
+    bug_report = f"""
+**#BUG : ** **@{OWNER_USERNAME}**
+**From User : ** **{mention}**
+**User ID : ** **{user_id}**
+**Group : ** **{link_chat_id}**
+**Bug Report : ** **{bugs}**
+**Event Stamp : ** **{datetimes}**"""
+
+    if user_id != OWNER_ID:
         if bugs:
             message.reply_text(
                 f"<b>Bug Report : {bugs}</b>\n\n"
@@ -92,10 +87,6 @@ def bug(update: Update, context: CallbackContext):
                         ]
                     ]
                 )
-            )
-        else:
-            message.reply_text(
-                f"❎ <b>No bug to Report!</b> Use `/bug <information>`",
             )
 
 def close_reply(update: Update, context: CallbackContext):
