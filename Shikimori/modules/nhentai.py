@@ -1,4 +1,6 @@
+from pykeyboard import InlineKeyboard
 from pyrogram import filters
+from pyrogram.types import InlineKeyboardButton
 import asyncio
 from janda import Nhentai, resolve
 import json
@@ -45,4 +47,6 @@ Source ➢ {source}
 Fav➢ {num_favorites}
 Pages ➢ {num_pages}
     """
-    return await message.reply_text(caption)
+    button= InlineKeyboardButton(text="Visit", url=source)
+
+    return await message.reply_text(caption, reply_markup=button)
