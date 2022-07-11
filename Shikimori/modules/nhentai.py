@@ -13,8 +13,8 @@ async def sauce(_, message):
     if not message.chat.type == "private":
         is_nsfw = sql.is_nsfw(chat_id)
         if not is_nsfw:
-            message.reply_text("NSFW is not activated")
-            return
+           return await message.reply_text("NSFW is not activated")
+            
     if len(message.command) != 2:
         await message.reply_text("/sauce code")
         return
