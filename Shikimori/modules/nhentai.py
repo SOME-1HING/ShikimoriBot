@@ -82,7 +82,7 @@ Tags ➢** `{tags}`
 **Pages ➢** `{num_pages}`
     """
 
-    source_button = InlineKeyboardButton(text="Visit", url=source)
+    source_button = [InlineKeyboardButton(text="Visit", url=source)]
 
     buttons =[
             [
