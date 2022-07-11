@@ -1,6 +1,11 @@
 from pykeyboard import InlineKeyboard
 from pyrogram import filters
-from pyrogram.types import InlineKeyboardButton
+from pyrogram.types import (
+    CallbackQuery,
+    InlineKeyboardButton,
+    InlineKeyboardMarkup,
+    Message,
+)
 import asyncio
 import re
 import Shikimori.modules.sql.nsfw_sql as sql
@@ -86,25 +91,21 @@ Tags ➢** `{tags}`
 
     buttons = [
     [
-        InlineKeyboardButton(text="❮", callback_data="bright"),
+        InlineKeyboardButton(text="❮", url=source),
         InlineKeyboardButton(text="CLOSE", callback_data="close_"),
-        InlineKeyboardButton(text="❯", callback_data="b|w"),
+        InlineKeyboardButton(text="❯", url=source),
     ],
     [
         source_button
     ],
     ]
 
-    return await message.reply_photo(photo=cover,caption=caption, reply_markup=buttons)
+    return await message.reply_photo(photo=cover,caption=caption, reply_markup=InlineKeyboardMarkup(buttons))
 
 
 
-def close_(update: Update, context: CallbackContext):
-    query = update.callback_query
+@pbot.on_callback_query()
+async def cb_handler(client: pbot, query: CallbackQuery):
     if query.data == "close_":
-        query.message.delete()
+        await query.message.delete()
 
-close_handler = CallbackQueryHandler(
-        close_, pattern=r"close_", run_async=True
-    )
-dispatcher.add_handler(close_handler)
