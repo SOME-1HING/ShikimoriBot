@@ -41,16 +41,16 @@ def bug(update: Update, context: CallbackContext):
             
         first_name = update.effective_user.first_name
         user = message.from_user
-        mention = f"[{first_name}](tg://user?id={user.id}) [Shikimori Bot](https://t.me/micchon_shikimori_bot)"
+        mention = f'<a href="tg://user?id={user.id}">{first_name}</a>'
         datetimes_fmt = "%d-%m-%Y"
         datetimes = datetime.utcnow().strftime(datetimes_fmt)
         bug_report = f"""
-*#BUG :  @{OWNER_USERNAME}
+<b>#BUG :  @{OWNER_USERNAME}
 From User :  {mention}
 User ID :  {user_id}
 Group :  @{link_chat_id}
 Bug Report :  {bugs}
-Event Stamp :  {datetimes}*
+Event Stamp :  {datetimes}</b>
 """
 
         if user_id != OWNER_ID:
@@ -89,7 +89,7 @@ Event Stamp :  {datetimes}*
                         ]
                     ]
             ),
-            parse_mode=ParseMode.MARKDOWN,
+            parse_mode=ParseMode.HTML,
             )
     except:
         update.effective_message.reply_text(
