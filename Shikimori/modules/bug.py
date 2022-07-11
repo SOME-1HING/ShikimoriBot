@@ -40,14 +40,14 @@ def bug(update: Update, context: CallbackContext):
             return
             
 
-        mention = "["+update.effective_user.first_name+"](tg://user?id="+str(message.from_user.id)+")"
+        mention = f"[{message.first_name}](tg://user?id={user_id})"
         datetimes_fmt = "%d-%m-%Y"
         datetimes = datetime.utcnow().strftime(datetimes_fmt)
         bug_report = f"""
 *#BUG : * *@{OWNER_USERNAME}*
 *From User : * *{mention}*
 *User ID : * *{user_id}*
-*Group : * *{link_chat_id}*
+*Group : * *@{link_chat_id}*
 *Bug Report : * *{bugs}*
 *Event Stamp : * *{datetimes}*
 """
