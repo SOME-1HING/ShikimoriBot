@@ -105,4 +105,4 @@ def close_(update: Update, context: CallbackContext):
 close_handler = CallbackQueryHandler(
         close_, pattern=r"close_", run_async=True
     )
-dispatcher.add_handler(close_)
+dispatcher.add_handler(close_handler)
