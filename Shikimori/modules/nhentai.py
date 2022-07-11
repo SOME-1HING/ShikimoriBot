@@ -8,7 +8,9 @@ import asyncio
 import Shikimori.modules.sql.nsfw_sql as sql
 from janda import Nhentai
 import json
-from Shikimori import pbot
+from Shikimori import pbot, dispatcher
+from telegram import Update
+from telegram.ext import CallbackContext, CallbackQueryHandler
 
 @pbot.on_message(filters.command("sauce"))
 async def sauce(_, message):
@@ -71,16 +73,18 @@ Tags ➢** `{tags}`
         InlineKeyboardButton(text="Visit", url=source),
     ],
     [
-        InlineKeyboardButton(text="❌ Close", callback_data="close_n"),
+        InlineKeyboardButton(text="❌ Close", callback_data="close_reply"),
     ],
     ]
 
     return await message.reply_photo(photo=cover,caption=caption, reply_markup=InlineKeyboardMarkup(buttons))
 
-@pbot.on_callback_query(filters.regex("^close_n"))
-async def close_n(client: pbot, query: CallbackQuery):
+def close_reply(update: Update, context: CallbackContext):
+    query = update.callback_query
+    if query.data == "close_reply_":
+        query.message.delete()
 
-    msg = await query.edit_message_text() 
-    msg.delete()
-     
-    return await query.send_text("lul")
+close_reply_handler = CallbackQueryHandler(
+        close_reply, pattern=r"close_reply_", run_async=True
+    )
+dispatcher.add_handler(close_reply_handler)
