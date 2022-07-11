@@ -85,7 +85,7 @@ from Shikimori import SUPPORT_CHAT, dispatcher
 #         )
 
 
-def sause(update: Update, context: CallbackContext):
+def sauce(update: Update, context: CallbackContext):
     try:
         args = update.effective_message.text.split(None, 1)
         user_id = update.effective_message.from_user.id
