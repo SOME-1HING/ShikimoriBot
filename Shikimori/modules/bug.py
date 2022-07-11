@@ -4,14 +4,14 @@ from Shikimori import (
     OWNER_ID,
     OWNER_USERNAME,
     SUPPORT_CHAT,
-    dispatcher
 )
 from pyrogram.types import Message
 import time
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update
 from telegram.ext import CallbackContext, CallbackQueryHandler
+from Shikimori.utils.errors import capture_err
 
-
+@capture_err
 def content(msg: Message) -> [None, str]:
     text_to_return = msg.text
 
@@ -25,13 +25,17 @@ def content(msg: Message) -> [None, str]:
     else:
         return None
 
+@capture_err
 def bug(update: Update, context: CallbackContext):
     args = context.args
     user_id = update.effective_message.from_user.id
     message = update.effective_message
-    chat_id = update.effective_chat.id
+    chat = update.effective_chat
+    msg_id = message.reply_to_message.message_id if message.reply_to_message else message.message_id
+
     if message.chat.username:
-        chat_username = (f"@{dispatcher.bot.getChat(chat_id).username} / `{dispatcher.bot.getChat(chat_id).id}`")
+        link_chat_id = message.chat.username
+        message_link = f"https://t.me/{link_chat_id}/{msg_id}"
     bugs = content(message)
     mention = "["+update.effective_user.first_name+"](tg://user?id="+str(message.from_user.id)+")"
     datetimes_fmt = "%d-%m-%Y"
@@ -40,7 +44,7 @@ def bug(update: Update, context: CallbackContext):
 **#BUG : ** **@{OWNER_USERNAME}**
 **From User : ** **{mention}**
 **User ID : ** **{user_id}**
-**Group : ** **{chat_username}**
+**Group : ** **{link_chat_id}**
 **Bug Report : ** **{bugs}**
 **Event Stamp : ** **{datetimes}**"""
 
@@ -80,7 +84,7 @@ def bug(update: Update, context: CallbackContext):
                     [
                         [
                             InlineKeyboardButton(
-                                "➡ View Bug", url=f"{message.link}")
+                                "➡ View Bug", url=f"{message_link}")
                         ],
                         [
                             InlineKeyboardButton(
