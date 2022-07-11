@@ -12,6 +12,10 @@ from telegram.ext import CallbackContext, CallbackQueryHandler, CommandHandler
 
 def bug(update: Update, context: CallbackContext):
     try:
+        args = update.effective_message.text.split(None, 1)
+        user_id = update.effective_message.from_user.id
+        message = update.effective_message
+        msg_id = message.reply_to_message.message_id if message.reply_to_message else message.message_id
         if user_id == OWNER_ID:
             message.reply_text(
                     "❎ **Why owner of bot reporting a bug?? Go fix yourself**", parse_mode=ParseMode.MARKDOWN
@@ -20,10 +24,6 @@ def bug(update: Update, context: CallbackContext):
         if update.effective_chat.type == "private":
             update.effective_message.reply_text(f"❎ **This command only works in groups.**\n\n Visit @{SUPPORT_CHAT} to report bugs related to bot's pm.", parse_mode=ParseMode.MARKDOWN)
             return
-        args = update.effective_message.text.split(None, 1)
-        user_id = update.effective_message.from_user.id
-        message = update.effective_message
-        msg_id = message.reply_to_message.message_id if message.reply_to_message else message.message_id
         
         if len(args) >= 2:
             bugs = args[1]
@@ -42,12 +42,13 @@ def bug(update: Update, context: CallbackContext):
         datetimes_fmt = "%d-%m-%Y"
         datetimes = datetime.utcnow().strftime(datetimes_fmt)
         bug_report = f"""
-    **#BUG : ** **@{OWNER_USERNAME}**
-    **From User : ** **{mention}**
-    **User ID : ** **{user_id}**
-    **Group : ** **{link_chat_id}**
-    **Bug Report : ** **{bugs}**
-    **Event Stamp : ** **{datetimes}**"""
+**#BUG : ** **@{OWNER_USERNAME}**
+**From User : ** **{mention}**
+**User ID : ** **{user_id}**
+**Group : ** **{link_chat_id}**
+**Bug Report : ** **{bugs}**
+**Event Stamp : ** **{datetimes}**
+"""
 
         if user_id != OWNER_ID:
             message.reply_text(
