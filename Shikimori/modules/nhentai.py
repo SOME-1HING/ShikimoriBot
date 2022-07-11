@@ -2,10 +2,28 @@ from pykeyboard import InlineKeyboard
 from pyrogram import filters
 from pyrogram.types import InlineKeyboardButton
 import asyncio
+import re
 import Shikimori.modules.sql.nsfw_sql as sql
 from janda import Nhentai, resolve
 import json
-from Shikimori import pbot
+from Shikimori import pbot, dispatcher
+from math import ceil
+from telegram import InlineKeyboardButton, InlineKeyboardMarkup, ParseMode, Update
+from telegram.error import (
+    BadRequest,
+    ChatMigrated,
+    NetworkError,
+    TelegramError,
+    TimedOut,
+    Unauthorized,
+)
+from telegram.ext import (
+    CallbackContext,
+    CallbackQueryHandler,
+    CommandHandler,
+    Filters,
+    MessageHandler,
+)
 
 @pbot.on_message(filters.command("sauce"))
 async def sauce(_, message):
@@ -45,10 +63,10 @@ async def sauce(_, message):
 
     artist= str(artist)
     tags = str(tags)
-    tags = tags.replace("'", "")
 
     for ch in ["[", "]", "'"]:
         artist = artist.replace(ch, "")
+        tags = tags.replace(ch, "")
 
     caption=f"""
 **Title➢ {title}**
@@ -60,10 +78,31 @@ Lang ➢ {language.capitalize()}
 Parodies ➢ `{parodies}`
 Tags ➢** `{tags}`
 
-**Fav ➢** `{num_favorites}`
+**Fav ➢** ❤️`{num_favorites}`
 **Pages ➢** `{num_pages}`
     """
-    button = InlineKeyboard(row_width=1)
-    button.add(InlineKeyboardButton(text="Visit", url=source))
 
-    return await message.reply_photo(photo=cover,caption=caption, reply_markup=button)
+    source_button = InlineKeyboardButton(text="Visit", url=source)
+
+    buttons =[
+            [
+                InlineKeyboardButton(text="❮", callback_data="bright"),
+                InlineKeyboardButton(text="CLOSE", callback_data="close_"),
+                InlineKeyboardButton(text="❯", callback_data="b|w"),
+            ],
+            source_button
+    ]
+
+    return await message.reply_photo(photo=cover,caption=caption, reply_markup=buttons)
+
+
+
+def close_(update: Update, context: CallbackContext):
+    query = update.callback_query
+    if query.data == "close_":
+        query.message.delete()
+
+close_handler = CallbackQueryHandler(
+        close_, pattern=r"close_", run_async=True
+    )
+dispatcher.add_handler(close_)
