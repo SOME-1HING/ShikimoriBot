@@ -36,7 +36,6 @@ async def sauce(_, message):
     source = d["source"]
     parodies = res["parodies"]
     tags = res["tags"]
-    tags = tags.replace("'", "")
     j = res["optional_title"]
     title = j["english"]
 
@@ -45,6 +44,8 @@ async def sauce(_, message):
         parodies ="Original"
 
     artist= str(artist)
+    tags = str(tags)
+    tags = tags.replace("'", "")
 
     for ch in ["[", "]", "'"]:
         artist = artist.replace(ch, "")
