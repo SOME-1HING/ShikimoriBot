@@ -9,9 +9,7 @@ from Shikimori import (
 import time
 from telegram import InlineKeyboardButton, ParseMode, InlineKeyboardMarkup, Update
 from telegram.ext import CallbackContext, CallbackQueryHandler, CommandHandler
-from Shikimori.utils.errors import capture_err
 
-@capture_err
 def bug(update: Update, context: CallbackContext):
     try:
         if update.effective_chat.type == "private":
