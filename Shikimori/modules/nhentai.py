@@ -14,10 +14,12 @@ nhentai = NHentai()
 nhentai_async = NHentaiAsync()
 
 @pbot.on_message(filters.command("sauce"))
-@capture_err
 async def sauce(_, message):
-    popular = await nhentai_async.get_popular_now()
-    return await message.reply_text(popular)
+    try:
+        popular = await nhentai_async.get_popular_now()
+        return await message.reply_text(popular)
+    except:
+        return await message.reply_text("LUL ERROR")
 
 # def sauce(update: Update, context: CallbackContext):
 #     try:
