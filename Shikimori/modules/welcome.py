@@ -7,9 +7,12 @@ from io import BytesIO
 import Shikimori.modules.sql.welcome_sql as sql
 from Shikimori import (
     DEV_USERS,
+    JOIN_LOGGER,
     OWNER_ID,
     DRAGONS,
     DEMONS,
+    SUPPORT_CHAT,
+    UPDATE_CHANNEL,
     WOLVES,
     LOGGER,
     dispatcher,
@@ -170,7 +173,7 @@ def new_member(update: Update, context: CallbackContext):  # sourcery no-metrics
 
     for new_mem in new_members:
 
-        welcome_log = None
+        welcome_log = JOIN_LOGGER
         res = None
         sent = None
         should_mute = True
@@ -251,6 +254,34 @@ def new_member(update: Update, context: CallbackContext):  # sourcery no-metrics
                     "Oof! A Slave just joined!", reply_to_message_id=reply
                 )
                 continue
+
+            if new_mem.id == bot.id:
+                profile = context.bot.get_user_profile_photos(bot.id).photos[0][-1]
+                update.effective_message.reply_photo(
+                        profile,
+                        caption= "❤️ <b>Thanks for adding me to this group!</b>\n\n<b>Promote me as administrator of the group, to access all my commands.</b>",
+                        reply_markup=InlineKeyboardMarkup(
+                            [
+                                {
+                                    InlineKeyboardButton(
+                                        text="Support",
+                                        url=f"https://t.me/{SUPPORT_CHAT}"),
+                                    InlineKeyboardButton(
+                                        text="Updates",
+                                        url=f"https://t.me/{UPDATE_CHANNEL}",
+                                    )
+                                }
+                            ]
+                        ),
+                        parse_mode=ParseMode.HTML,
+                        reply_to_message_id=reply,
+                    )
+                bot.send_message(
+                    JOIN_LOGGER,
+                    "I have been added to {} with \nID: <pre>{}</pre>".format(
+                        chat.title, chat.id),
+                    parse_mode=ParseMode.HTML)
+
 
             buttons = sql.get_welc_buttons(chat.id)
             keyb = build_keyboard(buttons)
