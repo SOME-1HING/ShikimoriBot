@@ -77,18 +77,15 @@ Tags ➢** `{tags}`
 
     buttons = [
     [
-        InlineKeyboardButton(text="❮", callback_data="back_n"),
-        InlineKeyboardButton(text="CLOSE", callback_data="close_n"),
-        InlineKeyboardButton(text="❯", callback_data="next_n"),
+        source_button,
+        InlineKeyboardButton(text="Read Here", callback_data="read_n"),
     ],
     [
-        source_button
+        InlineKeyboardButton(text="CLOSE", callback_data="close_n"),
     ],
     ]
 
     return await message.reply_photo(photo=cover,caption=caption, reply_markup=InlineKeyboardMarkup(buttons))
-
-
 
 @pbot.on_callback_query()
 async def close_n(client: pbot, query: CallbackQuery):
