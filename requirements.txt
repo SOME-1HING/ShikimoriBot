@@ -25,7 +25,6 @@ Pillow
 CurrencyConverter
 googletrans
 google-trans-new
-jikanpy
 speedtest-cli
 coffeehouse
 regex
@@ -60,7 +59,7 @@ countryinfo
 html2text
 bs4
 redis
-hentai
+NHentai-API
 pySmartDL
 bing_image_downloader
 search_engine_parser
