@@ -4,10 +4,11 @@ from Shikimori import (
     OWNER_ID,
     OWNER_USERNAME,
     SUPPORT_CHAT,
+    dispatcher
 )
 import time
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update
-from telegram.ext import CallbackContext, CallbackQueryHandler
+from telegram.ext import CallbackContext, CallbackQueryHandler, CommandHandler
 from Shikimori.utils.errors import capture_err
 
 @capture_err
@@ -116,6 +117,15 @@ close_reply_handler = CallbackQueryHandler(
 close_send_photo_handler = CallbackQueryHandler(
     close_send_photo, pattern=r"close_send_photo_", run_async=True
 )
+
+BUG_HANDLER = CommandHandler(("bug", "bugs") bug, run_async = True)
+
+dispatcher.add_handler(BUG_HANDLER)
+dispatcher.add_handler(close_reply_handler)
+dispatcher.add_handler(close_send_photo_handler)
+
+__command_list__ = ["bug"]
+__handlers__ = [BUG_HANDLER]
 
 __mod_name__ = "Bug"
 
