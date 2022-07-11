@@ -102,7 +102,7 @@ async def button_n(client: pbot, query: CallbackQuery):
     i = 1
     while i != (int(sauce.num_pages)-1):
         if next_n:
-            await query.message.edit_photo(photo= f"{sauce.img_url}/{i}", )
+            await query.message.edit_photo(photo= f"{sauce.img_url}/{i}.jpg", )
             source = sauce.source_button
             buttons = [
             [
@@ -116,7 +116,7 @@ async def button_n(client: pbot, query: CallbackQuery):
             ]
             i = i+1
         elif back_n:
-            await query.message.edit_photo(photo= f"{sauce.img_url}/{i}", )
+            await query.message.edit_photo(photo= f"{sauce.img_url}/{i}.jpg", )
             source = sauce.source_button
             buttons = [
             [
