@@ -6,8 +6,9 @@ from re import sub as re_sub
 from sys import version as pyver
 from time import ctime, time
 import socket
-import aiohttp
-from random import randint
+import ffmpeg
+import youtube_dl
+from urllib.parse import urlparse
 from time import time
 from fuzzysearch import find_near_matches
 from motor import version as mongover
@@ -23,21 +24,22 @@ from pyrogram.types import (CallbackQuery,
 from search_engine_parser import GoogleSearch
 
 from Shikimori import (
+    ALIVE_MEDIA,
     DEV_USERS,
     LOG_CHANNEL, 
     BOT_USERNAME,
+    STATS_IMG,
     SUPPORT_CHAT,
-    ubot2,
 )
 from Shikimori.__main__ import bot_name
 from Shikimori import pbot as app 
 from Shikimori import arq
-from Shikimori.services.keyboard import Ikb
+from Shikimori.core.keyboard import ikb
 from Shikimori.utils.pluginhelper import convert_seconds_to_minutes as time_convert, fetch
-from Shikimori.services.tasks import _get_tasks_text, all_tasks, rm_task
-from Shikimori.services.types import InlineQueryResultCachedDocument
+from Shikimori.core.tasks import _get_tasks_text, all_tasks, rm_task
+from Shikimori.core.types import InlineQueryResultCachedDocument
 from Shikimori.modules.info import get_chat_info, get_user_info
-from Shikimori.modules.music import download_youtube_audio
+from Shikimori.modules.song import download_youtube_audio
 from Shikimori.utils.functions import test_speedtest
 from Shikimori.utils.pastebin import paste
 
@@ -70,6 +72,50 @@ keywords_list = [
     "music",
     "ytmusic",
 ]
+
+is_downloading = False
+
+
+def get_file_extension_from_url(url):
+    url_path = urlparse(url).path
+    basename = os.path.basename(url_path)
+    return basename.split(".")[-1]
+
+
+def download_youtube_audio(url: str):
+    global is_downloading
+    with youtube_dl.YoutubeDL(
+        {
+            "format": "bestaudio",
+            "writethumbnail": True,
+            "quiet": True,
+        }
+    ) as ydl:
+        info_dict = ydl.extract_info(url, download=False)
+        if int(float(info_dict["duration"])) > 600:
+            is_downloading = False
+            return []
+        ydl.process_info(info_dict)
+        audio_file = ydl.prepare_filename(info_dict)
+        basename = audio_file.rsplit(".", 1)[-2]
+        if info_dict["ext"] == "webm":
+            audio_file_opus = basename + ".opus"
+            ffmpeg.input(audio_file).output(
+                audio_file_opus, codec="copy", loglevel="error"
+            ).overwrite_output().run()
+            os.remove(audio_file)
+            audio_file = audio_file_opus
+        thumbnail_url = info_dict["thumbnail"]
+        thumbnail_file = (
+            basename
+            + "."
+            + get_file_extension_from_url(thumbnail_url)
+        )
+        title = info_dict["title"]
+        performer = info_dict["uploader"]
+        duration = int(float(info_dict["duration"]))
+    return [title, performer, duration, audio_file, thumbnail_file]
+
 
 
 async def _netcat(host, port, content):
@@ -104,7 +150,7 @@ async def inline_help_func(__HELP__):
             input_message_content=InputTextMessageContent(
                 "**__Click A Button To Get Started.__**"
             ),
-            thumb_url="https://telegra.ph/file/f91d3dc1c1800faf29744.jpg",
+            thumb_url=f"{STATS_IMG}",
             reply_markup=buttons,
         ),
     ]
@@ -115,7 +161,6 @@ async def inline_help_func(__HELP__):
 async def alive_function(answers):
     buttons = InlineKeyboard(row_width=2)
     bot_state = "Dead" if not await app.get_me() else "Alive"
-    ubot_state = "Dead" if not await ubot2.get_me() else "Alive"
     buttons.add(
         InlineKeyboardButton("Main bot", url=f"https://t.me/{BOT_USERNAME}"),
         InlineKeyboardButton(
@@ -126,18 +171,17 @@ async def alive_function(answers):
     msg = f"""
 **[{bot_name} Bot ❤️](https://t.me/{SUPPORT_CHAT}):**
 **MainBot:** `{bot_state}`
-**UserBot:** `{ubot_state}`
 **Python:** `{pyver.split()[0]}`
 **Pyrogram:** `{pyrover}`
 **MongoDB:** `{mongover}`
 **Platform:** `{sys.platform}`
-**Profiles:** [BOT](t.me/{BOT_USERNAME}) | [UBOT](t.me/excrybaby)
+**Profiles:** [BOT](t.me/{BOT_USERNAME})
 """
     answers.append(
         InlineQueryResultArticle(
             title="Alive",
             description="Check Bot's Stats",
-            thumb_url="https://telegra.ph/file/f91d3dc1c1800faf29744.jpg",
+            thumb_url=f"{STATS_IMG}",
             input_message_content=InputTextMessageContent(
                 msg, disable_web_page_preview=True
             ),
@@ -373,112 +417,6 @@ async def lyrics_func(answers, text):
     )
     return answers
 
-
-async def tg_search_func(answers, text, user_id):
-    if user_id not in DEV_USERS:
-        msg = "**ERROR**\n__THIS FEATURE IS ONLY FOR DEV USERS__"
-        answers.append(
-            InlineQueryResultArticle(
-                title="ERROR",
-                description="THIS FEATURE IS ONLY FOR SUDO USERS",
-                input_message_content=InputTextMessageContent(msg),
-            )
-        )
-        return answers
-    if str(text)[-1] != ":":
-        msg = "**ERROR**\n__Put A ':' After The Text To Search__"
-        answers.append(
-            InlineQueryResultArticle(
-                title="ERROR",
-                description="Put A ':' After The Text To Search",
-                input_message_content=InputTextMessageContent(msg),
-            )
-        )
-
-        return answers
-    text = text[0:-1]
-    async for message in ubot2.search_global(text, limit=49):
-        buttons = InlineKeyboard(row_width=2)
-        buttons.add(
-            InlineKeyboardButton(
-                text="Origin",
-                url=message.link if message.link else "https://t.me/telegram",
-            ),
-            InlineKeyboardButton(
-                text="Search again",
-                switch_inline_query_current_chat="search",
-            ),
-        )
-        name = (
-            message.from_user.first_name
-            if message.from_user.first_name
-            else "NO NAME"
-        )
-        caption = f"""
-**Query:** {text}
-**Name:** {str(name)} [`{message.from_user.id}`]
-**Chat:** {str(message.chat.title)} [`{message.chat.id}`]
-**Date:** {ctime(message.date)}
-**Text:** >>
-{message.text.markdown if message.text else message.caption if message.caption else '[NO_TEXT]'}
-"""
-        result = InlineQueryResultArticle(
-            title=name,
-            description=message.text if message.text else "[NO_TEXT]",
-            reply_markup=buttons,
-            input_message_content=InputTextMessageContent(
-                caption, disable_web_page_preview=True
-            ),
-        )
-        answers.append(result)
-    return answers
-
-
-async def music_inline_func(answers, query):
-    chat_id = -1001445180719
-    group_invite = "https://t.me/joinchat/vSDE2DuGK4Y4Nzll"
-    try:
-        messages = [
-            m
-            async for m in ubot2.search_messages(
-                chat_id, query, filter="audio", limit=100
-            )
-        ]
-    except Exception as e:
-        print(e)
-        msg = f"You Need To Join Here With Your Bot And Userbot To Get Cached Music.\n{group_invite}"
-        answers.append(
-            InlineQueryResultArticle(
-                title="ERROR",
-                description="Click Here To Know More.",
-                input_message_content=InputTextMessageContent(
-                    msg, disable_web_page_preview=True
-                ),
-            )
-        )
-        return answers
-    messages_ids_and_duration = []
-    for f_ in messages:
-        messages_ids_and_duration.append(
-            {
-                "message_id": f_.message_id,
-                "duration": f_.audio.duration if f_.audio.duration else 0,
-            }
-        )
-    messages = list(
-        {v["duration"]: v for v in messages_ids_and_duration}.values()
-    )
-    messages_ids = [ff_["message_id"] for ff_ in messages]
-    messages = await app.get_messages(chat_id, messages_ids[0:48])
-    return [
-        InlineQueryResultCachedDocument(
-            file_id=message_.audio.file_id,
-            title=message_.audio.title,
-        )
-        for message_ in messages
-    ]
-
-
 async def paste_func(answers, text):
     start_time = time()
     url = await paste(text)
@@ -493,22 +431,6 @@ async def paste_func(answers, text):
     )
     return answers
 
-
-async def webss(url):
-    start_time = time()
-    if "." not in url:
-        return
-    screenshot = await fetch(f"https://webshot.amanoteam.com/print?q={url}")
-    end_time = time()
-    # m = await app.send_photo(LOG_GROUP_ID, photo=screenshot["url"])
-    await m.delete()
-    a = []
-    pic = InlineQueryResultPhoto(
-        photo_url=screenshot["url"],
-        caption=(f"`{url}`\n__Took {round(end_time - start_time)} Seconds.__"),
-    )
-    a.append(pic)
-    return a
 
 
 async def saavn_func(answers, text):
@@ -796,25 +718,58 @@ async def pokedexinfo(answers, pokemon):
     buttons.add(
         InlineKeyboardButton("Pokedex", switch_inline_query_current_chat="pokedex")
     )
+    pokemon = result['name']
+    pokedex = result['id']
+    type = result['type']
+    poke_img = f"https://img.pokemondb.net/artwork/large/{pokemon}.jpg"
+    abilities = result['abilities']
+    height = result['height']
+    weight = result['weight']
+    gender = result['gender']
+    stats = result['stats']
+    description = result['description']
+
     caption = f"""
-**Pokemon:** `{result['name']}`
-**Pokedex:** `{result['id']}`
-**Type:** `{result['type']}`
-**Abilities:** `{result['abilities']}`
-**Height:** `{result['height']}`
-**Weight:** `{result['weight']}`
-**Gender:** `{result['gender']}`
-**Stats:** `{result['stats']}`
-**Description:** `{result['description']}`"""
-    answers.append(
-        InlineQueryResultPhoto(
-            photo_url=f"https://img.pokemondb.net/artwork/large/{pokemon}.jpg",
-            title=result["name"],
-            description=result["description"],
-            caption=caption,
-            reply_markup=buttons,
-        )
-    )
+======[ 【Ｐｏｋéｄｅｘ】 ]======
+
+╒═══「 **{pokemon.upper()}** 」
+
+**Pokedex ➢** `{pokedex}`
+**Type ➢** {type}
+**Abilities ➢** {abilities}
+**Height ➢** `{height}`
+**Weight ➢** `{weight}`
+**Gender ➢** {gender}
+
+**Stats ➢** 
+{stats}
+
+**Description ➢** __{description}__
+"""
+
+    for ch in ["[", "]", "{", "}", ":"]:
+        if ch in caption:
+            caption = caption.replace(ch, "") 
+
+
+    caption = caption.replace("'", "`")
+    caption = caption.replace("`hp`", "× HP : ")
+    caption = caption.replace(", `attack`", "\n× Attack : ")
+    caption = caption.replace(", `defense`", "\n× Defense : ")
+    caption = caption.replace(", `sp_atk`", "\n× Special Attack : ")
+    caption = caption.replace(", `sp_def`", "\n× Special Defanse : ")
+    caption = caption.replace(", `speed`", "\n× Speed : ")
+    caption = caption.replace(", `total`", "\n× Total : ")
+
+    try:
+        link = f"https://www.pokemon.com/us/pokedex/{pokemon}"
+        button = InlineKeyboard(row_width=1)
+        button.add(InlineKeyboardButton(text="More Info", url=link))
+        answers.append(InlineQueryResultPhoto(photo=poke_img, caption=caption, reply_markup=button))
+
+    except:
+        answers.append(InlineQueryResultArticle(photo=poke_img, caption=caption))
+        
     return answers
 
 
