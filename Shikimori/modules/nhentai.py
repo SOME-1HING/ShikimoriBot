@@ -95,37 +95,37 @@ async def close_n(client: pbot, query: CallbackQuery):
     if query.data == "close_n":
         await query.message.delete()
 
-@pbot.on_callback_query()
-async def button_n(client: pbot, query: CallbackQuery):
-    next_n = re.match(r"next_n", query.data)
-    back_n = re.match(r"back_n", query.data)
-    i = 1
-    while i != (int(sauce.num_pages)-1):
-        if next_n:
-            source = sauce.source_button
-            buttons = [
-            [
-                InlineKeyboardButton(text="❮", callback_data="back_n"),
-                InlineKeyboardButton(text="CLOSE", callback_data="close_n"),
-                InlineKeyboardButton(text="❯", callback_data="next_n"),
-            ],
-            [
-                source
-            ],
-            await query.message.edit_message_media(photo= f"{sauce.img_url}/{i}.jpg", reply_markup=InlineKeyboardMarkup(buttons))
-            ]
-            i = i+1
-        elif back_n:
-            source = sauce.source_button
-            buttons = [
-            [
-                InlineKeyboardButton(text="❮", callback_data="back_n"),
-                InlineKeyboardButton(text="CLOSE", callback_data="close_n"),
-                InlineKeyboardButton(text="❯", callback_data="next_n"),
-            ],
-            [
-                source
-            ],
-            ]
-            await query.message.edit_message_media(photo= f"{sauce.img_url}/{i}.jpg", reply_markup=InlineKeyboardMarkup(buttons))
-            i = i-1
+# @pbot.on_callback_query()
+# async def button_n(client: pbot, query: CallbackQuery):
+#     next_n = re.match(r"next_n", query.data)
+#     back_n = re.match(r"back_n", query.data)
+#     i = 1
+#     while i != (int(sauce.num_pages)-1):
+#         if next_n:
+#             source = sauce.source_button
+#             buttons = [
+#             [
+#                 InlineKeyboardButton(text="❮", callback_data="back_n"),
+#                 InlineKeyboardButton(text="CLOSE", callback_data="close_n"),
+#                 InlineKeyboardButton(text="❯", callback_data="next_n"),
+#             ],
+#             [
+#                 source
+#             ],
+#             await query.message.edit_message_media(photo= f"{sauce.img_url}/{i}.jpg", reply_markup=InlineKeyboardMarkup(buttons))
+#             ]
+#             i = i+1
+#         elif back_n:
+#             source = sauce.source_button
+#             buttons = [
+#             [
+#                 InlineKeyboardButton(text="❮", callback_data="back_n"),
+#                 InlineKeyboardButton(text="CLOSE", callback_data="close_n"),
+#                 InlineKeyboardButton(text="❯", callback_data="next_n"),
+#             ],
+#             [
+#                 source
+#             ],
+#             ]
+#             await query.message.edit_message_media(photo= f"{sauce.img_url}/{i}.jpg", reply_markup=InlineKeyboardMarkup(buttons))
+#             i = i-1
