@@ -1,19 +1,14 @@
-from Shikimori.modules.imgeditor import photo
-from pykeyboard import InlineKeyboard
 from pyrogram import filters
 from pyrogram.types import (
     CallbackQuery,
     InlineKeyboardButton,
     InlineKeyboardMarkup,
-    Message,
 )
 import asyncio
-import re
 import Shikimori.modules.sql.nsfw_sql as sql
-from janda import Nhentai, resolve
+from janda import Nhentai
 import json
-from Shikimori import pbot, dispatcher
-from math import ceil
+from Shikimori import pbot
 
 @pbot.on_message(filters.command("sauce"))
 async def sauce(_, message):
@@ -82,8 +77,10 @@ Tags ➢** `{tags}`
 
     return await message.reply_photo(photo=cover,caption=caption, reply_markup=InlineKeyboardMarkup(buttons))
 
-@pbot.on_callback_query()
+@pbot.on_callback_query(filters.regex("^close_n"))
 async def close_n(client: pbot, query: CallbackQuery):
-    if query.data == "close_n":
-        msg = await query.edit_message_text() 
-        msg.delete()
+
+    msg = await query.edit_message_text() 
+    msg.delete()
+     
+    return await query.send_text("lul")
