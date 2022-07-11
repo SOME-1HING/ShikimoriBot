@@ -22,7 +22,7 @@ def bug(update: Update, context: CallbackContext):
                 )
             return
         if update.effective_chat.type == "private":
-            update.effective_message.reply_text(f"❎ **This command only works in groups.**\n\n Visit @{SUPPORT_CHAT} to report bugs related to bot's pm.", parse_mode=ParseMode.MARKDOWN)
+            update.effective_message.reply_text(f"❎ **This command only works in public groups.**\n\n Visit @{SUPPORT_CHAT} to report bugs related to bot's pm.", parse_mode=ParseMode.MARKDOWN)
             return
         
         if len(args) >= 2:
@@ -32,7 +32,8 @@ def bug(update: Update, context: CallbackContext):
                 message_link = f"https://t.me/{link_chat_id}/{msg_id}"
                 message.reply_text(message_link)
             else:
-                message.reply_text("hmm")
+                update.effective_message.reply_text(f"❎ **This command only works in public groups.**\n\n Visit @{SUPPORT_CHAT} to report bugs related to bot's pm.", parse_mode=ParseMode.MARKDOWN)
+                return
         else:
             message.reply_text(
                     f"❎ **No bug to Report!** Use `/bug <information>`", parse_mode=ParseMode.MARKDOWN
