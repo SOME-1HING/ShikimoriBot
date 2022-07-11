@@ -33,9 +33,12 @@ async def sauce(_, message):
     language = res["language"]
     num_favorites = res["num_favorites"]
     num_pages = res["num_pages"]
-    title = res["title"]
     source = d["source"]
     parodies = res["parodies"]
+    tags = res["tags"]
+    j = res["optional_title"]
+    title = j["english"]
+
 
     if parodies== None:
         parodies ="Original"
@@ -52,6 +55,7 @@ Artist ➢ {artist}
 Lang ➢ {language}
 Parodies ➢ {parodies}
 Source ➢ {source}
+Tags ➢ {tags}
 Fav➢ {num_favorites}
 Pages ➢ {num_pages}
     """
