@@ -22,6 +22,7 @@ async def sauce(_, message):
     artist = res["artist"]
     id = res["id"]
     image = res["image"]
+    cover = image[0]
     language = res["language"]
     num_favorites = res["num_favorites"]
     num_pages = res["num_pages"]
@@ -49,4 +50,4 @@ Pages ➢ {num_pages}
     """
     button= InlineKeyboardButton(text="Visit", url=source)
 
-    return await message.reply_text(caption, reply_markup=button)
+    return await message.reply_photo(photo=cover,caption=caption, reply_markup=button)
