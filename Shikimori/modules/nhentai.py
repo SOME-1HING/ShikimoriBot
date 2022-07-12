@@ -1,16 +1,12 @@
-from pyrogram import filters
-from pyrogram.types import (
-    CallbackQuery,
-    InlineKeyboardButton,
-    InlineKeyboardMarkup,
-)
-import asyncio
-import Shikimori.modules.sql.nsfw_sql as sql
-from janda import Nhentai
 import json
-from Shikimori import pbot, dispatcher
+import asyncio
+from janda import Nhentai
+from pyrogram import filters
+from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from telegram import Update
 from telegram.ext import CallbackContext, CallbackQueryHandler
+from Shikimori import pbot, dispatcher
+import Shikimori.modules.sql.nsfw_sql as sql
 
 @pbot.on_message(filters.command("sauce"))
 async def sauce(_, message):
@@ -20,64 +16,67 @@ async def sauce(_, message):
         if not is_nsfw:
            return await message.reply_text("NSFW is not activated")
             
-    if len(message.command) != 2:
-        await message.reply_text("/sauce code")
-        return
-    nh = Nhentai()
-    code = message.text.split(None, 1)[1]
-    code = int(code)
-    data = await nh.get(code)
-    json_acceptable_string = data.replace("'", "\"")
-    d = json.loads(json_acceptable_string)
-    await asyncio.sleep(0.6)
-    res = d["data"]
-    artist = res["artist"]
-    id = res["id"]
-    image = res["image"]
-    cover = image[0]
-    language = res["language"]
-    num_favorites = res["num_favorites"]
-    num_pages = res["num_pages"]
-    source = d["source"]
-    parodies = res["parodies"]
-    tags = res["tags"]
-    j = res["optional_title"]
-    title = j["english"]
+    try:
+        code = int(code)
+        nh = Nhentai()
+        code = message.text.split(None, 1)[1]
+        data = await nh.get(code)
+        json_acceptable_string = data.replace("'", "\"")
+        d = json.loads(json_acceptable_string)
+        await asyncio.sleep(0.6)
+        res = d["data"]
+        artist = res["artist"]
+        id = res["id"]
+        image = res["image"]
+        cover = image[0]
+        language = res["language"]
+        num_favorites = res["num_favorites"]
+        num_pages = res["num_pages"]
+        source = d["source"]
+        parodies = res["parodies"]
+        tags = res["tags"]
+        j = res["optional_title"]
+        title = j["english"]
 
 
-    if parodies== None:
-        parodies ="Original"
+        if parodies== None:
+            parodies ="Original"
 
-    artist= str(artist)
-    tags = str(tags)
+        artist= str(artist)
+        tags = str(tags)
 
-    for ch in ["[", "]", "'"]:
-        artist = artist.replace(ch, "")
-        tags = tags.replace(ch, "")
+        for ch in ["[", "]", "'"]:
+            artist = artist.replace(ch, "")
+            tags = tags.replace(ch, "")
 
-    caption=f"""
-**Title➢ {title}**
+        caption=f"""
+    **Title➢ {title}**
 
-**id ➢** `{id}`
-**Artist ➢ {artist.capitalize()}
-Lang ➢ {language.capitalize()}
+    **id ➢** `{id}`
+    **Artist ➢ {artist.capitalize()}
+    Lang ➢ {language.capitalize()}
 
-Parodies ➢ `{parodies}`
-Tags ➢** `{tags}`
+    Parodies ➢ `{parodies}`
+    Tags ➢** `{tags}`
 
-**Fav ➢** ❤️`{num_favorites}`
-**Pages ➢** `{num_pages}`
-    """
-    buttons = [
-    [
-        InlineKeyboardButton(text="Visit", url=source),
-    ],
-    [
-        InlineKeyboardButton(text="❌ Close", callback_data="close_reply_"),
-    ],
-    ]
+    **Fav ➢** ❤️`{num_favorites}`
+    **Pages ➢** `{num_pages}`
+        """
+        buttons = [
+        [
+            InlineKeyboardButton(text="Visit", url=source),
+        ],
+        [
+            InlineKeyboardButton(text="❌ Close", callback_data="close_reply_"),
+        ],
+        ]
 
-    return await message.reply_photo(photo=cover,caption=caption, reply_markup=InlineKeyboardMarkup(buttons))
+        return await message.reply_photo(photo=cover,caption=caption, reply_markup=InlineKeyboardMarkup(buttons))
+
+    except ValueError:
+        return await message.reply_text("Only integers are allowed")
+    except:
+        return await message.reply_text("Not Found")
 
 def close_reply(update: Update, context: CallbackContext):
     query = update.callback_query
