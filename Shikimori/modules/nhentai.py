@@ -52,17 +52,17 @@ async def sauce(_, message):
             tags = tags.replace(ch, "")
 
         caption=f"""
-    **Title➢ {title}**
+**Title➢ {title}**
 
-    **id ➢** `{id}`
-    **Artist ➢ {artist.capitalize()}
-    Lang ➢ {language.capitalize()}
+**id ➢** `{id}`
+**Artist ➢ {artist.capitalize()}
+Lang ➢ {language.capitalize()}
 
-    Parodies ➢ `{parodies}`
-    Tags ➢** `{tags}`
+Parodies ➢ `{parodies}`
+Tags ➢** `{tags}`
 
-    **Fav ➢** ❤️`{num_favorites}`
-    **Pages ➢** `{num_pages}`
+**Fav ➢** ❤️`{num_favorites}`
+**Pages ➢** `{num_pages}`
         """
         buttons = [
         [
