@@ -74,11 +74,8 @@ async def sauce(_, message):
         ]
 
         return await message.reply_photo(photo=cover,caption=caption, reply_markup=InlineKeyboardMarkup(buttons))
-
-    except ValueError:
-        return await message.reply_text("Only integers are allowed")
     except:
-        return await message.reply_text("Not Found")
+        return await message.reply_text("Not Found. Make sure only integers are allowed.")
 
 def close_reply(update: Update, context: CallbackContext):
     query = update.callback_query
