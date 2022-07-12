@@ -17,6 +17,8 @@ async def sauce(_, message):
            return await message.reply_text("NSFW is not activated")
             
     try:
+        nh = Nhentai()
+        code = message.text.split(None, 1)[1]
         code = int(code)
         nh = Nhentai()
         code = message.text.split(None, 1)[1]
