@@ -243,7 +243,7 @@ def main():
             elif alive_id in ("gif", "webp"):
                 msg = dispatcher.bot.send_animation(
                 f"@{SUPPORT_CHAT}",
-                photo=ALIVE_MEDIA,
+                ALIVE_MEDIA,
                 caption="👋 Hi, i'm alive.",
                 parse_mode=ParseMode.MARKDOWN
                 )
