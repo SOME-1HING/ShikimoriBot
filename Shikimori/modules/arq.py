@@ -70,15 +70,15 @@ async def ytarq(_, message):
 
 
 @pbot.on_message(filters.command("spellcheck"))
-async def torrent_func(_, message):
+async def spellcheck_func(_, message):
     if len(message.command) < 2:
         return await message.reply_text("**Usage:**\n/spellcheck [QUERY]")
 
     query = message.text.strip().split(None, 1)[1]
 
     try:
-        hmm = await arq.spellcheck(query)
-        spellcheck = hmm.result[0]
+        spellcheck = await arq.spellcheck(query)
+        # spellcheck = hmm.result[0]
         corrected = spellcheck["corrected"]
         corrections = spellcheck["corrections"]
 
@@ -89,3 +89,45 @@ async def torrent_func(_, message):
     
     except:
         await message.reply_text(f"Check your query. And if the function doesn't work, contact @{SUPPORT_CHAT}")
+
+@pbot.on_message(filters.command("phub"))
+async def phub(_, message):
+    if len(message.command) < 2:
+        return await message.reply_text("**Usage:**\n\n`/phub [QUERY]`")
+    m = await message.reply_text("**Searching**")
+    query = message.text.strip().split(None, 1)[1]
+
+    try:
+        hmm = await arq.pornhub(query)
+        result = hmm.result[0]
+        thumbs = result["thumbnails"]
+        thumb= thumbs[0]
+        thumb = thumb + ".jpg"
+        title = result["title"]
+        rating = result["rating"]
+        Duration = result["duration"]
+        views = result["views"]
+        url = result["url"]
+        category = result["category"]
+        views = views.replace('.', ",")
+        views = views.replace("Aufrufe", "")
+
+        text = f"Title 🎩 - **{title}**\n"
+        text += f"Duration 🕔 - `{Duration}`\n"
+        text += f"Views 👀 - `{views}`\n"
+        text += f"Category 📺 - `{category}`\n"
+        text += f"Rating 📺 - `{rating}`\n"
+        link = f"https://youtube.com{url}"
+        text += f"{url}"
+
+        buttons = [
+            [
+                InlineKeyboardButton(text="Visit", url=link),
+            ],]
+        await m.delete()
+        return await message.reply_photo(thumb ,caption = text, 
+        #reply_markup=InlineKeyboardMarkup(buttons)
+        )
+    
+    except:
+        await m.edit(f"ERROR!!! Contact @{SUPPORT_CHAT}")
