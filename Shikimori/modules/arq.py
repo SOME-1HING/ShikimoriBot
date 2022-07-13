@@ -41,7 +41,7 @@ async def ytarq(_, message):
     text += f"Duration 🕔 - `{Duration}`\n"
     text += f"Views 👀 - `{views}`\n"
     text += f"Channel 📺 - `{channel}`\n"
-    link = f"https://youtube.com{url}\n\n"
+    link = f"https://youtube.com{url}"
 
     buttons = [
         [
