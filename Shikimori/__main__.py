@@ -220,16 +220,39 @@ def migrate_chats(update: Update, context: CallbackContext):
     LOGGER.info("Successfully migrated!")
     raise DispatcherHandlerStop
 
+ALIVE_ID = ALIVE_MEDIA.split(".")
+alive_id = ALIVE_ID[-1]
 
 def main():
     if SUPPORT_CHAT is not None and isinstance(SUPPORT_CHAT, str):
         try:
-            msg = dispatcher.bot.send_photo(
+            if alive_id in ("jpeg", "jpg", "png"):
+                msg = dispatcher.bot.send_photo(
                 f"@{SUPPORT_CHAT}",
                 photo=ALIVE_MEDIA,
                 caption="👋 Hi, i'm alive.",
                 parse_mode=ParseMode.MARKDOWN
-            )
+                )
+            elif alive_id in ("mp4", "mkv"):
+                msg = dispatcher.bot.send_video(
+                f"@{SUPPORT_CHAT}",
+                video=ALIVE_MEDIA,
+                caption="👋 Hi, i'm alive.",
+                parse_mode=ParseMode.MARKDOWN
+                )
+            elif alive_id in ("gif", "webp"):
+                msg = dispatcher.bot.send_animation(
+                f"@{SUPPORT_CHAT}",
+                photo=ALIVE_MEDIA,
+                caption="👋 Hi, i'm alive.",
+                parse_mode=ParseMode.MARKDOWN
+                )
+            else:
+                msg = dispatcher.bot.send_text(
+                f"@{SUPPORT_CHAT}",
+                "👋 Hi, i'm alive.",
+                parse_mode=ParseMode.MARKDOWN
+                )
             time.sleep(15)
             try:
                 msg.delete()
