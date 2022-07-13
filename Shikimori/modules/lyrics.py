@@ -54,7 +54,8 @@ async def ytarq(_, message):
     m = await message.reply_text("**Searching**")
     query = message.text.strip().split(None, 1)[1]
 
-    results = await arq.youtube(query)
+    hmm = await arq.youtube(query)
+    results = hmm["DotMap"]
 
     text = f"Title 🎩 - {results['title']}\n"
     text += f"Duration 🕔 - {results['duration']}\n"
