@@ -1,11 +1,12 @@
 import html
+import time
 import requests
 from pyrogram import filters
 import nekos
 try:
     import hmfull as hmfull
 except: 
-    import hmfull.py as hmfull
+    import hmfullpy as hmfull
 from Shikimori import SUPPORT_CHAT, dispatcher, pbot
 import Shikimori.modules.sql.nsfw_sql as sql
 from Shikimori.modules.log_channel import gloggable
@@ -70,7 +71,7 @@ def list_nsfw_chats(update: Update, context: CallbackContext):
         except Unauthorized:
             sql.rem_nsfw(*chat)
         except RetryAfter as e:
-            sleep(e.retry_after)
+            time.sleep(e.retry_after)
     update.effective_message.reply_text(text, parse_mode="HTML")
 
 def blowjob(update, context):
