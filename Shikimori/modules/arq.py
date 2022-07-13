@@ -19,7 +19,7 @@ async def torrent_func(_, message):
     seeds = ["seeds"]
     leechs = ["leechs"]
     magnet = ["magnet"]
-    await m.edit(f"{name}")   
+    await m.edit(f"{magnet}")   
 
 @pbot.on_message(filters.command("yt"))
 async def ytarq(_, message):
