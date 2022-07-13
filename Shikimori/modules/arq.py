@@ -18,7 +18,18 @@ async def torrent_func(_, message):
     seeds = torrent["seeds"]
     leechs = torrent["leechs"]
     magnet = torrent["magnet"]
-    await m.edit(f"{magnet}")   
+
+    text = f"Title - **{name}**\n"
+    text += f"Uploaded By - `{upload}`\n"
+    text += f"Size - `{size}`\n"
+    text += f"Seeds - `{seeds}`  Leechs - `{leechs}`\n"
+
+    buttons = [
+        [
+            InlineKeyboardButton(text="Magnet  Link", url=magnet),
+        ],]
+
+    await m.edit(text, reply_markup=InlineKeyboardMarkup(buttons))   
 
 @pbot.on_message(filters.command("yt"))
 async def ytarq(_, message):
