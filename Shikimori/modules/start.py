@@ -1,6 +1,7 @@
 import time
 import re
-from Shikimori.__main__ import get_readable_time, HELPABLE, IMPORTED, bot_name
+from Shikimori.__main__ import HELPABLE, IMPORTED
+from Shikimori.modules.helper_funcs.readable_time import get_readable_time
 from Shikimori import (
     BOT_USERNAME,
     UPDATE_CHANNEL,
@@ -16,6 +17,8 @@ from Shikimori.modules.helper_funcs.chat_status import is_user_admin
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, ParseMode, Update
 from telegram.ext import CallbackContext, CommandHandler
 from telegram.utils.helpers import escape_markdown
+
+bot_name = f"{dispatcher.bot.first_name}"
 
 IMG_START = START_MEDIA.split(".")
 start_id = IMG_START[-1]

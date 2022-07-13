@@ -1,11 +1,12 @@
 import time
-from Shikimori.__main__ import get_readable_time
+from Shikimori.modules.helper_funcs.readable_time import get_readable_time
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, ParseMode, Update
 from telegram.utils.helpers import escape_markdown
 from telegram.ext import CallbackContext, CallbackQueryHandler
 from Shikimori.modules.start import PM_START_TEXT, buttons
-from Shikimori.__main__ import bot_name
 from Shikimori import StartTime, dispatcher
+
+bot_name = f"{dispatcher.bot.first_name}"
 
 def Shikimori_about_callback(update, context):
     query = update.callback_query

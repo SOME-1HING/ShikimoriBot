@@ -11,9 +11,10 @@ from pyrogram.errors.exceptions.bad_request_400 import (
 from pyrogram.types import ChatPermissions, InlineKeyboardButton, InlineKeyboardMarkup
 
 from Shikimori import DRAGONS as SUDO_USERS
-from Shikimori import pbot
+from Shikimori import pbot, dispatcher
 from Shikimori.modules.sql import forceSubscribe_sql as sql
-from Shikimori.__main__ import bot_name
+
+bot_name = f"{dispatcher.bot.first_name}"
 
 logging.basicConfig(level=logging.INFO)
 

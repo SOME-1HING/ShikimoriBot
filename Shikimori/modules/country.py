@@ -1,8 +1,9 @@
 import flag
 from countryinfo import CountryInfo
-from Shikimori import telethn as borg
+from Shikimori import dispatcher, telethn as borg
 from Shikimori.events import register
-from Shikimori.__main__ import bot_name
+
+bot_name = f"{dispatcher.bot.first_name}"
 
 
 @register(pattern="^/country (.*)")

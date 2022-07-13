@@ -20,7 +20,8 @@ from Shikimori.modules.helper_funcs.filters import CustomFilters
 from Shikimori.modules.helper_funcs.chat_status import user_admin, user_admin_no_reply
 from Shikimori import  dispatcher, updater, SUPPORT_CHAT
 from Shikimori.modules.log_channel import gloggable
-from Shikimori.__main__ import bot_name
+
+bot_name = f"{dispatcher.bot.first_name}"
 
 @user_admin_no_reply
 @gloggable

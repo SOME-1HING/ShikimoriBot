@@ -31,9 +31,8 @@ from Shikimori import (
     STATS_IMG,
     SUPPORT_CHAT,
 )
-from Shikimori.__main__ import bot_name
 from Shikimori import pbot as app 
-from Shikimori import arq
+from Shikimori import arq, dispatcher
 from Shikimori.core.keyboard import ikb
 from Shikimori.utils.pluginhelper import convert_seconds_to_minutes as time_convert, fetch
 from Shikimori.core.tasks import _get_tasks_text, all_tasks, rm_task
@@ -42,6 +41,8 @@ from Shikimori.modules.info import get_chat_info, get_user_info
 from Shikimori.modules.song import download_youtube_audio
 from Shikimori.utils.functions import test_speedtest
 from Shikimori.utils.pastebin import paste
+
+bot_name = f"{dispatcher.bot.first_name}"
 
 MESSAGE_DUMP_CHAT = LOG_CHANNEL
 
