@@ -3,7 +3,7 @@ import time
 import requests
 from pyrogram import filters
 import nekos
-from Shikimori.imports import hmfull
+from Shikimori.imports.hmfull.src import hmfull
 from Shikimori import SUPPORT_CHAT, dispatcher, pbot
 import Shikimori.modules.sql.nsfw_sql as sql
 from Shikimori.modules.log_channel import gloggable
@@ -190,17 +190,17 @@ Following are the NSFW commands:
 @pbot.on_message(filters.command('nsfw'))
 async def ass(_, message):
     chat_id = message.chat.id
+    nsfw_query = ["ass", "bdsm", "cum", "creampie", "manga"]
     if not message.chat.type == "private":
         is_nsfw = sql.is_nsfw(chat_id)
         if not is_nsfw:
             return
     if len(message.command) != 2:
         return await message.reply_text(
-            "Usage: /nsfw query"
+            f"Usage: /nsfw `{nsfw_query}`"
         )
     query = message.text.split(None, 1)[1].strip()
     query = query.lower()
-    nsfw_query = ["ass", "bdsm", "cum", "creampie", "manga"]
     try:
         if query in nsfw_query:
             if query == "ass":
