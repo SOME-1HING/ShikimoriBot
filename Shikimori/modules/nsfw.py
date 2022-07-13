@@ -196,6 +196,9 @@ async def ass(_, message):
         if not is_nsfw:
             return
     if len(message.command) != 2:
+        for ch in ["[", "]", "'"]:
+            if ch in nsfw_query:
+                nsfw_query = nsfw_query.replace(ch, "") 
         return await message.reply_text(
             f"Usage: /nsfw `{nsfw_query}`"
         )
@@ -213,10 +216,95 @@ async def ass(_, message):
                 res = hmfull.HMtai.nsfw.creampie()
             elif query == "manga":
                 res = hmfull.HMtai.nsfw.manga()
+            elif query == "blowjob" or query =="bj":
+                res = hmfull.HMtai.nsfw.blowjob()
+            elif query == "boobjob":
+                res = hmfull.HMtai.nsfw.boobjob()
+            elif query == "vagina":
+                res = hmfull.HMtai.nsfw.vagina()
+            elif query == "uniform":
+                res = hmfull.HMtai.nsfw.uniform()
+            elif query == "foot":
+                res = hmfull.HMtai.nsfw.foot()
+            elif query == "femdom":
+                res = hmfull.HMtai.nsfw.femdom()
+            elif query == "gangbang":
+                res = hmfull.HMtai.nsfw.gangbang()
+            elif query == "hentai":
+                res = hmfull.HMtai.nsfw.hentai()
+            elif query == "incest":
+                res = hmfull.HMtai.nsfw.incest()
+            elif query == "ahegao":
+                res = hmfull.HMtai.nsfw.ahegao()
+            elif query == "neko":
+                res = hmfull.HMtai.nsfw.neko()
+            elif query == "gif":
+                res = hmfull.HMtai.nsfw.gif()
+            elif query == "ero":
+                res = hmfull.HMtai.nsfw.ero()
+            elif query == "cuckold":
+                res = hmfull.HMtai.nsfw.cuckold()
+            elif query == "orgy":
+                res = hmfull.HMtai.nsfw.orgy()
+            elif query == "elves":
+                res = hmfull.HMtai.nsfw.elves()
+            elif query == "pantsu":
+                res = hmfull.HMtai.nsfw.pantsu()
+            elif query == "mobile":
+                res = hmfull.HMtai.nsfw.nsfwMobileWallpaper()
+            elif query == "glasses":
+                res = hmfull.HMtai.nsfw.glasses()
+            elif query == "tentacles":
+                res = hmfull.HMtai.nsfw.tentacles()
+            elif query == "thighs":
+                res = hmfull.HMtai.nsfw.thighs()
+            elif query == "yuri":
+                res = hmfull.HMtai.nsfw.yuri()
+            elif query == "zettai":
+                res = hmfull.HMtai.nsfw.zettaiRyouiki()
+            elif query == "masturbation":
+                res = hmfull.HMtai.nsfw.masturbation()
+            elif query == "public":
+                res = hmfull.HMtai.nsfw.public()
+            elif query == "wallpaper":
+                res = hmfull.Nekos.nsfw.wallpaper()
+            elif query == "nekolewd":
+                res = hmfull.NekoLove.nsfw.nekolewd()
+            elif query == "nekogif":
+                hmm = hmfull.Nekos.nsfw.nekogif()
+                url = hmm["url"]
+                return await message.reply_animation(url)
+            elif query == "henti":
+                res = hmfull.NekoBot.nsfw.hentai()
+            elif query == "hass":
+                res = hmfull.NekoBot.nsfw.hass()
+            elif query == "boobs":
+                res = hmfull.NekoBot.nsfw.boobs()
+            elif query == "paizuri":
+                res = hmfull.NekoBot.nsfw.paizuri()
+            elif query == "hyuri":
+                res = hmfull.NekoBot.nsfw.yuri()
+            elif query == "hthigh":
+                res = hmfull.NekoBot.nsfw.thigh()
+            elif query == "midriff":
+                res = hmfull.NekoBot.nsfw.midriff()
+            elif query == "kitsune":
+                res = hmfull.NekoBot.nsfw.kitsune()
+            elif query == "tentacle":
+                res = hmfull.NekoBot.nsfw.tentacle()
+            elif query == "anal":
+                res = hmfull.NekoBot.nsfw.anal()
+            elif query == "hanal":
+                res = hmfull.NekoBot.nsfw.hanal()
+            elif query == "hneko":
+                res = hmfull.NekoBot.nsfw.hneko()
 
             url = res["url"]
-            return await message.reply_photo(photo=url)
+            return await message.reply_photo(url)
         else:
+            for ch in ["[", "]", "'"]:
+                if ch in nsfw_query:
+                    nsfw_query = nsfw_query.replace(ch, "") 
             return await message.reply_text(f"Usage: /nsfw `{nsfw_query}`")
     except:
         return await message.reply_text(f"ERROR!!! Contact @{SUPPORT_CHAT}")
