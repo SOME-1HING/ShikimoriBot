@@ -1,5 +1,5 @@
 from Shikimori.imports.hmfull.src import fetchAPI
-import hmtai
+from Shikimori.imports.hmfull.src import hmtai
 
 hmlinks = fetchAPI.HMrequest
 
