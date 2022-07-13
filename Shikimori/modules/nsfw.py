@@ -190,7 +190,7 @@ Following are the NSFW commands:
 @pbot.on_message(filters.command('nsfw'))
 async def ass(_, message):
     chat_id = message.chat.id
-    nsfw_query = ["ass", "bdsm", "cum", "creampie", "manga"]
+    nsfw_query = ["ass", "bdsm", "cum", "creampie", "manga", "blowjob", "bj", "boobjob", "vagina", "uniform", "foot", "femdom", "gangbang", "hentai", "incest", "ahegao", "neko", "gif", "ero", "cuckold", "orgy", "elves", "pantsu", "mobile", "glasses", "tentacles", "tentacle", "thighs", "yuri", "zettai", "masturbation", "public", "wallpaper", "nekolewd", "nekogif", "henti", "hass", "boobs", "paizuri", "hyuri", "hthigh", "midriff", "kitsune", "tentacle", "anal", "hanal", "hneko"]
     if not message.chat.type == "private":
         is_nsfw = sql.is_nsfw(chat_id)
         if not is_nsfw:
@@ -198,9 +198,9 @@ async def ass(_, message):
     if len(message.command) != 2:
         for ch in ["[", "]", "'"]:
             if ch in nsfw_query:
-                nsfw_query = nsfw_query.replace(ch, "") 
+                _query = nsfw_query.replace(ch, "") 
         return await message.reply_text(
-            f"Usage: /nsfw `{nsfw_query}`"
+            f"Usage: /nsfw `{_query}`"
         )
     query = message.text.split(None, 1)[1].strip()
     query = query.lower()
@@ -239,7 +239,9 @@ async def ass(_, message):
             elif query == "neko":
                 res = hmfull.HMtai.nsfw.neko()
             elif query == "gif":
-                res = hmfull.HMtai.nsfw.gif()
+                hmm = hmfull.HMtai.nsfw.gif()
+                url = hmm["url"]
+                return await message.reply_animation(url)
             elif query == "ero":
                 res = hmfull.HMtai.nsfw.ero()
             elif query == "cuckold":
@@ -304,8 +306,8 @@ async def ass(_, message):
         else:
             for ch in ["[", "]", "'"]:
                 if ch in nsfw_query:
-                    nsfw_query = nsfw_query.replace(ch, "") 
-            return await message.reply_text(f"Usage: /nsfw `{nsfw_query}`")
+                    _query = nsfw_query.replace(ch, "") 
+            return await message.reply_text(f"Usage: /nsfw `{_query}`")
     except:
         return await message.reply_text(f"ERROR!!! Contact @{SUPPORT_CHAT}")
 
