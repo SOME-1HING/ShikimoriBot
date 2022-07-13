@@ -4,18 +4,22 @@ from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from Shikimori import pbot
 from Shikimori.utils.arqapi import arq
 
-@pbot.on_message(filters.command("lyrics"))
-async def lyrics_func(_, message):
+@pbot.on_message(filters.command("torrent"))
+async def torrent_func(_, message):
     if len(message.command) < 2:
-        return await message.reply_text("**Usage:**\n/lyrics [QUERY]")
+        return await message.reply_text("**Usage:**\n/torrent [QUERY]")
     m = await message.reply_text("**Searching**")
     query = message.text.strip().split(None, 1)[1]
-    song = await arq.lyrics(query)
-    lyrics = song.result
-    if len(lyrics) < 4095:
-        return await m.edit(f"__{lyrics}__")
-    lyrics = await paste(lyrics)
-    await m.edit(f"**LYRICS_TOO_LONG:** [URL]({lyrics})")
+    results = await arq.torrent(query)
+    results = results[0]
+    torrent = results.result
+    name = torrent["name"]
+    upload = torrent["uploaded"]
+    size = torrent["size"]
+    seeds = ["seeds"]
+    leechs = ["leechs"]
+    magnet = ["magnet"]
+    await m.edit(f"{name}")   
 
 @pbot.on_message(filters.command("yt"))
 async def ytarq(_, message):
