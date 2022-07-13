@@ -214,6 +214,7 @@ async def ass(_, message):
             elif status == "manga":
                 res = hmfull.HMtai.nsfw.manga()
 
+
             url = res["url"]
             return await message.reply_photo(photo=url)
         else:
