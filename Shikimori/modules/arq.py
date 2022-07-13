@@ -48,5 +48,5 @@ async def ytarq(_, message):
             InlineKeyboardButton(text="Visit", url=link),
         ],]
     await m.delete()
-    return await message.reply_photo(thumb ,text, reply_markup=InlineKeyboardMarkup(buttons))
+    return await message.reply_photo(thumb ,caption = text, reply_markup=InlineKeyboardMarkup(buttons))
   
