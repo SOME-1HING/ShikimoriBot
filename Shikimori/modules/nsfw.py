@@ -3,10 +3,7 @@ import time
 import requests
 from pyrogram import filters
 import nekos
-try:
-    import hmfull as hmfull
-except: 
-    import hmfullpy as hmfull
+from Shikimori.imports import hmfull
 from Shikimori import SUPPORT_CHAT, dispatcher, pbot
 import Shikimori.modules.sql.nsfw_sql as sql
 from Shikimori.modules.log_channel import gloggable
