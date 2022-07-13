@@ -76,7 +76,7 @@ def blowjob(update, context):
     if not update.effective_message.chat.type == "private":
         is_nsfw = sql.is_nsfw(chat_id)
         if not is_nsfw:
-            msg.reply_text("NSFW is not activated")
+            msg.reply_text("NSFW is not activated!!\n\nUse '/addnsfw' to activate NSFW commands.")
             return
     msg = update.effective_message
     url = f"{url_nsfw}blowjob" 
@@ -89,7 +89,7 @@ def trap(update, context):
     if not update.effective_message.chat.type == "private":
         is_nsfw = sql.is_nsfw(chat_id)
         if not is_nsfw:
-            msg.reply_text("NSFW is not activated")
+            msg.reply_text("NSFW is not activated!!\n\nUse '/addnsfw' to activate NSFW commands.")
             return
     msg = update.effective_message
     url = f"{url_nsfw}trap" 
@@ -102,7 +102,7 @@ def nsfwwaifu(update, context):
     if not update.effective_message.chat.type == "private":
         is_nsfw = sql.is_nsfw(chat_id)
         if not is_nsfw:
-            msg.reply_text("NSFW is not activated")
+            msg.reply_text("NSFW is not activated!!\n\nUse '/addnsfw' to activate NSFW commands.")
             return
     msg = update.effective_message
     url = f"{url_nsfw}waifu" 
@@ -115,7 +115,7 @@ def nsfwneko(update, context):
     if not update.effective_message.chat.type == "private":
         is_nsfw = sql.is_nsfw(chat_id)
         if not is_nsfw:
-            msg.reply_text("NSFW is not activated")
+            msg.reply_text("NSFW is not activated!!\n\nUse '/addnsfw' to activate NSFW commands.")
             return
     msg = update.effective_message
     url = f"{url_nsfw}neko" 
@@ -175,6 +175,8 @@ __help__ = """
 ❍ `/rmnsfw` : To Deactivate NSFW commands.
 ❍ `/nsfwchats` : Lists NSFW chats.
 
+❍ `/nsfw` ['ass', 'bdsm', 'cum', 'creampie', 'manga', 'blowjob', 'bj', 'boobjob', 'vagina', 'uniform', 'foot', 'femdom', 'gangbang', 'hentai', 'incest', 'ahegao', 'neko', 'gif', 'ero', 'cuckold', 'orgy', 'elves', 'pantsu', 'mobile', 'glasses', 'tentacles', 'tentacle', 'thighs', 'yuri', 'zettai', 'masturbation', 'public', 'wallpaper', 'nekolewd', 'nekogif', 'henti', 'hass', 'boobs', 'paizuri', 'hyuri', 'hthigh', 'midriff', 'kitsune', 'tentacle', 'anal', 'hanal', 'hneko']
+
 Following are the NSFW commands:
 
     ➢ `/nsfwwaifu`
@@ -190,26 +192,27 @@ Following are the NSFW commands:
 @pbot.on_message(filters.command('nsfw'))
 async def ass(_, message):
     chat_id = message.chat.id
-    nsfw_query = ["ass", "bdsm", "cum", "creampie", "manga", "blowjob", "bj", "boobjob", "vagina", "uniform", "foot", "femdom", "gangbang", "hentai", "incest", "ahegao", "neko", "gif", "ero", "cuckold", "orgy", "elves", "pantsu", "mobile", "glasses", "tentacles", "tentacle", "thighs", "yuri", "zettai", "masturbation", "public", "wallpaper", "nekolewd", "nekogif", "henti", "hass", "boobs", "paizuri", "hyuri", "hthigh", "midriff", "kitsune", "tentacle", "anal", "hanal", "hneko"]
+    nsfw_query = ["ass", "cum", "creampie", "manga", "blowjob", "bj", "boobjob", "vagina", "uniform", "foot", "femdom", "gangbang", "hentai", "incest", "ahegao", "neko", "gif", "ero", "cuckold", "orgy", "elves", "pantsu", "mobile", "glasses", "tentacles", "tentacle", "thighs", "yuri", "zettai", "masturbation", "public", "wallpaper", "nekolewd", "nekogif", "henti", "hass", "boobs", "paizuri", "hyuri", "hthigh", "midriff", "kitsune", "tentacle", "anal", "hanal", "hneko"]
     if not message.chat.type == "private":
         is_nsfw = sql.is_nsfw(chat_id)
         if not is_nsfw:
+            message.reply_text("NSFW is not activated!!\n\nUse '/addnsfw' to activate NSFW commands.")
             return
     for ch in ["[", "]", "'"]:
-        if ch in nsfw_query:
-            nsfw_query = nsfw_query.replace(ch, "") 
+        if ch in f"{nsfw_query}":
+            n_query = nsfw_query.replace(ch, "") 
+        else:
+            n_query = nsfw_query
     if len(message.command) != 2:
         return await message.reply_text(
-            f"Usage: /nsfw `{nsfw_query}`"
+            f"Usage: /nsfw `{n_query}`"
         )
     query = message.text.split(None, 1)[1].strip()
     query = query.lower()
     try:
-        if query in nsfw_query:
+        if query in nsfw_query: 
             if query == "ass":
                 res = hmfull.HMtai.nsfw.ass()
-            elif query == "bdsm":
-                res = hmfull.HMtai.nsfw.bdsm()
             elif query == "cum":
                 res = hmfull.HMtai.nsfw.cum()
             elif query == "creampie":
@@ -304,7 +307,7 @@ async def ass(_, message):
             url = res["url"]
             return await message.reply_photo(url)
         else:
-            return await message.reply_text(f"Usage: /nsfw `{nsfw_query}`")
+            return await message.reply_text(f"Usage: /nsfw `{n_query}`")
     except:
         return await message.reply_text(f"ERROR!!! Contact @{SUPPORT_CHAT}")
 
