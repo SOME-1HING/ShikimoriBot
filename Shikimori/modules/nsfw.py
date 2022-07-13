@@ -199,7 +199,8 @@ async def ass(_, message):
             message.reply_text("NSFW is not activated!!\n\nUse '/addnsfw' to activate NSFW commands.")
             return
     for ch in ["[", "]", "'"]:
-        if ch in f"{nsfw_query}":
+        h = f"{nsfw_query}"
+        if ch in h:
             n_query = nsfw_query.replace(ch, "") 
         else:
             n_query = nsfw_query
