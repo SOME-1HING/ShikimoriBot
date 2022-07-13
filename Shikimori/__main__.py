@@ -236,7 +236,7 @@ def main():
             elif alive_id in ("mp4", "mkv"):
                 msg = dispatcher.bot.send_video(
                 f"@{SUPPORT_CHAT}",
-                video=ALIVE_MEDIA,
+                ALIVE_MEDIA,
                 caption="👋 Hi, i'm alive.",
                 parse_mode=ParseMode.MARKDOWN
                 )
