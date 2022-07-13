@@ -10,15 +10,14 @@ async def torrent_func(_, message):
         return await message.reply_text("**Usage:**\n/torrent [QUERY]")
     m = await message.reply_text("**Searching**")
     query = message.text.strip().split(None, 1)[1]
-    results = await arq.torrent(query)
-    results = results[0]
-    torrent = results.result
+    hmm = await arq.torrent(query)
+    torrent = hmm.result[0]
     name = torrent["name"]
     upload = torrent["uploaded"]
     size = torrent["size"]
-    seeds = ["seeds"]
-    leechs = ["leechs"]
-    magnet = ["magnet"]
+    seeds = torrent["seeds"]
+    leechs = torrent["leechs"]
+    magnet = torrent["magnet"]
     await m.edit(f"{magnet}")   
 
 @pbot.on_message(filters.command("yt"))
