@@ -199,19 +199,19 @@ async def ass(_, message):
             "Usage: /nsfw query"
         )
     query = message.text.split(None, 1)[1].strip()
-    status = status.lower()
+    query = query.lower()
     nsfw_query = ["ass", "bdsm", "cum", "creampie", "manga"]
     try:
         if query in nsfw_query:
-            if status == "ass":
+            if query == "ass":
                 res = hmfull.HMtai.nsfw.ass()
-            elif status == "bdsm":
+            elif query == "bdsm":
                 res = hmfull.HMtai.nsfw.bdsm()
-            elif status == "cum":
+            elif query == "cum":
                 res = hmfull.HMtai.nsfw.cum()
-            elif status == "creampie":
+            elif query == "creampie":
                 res = hmfull.HMtai.nsfw.creampie()
-            elif status == "manga":
+            elif query == "manga":
                 res = hmfull.HMtai.nsfw.manga()
 
             url = res["url"]
