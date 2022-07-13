@@ -201,7 +201,7 @@ async def ass(_, message):
     for ch in ["[", "]", "'"]:
         h = f"{nsfw_query}"
         if ch in h:
-            n_query = nsfw_query.replace(ch, "") 
+            n_query = h.replace(ch, "") 
         else:
             n_query = nsfw_query
     if len(message.command) != 2:
