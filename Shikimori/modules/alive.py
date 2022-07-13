@@ -3,7 +3,8 @@ from Shikimori.modules.disable import DisableAbleCommandHandler
 from telegram import ParseMode, Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import CallbackContext
 
-PHOTO = ALIVE_MEDIA
+ALIVE_ID = ALIVE_MEDIA.split(".")
+alive_id = ALIVE_ID[-1]
 
 def awake(update: Update, context: CallbackContext):
     message = update.effective_message
@@ -34,7 +35,18 @@ def awake(update: Update, context: CallbackContext):
     else:
         TEXT = TEXT + "\n<b>Thanks For Adding Me Here ❤️</b>"
 
-    message.reply_animation(PHOTO, caption=TEXT, reply_markup=InlineKeyboardMarkup(buttons),parse_mode=ParseMode.HTML)
+    try:
+        if alive_id in ("jpeg", "jpg", "png"):
+            message.reply_photo(ALIVE_MEDIA, caption=TEXT, reply_markup=InlineKeyboardMarkup(buttons),parse_mode=ParseMode.HTML)
+        elif alive_id in ("mp4", "mkv"):
+            message.reply_video(ALIVE_MEDIA, caption=TEXT, reply_markup=InlineKeyboardMarkup(buttons),parse_mode=ParseMode.HTML)
+        elif alive_id in ("gif", "webp"):
+            message.reply_animation(ALIVE_MEDIA, caption=TEXT, reply_markup=InlineKeyboardMarkup(buttons),parse_mode=ParseMode.HTML)
+        else:
+            message.reply_text(TEXT, reply_markup=InlineKeyboardMarkup(buttons),parse_mode=ParseMode.HTML)
+
+    except:
+        message.reply_text(TEXT, reply_markup=InlineKeyboardMarkup(buttons),parse_mode=ParseMode.HTML)
 
 ALIVE_HANDLER = DisableAbleCommandHandler("alive", awake, run_async=True)
 dispatcher.add_handler(ALIVE_HANDLER)
