@@ -1,7 +1,9 @@
 import html
 import requests
+from pyrogram import filters
 import nekos
-from Shikimori import dispatcher
+import hmfull 
+from Shikimori import dispatcher, pbot
 import Shikimori.modules.sql.nsfw_sql as sql
 from Shikimori.modules.log_channel import gloggable
 from telegram import Update
@@ -183,3 +185,16 @@ Following are the NSFW commands:
     ➢ `/nneko`
     ➢ `/spank`
 """
+
+@pbot.on_message(filters.command('ass'))
+async def ass(_, message):
+    chat_id = message.chat.id
+    if not message.chat.type == "private":
+        is_nsfw = sql.is_nsfw(chat_id)
+        if not is_nsfw:
+            return
+    res = hmfull.HMtai.nsfw.feet()
+    url = res["url"]
+    return await message.reply_photo(photo=url)
+
+
