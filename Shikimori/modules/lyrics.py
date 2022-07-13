@@ -31,7 +31,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 from pyrogram import filters
 from Shikimori.utils.pastebin import paste
-from Shikimori import pbot, arq
+from Shikimori import pbot
+from Shikimori.utils.arqapi import arq
 
 @pbot.on_message(filters.command("lyrics"))
 async def lyrics_func(_, message):
@@ -45,3 +46,10 @@ async def lyrics_func(_, message):
         return await m.edit(f"__{lyrics}__")
     lyrics = await paste(lyrics)
     await m.edit(f"**LYRICS_TOO_LONG:** [URL]({lyrics})")
+
+@pbot.on_message(filters.command("ytarq"))
+async def ytarq(_, message):
+    results = await arq.youtube("Never gonna give you up")
+    videos = results.result[0]
+    return await message.reply_text(videos)
+    
