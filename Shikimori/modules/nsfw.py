@@ -1,9 +1,10 @@
 import html
+import re
 import requests
 from pyrogram import filters
 import nekos
 import hmfull 
-from Shikimori import dispatcher, pbot
+from Shikimori import SUPPORT_CHAT, dispatcher, pbot
 import Shikimori.modules.sql.nsfw_sql as sql
 from Shikimori.modules.log_channel import gloggable
 from telegram import Update
@@ -186,15 +187,38 @@ Following are the NSFW commands:
     ➢ `/spank`
 """
 
-@pbot.on_message(filters.command('ass'))
+@pbot.on_message(filters.command('nsfw'))
 async def ass(_, message):
     chat_id = message.chat.id
     if not message.chat.type == "private":
         is_nsfw = sql.is_nsfw(chat_id)
         if not is_nsfw:
             return
-    res = hmfull.HMtai.nsfw.feet()
-    url = res["url"]
-    return await message.reply_photo(photo=url)
+    if len(message.command) != 2:
+        return await message.reply_text(
+            "Usage: /nsfw query"
+        )
+    query = message.text.split(None, 1)[1].strip()
+    status = status.lower()
+    nsfw_query = ["ass", "bdsm", "cum", "creampie", "manga"]
+    try:
+        if query in nsfw_query:
+            if status == "ass":
+                res = hmfull.HMtai.nsfw.ass()
+            elif status == "bdsm":
+                res = hmfull.HMtai.nsfw.bdsm()
+            elif status == "cum":
+                res = hmfull.HMtai.nsfw.cum()
+            elif status == "creampie":
+                res = hmfull.HMtai.nsfw.creampie()
+            elif status == "manga":
+                res = hmfull.HMtai.nsfw.manga()
+
+            url = res["url"]
+            return await message.reply_photo(photo=url)
+        else:
+            return await message.reply_text(f"Usage: /nsfw `{nsfw_query}`")
+    except:
+        return await message.reply_text(f"ERROR!!! Contact @{SUPPORT_CHAT}")
 
 
