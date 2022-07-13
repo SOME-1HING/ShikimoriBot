@@ -28,6 +28,7 @@ async def ytarq(_, message):
     videos = hmm.result[0]
     thumbs = videos["thumbnails"]
     thumb= thumbs[0]
+    thumb = thumb + ".jpg"
     title = videos["title"]
     channel = videos["channel"]
     Duration = videos["duration"]
