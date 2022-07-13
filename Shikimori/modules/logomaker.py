@@ -1,5 +1,5 @@
 from Shikimori.events import register
-from Shikimori import OWNER_ID
+from Shikimori import OWNER_ID, BOT_USERNAME, SUPPORT_CHAT
 from Shikimori import telethn as tbot
 import os 
 from PIL import Image, ImageDraw, ImageFont
@@ -7,7 +7,7 @@ import random
 import requests
 import io
 import glob
-from Shikimori.__main__ import bot_name, BOT_USERNAME, SUPPORT_CHAT
+from Shikimori.__main__ import bot_name
 
 
 FONT_FILE_TO_USE = "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"

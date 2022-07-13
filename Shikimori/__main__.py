@@ -41,6 +41,8 @@ from telegram.ext import (
 )
 from telegram.ext.dispatcher import DispatcherHandlerStop
 
+bot_name = f"{dispatcher.bot.first_name}"
+
 def get_readable_time(seconds: int) -> str:
     count = 0
     ping_time = ""
