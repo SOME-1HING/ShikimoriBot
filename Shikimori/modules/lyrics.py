@@ -49,7 +49,18 @@ async def lyrics_func(_, message):
 
 @pbot.on_message(filters.command("ytarq"))
 async def ytarq(_, message):
-    results = await arq.youtube("Never gonna give you up")
-    videos = results.result[0]
-    return await message.reply_text(videos)
-    
+    if len(message.command) < 2:
+        return await message.reply_text("**Usage:**\n/lyrics [QUERY]")
+    m = await message.reply_text("**Searching**")
+    query = message.text.strip().split(None, 1)[1]
+
+    results = await arq.youtube(query)
+
+    text = f"Title 🎩 - {results['title']}\n"
+    text += f"Duration 🕔 - {results['duration']}\n"
+    text += f"Views 👀 - {results['views']}\n"
+    text += f"Channel 📺 - {results['channel']}\n"
+    text += f"https://youtube.com{results['url_suffix']}\n\n"
+
+    return await message.reply_text(text)
+  
