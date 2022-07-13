@@ -195,12 +195,12 @@ async def ass(_, message):
         is_nsfw = sql.is_nsfw(chat_id)
         if not is_nsfw:
             return
+    for ch in ["[", "]", "'"]:
+        if ch in nsfw_query:
+            nsfw_query = nsfw_query.replace(ch, "") 
     if len(message.command) != 2:
-        for ch in ["[", "]", "'"]:
-            if ch in nsfw_query:
-                _query = nsfw_query.replace(ch, "") 
         return await message.reply_text(
-            f"Usage: /nsfw `{_query}`"
+            f"Usage: /nsfw `{nsfw_query}`"
         )
     query = message.text.split(None, 1)[1].strip()
     query = query.lower()
@@ -304,10 +304,7 @@ async def ass(_, message):
             url = res["url"]
             return await message.reply_photo(url)
         else:
-            for ch in ["[", "]", "'"]:
-                if ch in nsfw_query:
-                    _query = nsfw_query.replace(ch, "") 
-            return await message.reply_text(f"Usage: /nsfw `{_query}`")
+            return await message.reply_text(f"Usage: /nsfw `{nsfw_query}`")
     except:
         return await message.reply_text(f"ERROR!!! Contact @{SUPPORT_CHAT}")
 
