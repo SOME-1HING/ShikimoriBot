@@ -17,10 +17,10 @@ async def lyrics_func(_, message):
     lyrics = await paste(lyrics)
     await m.edit(f"**LYRICS_TOO_LONG:** [URL]({lyrics})")
 
-@pbot.on_message(filters.command("ytarq"))
+@pbot.on_message(filters.command("yt"))
 async def ytarq(_, message):
     if len(message.command) < 2:
-        return await message.reply_text("**Usage:**\n/lyrics [QUERY]")
+        return await message.reply_text("**Usage:**\n\n`/yt [QUERY]`")
     m = await message.reply_text("**Searching**")
     query = message.text.strip().split(None, 1)[1]
 
