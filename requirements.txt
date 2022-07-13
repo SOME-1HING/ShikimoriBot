@@ -73,7 +73,7 @@ better_profanity
 textblob 
 nudepy
 nekos.py
-hmfull.py
+git+https://github.com/ProgrammerIn-wonderland/hmfullpy.git
 motor
 gpytranslate
 fontTools

@@ -1,9 +1,11 @@
 import html
-import re
 import requests
 from pyrogram import filters
 import nekos
-import hmfull 
+try:
+    import hmfull as hmfull
+except: 
+    import hmfull.py as hmfull
 from Shikimori import SUPPORT_CHAT, dispatcher, pbot
 import Shikimori.modules.sql.nsfw_sql as sql
 from Shikimori.modules.log_channel import gloggable
@@ -213,7 +215,6 @@ async def ass(_, message):
                 res = hmfull.HMtai.nsfw.creampie()
             elif status == "manga":
                 res = hmfull.HMtai.nsfw.manga()
-
 
             url = res["url"]
             return await message.reply_photo(photo=url)
