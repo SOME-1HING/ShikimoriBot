@@ -2,7 +2,7 @@ import html
 import random
 import time
 
-import Shikimori.modules.ExtraGifs_strings as ExtraGifs_strings
+import Shikimori.strings.ExtraGifs_strings as ExtraGifs_strings
 from Shikimori import dispatcher
 from Shikimori.modules.disable import DisableAbleCommandHandler
 from Shikimori.modules.helper_funcs.chat_status import is_user_admin

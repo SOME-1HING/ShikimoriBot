@@ -1,9 +1,46 @@
+"""
+STATUS: Code is working. ✅
+"""
+
+"""
+BSD 2-Clause License
+
+Copyright (C) 2022, SOME-1HING [https://github.com/SOME-1HING]
+
+Credits:-
+    I don't know who originally wrote this code. If you originally wrote this code, please reach out to me. 
+
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+1. Redistributions of source code must retain the above copyright notice, this
+   list of conditions and the following disclaimer.
+
+2. Redistributions in binary form must reproduce the above copyright notice,
+   this list of conditions and the following disclaimer in the documentation
+   and/or other materials provided with the distribution.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+"""
+
 import json
 import requests
 import random
 
 from Shikimori import dispatcher
 from Shikimori.modules.disable import DisableAbleCommandHandler
+from Shikimori.strings.animequotes_string import QUOTES_IMG
 from telegram.ext import CallbackContext, CallbackQueryHandler
 from telegram import ParseMode, Update, InlineKeyboardMarkup, InlineKeyboardButton
 
@@ -56,76 +93,6 @@ def changek_quote(update: Update, context: CallbackContext):
     message = update.effective_message
     keyboard = [[InlineKeyboardButton(text="Change", callback_data="quotek_change")]]
     message.reply_photo(random.choice(QUOTES_IMG),reply_markup=InlineKeyboardMarkup(keyboard))
-
-
-QUOTES_IMG = (
-      "https://i.imgur.com/Iub4RYj.jpg", 
-      "https://i.imgur.com/uvNMdIl.jpg", 
-      "https://i.imgur.com/YOBOntg.jpg", 
-      "https://i.imgur.com/fFpO2ZQ.jpg", 
-      "https://i.imgur.com/f0xZceK.jpg", 
-      "https://i.imgur.com/RlVcCip.jpg", 
-      "https://i.imgur.com/CjpqLRF.jpg", 
-      "https://i.imgur.com/8BHZDk6.jpg", 
-      "https://i.imgur.com/8bHeMgy.jpg", 
-      "https://i.imgur.com/5K3lMvr.jpg", 
-      "https://i.imgur.com/NTzw4RN.jpg", 
-      "https://i.imgur.com/wJxryAn.jpg", 
-      "https://i.imgur.com/9L0DWzC.jpg", 
-      "https://i.imgur.com/sBe8TTs.jpg", 
-      "https://i.imgur.com/1Au8gdf.jpg", 
-      "https://i.imgur.com/28hFQeU.jpg", 
-      "https://i.imgur.com/Qvc03JY.jpg", 
-      "https://i.imgur.com/gSX6Xlf.jpg", 
-      "https://i.imgur.com/iP26Hwa.jpg", 
-      "https://i.imgur.com/uSsJoX8.jpg", 
-      "https://i.imgur.com/OvX3oHB.jpg", 
-      "https://i.imgur.com/JMWuksm.jpg", 
-      "https://i.imgur.com/lhM3fib.jpg", 
-      "https://i.imgur.com/64IYKkw.jpg", 
-      "https://i.imgur.com/nMbyA3J.jpg", 
-      "https://i.imgur.com/7KFQhY3.jpg", 
-      "https://i.imgur.com/mlKb7zt.jpg", 
-      "https://i.imgur.com/JCQGJVw.jpg", 
-      "https://i.imgur.com/hSFYDEz.jpg", 
-      "https://i.imgur.com/PQRjAgl.jpg", 
-      "https://i.imgur.com/ot9624U.jpg", 
-      "https://i.imgur.com/iXmqN9y.jpg", 
-      "https://i.imgur.com/RhNBeGr.jpg", 
-      "https://i.imgur.com/tcMVNa8.jpg", 
-      "https://i.imgur.com/LrVg810.jpg", 
-      "https://i.imgur.com/TcWfQlz.jpg", 
-      "https://i.imgur.com/muAUdvJ.jpg", 
-      "https://i.imgur.com/AtC7ZRV.jpg", 
-      "https://i.imgur.com/sCObQCQ.jpg", 
-      "https://i.imgur.com/AJFDI1r.jpg", 
-      "https://i.imgur.com/TCgmRrH.jpg", 
-      "https://i.imgur.com/LMdmhJU.jpg", 
-      "https://i.imgur.com/eyyax0N.jpg", 
-      "https://i.imgur.com/YtYxV66.jpg", 
-      "https://i.imgur.com/292w4ye.jpg", 
-      "https://i.imgur.com/6Fm1vdw.jpg", 
-      "https://i.imgur.com/2vnBOZd.jpg", 
-      "https://i.imgur.com/j5hI9Eb.jpg", 
-      "https://i.imgur.com/cAv7pJB.jpg", 
-      "https://i.imgur.com/jvI7Vil.jpg", 
-      "https://i.imgur.com/fANpjsg.jpg", 
-      "https://i.imgur.com/5o1SJyo.jpg", 
-      "https://i.imgur.com/dSVxmh8.jpg", 
-      "https://i.imgur.com/02dXlAD.jpg", 
-      "https://i.imgur.com/htvIoGY.jpg", 
-      "https://i.imgur.com/hy6BXOj.jpg", 
-      "https://i.imgur.com/OuwzNYu.jpg", 
-      "https://i.imgur.com/L8vwvc2.jpg", 
-      "https://i.imgur.com/3VMVF9y.jpg", 
-      "https://i.imgur.com/yzjq2n2.jpg", 
-      "https://i.imgur.com/0qK7TAN.jpg", 
-      "https://i.imgur.com/zvcxSOX.jpg", 
-      "https://i.imgur.com/FO7bApW.jpg", 
-      "https://i.imgur.com/KK06gwg.jpg", 
-      "https://i.imgur.com/6lG4tsO.jpg"
-      
-      )    
 
 ANIMEQUOTES_HANDLER = DisableAbleCommandHandler("animequotes", animequotes, run_async = True)
 QUOTES_HANDLER = DisableAbleCommandHandler("quote", quotes, run_async = True)
