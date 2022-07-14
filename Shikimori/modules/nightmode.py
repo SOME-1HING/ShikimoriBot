@@ -1,11 +1,44 @@
-from Shikimori.modules.sql.night_mode_sql import add_nightmode, rmnightmode, get_all_chat_id, is_nightmode_indb
+"""
+BSD 2-Clause License
+
+Copyright (C) 2017-2019, Paul Larsen
+Copyright (C) 2021-2022, Awesome-RJ, [ https://github.com/Awesome-RJ ]
+Copyright (c) 2021-2022, Yūki • Black Knights Union, [ https://github.com/Awesome-RJ/CutiepiiRobot ]
+
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+1. Redistributions of source code must retain the above copyright notice, this
+   list of conditions and the following disclaimer.
+
+2. Redistributions in binary form must reproduce the above copyright notice,
+   this list of conditions and the following disclaimer in the documentation
+   and/or other materials provided with the distribution.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+"""
+
 from telethon.tl.types import ChatBannedRights
-from apscheduler.schedulers.asyncio import AsyncIOScheduler 
-from telethon import functions
-from Shikimori.events import register
-from Shikimori import OWNER_ID
-from Shikimori import telethn as tbot
 from telethon import *
+from telethon import types
+from telethon.tl import functions
+from apscheduler.schedulers.asyncio import AsyncIOScheduler 
+
+
+from Shikimori.modules.sql.night_mode_sql import add_nightmode, rmnightmode, get_all_chat_id, is_nightmode_indb
+from Shikimori.events import register
+from Shikimori import OWNER_ID, telethn, LOGGER
 
 hehes = ChatBannedRights(
     until_date=None,
@@ -39,7 +72,7 @@ async def is_register_admin(chat, user):
     if isinstance(chat, (types.InputPeerChannel, types.InputChannel)):
         return isinstance(
             (
-                await tbot(functions.channels.GetParticipantRequest(chat, user))
+                await telethn(functions.channels.GetParticipantRequest(chat, user))
             ).participant,
             (types.ChannelParticipantAdmin, types.ChannelParticipantCreator),
         )
@@ -47,7 +80,7 @@ async def is_register_admin(chat, user):
         return True
 
 async def can_change_info(message):
-    result = await tbot(
+    result = await telethn(
         functions.channels.GetParticipantRequest(
             channel=message.chat_id,
             user_id=message.sender_id,
@@ -58,21 +91,20 @@ async def can_change_info(message):
         isinstance(p, types.ChannelParticipantAdmin) and p.admin_rights.change_info
     )
 
-@register(pattern="^/(nimode|Nightmode|NightMode) ?(.*)")
+@register(pattern="^/(nightmode|Nightmode|NightMode) ?(.*)")
 async def profanity(event):
     if event.fwd_from:
         return
     if event.is_private:
         return
     input = event.pattern_match.group(2)
-    if not event.sender_id == OWNER_ID:
+    if event.sender_id != OWNER_ID:
         if not await is_register_admin(event.input_chat, event.sender_id):
            await event.reply("Only admins can execute this command!")
            return
-        else:
-          if not await can_change_info(message=event):
-            await event.reply("You are missing the following rights to use this command:CanChangeinfo")
-            return
+        if not await can_change_info(message=event):
+          await event.reply("You are missing the following rights to use this command:CanChangeinfo")
+          return
     if not input:
         if is_nightmode_indb(str(event.chat_id)):
                 await event.reply(
@@ -83,25 +115,26 @@ async def profanity(event):
             "Currently NightMode is Disabled for this Chat"
         )
         return
-    if "on" in input:
-        if event.is_group:
-            if is_nightmode_indb(str(event.chat_id)):
-                    await event.reply(
-                        "Night Mode is Already Turned ON for this Chat"
-                    )
-                    return
-            add_nightmode(str(event.chat_id))
-            await event.reply("NightMode turned on for this chat.")
+    if "on" in input and event.is_group:
+        if is_nightmode_indb(str(event.chat_id)):
+                await event.reply(
+                    "Night Mode is Already Turned ON for this Chat"
+                )
+                return
+        add_nightmode(str(event.chat_id))
+        await event.reply("NightMode turned on for this chat.")
     if "off" in input:
-        if event.is_group:
-            if not is_nightmode_indb(str(event.chat_id)):
-                    await event.reply(
-                        "Night Mode is Already Off for this Chat"
-                    )
-                    return
+        if (
+            event.is_group
+            and not is_nightmode_indb(str(event.chat_id))
+        ):
+                await event.reply(
+                    "Night Mode is Already Off for this Chat"
+                )
+                return
         rmnightmode(str(event.chat_id))
         await event.reply("NightMode Disabled!")
-    if not "off" in input and not "on" in input:
+    if "off" not in input and "on" not in input:
         await event.reply("Please Specify On or Off!")
         return
 
@@ -112,19 +145,19 @@ async def job_close():
         return
     for pro in chats:
         try:
-            await tbot.send_message(
-              int(pro.chat_id), "12:00 Am, Group Is Closing Till 6 Am. Night Mode Started !"
+            await telethn.send_message(
+              int(pro.chat_id), "12:00 Am, Group Is Closing Till 6 Am. Night Mode Started ! \n**Powered By Yūki Network**"
             )
-            await tbot(
+            await telethn(
             functions.messages.EditChatDefaultBannedRightsRequest(
                 peer=int(pro.chat_id), banned_rights=hehes
             )
             )
         except Exception as e:
-            logger.info(f"Unable To Close Group {chat} - {e}")
+            LOGGER.info(f"Unable To Close Group {pro.chat_id} - {e}")
 
 #Run everyday at 12am
-scheduler = AsyncIOScheduler(timezone="Asia/Colombo")
+scheduler = AsyncIOScheduler(timezone="Asia/Kolkata")
 scheduler.add_job(job_close, trigger="cron", hour=23, minute=59)
 scheduler.start()
 
@@ -134,29 +167,27 @@ async def job_open():
         return
     for pro in chats:
         try:
-            await tbot.send_message(
-              int(pro.chat_id), "06:00 Am, Group Is Opening."
+            await telethn.send_message(
+              int(pro.chat_id), "06:00 Am, Group Is Opening.\n**Powered By Yūki Network**"
             )
-            await tbot(
+            await telethn(
             functions.messages.EditChatDefaultBannedRightsRequest(
                 peer=int(pro.chat_id), banned_rights=openhehe
             )
         )
         except Exception as e:
-            logger.info(f"Unable To Open Group {pro.chat_id} - {e}")
+            LOGGER.info(f"Unable To Open Group {pro.chat_id} - {e}")
 
 # Run everyday at 06
-scheduler = AsyncIOScheduler(timezone="Asia/Colombo")
+scheduler = AsyncIOScheduler(timezone="Asia/Kolkata")
 scheduler.add_job(job_open, trigger="cron", hour=5, minute=58)
 scheduler.start()
 
+__help__ = """
+➛ /nightmode*:* on/off
 
-__help__ = f"""
- ❍ `/nimode` on/off
- ❍ `/nightmode` : on/off
- 
 **Note:** Night Mode chats get Automatically closed at 12pm(IST)
-and Automatically opened at 6am(IST) To Prevent Night Spams.
+and Automatically openned at 6am(IST) To Prevent Night Spams.
 """
 
-__mod_name__ = "Night Mode 🌃"
+__mod_name__ = "NightMode"
