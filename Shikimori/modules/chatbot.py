@@ -1,3 +1,5 @@
+# Credits to MetaVoid Team for making this module.
+
 import json
 import re
 import os

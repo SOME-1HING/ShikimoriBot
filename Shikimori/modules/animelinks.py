@@ -31,7 +31,7 @@ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 """
 
-from Shikimori.modules.animedev import client as animedev_client, exceptions
+from Shikimori.imports.animedev import client as animedev_client, exceptions
 from Shikimori.events import register
 from Shikimori import telethn, SUPPORT_CHAT
 from telethon import Button

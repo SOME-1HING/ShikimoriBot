@@ -7,9 +7,6 @@ BSD 2-Clause License
 
 Copyright (C) 2022, SOME-1HING [https://github.com/SOME-1HING]
 
-Credits: 
-    Void [https://github.com/Voidxtoxic/]
-
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
