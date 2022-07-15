@@ -134,7 +134,7 @@ __Powered by__@Yuki_Network.
     )
 
 
-@pbot.on_message(filters.command(["nsfwscan", "nsfwscan@Shikimori"]))
+@pbot.on_message(filters.command(["nsfwscan", f"nsfwscan@{BOT_USERNAME}"]))
 @capture_err
 async def nsfw_scan_command(_, message):
     if not message.reply_to_message:
