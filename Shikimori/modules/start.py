@@ -44,7 +44,6 @@ from Shikimori import (
     ANIME_NAME,
     START_MEDIA,
 )
-from Shikimori.modules.help import send_help, HELP_STRINGS
 from Shikimori.modules.helper_funcs.misc import paginate_modules
 from Shikimori.modules.helper_funcs.chat_status import is_user_admin
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, ParseMode, Update
@@ -61,6 +60,9 @@ PM_START_TEXT = f"""
 
 *Click on the Commands Button below to go through my commands.*
 """
+
+HELP_STRINGS = """
+Click on the button bellow to get description about specifics command."""
 
 buttons = [
     [
@@ -198,3 +200,14 @@ def send_settings(chat_id, user_id, user=False):
                 "in a group chat you're admin in to find its current settings!",
                 parse_mode=ParseMode.MARKDOWN,
             )
+
+def send_help(chat_id, text, keyboard=None):
+    if not keyboard:
+        keyboard = InlineKeyboardMarkup(paginate_modules(0, HELPABLE, "help"))
+    dispatcher.bot.send_message(
+        chat_id=chat_id,
+        text=text,
+        parse_mode=ParseMode.MARKDOWN,
+        disable_web_page_preview=True,
+        reply_markup=keyboard,
+    )

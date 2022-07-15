@@ -118,15 +118,18 @@ async def del_nsfw(event):
                     dev = await event.respond(final)
                     await asyncio.sleep(10)
                     await dev.delete()
-        if event.photo:
+        if not event.text:
             is_nsfw = sql.is_nsfw(c["id"])
             if not is_nsfw:
                 return
             if event.chat_id == c["id"]:
-                file_id = await get_file_id_from_message(event.photo)
+                file_id = await get_file_id_from_message(event)
                 if not file_id:
                     return
-                file = await event.client.download_media(file_id)
+                try:
+                    file = await event.client.download_media(file_id)
+                except:
+                    return
                 try:
                     results = await arq.nsfw_scan(file=file)
                     if results.ok:
