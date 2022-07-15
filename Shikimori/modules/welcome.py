@@ -104,9 +104,11 @@ ENUM_FUNC_MAP = {
     sql.Types.VOICE.value: dispatcher.bot.send_voice,
     sql.Types.VIDEO.value: dispatcher.bot.send_video,
 }
-
-OWNER_WELCOME_MEDIA = OWNER_WELCOME_MEDIA.split(".")
-wel_id = OWNER_WELCOME_MEDIA[-1]
+try:
+    OWNER_WELCOME_MEDIA = OWNER_WELCOME_MEDIA.split(".")
+    wel_id = OWNER_WELCOME_MEDIA[-1]
+except:
+    wel_id = None
 
 VERIFIED_USER_WAITLIST = {}
 CAPTCHA_ANS_DICT = {}
