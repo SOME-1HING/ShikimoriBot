@@ -40,7 +40,7 @@ from pyrogram import filters
 from Shikimori import pbot as app, BOT_ID
 from Shikimori.utils.errors import capture_err
 from .helper_funcs.anonymous import user_admin, AdminPerms
-from Shikimori.utils.permissions import adminsOnly
+import Shikimori.modules.sql.karma_sql as sql
 from Shikimori.ex_plugins.dbfunctions import (
     alpha_to_int,
     get_karma,
@@ -72,7 +72,8 @@ regex_downvote = r"^(\-|\-\-|\-1|👎|noob|baka|idiot|chutiya|nub|noob|wrong|inc
 )
 @capture_err
 async def upvote(_, message):
-    if not await is_karma_on(message.chat.id):
+    sql.is_karma = sql.sql.is_karma(chat_id)
+    if not sql.is_karma:
         return
     if not message.reply_to_message.from_user:
         return
@@ -114,7 +115,8 @@ async def upvote(_, message):
 )
 @capture_err
 async def upvote(_, message):
-    if not is_karma_on(message.chat.id):
+    sql.is_karma = sql.sql.is_karma(chat_id)
+    if not sql.is_karma:
         return
     if not message.reply_to_message.from_user:
         return
@@ -232,10 +234,17 @@ async def captcha_state(_, message):
     state = message.text.split(None, 1)[1].strip()
     state = state.lower()
     if state == "on":
-        await karma_on(chat_id)
+        is_karma = sql.is_karma(chat_id)
+        if not is_karma:
+            sql.set_karma(chat_id)
         await message.reply_text("Enabled karma system.")
     elif state == "off":
-        karma_off(chat_id)
+        is_karma = sql.is_karma(chat_id)
+        if not is_karma:
+            message.reply_text("Karma is already Deactivated")
+            return ""
+        else:
+            sql.rem_karma(chat_id)
         await message.reply_text("Disabled karma system.")
     else:
         await message.reply_text(usage)
