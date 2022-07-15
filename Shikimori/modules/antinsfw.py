@@ -124,19 +124,22 @@ async def del_nsfw(event):
                 return
             if event.chat_id == c["id"]:
                 if event.photo:
-                    file = await event.client.download_media(event.photo)
+                    file = await event.client.download_media(event.photo, "nudes.jpg")
+                    file = "./nudes.jpg"
                     await event.respond("hmm")
                 elif event.document:
-                    file = await event.client.download_media(event.document)
+                    file = await event.client.download_media(event.document, "nudes.pdf")
+                    file = "./nudes.pdf"
                 elif event.animation:
-                    file = await event.client.download_media(event.animation)
+                    file = await event.client.download_media(event.animation, "nude.gif")
+                    file = "./nudes.gif"
                 elif event.sticker:
-                    file = await event.client.download_media(event.sticker)
+                    file = await event.client.download_media(event.sticker, "nude.png")
+                    file = "./nudes.png"
                 else:
                     return
                 try:
                     results = await arq.nsfw_scan(file=file)
-                    results = await arq.nsfw_scan(file= event.photo)
                     await event.respond("hmm") 
                     if results.ok:
                         return
@@ -151,6 +154,7 @@ async def del_nsfw(event):
                         hh = sender.id
                         final = f"**NSFW DETECTED**\n\n[{st}](tg://user?id={hh}) your message contain NSFW content.. So, {bot_name} deleted the message\n\n **Nsfw Sender - User / Bot :** [{st}](tg://user?id={hh})  \n\n**Neutral:** `{results.neutral} %`\n**Porn:** `{results.porn} %`\n**Hentai:** `{results.hentai} %`\n**Sexy:** `{results.sexy} %`\n**Drawings:** `{results.drawings} %`\n**NSFW:** `{results.is_nsfw}` \n**#ANTI_NSFW** "
                         dev = await event.respond(final)
+                        os.remove(file)
                         await asyncio.sleep(10)
                         await dev.delete()
                         return final
