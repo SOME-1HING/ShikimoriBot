@@ -30,7 +30,7 @@ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
 OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 """
-import requests
+
 import aiohttp
 from pyrogram import filters, enums
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
@@ -47,51 +47,51 @@ async def github(_, message):
         return
     username = message.text.split(None, 1)[1]
     URL = f'https://api.github.com/users/{username}'
-    result = requests.get(URL).json()
-    try:
-        if result["message"] == "Not Found":
-            return await message.reply_text("User not Found.")
-        else:
-            m = await message.reply_text("`Searching....`")
-            url = result['html_url']
-            name = result['name']
-            company = result['company']
-            bio = result['bio']
-            created_at = result['created_at']
-            avatar_url = result['avatar_url']
-            blog = result['blog']
-            location = result['location']
-            repositories = result['public_repos']
-            followers = result['followers']
-            following = result['following']
-            caption = f"""**Info Of {name}**
-    **Username:** `{username}`
-    **Bio:** `{bio}`
-    **Profile Link:** [Here]({url})
-    **Company:** `{company}`
-    **Created On:** `{created_at}`
-    **Repositories:** `{repositories}`
-    **Blog:** `{blog}`
-    **Location:** `{location}`
-    **Followers:** `{followers}`
-    **Following:** `{following}`"""
-            await m.delete()
-            return await message.reply_photo(photo=avatar_url, caption=caption,reply_markup=InlineKeyboardMarkup(
-                    [
-                        [
-                            InlineKeyboardButton(
-                                text="Profile",
-                                url=url,
-                            ),
-                        ],
-                    ],
-                    disable_web_page_preview=True,
-                ), parse_mode= enums.ParseMode.MARKDOWN)
+    async with aiohttp.ClientSession() as session:
+        async with session.get(URL) as request:
+            if request.status == 404:
+                return await message.reply_text(f"ERROR!! Contact @{SUPPORT_CHAT}")
 
-    except Exception as e:
-        await message.reply_text(f"ERROR!! Contact{SUPPORT_CHAT}")
-        print(str(e))
-        pass
+            result = await request.json()
+            try:
+                m = message.reply_text("`Searching.....`")
+                url = result['html_url']
+                name = result['name']
+                company = result['company']
+                bio = result['bio']
+                created_at = result['created_at']
+                avatar_url = result['avatar_url']
+                blog = result['blog']
+                location = result['location']
+                repositories = result['public_repos']
+                followers = result['followers']
+                following = result['following']
+                caption = f"""**Info Of {name}**
+**Username:** `{username}`
+**Bio:** `{bio}`
+**Profile Link:** [Here]({url})
+**Company:** `{company}`
+**Created On:** `{created_at}`
+**Repositories:** `{repositories}`
+**Blog:** `{blog}`
+**Location:** `{location}`
+**Followers:** `{followers}`
+**Following:** `{following}`"""
+                await message.reply_photo(photo=avatar_url, caption=caption,reply_markup=InlineKeyboardMarkup(
+                        [
+                            [
+                                InlineKeyboardButton(
+                                    text="Profile",
+                                    url=url,
+                                ),
+                            ],
+                        ],
+                        disable_web_page_preview=True,
+                    ), parse_mode= enums.ParseMode.MARKDOWN)
+            except Exception as e:
+                print(str(e))
+                await message.reply_text(f"ERROR!! Contact @{SUPPORT_CHAT}")
+                pass
 
 
 __mod_name__ = "Github 🐱‍💻"
