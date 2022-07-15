@@ -139,6 +139,8 @@ async def del_nsfw(event):
                     await event.respond("hmm") 
                     if results.ok:
                         return
+                    await event.respond(results.porn) 
+                    await event.respond(float(results.porn)) 
                     hmm = float(results.hentai)
                     hmmm = float(results.porn)
                     hmmmm = float(results.sexy)
