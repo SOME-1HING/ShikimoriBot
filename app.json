@@ -241,6 +241,11 @@
          "required": false,
          "value": "https://telegra.ph/file/061054c8f73fe7ffbf6aa.mp4"
       },
+      "OWNER_WELCOME_MEDIA": {
+         "description": "URL of media that you want to show when owner of bot joins any chat. Supported file types (jpg, png, gif, webp, mkv, mp4).",
+         "required": false,
+         "value": ""
+      },
       "INLINE_IMG": {
          "description": "URL of image for inline querry. Must be a still image.",
          "required": false,

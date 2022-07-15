@@ -30,12 +30,12 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 """
 import random
 
-from Shikimori import OWNER_ID, telethn
+from Shikimori import DEV_USERS, OWNER_ID, telethn
 
 from telethon import events, Button
 from telegram import ParseMode
 
-BUTTON = [[Button.url("❓ What Is This", "https://t.me/Black_Knights_Union/195")]]
+BUTTON = [[Button.url("❓ What Is This", "https://t.me/Shikimori_bot_Updates/34")]]
 COMET = "https://telegra.ph/file/713fbfbdde25cc1726866.mp4"
 STAR = "https://telegra.ph/file/ad90b44c551cec31df76b.mp4"
 WISH = """
@@ -49,7 +49,7 @@ WISH = """
 @telethn.on(events.NewMessage(pattern="/wish ?(.*)"))
 async def wish(e):
  quew = e.pattern_match.group(1)
- if e.sender_id != OWNER_ID and not quew:
+ if e.sender_id != DEV_USERS and not quew:
   (await e.reply(WISH, parse_mode=ParseMode.MARKDOWN, buttons=BUTTON, file=STAR),) 
   return   
  if not e.is_reply:

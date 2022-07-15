@@ -221,7 +221,7 @@ async def karma(_, message):
         await message.reply_text(f"**Total Points**: __{karma}__")
 
 
-@app.on_message(filters.command("karma") & ~filters.private)
+@app.on_message(filters.command("karma"))
 @adminsOnly("can_change_info")
 async def captcha_state(_, message):
     usage = "**Usage:**\n/karma [ON|OFF]"

@@ -89,6 +89,7 @@ class Config(object):
     MEDIA_BYE = "https://telegra.ph/file/061054c8f73fe7ffbf6aa.mp4"
     INLINE_IMG = "https://telegra.ph/file/8cec66d01df8c0071ebaa.jpg"
     API_WEATHER = "awoo"
+    OWNER_WELCOME_MEDIA = ""
 
 class Production(Config):
     LOGGER = True

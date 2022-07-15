@@ -164,7 +164,8 @@ if ENV:
     MEDIA_HELLO = os.environ.get("MEDIA_HELLO", None)
     MEDIA_BYE = os.environ.get("MEDIA_BYE", None)
     INLINE_IMG = os.environ.get("INLINE_IMG", None)
-        
+    OWNER_WELCOME_MEDIA = os.environ.get("OWNER_WELCOME_MEDIA", None)
+
     try:
         WHITELIST_CHATS = {int(x) for x in os.environ.get('WHITELIST_CHATS', "").split()}
     except ValueError:
@@ -252,6 +253,7 @@ else:
     MEDIA_HELLO = Config.MEDIA_HELLO
     MEDIA_BYE = Config.MEDIA_BYE
     INLINE_IMG = Config.INLINE_IMG
+    OWNER_WELCOME_MEDIA = Config.OWNER_WELCOME_MEDIA
 
     try:
         WHITELIST_CHATS = {int(x) for x in os.environ.get('WHITELIST_CHATS', "").split()}

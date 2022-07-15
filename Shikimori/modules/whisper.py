@@ -1,3 +1,5 @@
+# Credits to Reeshuxd
+
 from telethon import events, Button
 import logging
 from telethon.tl.functions.users import GetFullUserRequest as us
@@ -8,10 +10,10 @@ logging.basicConfig(level=logging.INFO)
 
 db = {}
 
-@bot.on(events.NewMessage(pattern=f"^[!?@/]{BOT_USERNAME}$"))
+@bot.on(events.NewMessage(pattern=f"^[!?@/]({BOT_USERNAME} | wspr)$"))
 async def stsrt(event):
     await event.reply(
-            "**Heya, I am a Whisper Bot function for Cutiepii!**",
+            f"**Heya, I am a Whisper Bot function for @{BOT_USERNAME}!**",
             buttons=[
                 [Button.switch_inline("Go Inline", query="")]
                 ]
@@ -25,8 +27,8 @@ async def die(event):
     me = (await bot.get_me()).username
     dn = event.builder.article(
             title="It's a whisper bot!",
-            description="It's a whisper Bot function for Cutiepii!\n(c) Reeshuxd",
-            text=f"**It's a whisper bot**\n`@{me} wspr Username|Message`\n**(c) Reeshuxd**",
+            description=f"whisper Bot function for @{BOT_USERNAME}!",
+            text=f"**It's a whisper bot**\n`@{me} wspr Username|Message`",
             buttons=[
                 [Button.switch_inline(" Go Inline ", query="wspr ")]
                 ]
