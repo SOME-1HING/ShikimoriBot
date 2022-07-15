@@ -12,7 +12,7 @@ from Shikimori.Extras.errors import capture_err
 @pbot.on_message(filters.command("imdb"))
 @capture_err
 async def imdb(_, message):
-    movie_name = message.split(None, 1)[1]
+    movie_name = message.text.split(None, 1)[1]
     remove_space = movie_name.split(" ")
     final_name = "+".join(remove_space)
     page = requests.get(
