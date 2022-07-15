@@ -19,26 +19,15 @@ import re
 import better_profanity
 import emoji
 import nude
-import requests
 from better_profanity import profanity
 from google_trans_new import google_translator
 from telethon import events
 from telethon.tl.types import ChatBannedRights
 
-from Shikimori import BOT_ID
-from Shikimori.mongo import client, db
-
-# from Shikimori.db.mongo_helpers.nsfw_guard import add_chat, get_all_nsfw_chats, is_chat_in_db, rm_chat
+from Shikimori import dispatcher
+from Shikimori.mongo import db
 from Shikimori.pyrogramee.telethonbasics import is_admin
 from Shikimori.events import register
-from Shikimori import MONGO_DB_URI 
-from pymongo import MongoClient
-from Shikimori.modules.sql.nsfw_watch_sql import (
-    add_nsfwatch,
-    get_all_nsfw_enabled_chat,
-    is_nsfwatch_indb,
-    rmnsfwatch,
-)
 from Shikimori import telethn as tbot
 
 translator = google_translator()
@@ -48,6 +37,7 @@ MUTE_RIGHTS = ChatBannedRights(until_date=None, send_messages=False)
 # This hardwork was completely done by MissJuliaRobot
 # Full Credits goes to MissJuliaRobot
 
+bot_name = f"{dispatcher.bot.first_name}"
 
 approved_users = db.approve
 spammers = db.spammer
@@ -189,7 +179,7 @@ async def del_profanity(event):
                     await event.delete()
                     st = sender.first_name
                     hh = sender.id
-                    final = f"**NSFW DETECTED**\n\n{st}](tg://user?id={hh}) your message contain NSFW content.. So, Layla deleted the message\n\n **Nsfw Sender - User / Bot :** {st}](tg://user?id={hh})  \n\n`⚔️Automatic Detections Powered By LaylaAI` \n**#GROUP_GUARDIAN** "
+                    final = f"**NSFW DETECTED**\n\n[{st}](tg://user?id={hh}) your message contain NSFW content.. So, {bot_name} deleted the message\n\n **Nsfw Sender - User / Bot :** [{st}](tg://user?id={hh})  \n\n`⚔️Automatic Detections Powered By LaylaAI` \n**#GROUP_GUARDIAN** "
                     dev = await event.respond(final)
                     await asyncio.sleep(10)
                     await dev.delete()
@@ -201,7 +191,7 @@ def extract_emojis(s):
 
 
 @tbot.on(events.NewMessage(pattern=None))
-async def del_profanity(event):
+async def global_mode(event):
     if event.is_private:
         return
     msg = str(event.text)
