@@ -36,6 +36,8 @@ from Shikimori.modules.disable import DisableAbleCommandHandler
 from telegram import ParseMode, Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import CallbackContext
 
+bot_name = f"{dispatcher.bot.first_name}"
+
 ALIVE_ID = ALIVE_MEDIA.split(".")
 alive_id = ALIVE_ID[-1]
 
@@ -56,7 +58,7 @@ def awake(update: Update, context: CallbackContext):
     user = message.from_user
 
     TEXT = f"""
-    <b>Hi <a href="tg://user?id={user.id}">{first_name}</a>, I'm Shikomori Robot.
+    <b>Hi <a href="tg://user?id={user.id}">{first_name}</a>, I'm {bot_name} Robot.
 
 ⚪ I'm Working Properly
 
