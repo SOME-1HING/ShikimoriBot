@@ -207,8 +207,8 @@ async def del_profanity(event):
     msg = str(event.text)
     sender = await event.get_sender()
     # let = sender.username
-    if await is_admin(event, event.message.sender_id):
-        return
+    # if await is_admin(event, event.message.sender_id):
+    #     return
     chats = antislang_chats.find({})
     for c in chats:
         if event.text:
