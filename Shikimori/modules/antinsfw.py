@@ -20,13 +20,14 @@ from better_profanity import profanity
 from google_trans_new import google_translator
 from telethon import events
 from telethon.tl.types import ChatBannedRights
-
+from Shikimori.modules.nsfwscan import get_file_id_from_message
 from Shikimori import dispatcher
 from Shikimori.mongo import db
 import Shikimori.modules.sql.nsfw_sql as sql
 from Shikimori.pyrogramee.telethonbasics import is_admin
 from Shikimori.events import register
-from Shikimori import telethn as tbot
+from Shikimori import telethn as tbot, arq
+from Shikimori.modules.log_channel import loggable
 
 translator = google_translator()
 MUTE_RIGHTS = ChatBannedRights(until_date=None, send_messages=False)
@@ -92,8 +93,9 @@ async def profanity(event):
         await event.reply("`You Should Be Admin To Do This!`")
         return
 
+@loggable
 @tbot.on(events.NewMessage(pattern=None))
-async def del_profanity(event):
+async def del_nsfw(event):
     if event.is_private:
         return
     msg = str(event.text)
@@ -121,15 +123,26 @@ async def del_profanity(event):
             if not is_nsfw:
                 return
             if event.chat_id == c["id"]:
-                await event.client.download_media(event.photo, "nudes.jpg")
-                if nude.is_nude("./nudes.jpg"):
-                    await event.delete()
-                    st = sender.first_name
-                    hh = sender.id
-                    final = f"**NSFW DETECTED**\n\n[{st}](tg://user?id={hh}) your message contain NSFW content.. So, {bot_name} deleted the message\n\n **Nsfw Sender - User / Bot :** [{st}](tg://user?id={hh})  \n\n`⚔️Automatic Detections Powered By LaylaAI` \n**#GROUP_GUARDIAN** "
-                    dev = await event.respond(final)
-                    await asyncio.sleep(10)
-                    await dev.delete()
-                    os.remove("nudes.jpg")
+                file_id = await get_file_id_from_message(event.photo)
+                if not file_id:
+                    return
+                file = await event.client.download_media(file_id)
+                try:
+                    results = await arq.nsfw_scan(file=file)
+                    if results.ok:
+                        return
+                    hmm = float(results.hentai)
+                    hmmm = float(results.porn)
+                    hmmmm = float(results.sexy)
+                    if hmm >= 52.000 or hmmm >= 15.000 or hmmmm >= 30.000:
+                        await event.delete()
+                        st = sender.first_name
+                        hh = sender.id
+                        final = f"**NSFW DETECTED**\n\n[{st}](tg://user?id={hh}) your message contain NSFW content.. So, {bot_name} deleted the message\n\n **Nsfw Sender - User / Bot :** [{st}](tg://user?id={hh})  \n\n**Neutral:** `{results.neutral} %`\n**Porn:** `{results.porn} %`\n**Hentai:** `{results.hentai} %`\n**Sexy:** `{results.sexy} %`\n**Drawings:** `{results.drawings} %`\n**NSFW:** `{results.is_nsfw}` \n**#ANTI_NSFW** "
+                        dev = await event.respond(final)
+                        await dev.delete()
+                        return final
+                except Exception:
+                    return  
 
  
