@@ -314,7 +314,7 @@ def info(update: Update, context: CallbackContext):
                     text += _stext.format("Detected")
                 elif status in {"administrator", "creator"}:
                     text += _stext.format("Admin")
-    if user_id not in [bot.id, 777000, 1087968824]:
+    if user_id != bot.id:
         userhp = hpmanager(user)
         text += f"\n\n<b>Health:</b> <code>{userhp['earnedhp']}/{userhp['totalhp']}</code>\n[<i>{make_bar(int(userhp['percentage']))} </i>{userhp['percentage']}%]"
 
@@ -322,12 +322,6 @@ def info(update: Update, context: CallbackContext):
 
     if user.id == OWNER_ID:
         text += "\n\nThis person is my 'Owner'."
-    elif user.id == 949365920:
-        text += "\n\nThis is my VC player assistant to play music."
-        disaster_level_present = True
-    elif user.id == 2119580786:
-        text += "\n\nThis person is my 'Manager' and My 'Best Friend'."
-        disaster_level_present = True
     elif user.id in DEV_USERS:
         text += "\n\nThis person is my 'Best Friend'."
         disaster_level_present = True
