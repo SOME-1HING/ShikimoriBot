@@ -32,7 +32,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 """
 
 import aiohttp
-from pyrogram import filters
+from pyrogram import filters, enums, InlineKeyboardButton, InlineKeyboardMarkup
 from Shikimori import pbot
 from Shikimori.Extras.errors import capture_err
 
@@ -78,7 +78,17 @@ async def github(_, message):
             except Exception as e:
                 print(str(e))
                 pass
-    await message.reply_photo(photo=avatar_url, caption=caption)
+    await message.reply_photo(photo=avatar_url, caption=caption,reply_markup=InlineKeyboardMarkup(
+            [
+                [
+                    InlineKeyboardButton(
+                        text="Profile",
+                        url=url,
+                    ),
+                ],
+            ],
+            disable_web_page_preview=True,
+        ), parse_mode= enums.ParseMode.MARKDOWN)
 
 
 __mod_name__ = "Github 🐱‍💻"

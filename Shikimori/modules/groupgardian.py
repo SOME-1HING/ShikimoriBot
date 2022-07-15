@@ -108,7 +108,7 @@ async def profanity(event):
 
 
 @register(pattern="^/globalmode(?: |$)(.*)")
-async def profanity(event):
+async def globalmode(event):
     if event.fwd_from:
         return
     if not event.is_group:
