@@ -55,7 +55,7 @@ def bot_img(update: Update, context: CallbackContext):
     profile = context.bot.get_user_profile_photos(BOT_ID).photos[0][-1]
     return message.reply_photo(profile)
 
-BOT_IMG_HANDLER = DisableAbleCommandHandler("me", bot_img, run_async=True)
+BOT_IMG_HANDLER = DisableAbleCommandHandler("imgg", bot_img, run_async=True)
 
 dispatcher.add_handler(BOT_IMG_HANDLER)
 
