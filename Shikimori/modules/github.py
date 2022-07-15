@@ -53,6 +53,8 @@ async def github(_, message):
                 return await message.reply_text(f"ERROR!! Contact @{SUPPORT_CHAT}")
 
             result = await request.json()
+            if result["documentation_url"]:
+                return await message.reply_text("User not Found.")
             try:
                 url = result['html_url']
                 name = result['name']
