@@ -37,9 +37,16 @@ from telegram import InlineKeyboardButton, InlineKeyboardMarkup, ParseMode, Upda
 from telegram.utils.helpers import escape_markdown
 from telegram.ext import CallbackContext, CallbackQueryHandler
 from Shikimori.modules.start import PM_START_TEXT, buttons
-from Shikimori import StartTime, dispatcher
+from Shikimori import NETWORK, NETWORK_USERNAME, StartTime, dispatcher
 
 bot_name = f"{dispatcher.bot.first_name}"
+
+if NETWORK:
+    hmm = InlineKeyboardButton(text=f"{NETWORK}", url=f"https://t.me/{NETWORK_USERNAME}")
+elif "voidxnetwork" in NETWORK_USERNAME:
+    hmm = InlineKeyboardButton(text="【V๏ɪ፝֟𝔡】 ✧Network✧", callback_data="void_")
+else:
+    hmm = None
 
 def Shikimori_about_callback(update, context):
     query = update.callback_query
@@ -61,7 +68,7 @@ def Shikimori_about_callback(update, context):
                     InlineKeyboardButton(text="License", callback_data="license_"),
                     ],
                     [
-                    InlineKeyboardButton(text="【V๏ɪ፝֟𝔡】✧Network✧", callback_data="void_"),
+                    hmm,
                     InlineKeyboardButton(text="Documentation", url="https://some1hing.gitbook.io/shikimori-bot/"),
                     ],
                     [

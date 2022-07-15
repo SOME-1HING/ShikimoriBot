@@ -54,7 +54,7 @@ support_chat = os.getenv("SUPPORT_CHAT")
 def logs(update: Update, context: CallbackContext):
     chat = update.effective_chat
     user = update.effective_user
-    with open("shikimori_logs.txt", "rb") as f:
+    with open("bot_logs.txt", "rb") as f:
         context.bot.send_document(document=f, filename=f.name, chat_id=user.id)
     if chat.type != chat.PRIVATE:
         msg = update.effective_message
