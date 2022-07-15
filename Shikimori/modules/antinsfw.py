@@ -41,7 +41,7 @@ from pyrogram import filters
 
 from Shikimori import BOT_USERNAME, DEV_USERS, arq, pbot
 from Shikimori.utils.errors import capture_err
-from Shikimori.utils.permissions import adminsOnly
+from .helper_funcs.anonymous import user_admin
 import Shikimori.modules.sql.nsfw_sql as sql
 
 async def get_file_id_from_message(message):
@@ -178,9 +178,8 @@ async def nsfw_scan_command(_, message):
 """
     )
 
-
+@user_admin
 @pbot.on_message(filters.command(["antinsfw", f"antinsfw@{BOT_USERNAME}"]))
-@adminsOnly("can_change_info")
 async def nsfw_enable_disable(_, message):
     if len(message.command) != 2:
         await message.reply_text(
