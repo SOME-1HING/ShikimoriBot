@@ -43,8 +43,6 @@ from Shikimori import BOT_USERNAME, DEV_USERS, arq, pbot
 from Shikimori.utils.errors import capture_err
 from Shikimori.utils.permissions import adminsOnly
 import Shikimori.modules.sql.nsfw_sql as sql
-from Shikimori.modules.mongo.nsfw_mongo import is_nsfw_on, nsfw_off, nsfw_on
-
 
 async def get_file_id_from_message(message):
     file_id = None
@@ -92,9 +90,10 @@ async def get_file_id_from_message(message):
 )
 @capture_err
 async def detect_nsfw(_, message):
-    if not await is_nsfw_on(message.chat.id):
-        return
+    chat_id = message.chat.id
     is_nsfw = sql.is_nsfw(chat_id)
+    if not is_nsfw:
+        return
     if is_nsfw:
         pass
     if not message.from_user:
@@ -193,13 +192,21 @@ async def nsfw_enable_disable(_, message):
     status = status.lower()
     chat_id = message.chat.id
     if status in ("on", "yes"):
-        await nsfw_on(chat_id)
-        await message.reply_text(
+        is_nsfw = sql.is_nsfw(chat_id)
+        if not is_nsfw:
+            sql.set_nsfw(chat_id)
+            await message.reply_text(
             "Enabled AntiNSFW System. I will Delete Messages Containing Inappropriate Content."
-        )
+            )
+        message.reply_text("NSFW Mode is already Activated for this chat!")
+        return ""
     elif status in ("off", "no"):
-        await nsfw_off(chat_id)
-        await message.reply_text("Disabled AntiNSFW System.")
+        if not is_nsfw:
+            message.reply_text("NSFW Mode is already Deactivated")
+            return ""
+        else:
+            sql.rem_nsfw(chat_id)
+            await message.reply_text("Disabled AntiNSFW System.")
     else:
         await message.reply_text(
             "Unknown Suffix, Use /antinsfw [on/off]"
