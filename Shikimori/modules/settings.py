@@ -166,10 +166,9 @@ def settings_button(update: Update, context: CallbackContext):
 
 
 def get_settings(update: Update, context: CallbackContext):
-    chat = update.effective_chat  # type: Optional[Chat]
-    user = update.effective_user  # type: Optional[User]
-    msg = update.effective_message  # type: Optional[Message]
-
+    chat = update.effective_chat 
+    user = update.effective_user
+    msg = update.effective_message 
     # ONLY send settings in PM
     if chat.type != chat.PRIVATE:
         if is_user_admin(chat, user.id):

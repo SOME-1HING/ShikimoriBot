@@ -1,6 +1,6 @@
     
 import requests
-import BeautifulSoup
+from bs4 import BeautifulSoup
 import re
 from pyrogram import filters, enums
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
