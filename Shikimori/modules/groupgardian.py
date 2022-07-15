@@ -14,10 +14,7 @@
 
 import asyncio
 import os
-import re
-
 import better_profanity
-import emoji
 import nude
 from better_profanity import profanity
 from google_trans_new import google_translator
@@ -80,7 +77,7 @@ async def profanity(event):
                         return
                 spammers.insert_one({"id": event.chat_id})
                 await event.reply("Profanity filter turned on for this chat.")
-        if input == "off":
+        elif input == "off":
             if event.is_group:
                 chats = spammers.find({})
                 for c in chats:
@@ -89,7 +86,7 @@ async def profanity(event):
                         await event.reply("Profanity filter turned off for this chat.")
                         return
             await event.reply("Profanity filter isn't turned on for this chat.")
-        if not input == "on" and not input == "off":
+        else:
             await event.reply("I only understand by on or off")
             return
     else:

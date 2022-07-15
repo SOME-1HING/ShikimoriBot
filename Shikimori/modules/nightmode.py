@@ -97,7 +97,7 @@ async def nightmode(event):
         return
     if event.is_private:
         return
-    input = event.pattern_match.group(2)
+    input = event.pattern_match.group(1)
     if event.sender_id != DEV_USERS:
         if not await is_register_admin(event.input_chat, event.sender_id):
            await event.reply("Only admins can execute this command!")
@@ -115,7 +115,7 @@ async def nightmode(event):
             "Currently NightMode is Disabled for this Chat"
         )
         return
-    if "on" in input and event.is_group:
+    elif "on" in input and event.is_group:
         if is_nightmode_indb(str(event.chat_id)):
                 await event.reply(
                     "Night Mode is Already Turned ON for this Chat"
@@ -123,7 +123,7 @@ async def nightmode(event):
                 return
         add_nightmode(str(event.chat_id))
         await event.reply("NightMode turned on for this chat.")
-    if "off" in input:
+    elif "off" in input:
         if (
             event.is_group
             and not is_nightmode_indb(str(event.chat_id))
@@ -134,7 +134,7 @@ async def nightmode(event):
                 return
         rmnightmode(str(event.chat_id))
         await event.reply("NightMode Disabled!")
-    if "off" not in input and "on" not in input:
+    else :
         await event.reply("Please Specify On or Off!")
         return
 
