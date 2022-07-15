@@ -124,13 +124,13 @@ async def del_nsfw(event):
                 return
             if event.chat_id == c["id"]:
                 if event.photo:
-                    file = event.client.download_media(event.photo)
+                    file = await event.client.download_media(event.photo)
                 elif event.document:
-                    file = event.client.download_media(event.document)
+                    file = await event.client.download_media(event.document)
                 elif event.animation:
-                    file = event.client.download_media(event.animation)
+                    file = await event.client.download_media(event.animation)
                 elif event.sticker:
-                    file = event.client.download_media(event.sticker)
+                    file = await event.client.download_media(event.sticker)
                 else:
                     return
                 try:
