@@ -30,7 +30,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 """
 import html
 from telegram import Update, ParseMode
-from telegram.ext import Filters, CallbackContext
+from telegram.ext import Filters, CallbackContext, MessageHandler
 from pyrogram import filters
 
 from Shikimori import dispatcher, pbot
@@ -73,3 +73,9 @@ async def eliminate_channel(update: Update, context: CallbackContext):
         await message.delete()
         sender_chat = message.sender_chat
         await bot.ban_chat_sender_chat(sender_chat_id=sender_chat.id, chat_id=chat.id)
+
+ANTI_CHANNEL_HANDLER = MessageHandler(
+    Filters.text & (~Filters.regex(r"^#[^\s]+") & ~Filters.regex(r"^!")
+                    & ~Filters.regex(r"^\/")), eliminate_channel, run_async = True)
+
+dispatcher.add_handler(ANTI_CHANNEL_HANDLER)
