@@ -72,8 +72,8 @@ regex_downvote = r"^(\-|\-\-|\-1|👎|noob|baka|idiot|chutiya|nub|noob|wrong|inc
 )
 @capture_err
 async def upvote(_, message):
-    sql.is_karma = sql.sql.is_karma(chat_id)
-    if not sql.is_karma:
+    is_karma = sql.is_karma(chat_id)
+    if not is_karma:
         return
     if not message.reply_to_message.from_user:
         return
@@ -115,8 +115,8 @@ async def upvote(_, message):
 )
 @capture_err
 async def upvote(_, message):
-    sql.is_karma = sql.sql.is_karma(chat_id)
-    if not sql.is_karma:
+    is_karma = sql.is_karma(chat_id)
+    if not is_karma:
         return
     if not message.reply_to_message.from_user:
         return
@@ -241,7 +241,7 @@ async def captcha_state(_, message):
     elif state == "off":
         is_karma = sql.is_karma(chat_id)
         if not is_karma:
-            message.reply_text("Karma is already Deactivated")
+            await message.reply_text("Karma is already Deactivated")
             return ""
         else:
             sql.rem_karma(chat_id)
