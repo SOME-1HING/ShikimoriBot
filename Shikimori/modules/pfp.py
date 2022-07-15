@@ -41,7 +41,8 @@ from telethon.tl.functions.channels import *
 from telethon.tl.functions.photos import *
 from telethon.tl.types import *
 from Shikimori.events import register
-from Shikimori import BOT_ID, telethn as borg
+from Shikimori import BOT_ID, telethn as borg, dispatcher
+from Shikimori.modules.disable import DisableAbleCommandHandler
 from html import *
 import logging
 from telegram import Update
@@ -53,6 +54,10 @@ def bot_img(update: Update, context: CallbackContext):
     message = update.effective_message
     profile = context.bot.get_user_profile_photos(BOT_ID).photos[0][-1]
     return message.reply_photo(profile)
+
+BOT_IMG_HANDLER = DisableAbleCommandHandler("me", bot_img, run_async=True)
+
+dispatcher.add_handler(BOT_IMG_HANDLER)
 
 if 1 == 1:
     name = "Profile Photos"
