@@ -232,7 +232,10 @@ async def del_profanity(event):
     & filters.group
 )
 async def del_nsfw(_, message):
-    sender = await message.User
+    try:
+        sender = await message.from_user
+    except:
+        sender = await message.sender_chat 
     if is_user_admin(message.Chat, sender.id):
         return
 
