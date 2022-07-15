@@ -49,7 +49,7 @@ from pyrogram.types import (
 )
 from search_engine_parser import GoogleSearch
 
-from Shikimori import BOT_USERNAME, OWNER_ID, pbot, arq
+from Shikimori import BOT_USERNAME, NETWORK, NETWORK_USERNAME, OWNER_ID, OWNER_USERNAME, pbot, arq, dispatcher
 from Shikimori.utils.pluginhelpers import convert_seconds_to_minutes as time_convert
 from Shikimori.utils.pluginhelpers import fetch
 
@@ -96,6 +96,7 @@ async def inline_help_func(__HELP__):
     answerss = await alive_function(answerss)
     return answerss
 
+bot_name = f"{dispatcher.bot.first_name}"
 
 async def alive_function(answers):
     buttons = InlineKeyboard(row_width=2)
@@ -109,15 +110,18 @@ async def alive_function(answers):
     )
 
     msg = f"""
-**[Cutiepii 💜](https://github.com/Awesome-RJ/CutiepiiRobot):**
-**MainBot:** `{bot_state}`
-**UserBot:** `Alive`
-**Python:** `3.9`
-**Pyrogram:** `{pyrover}`
-**MongoDB:** `{mongover}`
-**Platform:** `{sys.platform}`
-**Profiles:** [BOT](https://telegram.dog/{BOT_USERNAME}) | [UBOT](https://telegram.dog/Awesome_Cutiepii)
-"""
+I'm <b>{bot_name}</b> Robot.
+
+⚪ I'm Working Properly
+
+⚪ My Owner : <a href="https://t.me/{OWNER_USERNAME}">{OWNER_USERNAME}</a></b>
+    """
+    if NETWORK:
+        TEXT = TEXT + f'\n⚪ <b>I am Powered by : <a href="https://t.me/{NETWORK_USERNAME}">{NETWORK}</a>\n\n' + 'Thanks For Adding Me Here ❤️</b>'
+    
+    else:
+        TEXT = TEXT + "\n<b>Thanks For Adding Me Here ❤️</b>"
+
     answers.append(
         InlineQueryResultArticle(
             title="Alive",

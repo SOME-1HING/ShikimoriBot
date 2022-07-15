@@ -52,9 +52,13 @@ __mod_name__ = "Inline"
 __help__ = f"""
 INLINE BOT SERVICE OF @{BOT_USERNAME}
 I'm more efficient when added as group admin. By the way these commands can be used by anyone in a group via inline.
+
 ──「 Syntax 」──
+
    @{BOT_USERNAME} [command] [query]
+
 ──「 Commands Available 」──
+
 ➛ alive - Check Bot's Stats.
 ➛ yt [query] - Youtube Search.
 ➛ tr [LANGUAGE_CODE] [QUERY]** - Translate Text.
