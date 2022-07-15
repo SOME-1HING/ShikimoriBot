@@ -36,12 +36,21 @@ from Shikimori import dispatcher
 from Shikimori.modules.disable import DisableAbleCommandHandler
 from Shikimori.modules.helper_funcs.anonymous import user_admin
 from Shikimori.modules.sql.antichannel_sql import antichannel_status, disable_antichannel, enable_antichannel
+from Shikimori.modules.log_channel import loggable
 
 @user_admin
+@loggable
 async def set_antichannel(update: Update, context: CallbackContext):
-    message = update.effective_message
-    chat = update.effective_chat
-    args = context.args
+    chat = update.effective_chat  
+    user = update.effective_user 
+    message = update.effective_message 
+    args = context.arg
+    if update.effective_message.chat.type == "private":
+            await message.reply_text(
+                update.effective_message,
+                "This command is meant to use in group not in PM",
+            )
+            return
     if len(args) > 0:
         s = args[0].lower()
         if s in ["yes", "on"]:
