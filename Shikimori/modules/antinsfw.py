@@ -125,6 +125,7 @@ async def del_nsfw(event):
             if event.chat_id == c["id"]:
                 if event.photo:
                     file = await event.client.download_media(event.photo)
+                    await event.respond("hmm")
                 elif event.document:
                     file = await event.client.download_media(event.document)
                 elif event.animation:
@@ -135,6 +136,7 @@ async def del_nsfw(event):
                     return
                 try:
                     results = await arq.nsfw_scan(file=file)
+                    await event.respond("hmm") 
                     if results.ok:
                         return
                     hmm = float(results.hentai)
