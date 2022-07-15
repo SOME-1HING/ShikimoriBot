@@ -87,6 +87,7 @@ class Config(object):
     MEDIA_GN = "https://telegra.ph/file/1862c7260109e24ed4715.jpg"
     MEDIA_HELLO = "https://telegra.ph/file/f3f2dc386a33e37f6cb05.png"
     MEDIA_BYE = "https://telegra.ph/file/061054c8f73fe7ffbf6aa.mp4"
+    INLINE_IMG = "https://telegra.ph/file/8cec66d01df8c0071ebaa.jpg"
     API_WEATHER = "awoo"
 
 class Production(Config):

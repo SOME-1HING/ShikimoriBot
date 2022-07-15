@@ -39,7 +39,7 @@ import aiohttp
 from googletrans import Translator
 from motor import version as mongover
 from pykeyboard import InlineKeyboard
-from pyrogram import __version__ as pyrover
+from pyrogram import __version__ as pyrover, enums
 from pyrogram.raw.functions import Ping
 from pyrogram.types import (
     InlineKeyboardButton,
@@ -49,7 +49,7 @@ from pyrogram.types import (
 )
 from search_engine_parser import GoogleSearch
 
-from Shikimori import BOT_USERNAME, NETWORK, NETWORK_USERNAME, OWNER_ID, OWNER_USERNAME, pbot, arq, dispatcher
+from Shikimori import BOT_USERNAME, INLINE_IMG, NETWORK, NETWORK_USERNAME, OWNER_ID, OWNER_USERNAME, pbot, arq, dispatcher
 from Shikimori.utils.pluginhelpers import convert_seconds_to_minutes as time_convert
 from Shikimori.utils.pluginhelpers import fetch
 
@@ -89,7 +89,7 @@ async def inline_help_func(__HELP__):
             title="Inline Commands",
             description="Help Related To Inline Usage.",
             input_message_content=InputTextMessageContent(__HELP__),
-            thumb_url="https://telegra.ph/file/ad9d8a4adb866d62c501f.png",
+            thumb_url= INLINE_IMG,
             reply_markup=buttons,
         )
     ]
@@ -109,7 +109,7 @@ async def alive_function(answers):
                              switch_inline_query_current_chat=""),
     )
 
-    msg = f"""
+    TEXT = f"""
 I'm <b>{bot_name}</b> Robot.
 
 ⚪ I'm Working Properly
@@ -126,10 +126,11 @@ I'm <b>{bot_name}</b> Robot.
         InlineQueryResultArticle(
             title="Alive",
             description="Check Bot's Stats",
-            thumb_url="https://telegra.ph/file/0d42f41c08e511b557ecc.png",
+            thumb_url=INLINE_IMG,
             input_message_content=InputTextMessageContent(
-                msg, disable_web_page_preview=True),
+                TEXT, disable_web_page_preview=True),
             reply_markup=buttons,
+            parse_mode=enums.ParseMode.HTML
         ))
     return answers
 

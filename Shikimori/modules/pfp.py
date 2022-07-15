@@ -34,31 +34,19 @@ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 """
 
-from email import message
 from telethon import *
 from telethon.tl.functions.account import *
 from telethon.tl.functions.channels import *
 from telethon.tl.functions.photos import *
 from telethon.tl.types import *
 from Shikimori.events import register
-from Shikimori import BOT_ID, telethn as borg, dispatcher
-from Shikimori.modules.disable import DisableAbleCommandHandler
+from Shikimori import telethn as borg
 from html import *
 import logging
-from telegram import Update
-from telegram.ext import CallbackContext
 
 logger = logging.getLogger(__name__)
 
-def bot_img(update: Update, context: CallbackContext):
-    bot, job_queue = context.bot, context.job_queue
-    message = update.effective_message
-    profile = context.bot.get_user_profile_photos(bot.id).photos[0]
-    return message.reply_photo(profile)
 
-BOT_IMG_HANDLER = DisableAbleCommandHandler("imgg", bot_img, run_async=True)
-
-dispatcher.add_handler(BOT_IMG_HANDLER)
 
 if 1 == 1:
     name = "Profile Photos"

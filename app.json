@@ -240,6 +240,11 @@
          "description": "URL of media that you want to show when user types (bye or afk). Supported file types (jpg, png, gif, webp, mkv, mp4). If you don't want this, just type reply_to_user_chat inside NO_LOAD vars. TBH it is a shit feature.",
          "required": false,
          "value": "https://telegra.ph/file/061054c8f73fe7ffbf6aa.mp4"
+      },
+      "INLINE_IMG": {
+         "description": "URL of image for inline querry. Must be a still image.",
+         "required": false,
+         "value": "https://telegra.ph/file/8cec66d01df8c0071ebaa.jpg"
       }
-   }
+   }  
 }

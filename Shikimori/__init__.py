@@ -163,6 +163,7 @@ if ENV:
     MEDIA_GN = os.environ.get("MEDIA_GN", None)
     MEDIA_HELLO = os.environ.get("MEDIA_HELLO", None)
     MEDIA_BYE = os.environ.get("MEDIA_BYE", None)
+    INLINE_IMG = os.environ.get("INLINE_IMG", None)
         
     try:
         WHITELIST_CHATS = {int(x) for x in os.environ.get('WHITELIST_CHATS', "").split()}
@@ -250,6 +251,7 @@ else:
     MEDIA_GN = Config.MEDIA_GN
     MEDIA_HELLO = Config.MEDIA_HELLO
     MEDIA_BYE = Config.MEDIA_BYE
+    INLINE_IMG = Config.INLINE_IMG
 
     try:
         WHITELIST_CHATS = {int(x) for x in os.environ.get('WHITELIST_CHATS', "").split()}
