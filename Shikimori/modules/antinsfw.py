@@ -41,7 +41,7 @@ bot_name = f"{dispatcher.bot.first_name}"
 antinsfw_chats = db.antinsfw
 
 CMD_STARTERS = "/"
-profanity.load_censor_words_from_file("./profanity_wordlist.txt")
+better_profanity.profanity.load_censor_words_from_file("./Shikimori/Extras/profanity_wordlist.txt")
 
 
 @register(pattern="^/antinsfw(?: |$)(.*)")
@@ -136,10 +136,11 @@ async def del_nsfw(event):
                     return
                 try:
                     results = await arq.nsfw_scan(file=file)
+                    results = await arq.nsfw_scan(file= event.photo)
                     await event.respond("hmm") 
                     if results.ok:
                         return
-                    await event.respond(results.porn) 
+                    await event.respond(results.porn)
                     await event.respond(float(results.porn)) 
                     hmm = float(results.hentai)
                     hmmm = float(results.porn)
