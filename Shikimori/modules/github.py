@@ -34,7 +34,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 import aiohttp
 from pyrogram import filters, enums
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
-from Shikimori import pbot
+from Shikimori import SUPPORT_CHAT, pbot
 from Shikimori.Extras.errors import capture_err
 
 
@@ -50,7 +50,7 @@ async def github(_, message):
     async with aiohttp.ClientSession() as session:
         async with session.get(URL) as request:
             if request.status == 404:
-                return await message.reply_text("404")
+                return await message.reply_text(f"ERROR!! Contact @{SUPPORT_CHAT}")
 
             result = await request.json()
             try:
