@@ -32,7 +32,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 """
 
 import aiohttp
-from pyrogram import filters, enums, InlineKeyboardButton, InlineKeyboardMarkup
+from pyrogram import filters, enums
+from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from Shikimori import pbot
 from Shikimori.Extras.errors import capture_err
 
