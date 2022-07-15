@@ -33,7 +33,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import time
 import re
-from Shikimori.__main__ import HELPABLE, IMPORTED
+from Shikimori.__main__ import HELPABLE, IMPORTED, USER_SETTINGS, CHAT_SETTINGS
 from Shikimori.modules.helper_funcs.readable_time import get_readable_time
 from Shikimori import (
     BOT_USERNAME,
@@ -45,7 +45,7 @@ from Shikimori import (
     START_MEDIA,
 )
 from Shikimori.modules.help import send_help, HELP_STRINGS
-from Shikimori.modules.settings import send_settings
+from Shikimori.modules.helper_funcs.misc import paginate_modules
 from Shikimori.modules.helper_funcs.chat_status import is_user_admin
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, ParseMode, Update
 from telegram.ext import CallbackContext, CommandHandler
@@ -158,3 +158,43 @@ def start(update: Update, context: CallbackContext):
 
 start_handler = CommandHandler("start", start, run_async=True)
 dispatcher.add_handler(start_handler)
+
+def send_settings(chat_id, user_id, user=False):
+    if user:
+        if USER_SETTINGS:
+            settings = "\n\n".join(
+                "*{}*:\n{}".format(mod.__mod_name__, mod.__user_settings__(user_id))
+                for mod in USER_SETTINGS.values()
+            )
+            dispatcher.bot.send_message(
+                user_id,
+                "These are your current settings:" + "\n\n" + settings,
+                parse_mode=ParseMode.MARKDOWN,
+            )
+
+        else:
+            dispatcher.bot.send_message(
+                user_id,
+                "Seems like there aren't any user specific settings available :'(",
+                parse_mode=ParseMode.MARKDOWN,
+            )
+
+    else:
+        if CHAT_SETTINGS:
+            chat_name = dispatcher.bot.getChat(chat_id).title
+            dispatcher.bot.send_message(
+                user_id,
+                text="Which module would you like to check {}'s settings for?".format(
+                    chat_name
+                ),
+                reply_markup=InlineKeyboardMarkup(
+                    paginate_modules(0, CHAT_SETTINGS, "stngs", chat=chat_id)
+                ),
+            )
+        else:
+            dispatcher.bot.send_message(
+                user_id,
+                "Seems like there aren't any chat settings available :'(\nSend this "
+                "in a group chat you're admin in to find its current settings!",
+                parse_mode=ParseMode.MARKDOWN,
+            )
