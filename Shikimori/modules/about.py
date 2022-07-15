@@ -36,10 +36,31 @@ from Shikimori.modules.helper_funcs.readable_time import get_readable_time
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, ParseMode, Update
 from telegram.utils.helpers import escape_markdown
 from telegram.ext import CallbackContext, CallbackQueryHandler
-from Shikimori.modules.start import PM_START_TEXT, buttons
-from Shikimori import NETWORK, NETWORK_USERNAME, StartTime, dispatcher
+from Shikimori import ANIME_NAME, BOT_USERNAME, NETWORK, NETWORK_USERNAME, START_MEDIA, SUPPORT_CHAT, UPDATE_CHANNEL, StartTime, dispatcher
 
 bot_name = f"{dispatcher.bot.first_name}"
+
+PM_START_TEXT = f"""
+\nI am *{bot_name}* , a group management bot based on the anime *{ANIME_NAME}*![ ]({START_MEDIA})
+
+*Click on the Commands Button below to go through my commands.*
+"""
+
+buttons = [
+    [
+        InlineKeyboardButton(
+            text=f" Add {bot_name} to your Group", url=f"t.me/{BOT_USERNAME}?startgroup=true"),
+    ],
+    [
+        InlineKeyboardButton(text="❓About", callback_data="Shikimori_"),
+        InlineKeyboardButton(text=" 💬Commands", callback_data="help_back"),
+    ],
+    [
+        InlineKeyboardButton(text="🚨Support Grp", url=f"https://t.me/{SUPPORT_CHAT}"),
+        InlineKeyboardButton(text="❗Updates", url=f"https://t.me/{UPDATE_CHANNEL}"),
+   
+    ], 
+]
 
 if NETWORK:
     hmm = InlineKeyboardButton(text=f"{NETWORK}", url=f"https://t.me/{NETWORK_USERNAME}")

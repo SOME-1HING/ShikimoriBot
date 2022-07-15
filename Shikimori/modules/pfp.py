@@ -34,6 +34,7 @@ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 """
 
+from email import message
 from telethon import *
 from telethon.tl.functions.account import *
 from telethon.tl.functions.channels import *
@@ -43,13 +44,15 @@ from Shikimori.events import register
 from Shikimori import BOT_ID, telethn as borg
 from html import *
 import logging
+from telegram import Update
+from telegram.ext import CallbackContext
 
 logger = logging.getLogger(__name__)
 
-@register(pattern=("/imgg"))
-async def bot_img(event):
-    photo = await event.client.get_profile_photos(BOT_ID)
-    return await event.client.send_file(event.chat.id, photo)
+def bot_img(update: Update, context: CallbackContext):
+    message = update.effective_message
+    profile = context.bot.get_user_profile_photos(BOT_ID).photos[0][-1]
+    return message.reply_photo(profile)
 
 if 1 == 1:
     name = "Profile Photos"
