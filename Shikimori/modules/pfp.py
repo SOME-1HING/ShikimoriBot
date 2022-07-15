@@ -40,7 +40,7 @@ from telethon.tl.functions.channels import *
 from telethon.tl.functions.photos import *
 from telethon.tl.types import *
 from Shikimori.events import register
-from Shikimori import telethn as borg
+from Shikimori import BOT_ID, telethn as borg
 from html import *
 import logging
 
@@ -48,7 +48,7 @@ logger = logging.getLogger(__name__)
 
 @register(pattern=("/imgg"))
 async def bot_img(event):
-    photo = event.client.get_profile_photos(client.get_me().id)
+    photo = event.client.get_profile_photos(BOT_ID)
     return await event.client.send_file(event.chat.id, photo)
 
 if 1 == 1:
