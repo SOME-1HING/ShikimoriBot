@@ -53,11 +53,11 @@ async def set_antichannel(_, message):
     )
     query = message.text.strip().split(None, 1)[1]
     query = query.lower()
-    if ["on", "enable", "yes"] in query:
+    if query in ["on", "enable", "yes"]:
         enable_antichannel(chat_id)
         await message.reply_text(f"Enabled antichannel!!")
         return
-    elif ["off", "disable", "no"] in query:
+    elif query in ["off", "disable", "no"]:
         enable_antichannel(chat_id)
         await message.reply_text(f"Disabled antichannel!!")
     else:
