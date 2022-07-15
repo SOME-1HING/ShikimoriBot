@@ -15,7 +15,8 @@
 import asyncio
 import os
 import better_profanity
-import nude
+from pyrogram import filters
+from Shikimori.modules.helper_funcs.chat_status import is_user_admin
 from better_profanity import profanity
 from google_trans_new import google_translator
 from telethon import events
@@ -26,7 +27,7 @@ from Shikimori.mongo import db
 import Shikimori.modules.sql.nsfw_sql as sql
 from Shikimori.pyrogramee.telethonbasics import is_admin
 from Shikimori.events import register
-from Shikimori import telethn as tbot, arq
+from Shikimori import telethn as tbot, arq, pbot
 from Shikimori.modules.log_channel import loggable
 
 translator = google_translator()
@@ -94,58 +95,58 @@ async def antinsfw(event):
         await event.reply("`You Should Be Admin To Do This!`")
         return
 
-@loggable
-@tbot.on(events.NewMessage(pattern=None))
-async def del_nsfw(event):
-    if event.is_private:
-        return
-    msg = str(event.text)
-    sender = await event.get_sender()
-    # let = sender.username
-    if await is_admin(event, event.message.sender_id):
-        return
-    chats = antinsfw_chats.find({})
-    for c in chats:
-        if not event.text:
-            is_nsfw = sql.is_nsfw(c["id"])
-            if not is_nsfw:
-                return
-            if event.chat_id == c["id"]:
-                if event.photo:
-                    file = await event.client.download_media(event.photo, "nudes.jpg")
-                    file = "./nudes.jpg"
-                    await event.respond("hmm")
-                elif event.document:
-                    file = await event.client.download_media(event.document, "nudes.pdf")
-                    file = "./nudes.pdf"
-                elif event.animation:
-                    file = await event.client.download_media(event.animation, "nude.gif")
-                    file = "./nudes.gif"
-                elif event.sticker:
-                    file = await event.client.download_media(event.sticker, "nude.png")
-                    file = "./nudes.png"
-                else:
-                    return
-                try:
-                    results = await arq.nsfw_scan(file=file)
-                    await event.respond("hmm") 
-                    if results.ok:
-                        return
-                    await event.respond(f"{results.porn}")
-                    check = f"{results.is_nsfw}"
+# @loggable
+# @tbot.on(events.NewMessage(pattern=None))
+# async def del_nsfw(event):
+#     if event.is_private:
+#         return
+#     msg = str(event.text)
+#     sender = await event.get_sender()
+#     # let = sender.username
+#     if await is_admin(event, event.message.sender_id):
+#         return
+#     chats = antinsfw_chats.find({})
+#     for c in chats:
+#         if not event.text:
+#             is_nsfw = sql.is_nsfw(c["id"])
+#             if not is_nsfw:
+#                 return
+#             if event.chat_id == c["id"]:
+#                 if event.photo:
+#                     file = await event.client.download_media(event.photo, "nudes.jpg")
+#                     file = "./nudes.jpg"
+#                     await event.respond("hmm")
+#                 elif event.document:
+#                     file = await event.client.download_media(event.document, "nudes.pdf")
+#                     file = "./nudes.pdf"
+#                 elif event.animation:
+#                     file = await event.client.download_media(event.animation, "nude.gif")
+#                     file = "./nudes.gif"
+#                 elif event.sticker:
+#                     file = await event.client.download_media(event.sticker, "nude.png")
+#                     file = "./nudes.png"
+#                 else:
+#                     return
+#                 try:
+#                     results = await arq.nsfw_scan(file=file)
+#                     await event.respond("hmm") 
+#                     if results.ok:
+#                         return
+#                     await event.respond(f"{results.porn}")
+#                     check = f"{results.is_nsfw}"
 
-                    if "True" in check:
-                        await event.delete()
-                        st = sender.first_name
-                        hh = sender.id
-                        final = f"**NSFW DETECTED**\n\n[{st}](tg://user?id={hh}) your message contain NSFW content.. So, {bot_name} deleted the message\n\n **Nsfw Sender - User / Bot :** [{st}](tg://user?id={hh})  \n\n**Neutral:** `{results.neutral} %`\n**Porn:** `{results.porn} %`\n**Hentai:** `{results.hentai} %`\n**Sexy:** `{results.sexy} %`\n**Drawings:** `{results.drawings} %`\n**NSFW:** `{results.is_nsfw}` \n**#ANTI_NSFW** "
-                        dev = await event.respond(final)
-                        os.remove(file)
-                        await asyncio.sleep(10)
-                        await dev.delete()
-                        return final
-                except Exception:
-                    return  
+#                     if "True" in check:
+#                         await event.delete()
+#                         st = sender.first_name
+#                         hh = sender.id
+#                         final = f"**NSFW DETECTED**\n\n[{st}](tg://user?id={hh}) your message contain NSFW content.. So, {bot_name} deleted the message\n\n **Nsfw Sender - User / Bot :** [{st}](tg://user?id={hh})  \n\n**Neutral:** `{results.neutral} %`\n**Porn:** `{results.porn} %`\n**Hentai:** `{results.hentai} %`\n**Sexy:** `{results.sexy} %`\n**Drawings:** `{results.drawings} %`\n**NSFW:** `{results.is_nsfw}` \n**#ANTI_NSFW** "
+#                         dev = await event.respond(final)
+#                         os.remove(file)
+#                         await asyncio.sleep(10)
+#                         await dev.delete()
+#                         return final
+#                 except Exception:
+#                     return  
 
 
 
@@ -224,3 +225,43 @@ async def del_profanity(event):
                     await asyncio.sleep(10)
                     await dev.delete()
                     return dev
+
+@loggable
+@pbot.on_message(filters.ALL & filters.group)
+async def del_nsfw(message):
+    sender = await message.User
+    if is_user_admin(message.Chat, sender.id):
+        return
+
+    if (
+        not message.document
+        and not message.photo
+        and not message.sticker
+        and not message.animation
+        and not message.video
+    ):
+        return
+    chats = antinsfw_chats.find({})
+    for c in chats:
+        is_nsfw = sql.is_nsfw(c["id"])
+        if not is_nsfw:
+            return
+        if message.chat.id == c["id"]:
+            file_id = await get_file_id_from_message(message)
+            try:
+                results = await arq.nsfw_scan(file=file_id)
+                if results.ok:
+                    return
+                check = f"{results.is_nsfw}"
+                if "True" in check:
+                    await message.delete()
+                    st = sender.first_name
+                    hh = sender.id
+                    final = f"**NSFW DETECTED**\n\n[{st}](tg://user?id={hh}) your message contain NSFW content.. So, {bot_name} deleted the message\n\n **Nsfw Sender - User / Bot :** [{st}](tg://user?id={hh})  \n\n**Neutral:** `{results.neutral} %`\n**Porn:** `{results.porn} %`\n**Hentai:** `{results.hentai} %`\n**Sexy:** `{results.sexy} %`\n**Drawings:** `{results.drawings} %`\n**NSFW:** `{results.is_nsfw}` \n**#ANTI_NSFW** "
+                    dev = await message.reply_text(final)
+                    os.remove(message)
+                    await asyncio.sleep(10)
+                    await dev.delete()
+                    return final
+            except Exception:
+                return  
