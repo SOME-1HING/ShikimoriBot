@@ -65,7 +65,6 @@ I'm more efficient when added as group admin. By the way these commands can be u
 ➛ modapk [name] - Give you direct link of mod apk.
 ➛ ud [QUERY] - Urban Dictionary Query
 ➛ google [QUERY] - Google Search.
-➛ webss [URL] - Take Screenshot Of A Website.
 ➛ bitly [URL] - Shorten A Link.
 ➛ wall [Query] - Find Wallpapers.
 ➛ pic [Query] - Find pictures.
@@ -107,7 +106,6 @@ __HELP__ = f"""
 - **ud [QUERY]** - __Urban Dictionary Query.__
 - **google [QUERY]** - __Google Search.__
 - **modapk [name]** - __Give you direct link of mod apk__
-- **webss [URL]** - __Take Screenshot Of A Website.__
 - **bitly [URL]** - __Shorten A Link.__
 - **wall [Query]** - __Find Wallpapers.__
 - **pic [Query]** - __Find pictures.__
@@ -167,10 +165,6 @@ async def inline_query_handler(client, query):
             tex = text.split(None, 1)[1]
             answerss = await google_search_func(answers, tex)
             await client.answer_inline_query(query.id, results=answerss, cache_time=10)
-        elif text.split()[0] == "webss":
-            tex = text.split(None, 1)[1]
-            answerss = await webss(tex)
-            await client.answer_inline_query(query.id, results=answerss, cache_time=2)
         elif text.split()[0] == "bitly":
             tex = text.split(None, 1)[1]
             answerss = await shortify(tex)

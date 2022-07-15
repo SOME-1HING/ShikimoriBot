@@ -134,24 +134,6 @@ I'm <b>{bot_name}</b> Robot.
         ))
     return answers
 
-
-async def webss(url):
-    start_time = time()
-    if "." not in url:
-        return
-    screenshot = await fetch(f"https://patheticprogrammers.cf/ss?site={url}")
-    end_time = time()
-    # m = await app.send_photo(LOG_GROUP_ID, photo=screenshot["url"])
-    await screenshot.delete()
-    a = []
-    pic = InlineQueryResultPhoto(
-        photo_url=screenshot["url"],
-        caption=(f"`{url}`\n__Took {round(end_time - start_time)} Seconds.__"),
-    )
-    a.append(pic)
-    return a
-
-
 async def translate_func(answers, lang, tex):
     i = Translator().translate(tex, dest=lang)
     msg = f"""
