@@ -22,7 +22,6 @@ Plugin to delete service messages in a chat!
 
 @app.on_message(
     filters.command("antiservice")
-    & ~filters.private
 )
 @capture_err
 @adminsOnly("can_change_info")

@@ -84,8 +84,7 @@ async def get_file_id_from_message(message):
         | filters.sticker
         | filters.animation
         | filters.video
-    )
-    & ~filters.private,
+    ),
     group=8,
 )
 @capture_err
@@ -180,7 +179,7 @@ async def nsfw_scan_command(_, message):
     )
 
 
-@pbot.on_message(filters.command(["antinsfw", f"antinsfw@{BOT_USERNAME}"]) & ~filters.private)
+@pbot.on_message(filters.command(["antinsfw", f"antinsfw@{BOT_USERNAME}"]))
 @adminsOnly("can_change_info")
 async def nsfw_enable_disable(_, message):
     if len(message.command) != 2:
