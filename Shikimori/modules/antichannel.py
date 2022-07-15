@@ -31,8 +31,9 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 import html
 from telegram import Update, ParseMode
 from telegram.ext import Filters, CallbackContext
+from pyrogram import filters
 
-from Shikimori import dispatcher
+from Shikimori import dispatcher, pbot
 from Shikimori.modules.disable import DisableAbleCommandHandler
 from Shikimori.modules.helper_funcs.anonymous import user_admin
 from Shikimori.modules.sql.antichannel_sql import antichannel_status, disable_antichannel, enable_antichannel
@@ -40,32 +41,27 @@ from Shikimori.modules.log_channel import loggable
 
 @user_admin
 @loggable
-async def set_antichannel(update: Update, context: CallbackContext):
-    chat = update.effective_chat  
-    user = update.effective_user 
-    message = update.effective_message 
-    args = context.arg
-    if update.effective_message.chat.type == "private":
-            await message.reply_text(
-                update.effective_message,
-                "This command is meant to use in group not in PM",
-            )
-            return
-    if len(args) > 0:
-        s = args[0].lower()
-        if s in ["yes", "on"]:
-            enable_antichannel(chat.id)
-            await message.reply_text(f"Enabled antichannel in {html.escape(chat.title)}", parse_mode=ParseMode.HTML)
-        elif s in ["off", "no"]:
-            disable_antichannel(chat.id)
-            await message.reply_text(f"Disabled antichannel in {html.escape(chat.title)}", parse_mode=ParseMode.HTML)
-        else:
-            await update.effective_message.reply_text(f"Unrecognized arguments {s}")
+@pbot.on_message(filters.command("antichannel"))
+async def set_antichannel(_, message):
+    chat_id = message.chat.id
+    if message.chat.type == "private":
+        await message.reply_text("This command only works in groups.")
         return
-    await message.reply_text(
-        f"Antichannel setting is currently {antichannel_status(chat.id)} in {html.escape(chat.title)}", parse_mode=ParseMode.HTML
+    if len(message.command) < 2:
+        return await message.reply_text(
+        f"Antichannel setting is currently {antichannel_status(chat_id)}\n\n**Usage:**\n/antichannel [ON/OFF]"
     )
-
+    query = message.text.strip().split(None, 1)[1]
+    query = query.lower()
+    if ["on", "enable", "yes"] in query:
+        enable_antichannel(chat_id)
+        await message.reply_text(f"Enabled antichannel!!")
+        return
+    elif ["off", "disable", "no"] in query:
+        enable_antichannel(chat_id)
+        await message.reply_text(f"Disabled antichannel!!")
+    else:
+        return await message.reply_text("**Usage:**\n/antichannel [ON/OFF]")
 
 async def eliminate_channel(update: Update, context: CallbackContext):
     message = update.effective_message
@@ -77,6 +73,3 @@ async def eliminate_channel(update: Update, context: CallbackContext):
         await message.delete()
         sender_chat = message.sender_chat
         await bot.ban_chat_sender_chat(sender_chat_id=sender_chat.id, chat_id=chat.id)
-
-
-dispatcher.add_handler(DisableAbleCommandHandler("antichannel", set_antichannel, filters=Filters.chat_type.groups))

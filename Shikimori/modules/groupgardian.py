@@ -44,172 +44,6 @@ from Shikimori import telethn as tbot
 translator = google_translator()
 MUTE_RIGHTS = ChatBannedRights(until_date=None, send_messages=False)
 
-async def is_nsfw(event):
-    lmao = event
-    if not (
-        lmao.gif
-        or lmao.video
-        or lmao.video_note
-        or lmao.photo
-        or lmao.sticker
-        or lmao.media
-    ):
-        return False
-    if lmao.video or lmao.video_note or lmao.sticker or lmao.gif:
-        try:
-            starkstark = await event.client.download_media(lmao.media, thumb=-1)
-        except:
-            return False
-    elif lmao.photo or lmao.sticker:
-        try:
-            starkstark = await event.client.download_media(lmao.media)
-        except:
-            return False
-    img = starkstark
-    f = {"file": (img, open(img, "rb"))}
-
-    r = requests.post("https://starkapi.herokuapp.com/nsfw/", files=f).json()
-    if r.get("success") is False:
-        is_nsfw = False
-    elif r.get("is_nsfw") is True:
-        is_nsfw = True
-    elif r.get("is_nsfw") is False:
-        is_nsfw = False
-    return is_nsfw
-
-
-@tbot.on(events.NewMessage(pattern="/nsfwguardian (.*)"))
-async def nsfw_watch(event):
-    if not event.is_group:
-        await event.reply("You Can Only Nsfw Watch in Groups.")
-        return
-    input_str = event.pattern_match.group(1)
-    if not await is_admin(event, BOT_ID):
-        await event.reply("`I Should Be Admin To Do This!`")
-        return
-    if await is_admin(event, event.message.sender_id):
-        if (
-            input_str == "on"
-            or input_str == "On"
-            or input_str == "ON"
-            or input_str == "enable"
-        ):
-            if is_nsfwatch_indb(str(event.chat_id)):
-                await event.reply("`This Chat Has Already Enabled Nsfw Watch.`")
-                return
-            add_nsfwatch(str(event.chat_id))
-            await event.reply(
-                f"**Added Chat {event.chat.title} With Id {event.chat_id} To Database. This Groups Nsfw Contents Will Be Deleted**"
-            )
-        elif (
-            input_str == "off"
-            or input_str == "Off"
-            or input_str == "OFF"
-            or input_str == "disable"
-        ):
-            if not is_nsfwatch_indb(str(event.chat_id)):
-                await event.reply("This Chat Has Not Enabled Nsfw Watch.")
-                return
-            rmnsfwatch(str(event.chat_id))
-            await event.reply(
-                f"**Removed Chat {event.chat.title} With Id {event.chat_id} From Nsfw Watch**"
-            )
-        else:
-            await event.reply(
-                "I undestand `/nsfwguardian on` and `/nsfwguardian off` only"
-            )
-    else:
-        await event.reply("`You Should Be Admin To Do This!`")
-        return
-
-
-@tbot.on(events.NewMessage())
-async def ws(event):
-    warner_starkz = get_all_nsfw_enabled_chat()
-    if len(warner_starkz) == 0:
-        return
-    if not is_nsfwatch_indb(str(event.chat_id)):
-        return
-    if not (event.photo):
-        return
-    if not await is_admin(event, BOT_ID):
-        return
-    if await is_admin(event, event.message.sender_id):
-        return
-    sender = await event.get_sender()
-    await event.client.download_media(event.photo, "nudes.jpg")
-    if nude.is_nude("./nudes.jpg"):
-        await event.delete()
-        st = sender.first_name
-        hh = sender.id
-        final = f"**NSFW DETECTED**\n\n{st}](tg://user?id={hh}) your message contain NSFW content.. So, luna deleted the message\n\n **Nsfw Sender - User / Bot :** {st}](tg://user?id={hh})  \n\n`⚔️Automatic Detections Powered By luna AI` \n**#GROUP_GUARDIAN** "
-        dev = await event.respond(final)
-        await asyncio.sleep(10)
-        await dev.delete()
-        os.remove("nudes.jpg")
-
-
-"""
-@pbot.on_edited_message(filters.command("nsfwguardian") & ~filters.bot)
-async def add_nsfw(client, message):
-    if len(await member_permissions(message.chat.id, message.from_user.id)) < 1:
-        await message.reply_text("**You don't have enough permissions**")
-        return
-    status = message.text.split(None, 1)[1] 
-    if status == "on" or status == "ON" or status == "enable":
-        pablo = await message.reply("`Processing..`")
-        if is_chat_in_db(message.chat.id):
-            await pablo.edit("This Chat is Already In My DB")
-            return
-        me = await client.get_me()
-        add_chat(message.chat.id)
-        await pablo.edit("Successfully Added Chat To NSFW Watch.")
-        
-    elif status == "off" or status=="OFF" or status == "disable":
-        pablo = await message.reply("`Processing..`")
-        if not is_chat_in_db(message.chat.id):
-            await pablo.edit("This Chat is Not in dB.")
-            return
-        rm_chat(message.chat.id)
-        await pablo.edit("Successfully Removed Chat From NSFW Watch service")
-    else:
-        await message.reply(" I undestand only `/nsfwguardian on` or `/nsfwguardian off` only")
-        
-@pbot.on_message(filters.incoming & filters.media & ~filters.private & ~filters.channel & ~filters.bot)
-async def nsfw_watch(client, message):
-    lol = get_all_nsfw_chats()
-    if len(lol) == 0:
-        message.continue_propagation()
-    if not is_chat_in_db(message.chat.id):
-        message.continue_propagation()
-    hot = await is_nsfw(client, message)
-    if not hot:
-        message.continue_propagation()
-    else:
-        try:
-            await message.delete()
-        except:
-            pass
-        lolchat = await client.get_chat(message.chat.id)
-        ctitle = lolchat.title
-        if lolchat.username:
-            hehe = lolchat.username
-        else:
-            hehe = message.chat.id
-        midhun = await client.get_users(message.from_user.id)
-        await message.delete()
-        if midhun.username:
-            Escobar = midhun.username
-        else:
-            Escobar = midhun.id
-        await client.send_message(
-            message.chat.id,
-            f"**NSFW DETECTED**\n\n{hehe}'s message contain NSFW content.. So, luna deleted the message\n\n **Nsfw Sender - User / Bot :** `{Escobar}` \n**Chat Title:** `{ctitle}` \n\n`⚔️Automatic Detections Powered By lunaAI` \n**#GROUP_GUARDIAN** ",
-        )
-        message.continue_propagation()
-"""
-
-
 # This Module is ported from https://github.com/MissJuliaRobot/MissJuliaRobot
 # This hardwork was completely done by MissJuliaRobot
 # Full Credits goes to MissJuliaRobot
@@ -231,9 +65,6 @@ async def profanity(event):
         await event.reply("You Can Only profanity in Groups.")
         return
     event.pattern_match.group(1)
-    if not await is_admin(event, BOT_ID):
-        await event.reply("`I Should Be Admin To Do This!`")
-        return
     if await is_admin(event, event.message.sender_id):
         input = event.pattern_match.group(1)
         chats = spammers.find({})
@@ -284,9 +115,6 @@ async def profanity(event):
         await event.reply("You Can Only enable global mode Watch in Groups.")
         return
     event.pattern_match.group(1)
-    if not await is_admin(event, BOT_ID):
-        await event.reply("`I Should Be Admin To Do This!`")
-        return
     if await is_admin(event, event.message.sender_id):
 
         input = event.pattern_match.group(1)
@@ -431,7 +259,7 @@ __help__ = """
 ✪ I can protect your group from NSFW senders, Slag word users and also can force members to use English
  
 *Commmands*
- - `/nsfwguardian` <i>on/off</i> - Enable|Disable Porn cleaning
+ - `/globalmode` <i>on/off</i> - Enable|Disable Porn cleaning
  - `/profanity` <i>on/off</i> - Enable|Disable slag word cleaning
  
 """
