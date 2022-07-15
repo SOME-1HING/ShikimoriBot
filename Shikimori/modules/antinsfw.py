@@ -92,9 +92,11 @@ async def detect_nsfw(_, message):
     chat_id = message.chat.id
     is_nsfw = sql.is_nsfw(chat_id)
     if not is_nsfw:
+        pass
+    if message.from_user.id in DEV_USERS:
         return
     if is_nsfw:
-        pass
+        return
     if not message.from_user:
         return
     file_id = await get_file_id_from_message(message)
@@ -110,8 +112,6 @@ async def detect_nsfw(_, message):
     results = results.result
     remove(file)
     nsfw = results.is_nsfw
-    if message.from_user.id in DEV_USERS:
-        return
     if not nsfw:
         return
     try:
@@ -189,18 +189,18 @@ async def nsfw_enable_disable(_, message):
     status = message.text.split(None, 1)[1].strip()
     status = status.lower()
     chat_id = message.chat.id
+    is_nsfw = sql.is_nsfw(chat_id)
     if status in ("on", "yes"):
-        is_nsfw = sql.is_nsfw(chat_id)
         if not is_nsfw:
             sql.set_nsfw(chat_id)
             await message.reply_text(
             "Enabled AntiNSFW System. I will Delete Messages Containing Inappropriate Content."
             )
-        message.reply_text("NSFW Mode is already Activated for this chat!")
+        await message.reply_text("NSFW Mode is already Activated for this chat!")
         return ""
     elif status in ("off", "no"):
         if not is_nsfw:
-            message.reply_text("NSFW Mode is already Deactivated")
+            await message.reply_text("NSFW Mode is already Deactivated")
             return ""
         else:
             sql.rem_nsfw(chat_id)
