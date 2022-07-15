@@ -49,7 +49,7 @@ async def github(_, message):
     URL = f'https://api.github.com/users/{username}'
     result = requests.get(URL).json()
     try:
-        if result["documentation_url"] in result:
+        if result["message"] == "Not Found":
             return await message.reply_text("User not Found.")
         m = await message.reply_text("`Searching....`")
         url = result['html_url']
