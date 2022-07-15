@@ -32,6 +32,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 """
 
 import time
+from tkinter.messagebox import NO
 from Shikimori.modules.helper_funcs.readable_time import get_readable_time
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, ParseMode, Update
 from telegram.utils.helpers import escape_markdown
@@ -62,11 +63,14 @@ buttons = [
     ], 
 ]
 
-if NETWORK:
-    hmm = InlineKeyboardButton(text=f"{NETWORK}", url=f"https://t.me/{NETWORK_USERNAME}")
-elif "voidxnetwork" in NETWORK_USERNAME:
-    hmm = InlineKeyboardButton(text="【V๏ɪ፝֟𝔡】 ✧Network✧", callback_data="void_")
-else:
+try:
+    if NETWORK:
+        hmm = InlineKeyboardButton(text=f"{NETWORK}", url=f"https://t.me/{NETWORK_USERNAME}")
+    elif "voidxnetwork" in NETWORK_USERNAME:
+        hmm = InlineKeyboardButton(text="【V๏ɪ፝֟𝔡】 ✧Network✧", callback_data="void_")
+    else:
+        hmm = None
+except:
     hmm = None
 
 def Shikimori_about_callback(update, context):
