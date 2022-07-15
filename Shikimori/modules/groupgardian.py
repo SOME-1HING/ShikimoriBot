@@ -23,6 +23,7 @@ from telethon.tl.types import ChatBannedRights
 
 from Shikimori import dispatcher
 from Shikimori.mongo import db
+import Shikimori.modules.sql.nsfw_sql as sql
 from Shikimori.pyrogramee.telethonbasics import is_admin
 from Shikimori.events import register
 from Shikimori import telethn as tbot
@@ -36,25 +37,23 @@ MUTE_RIGHTS = ChatBannedRights(until_date=None, send_messages=False)
 
 bot_name = f"{dispatcher.bot.first_name}"
 
-approved_users = db.approve
-spammers = db.spammer
-globalchat = db.globchat
+antinsfw_chats = db.antinsfw
 
 CMD_STARTERS = "/"
 profanity.load_censor_words_from_file("./profanity_wordlist.txt")
 
 
-@register(pattern="^/profanity(?: |$)(.*)")
+@register(pattern="^/antinsfw(?: |$)(.*)")
 async def profanity(event):
     if event.fwd_from:
         return
     if not event.is_group:
-        await event.reply("You Can Only profanity in Groups.")
+        await event.reply("You Can Only antinsfw in Groups.")
         return
     event.pattern_match.group(1)
     if await is_admin(event, event.message.sender_id):
         input = event.pattern_match.group(1)
-        chats = spammers.find({})
+        chats = antinsfw_chats.find({})
         if not input:
             for c in chats:
                 if event.chat_id == c["id"]:
@@ -68,24 +67,24 @@ async def profanity(event):
             return
         if input == "on":
             if event.is_group:
-                chats = spammers.find({})
+                chats = antinsfw_chats.find({})
                 for c in chats:
                     if event.chat_id == c["id"]:
                         await event.reply(
-                            "Profanity filter is already activated for this chat."
+                            "NSFW filter is already activated for this chat."
                         )
                         return
-                spammers.insert_one({"id": event.chat_id})
-                await event.reply("Profanity filter turned on for this chat.")
+                antinsfw_chats.insert_one({"id": event.chat_id})
+                await event.reply("NSFW filter turned on for this chat.")
         elif input == "off":
             if event.is_group:
-                chats = spammers.find({})
+                chats = antinsfw_chats.find({})
                 for c in chats:
                     if event.chat_id == c["id"]:
-                        spammers.delete_one({"id": event.chat_id})
-                        await event.reply("Profanity filter turned off for this chat.")
+                        antinsfw_chats.delete_one({"id": event.chat_id})
+                        await event.reply("NSFW filter turned off for this chat.")
                         return
-            await event.reply("Profanity filter isn't turned on for this chat.")
+            await event.reply("NSFW filter isn't turned on for this chat.")
         else:
             await event.reply("I only understand by on or off")
             return
@@ -102,7 +101,7 @@ async def del_profanity(event):
     # let = sender.username
     if await is_admin(event, event.message.sender_id):
         return
-    chats = spammers.find({})
+    chats = antinsfw_chats.find({})
     for c in chats:
         if event.text:
             if event.chat_id == c["id"]:
@@ -118,6 +117,9 @@ async def del_profanity(event):
                     await asyncio.sleep(10)
                     await dev.delete()
         if event.photo:
+            is_nsfw = sql.is_nsfw(c["id"])
+            if not is_nsfw:
+                return
             if event.chat_id == c["id"]:
                 await event.client.download_media(event.photo, "nudes.jpg")
                 if nude.is_nude("./nudes.jpg"):

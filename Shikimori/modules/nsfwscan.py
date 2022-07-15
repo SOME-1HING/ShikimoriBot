@@ -76,64 +76,6 @@ async def get_file_id_from_message(message):
         file_id = message.video.thumbs[0].file_id
     return file_id
 
-
-@pbot.on_message(
-    (
-        filters.document
-        | filters.photo
-        | filters.sticker
-        | filters.animation
-        | filters.video
-    ),
-    group=8,
-)
-@capture_err
-async def detect_nsfw(_, message):
-    chat_id = message.chat.id
-    is_nsfw = sql.is_nsfw(chat_id)
-    if not is_nsfw:
-        pass
-    if message.from_user.id in DEV_USERS:
-        return
-    if is_nsfw:
-        return
-    if not message.from_user:
-        return
-    file_id = await get_file_id_from_message(message)
-    if not file_id:
-        return
-    file = await pbot.download_media(file_id)
-    try:
-        results = await arq.nsfw_scan(file=file)
-    except Exception:
-        return
-    if not results.ok:
-        return
-    results = results.result
-    remove(file)
-    nsfw = results.is_nsfw
-    if not nsfw:
-        return
-    try:
-        await message.delete()
-    except Exception:
-        return
-    await message.reply_text(
-        f"""
-**NSFW Image Detected & Deleted Successfully!
-————————————————————**
-**User:** {message.from_user.mention} [`{message.from_user.id}`]
-**Safe:** `{results.neutral} %`
-**Porn:** `{results.porn} %`
-**Adult:** `{results.sexy} %`
-**Hentai:** `{results.hentai} %`
-**Drawings:** `{results.drawings} %`
-**————————————————————**
-__Powered by__@Yuki_Network.
-"""
-    )
-
-
 @pbot.on_message(filters.command(["nsfwscan", f"nsfwscan@{BOT_USERNAME}"]))
 @capture_err
 async def nsfw_scan_command(_, message):
@@ -178,34 +120,3 @@ async def nsfw_scan_command(_, message):
 """
     )
 
-@user_admin
-@pbot.on_message(filters.command(["antinsfw", f"antinsfw@{BOT_USERNAME}"]))
-async def nsfw_enable_disable(_, message):
-    if len(message.command) != 2:
-        await message.reply_text(
-            "Usage: /antinsfw [on/off]"
-        )
-        return
-    status = message.text.split(None, 1)[1].strip()
-    status = status.lower()
-    chat_id = message.chat.id
-    is_nsfw = sql.is_nsfw(chat_id)
-    if status in ("on", "yes"):
-        if not is_nsfw:
-            sql.set_nsfw(chat_id)
-            await message.reply_text(
-            "Enabled AntiNSFW System. I will Delete Messages Containing Inappropriate Content."
-            )
-        await message.reply_text("NSFW Mode is already Activated for this chat!")
-        return ""
-    elif status in ("off", "no"):
-        if not is_nsfw:
-            await message.reply_text("NSFW Mode is already Deactivated")
-            return ""
-        else:
-            sql.rem_nsfw(chat_id)
-            await message.reply_text("Disabled AntiNSFW System.")
-    else:
-        await message.reply_text(
-            "Unknown Suffix, Use /antinsfw [on/off]"
-        )
