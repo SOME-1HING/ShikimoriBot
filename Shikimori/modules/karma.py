@@ -39,6 +39,7 @@ from pyrogram import filters
 
 from Shikimori import pbot as app, BOT_ID
 from Shikimori.utils.errors import capture_err
+from .helper_funcs.anonymous import user_admin, AdminPerms
 from Shikimori.utils.permissions import adminsOnly
 from Shikimori.ex_plugins.dbfunctions import (
     alpha_to_int,
@@ -222,7 +223,7 @@ async def karma(_, message):
 
 
 @app.on_message(filters.command("karma"))
-@adminsOnly("can_change_info")
+@user_admin(AdminPerms.CAN_CHANGE_INFO)
 async def captcha_state(_, message):
     usage = "**Usage:**\n/karma [ON|OFF]"
     if len(message.command) != 2:
