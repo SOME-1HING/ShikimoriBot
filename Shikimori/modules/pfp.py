@@ -48,7 +48,7 @@ logger = logging.getLogger(__name__)
 
 @register(pattern=("/imgg"))
 async def bot_img(event):
-    photo = event.client.get_profile_photos(BOT_ID)
+    photo = await event.client.get_profile_photos(BOT_ID)
     return await event.client.send_file(event.chat.id, photo)
 
 if 1 == 1:
