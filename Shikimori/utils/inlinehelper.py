@@ -442,22 +442,51 @@ async def pokedexinfo(answers, pokemon):
     buttons = InlineKeyboard(row_width=1)
     buttons.add(
         InlineKeyboardButton("Pokedex",
-                             switch_inline_query_current_chat="pokedex"))
+                             url=f"https://www.pokemon.com/us/pokedex/{pokemon}"))
+    pokemon = result['name']
+    pokedex = result['id']
+    type = result['type']
+    poke_img = f"https://img.pokemondb.net/artwork/large/{pokemon}.jpg"
+    abilities = result['abilities']
+    height = result['height']
+    weight = result['weight']
+    gender = result['gender']
+    stats = result['stats']
+    description = result['description']
     caption = f"""
-**Pokemon:** `{result["name"]}`
-**Pokedex:** `{result["id"]}`
-**Type:** `{result["type"]}`
-**Abilities:** `{result["abilities"]}`
-**Height:** `{result["height"]}`
-**Weight:** `{result["weight"]}`
-**Gender:** `{result["gender"]}`
-**Stats:** `{result["stats"]}`
-**Description:** `{result["description"]}`"""
+======[ 【Ｐｏｋéｄｅｘ】 ]======
+
+╒═══「 **{pokemon.upper()}** 」
+
+**Pokedex ➢** `{pokedex}`
+**Type ➢** {type}
+**Abilities ➢** {abilities}
+**Height ➢** `{height}`
+**Weight ➢** `{weight}`
+**Gender ➢** {gender}
+
+**Stats ➢** 
+{stats}
+
+**Description ➢** __{description}__
+"""
+
+    for ch in ["[", "]", "{", "}", ":"]:
+        if ch in caption:
+            caption = caption.replace(ch, "") 
+
+
+    caption = caption.replace("'", "`")
+    caption = caption.replace("`hp`", "× HP : ")
+    caption = caption.replace(", `attack`", "\n× Attack : ")
+    caption = caption.replace(", `defense`", "\n× Defense : ")
+    caption = caption.replace(", `sp_atk`", "\n× Special Attack : ")
+    caption = caption.replace(", `sp_def`", "\n× Special Defanse : ")
+    caption = caption.replace(", `speed`", "\n× Speed : ")
+    caption = caption.replace(", `total`", "\n× Total : ")
     answers.append(
         InlineQueryResultPhoto(
-            photo_url=f"https://img.pokemondb.net/artwork/large/{pokemon}.jpg",
-            title=result["name"],
-            description=result["description"],
+            photo_url=poke_img,
             caption=caption,
             reply_markup=buttons,
         ))

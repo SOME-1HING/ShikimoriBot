@@ -38,7 +38,7 @@ from apscheduler.schedulers.asyncio import AsyncIOScheduler
 
 from Shikimori.modules.sql.night_mode_sql import add_nightmode, rmnightmode, get_all_chat_id, is_nightmode_indb
 from Shikimori.events import register
-from Shikimori import OWNER_ID, telethn, LOGGER
+from Shikimori import DEV_USERS, OWNER_ID, telethn, LOGGER
 
 hehes = ChatBannedRights(
     until_date=None,
@@ -91,19 +91,19 @@ async def can_change_info(message):
         isinstance(p, types.ChannelParticipantAdmin) and p.admin_rights.change_info
     )
 
-@register(pattern="^/(nightmode|Nightmode|NightMode) ?(.*)")
-async def profanity(event):
+@register(pattern="^/nightmode(?: |$)(.*)")
+async def nightmode(event):
     if event.fwd_from:
         return
     if event.is_private:
         return
     input = event.pattern_match.group(2)
-    if event.sender_id != OWNER_ID:
+    if event.sender_id != DEV_USERS:
         if not await is_register_admin(event.input_chat, event.sender_id):
            await event.reply("Only admins can execute this command!")
            return
         if not await can_change_info(message=event):
-          await event.reply("You are missing the following rights to use this command:CanChangeinfo")
+          await event.reply("You are missing the following rights to use this command: `CanChangeinfo`")
           return
     if not input:
         if is_nightmode_indb(str(event.chat_id)):
