@@ -36,7 +36,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import threading
 
-from sqlalchemy import String, Column, Integer, BigInteger, UnicodeText
+from sqlalchemy import String, Column, Integer, UnicodeText
 
 from Shikimori.modules.sql import SESSION, BASE
 
@@ -48,7 +48,7 @@ DEF_OBJ = (None, DEF_COUNT, DEF_LIMIT)
 class FloodControl(BASE):
     __tablename__ = "antiflood"
     chat_id = Column(String(14), primary_key=True)
-    user_id = Column(BigInteger)
+    user_id = Column(Integer)
     count = Column(Integer, default=DEF_COUNT)
     limit = Column(Integer, default=DEF_LIMIT)
 
@@ -134,9 +134,7 @@ def set_flood_strength(chat_id, flood_type, value):
         curr_setting = SESSION.query(FloodSettings).get(str(chat_id))
         if not curr_setting:
             curr_setting = FloodSettings(
-                chat_id,
-                flood_type=int(flood_type),
-                value=value,
+                chat_id, flood_type=int(flood_type), value=value,
             )
 
         curr_setting.flood_type = int(flood_type)
@@ -151,7 +149,8 @@ def get_flood_setting(chat_id):
         setting = SESSION.query(FloodSettings).get(str(chat_id))
         if setting:
             return setting.flood_type, setting.value
-        return 1, "0"
+        else:
+            return 1, "0"
 
     finally:
         SESSION.close()

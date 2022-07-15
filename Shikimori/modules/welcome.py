@@ -209,7 +209,7 @@ def new_member(update: Update, context: CallbackContext):  # sourcery no-metrics
 
     for new_mem in new_members:
 
-        welcome_log = JOIN_LOGGER
+        welcome_log = None
         res = None
         sent = None
         should_mute = True
@@ -628,6 +628,8 @@ def new_member(update: Update, context: CallbackContext):  # sourcery no-metrics
                 f"<b>ID</b>: <code>{new_mem.id}</code>"
             )
         return welcome_log  
+    
+    return ""
 
 
 def check_not_bot(member, chat_id, message_id, context):
