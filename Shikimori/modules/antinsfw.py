@@ -236,7 +236,7 @@ async def del_nsfw(_, message):
         sender = message.from_user
     except:
         sender = message.sender_chat 
-    if is_user_admin(message.Chat, sender.id):
+    if is_user_admin(message, sender.id):
         return
 
     if (
