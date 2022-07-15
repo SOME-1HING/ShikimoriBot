@@ -227,8 +227,11 @@ async def del_profanity(event):
                     return dev
 
 @loggable
-@pbot.on_message(filters.all & filters.group)
-async def del_nsfw(message):
+@pbot.on_message(
+    filters.all
+    & filters.group
+)
+async def del_nsfw(_, message):
     sender = await message.User
     if is_user_admin(message.Chat, sender.id):
         return
