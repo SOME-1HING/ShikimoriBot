@@ -123,12 +123,15 @@ async def del_nsfw(event):
             if not is_nsfw:
                 return
             if event.chat_id == c["id"]:
-                file_id = await get_file_id_from_message(event)
-                if not file_id:
-                    return
-                try:
-                    file = await event.client.download_media(file_id)
-                except:
+                if event.photo:
+                    file = event.client.download_media(event.photo)
+                elif event.document:
+                    file = event.client.download_media(event.document)
+                elif event.animation:
+                    file = event.client.download_media(event.animation)
+                elif event.sticker:
+                    file = event.client.download_media(event.sticker)
+                else:
                     return
                 try:
                     results = await arq.nsfw_scan(file=file)
