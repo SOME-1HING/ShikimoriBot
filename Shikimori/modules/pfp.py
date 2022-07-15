@@ -51,8 +51,9 @@ from telegram.ext import CallbackContext
 logger = logging.getLogger(__name__)
 
 def bot_img(update: Update, context: CallbackContext):
+    bot, job_queue = context.bot, context.job_queue
     message = update.effective_message
-    profile = context.bot.get_user_profile_photos(BOT_ID).photos[0][-1]
+    profile = context.bot.get_user_profile_photos(bot.id).photos[0][-1]
     return message.reply_photo(profile)
 
 BOT_IMG_HANDLER = DisableAbleCommandHandler("imgg", bot_img, run_async=True)
