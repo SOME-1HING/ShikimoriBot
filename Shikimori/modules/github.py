@@ -51,41 +51,42 @@ async def github(_, message):
     try:
         if result["message"] == "Not Found":
             return await message.reply_text("User not Found.")
-        m = await message.reply_text("`Searching....`")
-        url = result['html_url']
-        name = result['name']
-        company = result['company']
-        bio = result['bio']
-        created_at = result['created_at']
-        avatar_url = result['avatar_url']
-        blog = result['blog']
-        location = result['location']
-        repositories = result['public_repos']
-        followers = result['followers']
-        following = result['following']
-        caption = f"""**Info Of {name}**
-**Username:** `{username}`
-**Bio:** `{bio}`
-**Profile Link:** [Here]({url})
-**Company:** `{company}`
-**Created On:** `{created_at}`
-**Repositories:** `{repositories}`
-**Blog:** `{blog}`
-**Location:** `{location}`
-**Followers:** `{followers}`
-**Following:** `{following}`"""
-        await m.delete()
-        await message.reply_photo(photo=avatar_url, caption=caption,reply_markup=InlineKeyboardMarkup(
-                [
+        else:
+            m = await message.reply_text("`Searching....`")
+            url = result['html_url']
+            name = result['name']
+            company = result['company']
+            bio = result['bio']
+            created_at = result['created_at']
+            avatar_url = result['avatar_url']
+            blog = result['blog']
+            location = result['location']
+            repositories = result['public_repos']
+            followers = result['followers']
+            following = result['following']
+            caption = f"""**Info Of {name}**
+    **Username:** `{username}`
+    **Bio:** `{bio}`
+    **Profile Link:** [Here]({url})
+    **Company:** `{company}`
+    **Created On:** `{created_at}`
+    **Repositories:** `{repositories}`
+    **Blog:** `{blog}`
+    **Location:** `{location}`
+    **Followers:** `{followers}`
+    **Following:** `{following}`"""
+            await m.delete()
+            return await message.reply_photo(photo=avatar_url, caption=caption,reply_markup=InlineKeyboardMarkup(
                     [
-                        InlineKeyboardButton(
-                            text="Profile",
-                            url=url,
-                        ),
+                        [
+                            InlineKeyboardButton(
+                                text="Profile",
+                                url=url,
+                            ),
+                        ],
                     ],
-                ],
-                disable_web_page_preview=True,
-            ), parse_mode= enums.ParseMode.MARKDOWN)
+                    disable_web_page_preview=True,
+                ), parse_mode= enums.ParseMode.MARKDOWN)
 
     except Exception as e:
         await message.reply_text(f"ERROR!! Contact{SUPPORT_CHAT}")
