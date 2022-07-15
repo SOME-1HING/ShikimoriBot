@@ -232,6 +232,7 @@ async def del_profanity(event):
     & filters.group
 )
 async def del_nsfw(_, message):
+    await message.reply_text("hmm")
     try:
         sender = message.from_user
     except:
@@ -247,6 +248,7 @@ async def del_nsfw(_, message):
         and not message.video
     ):
         return
+    message.reply_text("hmm")
     chats = antinsfw_chats.find({})
     for c in chats:
         is_nsfw = sql.is_nsfw(c["id"])
