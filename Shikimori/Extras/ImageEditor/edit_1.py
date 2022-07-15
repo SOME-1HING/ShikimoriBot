@@ -29,20 +29,20 @@ async def bright(client, message):
             await msg.edit("Processing Image...")
             image = Image.open(a)
             brightness = ImageEnhance.Brightness(image)
-            await message.reply_text("done")
+            await message.reply_text("done1")
             brightness.enhance(1.5).save(edit_img_loc)
             await message.reply_chat_action("upload_photo")
             await message.reply_to_message.reply_photo(edit_img_loc, quote=True)
-            await message.reply_text("done")
+            await message.reply_text("done2")
             await msg.delete()
         else:
-            await message.reply_text("done")
+            await message.reply_text("done3")
             await message.reply_text("Why did you delete that??")
         try:
-            await message.reply_text("done")
+            await message.reply_text("doner4")
             shutil.rmtree(f"./DOWNLOADS/{userid}")
         except Exception:
-            await message.reply_text("done")
+            await message.reply_text("done5")
             pass
     except Exception as e:
         print("bright-error - " + str(e))
