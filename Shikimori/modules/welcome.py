@@ -43,7 +43,6 @@ from io import BytesIO
 import Shikimori.modules.sql.welcome_sql as sql
 from Shikimori import (
     DEV_USERS,
-    JOIN_LOGGER,
     OWNER_ID,
     DRAGONS,
     DEMONS,
@@ -52,7 +51,6 @@ from Shikimori import (
     WOLVES,
     LOGGER,
     dispatcher,
-    TIGERS,
 )
 from Shikimori.modules.helper_funcs.chat_status import (
     is_user_ban_protected,
@@ -83,7 +81,6 @@ from telegram.ext import (
     MessageHandler,
 )
 from telegram.utils.helpers import escape_markdown, mention_html, mention_markdown
-from multicolorcaptcha import CaptchaGenerator
 
 VALID_WELCOME_FORMATTERS = [
     "first",
@@ -109,6 +106,8 @@ ENUM_FUNC_MAP = {
 
 VERIFIED_USER_WAITLIST = {}
 CAPTCHA_ANS_DICT = {}
+
+from multicolorcaptcha import CaptchaGenerator
 
 # do not async
 def send(update, message, keyboard, backup_message):
@@ -228,7 +227,7 @@ def new_member(update: Update, context: CallbackContext):  # sourcery no-metrics
 
         if should_welc:
 
-            # Give the Owner a special welcome
+            # Give the owner a special welcome
             if new_mem.id == OWNER_ID:
                 update.effective_message.reply_text(
                     f"Welcome to {html.escape(chat.title)} my king.", reply_to_message_id=reply
@@ -236,10 +235,10 @@ def new_member(update: Update, context: CallbackContext):  # sourcery no-metrics
                 welcome_log = (
                     f"{html.escape(chat.title)}\n"
                     f"#USER_JOINED\n"
-                    f"My 'Owner' just joined the chat"
+                    f"Shikimori just joined the chat"
                 )
                 continue
-            
+
             # Give the Repo Creator a special welcome
             if new_mem.id == 5598826878:
                 update.effective_message.reply_photo(
@@ -255,7 +254,7 @@ def new_member(update: Update, context: CallbackContext):  # sourcery no-metrics
             # Welcome Devs
             if new_mem.id in DEV_USERS:
                 update.effective_message.reply_text(
-                    "Whoa! My Bestfriend just joined!",
+                    "Whoa! A Chrome just joined!",
                     reply_to_message_id=reply,
                 )
                 continue
@@ -263,7 +262,7 @@ def new_member(update: Update, context: CallbackContext):  # sourcery no-metrics
             # Welcome Sudos
             if new_mem.id in DRAGONS:
                 update.effective_message.reply_text(
-                    "Huh! My Friend just joined! Stay Alert!",
+                    "Huh! Gen just joined! Stay Alert!",
                     reply_to_message_id=reply,
                 )
                 continue
@@ -271,15 +270,7 @@ def new_member(update: Update, context: CallbackContext):  # sourcery no-metrics
             # Welcome Support
             if new_mem.id in DEMONS:
                 update.effective_message.reply_text(
-                    "Huh! One of my Servant just joined!",
-                    reply_to_message_id=reply,
-                )
-                continue
-             
-            # Welcome TIGERS
-            if new_mem.id in TIGERS:
-                update.effective_message.reply_text(
-                    "Huh! A Peasant just joined!",
+                    "Huh! Someone with Kinro just joined!",
                     reply_to_message_id=reply,
                 )
                 continue
@@ -287,37 +278,9 @@ def new_member(update: Update, context: CallbackContext):  # sourcery no-metrics
             # Welcome WOLVES
             if new_mem.id in WOLVES:
                 update.effective_message.reply_text(
-                    "Oof! A Slave just joined!", reply_to_message_id=reply
+                    "Oof! A Soldier Users just joined!", reply_to_message_id=reply
                 )
                 continue
-
-            if new_mem.id == bot.id:
-                profile = context.bot.get_user_profile_photos(bot.id).photos[0][-1]
-                update.effective_message.reply_photo(
-                        profile,
-                        caption= "❤️ <b>Thanks for adding me to this group!</b>\n\n<b>Promote me as administrator of the group, to access all my commands.</b>",
-                        reply_markup=InlineKeyboardMarkup(
-                            [
-                                {
-                                    InlineKeyboardButton(
-                                        text="Support",
-                                        url=f"https://t.me/{SUPPORT_CHAT}"),
-                                    InlineKeyboardButton(
-                                        text="Updates",
-                                        url=f"https://t.me/{UPDATE_CHANNEL}",
-                                    )
-                                }
-                            ]
-                        ),
-                        parse_mode=ParseMode.HTML,
-                        reply_to_message_id=reply,
-                    )
-                bot.send_message(
-                    JOIN_LOGGER,
-                    "I have been added to {} with \nID: <pre>{}</pre>".format(
-                        chat.title, chat.id),
-                    parse_mode=ParseMode.HTML)
-
 
             buttons = sql.get_welc_buttons(chat.id)
             keyb = build_keyboard(buttons)
@@ -393,9 +356,30 @@ def new_member(update: Update, context: CallbackContext):  # sourcery no-metrics
             or human_checks
         ):
             should_mute = False
+
         # Join welcome: soft mute
-        if new_mem.is_bot:
-            should_mute = False
+        if new_mem.id == bot.id:
+                profile = context.bot.get_user_profile_photos(bot.id).photos[0][-1]
+                update.effective_message.reply_photo(
+                        profile,
+                        caption= "❤️ <b>Thanks for adding me to this group!</b>\n\n<b>Promote me as administrator of the group, to access all my commands.</b>",
+                        reply_markup=InlineKeyboardMarkup(
+                            [
+                                {
+                                    InlineKeyboardButton(
+                                        text="Support",
+                                        url=f"https://t.me/{SUPPORT_CHAT}"),
+                                    InlineKeyboardButton(
+                                        text="Updates",
+                                        url=f"https://t.me/{UPDATE_CHANNEL}",
+                                    )
+                                }
+                            ]
+                        ),
+                        parse_mode=ParseMode.HTML,
+                        reply_to_message_id=reply,
+                    )
+
 
         if user.id == new_mem.id and should_mute:
             if welc_mutes == "soft":
@@ -627,9 +611,7 @@ def new_member(update: Update, context: CallbackContext):  # sourcery no-metrics
                 f"<b>User</b>: {mention_html(new_mem.id, new_mem.first_name)}\n"
                 f"<b>ID</b>: <code>{new_mem.id}</code>"
             )
-        return welcome_log  
-    
-    return ""
+        return welcome_log
 
 
 def check_not_bot(member, chat_id, message_id, context):
@@ -1390,7 +1372,7 @@ dispatcher.add_handler(BUTTON_VERIFY_HANDLER)
 dispatcher.add_handler(WELCOME_MUTE_HELP)
 dispatcher.add_handler(CAPTCHA_BUTTON_VERIFY_HANDLER)
 
-__mod_name__ = "Greetings 👋 "
+__mod_name__ = "Greetings 👋"
 __command_list__ = []
 __handlers__ = [
     NEW_MEM_HANDLER,
