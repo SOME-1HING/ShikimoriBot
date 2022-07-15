@@ -7,31 +7,42 @@ from PIL import Image, ImageEnhance, ImageFilter
 
 
 async def bright(client, message):
+    await message.reply_text("done")
     try:
+        await message.reply_text("done")
+
         userid = str(message.chat.id)
         if not os.path.isdir(f"./DOWNLOADS/{userid}"):
+            await message.reply_text("done")
             os.makedirs(f"./DOWNLOADS/{userid}")
         download_location = "./DOWNLOADS" + "/" + userid + "/" + userid + ".jpg"
         edit_img_loc = "./DOWNLOADS" + "/" + userid + "/" + "brightness.jpg"
         if not message.reply_to_message.empty:
+            await message.reply_text("done")
             msg = await message.reply_to_message.reply_text(
                 "Downloading image", quote=True
             )
             a = await client.download_media(
                 message=message.reply_to_message, file_name=download_location
             )
+            await message.reply_text("done")
             await msg.edit("Processing Image...")
             image = Image.open(a)
             brightness = ImageEnhance.Brightness(image)
+            await message.reply_text("done")
             brightness.enhance(1.5).save(edit_img_loc)
             await message.reply_chat_action("upload_photo")
             await message.reply_to_message.reply_photo(edit_img_loc, quote=True)
+            await message.reply_text("done")
             await msg.delete()
         else:
+            await message.reply_text("done")
             await message.reply_text("Why did you delete that??")
         try:
+            await message.reply_text("done")
             shutil.rmtree(f"./DOWNLOADS/{userid}")
         except Exception:
+            await message.reply_text("done")
             pass
     except Exception as e:
         print("bright-error - " + str(e))
