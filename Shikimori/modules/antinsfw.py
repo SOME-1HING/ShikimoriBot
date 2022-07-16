@@ -254,6 +254,7 @@ async def del_nsfw(_, message):
         await message.reply_text("hmm")
         is_nsfw = sql.is_nsfw(c["id"])
         if not is_nsfw:
+            await message.reply_text("huhmm")
             return
         file_id = await get_file_id_from_message(message)
         await message.reply_text("hmm")
