@@ -28,7 +28,7 @@ import Shikimori.modules.sql.nsfw_sql as sql
 from Shikimori.pyrogramee.telethonbasics import is_admin
 from Shikimori.events import register
 from Shikimori import telethn as tbot, arq, pbot
-from Shikimori.modules.log_channel import loggable
+from Shikimori.modules.sql import log_channel_sql as sql
 
 translator = google_translator()
 MUTE_RIGHTS = ChatBannedRights(until_date=None, send_messages=False)
@@ -199,7 +199,6 @@ async def antislang(event):
         await event.reply("`You Should Be Admin To Do This!`")
         return
 
-@loggable
 @tbot.on(events.NewMessage(pattern=None))
 async def del_profanity(event):
     if event.is_private:
@@ -226,7 +225,6 @@ async def del_profanity(event):
                     await dev.delete()
                     return dev
 
-@loggable
 @pbot.on_message(
     filters.all
     & filters.group
@@ -274,6 +272,16 @@ async def del_nsfw(_, message):
                 os.remove(file)
                 await asyncio.sleep(10)
                 await dev.delete()
-                return final
+                try:
+                    log_channel = sql.get_chat_log_channel(chat_id)
+                    if log_channel:
+                        pbot.send_message(
+                            log_channel,
+                            final
+                            + "\n\nFormatting has been disabled due to an unexpected error.",
+                        )
+                    return 
+                except:
+                    return
         except Exception as e:
             return print("anti-nsfw - " + str(e))
