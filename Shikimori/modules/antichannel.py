@@ -40,24 +40,34 @@ import Shikimori.modules.sql.antichannel_sql as sql
 from Shikimori.modules.log_channel import loggable
 
 @user_admin
-@pbot.on_message(filters.command("antichannel") & filters.group)
+@pbot.on_message(filters.command("achannel") & filters.group)
 async def set_antichannel(_, message):
-    chat_id = message.chat.id
-    if len(message.command) < 2:
-        return await message.reply_text(
-        f"Antichannel setting is currently {sql.is_achannel(chat_id)}\n\n**Usage:**\n/antichannel [ON/OFF]"
-    )
-    query = message.text.strip().split(None, 1)[1]
-    query = query.lower()
-    if query in ["on", "enable", "yes"]:
-        sql.set_aservice(chat_id)
-        await message.reply_text(f"Enabled antichannel!!")
-        return
-    elif query in ["off", "disable", "no"]:
-        sql.rem_aservice(chat_id)
-        return await message.reply_text(f"Disabled antichannel!!")
-    else:
-        return await message.reply_text("**Usage:**\n/antichannel [ON/OFF]")
+    try:
+        usage = "**Usage:**\n/achannel [ON|OFF]"
+        if len(message.command) != 2:
+            return await message.reply_text(usage)
+        chat_id = message.chat.id
+        state = message.text.split(None, 1)[1].strip()
+        state = state.lower()
+        if state == "on":
+            sql.is_achannel = sql.sql.is_achannel(chat_id)
+            if not sql.is_achannel:
+                sql.set_achannel(chat_id)
+                await message.reply_text("Enabled AntiCHannel System. I will Delete Service Messages from Now on.")
+            else:
+                await message.reply_text("AntiCHannel System is already on.")
+        elif state == "off":
+            sql.is_achannel = sql.sql.is_achannel(chat_id)
+            if not sql.is_achannel:
+                await message.reply_text("AntiCHannel System is already disabled.")
+                return ""
+            else:
+                sql.rem_achannel(chat_id)
+            await message.reply_text("Disabled AntiCHannel System. I won't Be Deleting Service Message from Now on.")
+        else:
+            await message.reply_text(usage)
+    except Exception as e:
+        return print("achannel - " + str(e))
 
 async def eliminate_channel(update: Update, context: CallbackContext):
     message = update.effective_message
@@ -69,3 +79,10 @@ async def eliminate_channel(update: Update, context: CallbackContext):
         await message.delete()
         sender_chat = message.sender_chat
         await bot.ban_chat_sender_chat(sender_chat_id=sender_chat.id, chat_id=chat.id)
+
+__mod_name__ = "AntiChannel"
+__help__ = """
+Plugin to delete service messages in a chat!
+
+/achannel [ON|OFF]
+"""

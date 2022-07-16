@@ -23,7 +23,7 @@ def is_achannel(chat_id):
     finally:
         SESSION.close()
 
-def set_aservice(chat_id):
+def set_achannel(chat_id):
     with INSERTION_LOCK:
         achannnelchat = SESSION.query(ANTICHANNELChats).get(str(chat_id))
         if not achannnelchat:
@@ -31,7 +31,7 @@ def set_aservice(chat_id):
         SESSION.add(achannnelchat)
         SESSION.commit()
 
-def rem_aservice(chat_id):
+def rem_achannel(chat_id):
     with INSERTION_LOCK:
         achannnelchat = SESSION.query(ANTICHANNELChats).get(str(chat_id))
         if achannnelchat:
