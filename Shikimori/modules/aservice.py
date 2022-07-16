@@ -5,7 +5,7 @@ import asyncio
 from pyrogram import filters
 
 from Shikimori import pbot
-from .helper_funcs.anonymous import user_admin
+from Shikimori.modules.helper_funcs.anonymous import user_admin
 import Shikimori.modules.sql.antiservice_sql as sql
 
 __mod_name__ = "AntiService"
@@ -16,7 +16,7 @@ Plugin to delete service messages in a chat!
 """
 
 @user_admin
-@pbot.on_message(filters.command("antiservice") & filters.group)
+@pbot.on_message(filters.command(("antiservice", "aservice")) & filters.group)
 async def aservice_state(_, message):
     try:
         usage = "**Usage:**\n/antiservice [ON|OFF]"
