@@ -274,10 +274,9 @@ async def del_nsfw(_, message):
                         await pbot.send_message(
                             log_channel,
                             final
-                            + "\n\nFormatting has been disabled due to an unexpected error.",
                         )
                     return 
-                except:
-                    return
+                except Exception as e:
+                    return print("anti-nsfw - " + str(e))
         except Exception as e:
             return print("anti-nsfw - " + str(e))
