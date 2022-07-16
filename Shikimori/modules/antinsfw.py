@@ -271,8 +271,9 @@ async def del_nsfw(_, message):
                 try:
                     log_channel = logsql.get_chat_log_channel(chat_id)
                     if log_channel:
+                        await pbot.reply_text(f"{log_channel}")
                         await pbot.send_message(
-                            log_channel,
+                            log_channel.id,
                             final
                         )
                     return 
