@@ -5,7 +5,7 @@ import asyncio
 from pyrogram import filters
 
 from Shikimori import pbot
-from Shikimori.modules.helper_funcs.anonymous import user_admin
+from Shikimori.pyrogramee.telethonbasics import is_admin
 import Shikimori.modules.sql.antiservice_sql as sql
 
 __mod_name__ = "AntiService"
@@ -15,11 +15,12 @@ Plugin to delete service messages in a chat!
 /aservice [ON|OFF]
 """
 
-@user_admin
 @pbot.on_message(filters.command("aservice") & filters.group)
 async def aservice_state(_, message):
     try:
         usage = "**Usage:**\n/aservice [ON|OFF]"
+        if await is_admin(message.chat.id, message.from_user.id):
+            return await message.reply_text("You need to be admin to do this.")
         if len(message.command) != 2:
             return await message.reply_text(usage)
         chat_id = message.chat.id

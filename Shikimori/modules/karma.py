@@ -39,7 +39,7 @@ from pyrogram import filters
 
 from Shikimori import pbot as app, BOT_ID
 from Shikimori.utils.errors import capture_err
-from .helper_funcs.anonymous import user_admin, AdminPerms
+from Shikimori.pyrogramee.telethonbasics import is_admin
 import Shikimori.modules.sql.karma_sql as sql
 from Shikimori.ex_plugins.dbfunctions import (
     alpha_to_int,
@@ -100,47 +100,6 @@ async def upvote(_, message):
         f"Incremented Karma of {user_mention} By 1 \nTotal Points: {karma}"
     )
 
-
-
-@app.on_message(
-
-    filters.text
-    & filters.group
-    & filters.incoming
-    & filters.reply
-    & filters.regex(regex_upvote)
-    & ~filters.via_bot
-    & ~filters.bot,
-    group=karma_positive_group,
-)
-@capture_err
-async def upvote(_, message):
-    is_karma = sql.is_karma(chat_id)
-    if not is_karma:
-        return
-    if not message.reply_to_message.from_user:
-        return
-    if not message.from_user:
-        return
-    if message.reply_to_message.from_user.id == message.from_user.id:
-        return
-    chat_id = message.chat.id
-    user_id = message.reply_to_message.from_user.id
-    user_mention = message.reply_to_message.from_user.mention
-    current_karma = await get_karma(chat_id, await int_to_alpha(user_id))
-    if current_karma:
-        current_karma = current_karma["karma"]
-        karma = current_karma + 1
-    else:
-        karma = 1
-    new_karma = {"karma": karma}
-    await update_karma(chat_id, await int_to_alpha(user_id), new_karma)
-    await message.reply_text(
-        f"Incremented Karma of {user_mention} By 1 \nTotal Points: {karma}"
-    )
-
-
-
 @app.on_message(
 
     filters.text
@@ -154,7 +113,8 @@ async def upvote(_, message):
 )
 @capture_err
 async def downvote(_, message):
-    if not is_karma_on(message.chat.id):
+    is_karma = sql.is_karma(chat_id)
+    if not is_karma:
         return
     if not message.reply_to_message.from_user:
         return
@@ -224,10 +184,11 @@ async def karma(_, message):
         await message.reply_text(f"**Total Points**: __{karma}__")
 
 
-@user_admin
 @app.on_message(filters.command("karma") & filters.group)
 async def karma_state(_, message):
     usage = "**Usage:**\n/karma [ON|OFF]"
+    if await is_admin(message.chat.id, message.from_user.id):
+        return await message.reply_text("You need to be admin to do this.")
     if len(message.command) != 2:
         return await message.reply_text(usage)
     chat_id = message.chat.id

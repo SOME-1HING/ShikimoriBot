@@ -49,13 +49,13 @@ from pyrogram.types import (
 )
 from search_engine_parser import GoogleSearch
 
-from Shikimori import BOT_USERNAME, OWNER_ID, pbot, arq
+from Shikimori import BOT_USERNAME, INLINE_IMG, OWNER_ID, OWNER_USERNAME, pbot, arq
 from Shikimori.utils.pluginhelpers import convert_seconds_to_minutes as time_convert
 from Shikimori.utils.pluginhelpers import fetch
 
 SUDOERS = OWNER_ID
 app = pbot
-
+bot_name = f"{dispatcher.bot.first_name}"
 
 async def _netcat(host, port, content):
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -109,20 +109,17 @@ async def alive_function(answers):
     )
 
     msg = f"""
-**[Cutiepii 💜](https://github.com/Awesome-RJ/CutiepiiRobot):**
-**MainBot:** `{bot_state}`
-**UserBot:** `Alive`
-**Python:** `3.9`
-**Pyrogram:** `{pyrover}`
-**MongoDB:** `{mongover}`
-**Platform:** `{sys.platform}`
-**Profiles:** [BOT](https://telegram.dog/{BOT_USERNAME}) | [UBOT](https://telegram.dog/Awesome_Cutiepii)
+**I'm {bot_name} Robot.
+
+⚪ I'm Working Properly
+
+⚪ My Owner : [{OWNER_USERNAME}](https://t.me/{OWNER_USERNAME})**
 """
     answers.append(
         InlineQueryResultArticle(
             title="Alive",
             description="Check Bot's Stats",
-            thumb_url="https://telegra.ph/file/0d42f41c08e511b557ecc.png",
+            thumb_url=INLINE_IMG,
             input_message_content=InputTextMessageContent(
                 msg, disable_web_page_preview=True),
             reply_markup=buttons,

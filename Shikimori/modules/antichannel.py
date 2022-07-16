@@ -35,17 +35,18 @@ from pyrogram import filters
 
 from Shikimori import dispatcher, pbot
 from Shikimori.modules.disable import DisableAbleCommandHandler
-from Shikimori.modules.helper_funcs.anonymous import user_admin
+from Shikimori.pyrogramee.telethonbasics import is_admin
 import Shikimori.modules.sql.antichannel_sql as sql
 from Shikimori.modules.log_channel import loggable
 
-@user_admin
 @pbot.on_message(filters.command("antichannel"))
 async def set_antichannel(_, message):
     chat_id = message.chat.id
     if message.chat.type == "private":
         await message.reply_text("This command only works in groups.")
         return
+    if await is_admin(message.chat.id, message.from_user.id):
+        return await message.reply_text("You need to be admin to do this.")
     if len(message.command) < 2:
         return await message.reply_text(
         f"Antichannel setting is currently {sql.is_achannel(chat_id)}\n\n**Usage:**\n/antichannel [ON/OFF]"
