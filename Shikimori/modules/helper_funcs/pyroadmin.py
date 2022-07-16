@@ -28,8 +28,8 @@ async def checkl(_, message):
 
 @pbot.on_message(filters.command("checkw"))
 async def checkw(_, message):
-    user = await message.user
     await message.reply_text("hmm")
+    user = await message.user
     try:
         if user.is_admin:
             return await message.reply_text("yes")
