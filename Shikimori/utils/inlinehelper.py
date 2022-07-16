@@ -49,7 +49,7 @@ from pyrogram.types import (
 )
 from search_engine_parser import GoogleSearch
 
-from Shikimori import BOT_USERNAME, INLINE_IMG, OWNER_ID, OWNER_USERNAME, pbot, arq
+from Shikimori import BOT_USERNAME, INLINE_IMG, OWNER_ID, OWNER_USERNAME, pbot, arq, dispatcher
 from Shikimori.utils.pluginhelpers import convert_seconds_to_minutes as time_convert
 from Shikimori.utils.pluginhelpers import fetch
 
