@@ -1,6 +1,7 @@
 # Written By [MaskedVirus | swatv3nub] for William and Ryūga
 # Kang With Proper Credits
 
+import asyncio
 from pyrogram import filters
 
 from Shikimori import pbot
@@ -40,11 +41,16 @@ async def aservice_state(_, message):
     else:
         await message.reply_text(usage)
 
-@pbot.on_message(filters.service, group=11)
+@pbot.on_message(filters.service & filters.group)
 async def delete_service(_, message):
     chat_id = message.chat.id
     try:
-        if await sql.is_aservice(chat_id):
-            return await message.delete()
-    except Exception:
-        pass
+        is_aservice = sql.is_aservice(chat_id)
+        if not is_aservice:
+            return
+        await asyncio.sleep(1)
+        await message.delete()
+        return
+
+    except Exception as e:
+        return print("anti-nsfw - " + str(e))
