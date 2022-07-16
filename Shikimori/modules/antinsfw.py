@@ -235,7 +235,8 @@ async def del_nsfw(client, message):
         sender = message.from_user
     except:
         sender = message.sender_chat
-    if client.get_chat_member(chat_id, sender.id).status in ("administrator", "creator") and  sender.id in DRAGONS:
+    user = client.get_chat_member(message.chat.id, sender.id)
+    if user.status in ("administrator", "creator") or user.user.id in DRAGONS:
         return
 
     if (
