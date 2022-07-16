@@ -188,27 +188,29 @@ async def karma(_, message):
 async def karma_state(_, message):
     usage = "**Usage:**\n/karma [ON|OFF]"
     if await is_admin(message.chat.id, message.from_user.id):
-        return await message.reply_text("You need to be admin to do this.")
-    if len(message.command) != 2:
-        return await message.reply_text(usage)
-    chat_id = message.chat.id
-    state = message.text.split(None, 1)[1].strip()
-    state = state.lower()
-    if state == "on":
-        is_karma = sql.is_karma(chat_id)
-        if not is_karma:
-            sql.set_karma(chat_id)
-        await message.reply_text("Enabled karma system.")
-    elif state == "off":
-        is_karma = sql.is_karma(chat_id)
-        if not is_karma:
-            await message.reply_text("Karma is already Deactivated")
-            return ""
+
+        if len(message.command) != 2:
+            return await message.reply_text(usage)
+        chat_id = message.chat.id
+        state = message.text.split(None, 1)[1].strip()
+        state = state.lower()
+        if state == "on":
+            is_karma = sql.is_karma(chat_id)
+            if not is_karma:
+                sql.set_karma(chat_id)
+            await message.reply_text("Enabled karma system.")
+        elif state == "off":
+            is_karma = sql.is_karma(chat_id)
+            if not is_karma:
+                await message.reply_text("Karma is already Deactivated")
+                return ""
+            else:
+                sql.rem_karma(chat_id)
+            await message.reply_text("Disabled karma system.")
         else:
-            sql.rem_karma(chat_id)
-        await message.reply_text("Disabled karma system.")
+            await message.reply_text(usage)
     else:
-        await message.reply_text(usage)
+        return await message.reply_text("You need to be admin to do this.")
 
 __mod_name__ = "Karma ☯️"
 __help__ = """

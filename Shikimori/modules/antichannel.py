@@ -46,22 +46,23 @@ async def set_antichannel(_, message):
         await message.reply_text("This command only works in groups.")
         return
     if await is_admin(message.chat.id, message.from_user.id):
-        return await message.reply_text("You need to be admin to do this.")
-    if len(message.command) < 2:
-        return await message.reply_text(
-        f"Antichannel setting is currently {sql.is_achannel(chat_id)}\n\n**Usage:**\n/antichannel [ON/OFF]"
-    )
-    query = message.text.strip().split(None, 1)[1]
-    query = query.lower()
-    if query in ["on", "enable", "yes"]:
-        sql.set_aservice(chat_id)
-        await message.reply_text(f"Enabled antichannel!!")
-        return
-    elif query in ["off", "disable", "no"]:
-        sql.rem_aservice(chat_id)
-        await message.reply_text(f"Disabled antichannel!!")
+        if len(message.command) < 2:
+            return await message.reply_text(
+            f"Antichannel setting is currently {sql.is_achannel(chat_id)}\n\n**Usage:**\n/antichannel [ON/OFF]"
+        )
+        query = message.text.strip().split(None, 1)[1]
+        query = query.lower()
+        if query in ["on", "enable", "yes"]:
+            sql.set_aservice(chat_id)
+            await message.reply_text(f"Enabled antichannel!!")
+            return
+        elif query in ["off", "disable", "no"]:
+            sql.rem_aservice(chat_id)
+            await message.reply_text(f"Disabled antichannel!!")
+        else:
+            return await message.reply_text("**Usage:**\n/antichannel [ON/OFF]")
     else:
-        return await message.reply_text("**Usage:**\n/antichannel [ON/OFF]")
+        return await message.reply_text("You need to be admin to do this.")
 
 async def eliminate_channel(update: Update, context: CallbackContext):
     message = update.effective_message
