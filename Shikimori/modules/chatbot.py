@@ -21,12 +21,12 @@ from telegram.utils.helpers import mention_html, mention_markdown, escape_markdo
 from Shikimori.modules.helper_funcs.filters import CustomFilters
 from Shikimori.modules.helper_funcs.chat_status import user_admin, user_admin_no_reply
 from Shikimori import  dispatcher, updater, SUPPORT_CHAT
-from Shikimori.modules.log_channel import gloggable
+from Shikimori.modules.log_channel import loggable
 
 bot_name = f"{dispatcher.bot.first_name}"
 
 @user_admin_no_reply
-@gloggable
+@loggable
 def kukirm(update: Update, context: CallbackContext) -> str:
     query: Optional[CallbackQuery] = update.callback_query
     user: Optional[User] = update.effective_user
@@ -52,7 +52,7 @@ def kukirm(update: Update, context: CallbackContext) -> str:
 
 
 @user_admin_no_reply
-@gloggable
+@loggable
 def kukiadd(update: Update, context: CallbackContext) -> str:
     query: Optional[CallbackQuery] = update.callback_query
     user: Optional[User] = update.effective_user
@@ -78,7 +78,7 @@ def kukiadd(update: Update, context: CallbackContext) -> str:
 
 
 @user_admin
-@gloggable
+@loggable
 def kuki(update: Update, context: CallbackContext):
     user = update.effective_user
     message = update.effective_message
