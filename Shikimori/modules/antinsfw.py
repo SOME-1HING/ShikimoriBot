@@ -273,8 +273,8 @@ async def del_nsfw(_, message):
                     if log_channel:
                         await message.reply_text(f"{log_channel}")
                         await pbot.send_message(
-                            log_channel.id,
-                            final
+                            log_channel,
+                            f"{final}"
                         )
                     return 
                 except Exception as e:
