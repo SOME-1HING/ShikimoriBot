@@ -28,7 +28,7 @@ import Shikimori.modules.sql.nsfw_sql as sql
 from Shikimori.pyrogramee.telethonbasics import is_admin
 from Shikimori.events import register
 from Shikimori import telethn as tbot, arq, pbot
-from Shikimori.modules.sql import log_channel_sql as sql
+from Shikimori.modules.sql import log_channel_sql as logsql
 
 translator = google_translator()
 MUTE_RIGHTS = ChatBannedRights(until_date=None, send_messages=False)
@@ -249,18 +249,14 @@ async def del_nsfw(_, message):
     chats = antinsfw_chats.find({})
     for c in chats:
         is_nsfw = sql.is_nsfw(chat_id)
-        # if not is_nsfw:
-        #     await message.reply_text("huhmm")
-        #     return
+        if is_nsfw:
+            return
         file_id = await get_file_id_from_message(message)
         try:
             if not file_id:
                 return
             file = await pbot.download_media(file_id)
             results = await arq.nsfw_scan(file=file)
-            # if results.ok:
-            #     await message.reply_text("ygfyuhmm")
-            #     return
             results = results.result
             check = f"{results.is_nsfw}"
             if "True" in check:
@@ -273,7 +269,7 @@ async def del_nsfw(_, message):
                 await asyncio.sleep(10)
                 await dev.delete()
                 try:
-                    log_channel = sql.get_chat_log_channel(chat_id)
+                    log_channel = logsql.get_chat_log_channel(chat_id)
                     if log_channel:
                         pbot.send_message(
                             log_channel,
