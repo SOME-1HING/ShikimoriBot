@@ -39,7 +39,7 @@ from pyrogram import filters
 
 from Shikimori import pbot as app, BOT_ID
 from Shikimori.utils.errors import capture_err
-from Shikimori.pyrogramee.telethonbasics import is_admin
+from Shikimori.modules.helper_funcs.anonymous import user_admin
 import Shikimori.modules.sql.karma_sql as sql
 from Shikimori.ex_plugins.dbfunctions import (
     alpha_to_int,
@@ -183,34 +183,30 @@ async def karma(_, message):
         karma = karma["karma"] if karma else 0
         await message.reply_text(f"**Total Points**: __{karma}__")
 
-
+@user_admin
 @app.on_message(filters.command("karma") & filters.group)
 async def karma_state(_, message):
     usage = "**Usage:**\n/karma [ON|OFF]"
-    check = await message.user.is_admin
-    if check:
-        if len(message.command) != 2:
-            return await message.reply_text(usage)
-        chat_id = message.chat.id
-        state = message.text.split(None, 1)[1].strip()
-        state = state.lower()
-        if state == "on":
-            is_karma = sql.is_karma(chat_id)
-            if not is_karma:
-                sql.set_karma(chat_id)
-            await message.reply_text("Enabled karma system.")
-        elif state == "off":
-            is_karma = sql.is_karma(chat_id)
-            if not is_karma:
-                await message.reply_text("Karma is already Deactivated")
-                return ""
-            else:
-                sql.rem_karma(chat_id)
-            await message.reply_text("Disabled karma system.")
+    if len(message.command) != 2:
+        return await message.reply_text(usage)
+    chat_id = message.chat.id
+    state = message.text.split(None, 1)[1].strip()
+    state = state.lower()
+    if state == "on":
+        is_karma = sql.is_karma(chat_id)
+        if not is_karma:
+            sql.set_karma(chat_id)
+        await message.reply_text("Enabled karma system.")
+    elif state == "off":
+        is_karma = sql.is_karma(chat_id)
+        if not is_karma:
+            await message.reply_text("Karma is already Deactivated")
+            return ""
         else:
-            await message.reply_text(usage)
+            sql.rem_karma(chat_id)
+        await message.reply_text("Disabled karma system.")
     else:
-        return await message.reply_text("You need to be admin to do this.")
+        await message.reply_text(usage)
 
 __mod_name__ = "Karma ☯️"
 __help__ = """
