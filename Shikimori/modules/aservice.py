@@ -16,7 +16,7 @@ Plugin to delete service messages in a chat!
 """
 
 @user_admin
-@pbot.on_message(filters.command("antiservice") & filters.group)
+@pbot.on_message(filters.command("hmm") & filters.group)
 async def aservice_state(_, message):
     try:
         usage = "**Usage:**\n/antiservice [ON|OFF]"
