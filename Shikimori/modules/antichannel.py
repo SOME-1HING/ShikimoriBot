@@ -4,6 +4,7 @@
 
 import Shikimori.modules.sql.antichannel_sql as sql
 import re
+from Shikimori.modules.sql import log_channel_sql as logsql
 import html
 from telegram import ParseMode
 from telegram import (CallbackQuery, Chat, InlineKeyboardButton,
@@ -20,6 +21,7 @@ from Shikimori.modules.log_channel import loggable
 def achannel_rem(update: Update, context: CallbackContext) -> str:
     query: Optional[CallbackQuery] = update.callback_query
     user: Optional[User] = update.effective_user
+    bot = context.bot
     match = re.match(r"achannel_rem\((.+?)\)", query.data)
     if match:
         user_id = match.group(1)
@@ -27,11 +29,20 @@ def achannel_rem(update: Update, context: CallbackContext) -> str:
         is_kuki = sql.rem_achannel(chat.id)
         if is_kuki:
             is_kuki = sql.rem_achannel(user_id)
-            return (
+            LOG = (
                 f"<b>{html.escape(chat.title)}:</b>\n"
                 f"ANTI_CHANNEL_DISABLED\n"
                 f"<b>Admin:</b> {mention_html(user.id, html.escape(user.first_name))}\n"
             )
+            log_channel = logsql.get_chat_log_channel(chat.id)
+            if log_channel:
+                return bot.send_message(
+                log_channel,
+                LOG,
+                parse_mode=ParseMode.HTML,
+                disable_web_page_preview=True,
+            )
+            return
         else:
             update.effective_message.edit_text(
                 f"Disabled AntiCHannel System. I won't Be Deleting Service Message from Now on.",
@@ -46,6 +57,7 @@ def achannel_rem(update: Update, context: CallbackContext) -> str:
 def achannel_add(update: Update, context: CallbackContext) -> str:
     query: Optional[CallbackQuery] = update.callback_query
     user: Optional[User] = update.effective_user
+    bot = context.bot
     match = re.match(r"achannel_add\((.+?)\)", query.data)
     if match:
         user_id = match.group(1)
@@ -53,11 +65,20 @@ def achannel_add(update: Update, context: CallbackContext) -> str:
         is_kuki = sql.set_achannel(chat.id)
         if is_kuki:
             is_kuki = sql.set_achannel(user_id)
-            return (
+            LOG = (
                 f"<b>{html.escape(chat.title)}:</b>\n"
                 f"ANTI_CHANNEL_ENABLE\n"
                 f"<b>Admin:</b> {mention_html(user.id, html.escape(user.first_name))}\n"
             )
+            log_channel = logsql.get_chat_log_channel(chat.id)
+            if log_channel:
+                return bot.send_message(
+                log_channel,
+                LOG,
+                parse_mode=ParseMode.HTML,
+                disable_web_page_preview=True,
+            )
+            return
         else:
             update.effective_message.edit_text(
                 f"Enabled AntiCHannel System. I will Delete Service Messages from Now on.",

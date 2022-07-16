@@ -6,6 +6,7 @@ from pyrogram import filters
 
 from Shikimori import DRAGONS, pbot
 import Shikimori.modules.sql.antiservice_sql as sql
+from Shikimori.modules.sql import log_channel_sql as logsql
 import re
 import html
 from telegram import ParseMode
@@ -32,6 +33,7 @@ Plugin to delete service messages in a chat!
 def aservice_rem(update: Update, context: CallbackContext) -> str:
     query: Optional[CallbackQuery] = update.callback_query
     user: Optional[User] = update.effective_user
+    bot = context.bot
     match = re.match(r"aservice_rem\((.+?)\)", query.data)
     if match:
         user_id = match.group(1)
@@ -39,11 +41,20 @@ def aservice_rem(update: Update, context: CallbackContext) -> str:
         is_kuki = sql.rem_aservice(chat.id)
         if is_kuki:
             is_kuki = sql.rem_aservice(user_id)
-            return (
+            LOG = (
                 f"<b>{html.escape(chat.title)}:</b>\n"
                 f"ANTI_SERVICE_DISABLED\n"
                 f"<b>Admin:</b> {mention_html(user.id, html.escape(user.first_name))}\n"
             )
+            log_channel = logsql.get_chat_log_channel(chat.id)
+            if log_channel:
+                return bot.send_message(
+                log_channel,
+                LOG,
+                parse_mode=ParseMode.HTML,
+                disable_web_page_preview=True,
+            )
+            return
         else:
             update.effective_message.edit_text(
                 f"Disabled AntiService System. I won't Be Deleting Service Message from Now on.",
@@ -58,6 +69,7 @@ def aservice_rem(update: Update, context: CallbackContext) -> str:
 def aservice_add(update: Update, context: CallbackContext) -> str:
     query: Optional[CallbackQuery] = update.callback_query
     user: Optional[User] = update.effective_user
+    bot = context.bot
     match = re.match(r"aservice_add\((.+?)\)", query.data)
     if match:
         user_id = match.group(1)
@@ -65,11 +77,20 @@ def aservice_add(update: Update, context: CallbackContext) -> str:
         is_kuki = sql.set_aservice(chat.id)
         if is_kuki:
             is_kuki = sql.set_aservice(user_id)
-            return (
+            LOG = (
                 f"<b>{html.escape(chat.title)}:</b>\n"
                 f"ANTI_SERVICE_ENABLE\n"
                 f"<b>Admin:</b> {mention_html(user.id, html.escape(user.first_name))}\n"
             )
+            log_channel = logsql.get_chat_log_channel(chat.id)
+            if log_channel:
+                return bot.send_message(
+                log_channel,
+                LOG,
+                parse_mode=ParseMode.HTML,
+                disable_web_page_preview=True,
+            )
+            return
         else:
             update.effective_message.edit_text(
                 f"Enabled AntiService System. I will Delete Service Messages from Now on.",

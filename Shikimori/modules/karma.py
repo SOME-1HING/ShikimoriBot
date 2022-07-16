@@ -35,6 +35,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 """
 import re
 import html
+from Shikimori.modules.sql import log_channel_sql as logsql
 from telegram import ParseMode
 from telegram import (CallbackQuery, Chat, InlineKeyboardButton,
                       InlineKeyboardMarkup, ParseMode, Update, User)
@@ -197,6 +198,7 @@ async def karma(_, message):
 def rem_karma(update: Update, context: CallbackContext) -> str:
     query: Optional[CallbackQuery] = update.callback_query
     user: Optional[User] = update.effective_user
+    bot = context.bot
     match = re.match(r"rem_karma\((.+?)\)", query.data)
     if match:
         user_id = match.group(1)
@@ -204,11 +206,20 @@ def rem_karma(update: Update, context: CallbackContext) -> str:
         is_kuki = sql.rem_karma(chat.id)
         if is_kuki:
             is_kuki = sql.rem_karma(user_id)
-            return (
+            LOG = (
                 f"<b>{html.escape(chat.title)}:</b>\n"
                 f"KARMA_DISABLED\n"
                 f"<b>Admin:</b> {mention_html(user.id, html.escape(user.first_name))}\n"
             )
+            log_channel = logsql.get_chat_log_channel(chat.id)
+            if log_channel:
+                return bot.send_message(
+                log_channel,
+                LOG,
+                parse_mode=ParseMode.HTML,
+                disable_web_page_preview=True,
+            )
+            return
         else:
             update.effective_message.edit_text(
                 f"Disabled Karma System.",
@@ -223,6 +234,7 @@ def rem_karma(update: Update, context: CallbackContext) -> str:
 def achannel_add(update: Update, context: CallbackContext) -> str:
     query: Optional[CallbackQuery] = update.callback_query
     user: Optional[User] = update.effective_user
+    bot = context.bot
     match = re.match(r"achannel_add\((.+?)\)", query.data)
     if match:
         user_id = match.group(1)
@@ -230,11 +242,20 @@ def achannel_add(update: Update, context: CallbackContext) -> str:
         is_kuki = sql.set_karma(chat.id)
         if is_kuki:
             is_kuki = sql.set_karma(user_id)
-            return (
+            LOG = (
                 f"<b>{html.escape(chat.title)}:</b>\n"
                 f"KARMA_ENABLE\n"
                 f"<b>Admin:</b> {mention_html(user.id, html.escape(user.first_name))}\n"
             )
+            log_channel = logsql.get_chat_log_channel(chat.id)
+            if log_channel:
+                return bot.send_message(
+                log_channel,
+                LOG,
+                parse_mode=ParseMode.HTML,
+                disable_web_page_preview=True,
+            )
+            return
         else:
             update.effective_message.edit_text(
                 f"Enabled Karma System.",

@@ -44,6 +44,7 @@ from telethon import events
 from telegram.ext import CallbackContext, CommandHandler, Filters
 from telegram.utils.helpers import mention_html
 from telethon.tl import functions, types
+from telegram import User, Chat
 
 from Shikimori import DRAGONS, dispatcher,DEV_USERS, telethn as bot
 from Shikimori.modules.disable import DisableAbleCommandHandler
@@ -56,7 +57,6 @@ from Shikimori.modules.helper_funcs.chat_status import (
     ADMIN_CACHE,
 )
 
-from Shikimori.modules.helper_funcs.admin_rights import user_can_changeinfo
 from Shikimori.modules.helper_funcs.extraction import (
     extract_user,
     extract_user_and_text,
@@ -100,6 +100,21 @@ async def member_permissions(chat_id: int, user_id: int):
     if member.can_manage_voice_chats:
         perms.append("can_manage_voice_chats")
     return perms
+
+def user_can_promote(chat: Chat, user: User, bot_id: int) -> bool:
+    return chat.get_member(user.id).can_promote_members
+
+
+def user_can_ban(chat: Chat, user: User, bot_id: int) -> bool:
+    return chat.get_member(user.id).can_restrict_members
+
+
+def user_can_pin(chat: Chat, user: User, bot_id: int) -> bool:
+    return chat.get_member(user.id).can_pin_messages
+
+
+def user_can_changeinfo(chat: Chat, user: User, bot_id: int) -> bool:
+    return chat.get_member(user.id).can_change_info
 
 @bot_admin
 @user_admin
