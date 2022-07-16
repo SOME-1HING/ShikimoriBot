@@ -50,14 +50,14 @@ async def set_antichannel(_, message):
             state = message.text.split(None, 1)[1].strip()
             state = state.lower()
             if state == "on":
-                sql.is_achannel = sql.sql.is_achannel(chat_id)
+                sql.is_achannel = sql.is_achannel(chat_id)
                 if not sql.is_achannel:
                     sql.set_achannel(chat_id)
                     await message.reply_text("Enabled AntiCHannel System. I will Delete Service Messages from Now on.")
                 else:
                     await message.reply_text("AntiCHannel System is already on.")
             elif state == "off":
-                sql.is_achannel = sql.sql.is_achannel(chat_id)
+                sql.is_achannel = sql.is_achannel(chat_id)
                 if not sql.is_achannel:
                     await message.reply_text("AntiCHannel System is already disabled.")
                     return ""
