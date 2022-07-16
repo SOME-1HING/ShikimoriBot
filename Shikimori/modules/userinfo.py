@@ -55,6 +55,7 @@ from Shikimori import (
     WOLVES,
     dispatcher,
 )
+from io import BytesIO
 from Shikimori.__main__ import TOKEN, USER_INFO
 import Shikimori.modules.sql.userinfo_sql as sql
 from Shikimori.modules.disable import DisableAbleCommandHandler
