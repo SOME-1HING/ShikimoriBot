@@ -24,14 +24,17 @@ async def checkl(_, message):
     except Exception as e:
         print(e)
 
+
+
 @pbot.on_message(filters.command("checkw"))
 async def checkw(_, message):
     user = await message.user
+    await message.reply_text("hmm")
     try:
         if user.is_admin:
             return await message.reply_text("yes")
         elif not user.is_admin:
-            return await message.rely_text("no")
+            return await message.reply_text("no")
         else:
             return await message.reply_text("error")
     except Exception as e:
