@@ -304,9 +304,6 @@ arq = ARQ(ARQ_API_URL, ARQ_API_KEY, session)
 
 pbot = Client("ShikimoriPyro", api_id=API_ID, api_hash=API_HASH, bot_token=TOKEN)
 
-app = Client("Shikimori", api_id=API_ID, api_hash=API_HASH, bot_token=TOKEN)
-
-
 DRAGONS = list(DRAGONS) + list(DEV_USERS)
 DEV_USERS = list(DEV_USERS)
 WOLVES = list(WOLVES)

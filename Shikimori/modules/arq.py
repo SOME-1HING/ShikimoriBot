@@ -1,7 +1,6 @@
 from pyrogram import filters
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
-from Shikimori import SUPPORT_CHAT, pbot
-from Shikimori.utils.arqapi import arq
+from Shikimori import SUPPORT_CHAT, pbot, arq
 
 @pbot.on_message(filters.command("torrent"))
 async def torrent_func(_, message):
