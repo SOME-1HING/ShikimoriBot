@@ -12,14 +12,14 @@ __mod_name__ = "AntiService"
 __help__ = """
 Plugin to delete service messages in a chat!
 
-/antiservice [ON|OFF]
+/aservice [ON|OFF]
 """
 
 @user_admin
-@pbot.on_message(filters.command("antiservice") & filters.group)
+@pbot.on_message(filters.command("aservice") & filters.group)
 async def aservice_state(_, message):
     try:
-        usage = "**Usage:**\n/antiservice [ON|OFF]"
+        usage = "**Usage:**\n/aservice [ON|OFF]"
         if len(message.command) != 2:
             return await message.reply_text(usage)
         chat_id = message.chat.id
