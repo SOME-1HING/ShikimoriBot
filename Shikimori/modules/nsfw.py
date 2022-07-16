@@ -49,7 +49,6 @@ from telegram.utils.helpers import mention_html
 url_nsfw = "https://api.waifu.pics/nsfw/"
 
 @user_admin
-@gloggable
 def add_nsfw(update: Update, context: CallbackContext):
     chat = update.effective_chat
     msg = update.effective_message
@@ -69,7 +68,6 @@ def add_nsfw(update: Update, context: CallbackContext):
         return ""
 
 @user_admin
-@gloggable
 def rem_nsfw(update: Update, context: CallbackContext):
     msg = update.effective_message
     chat = update.effective_chat
