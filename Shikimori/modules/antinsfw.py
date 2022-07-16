@@ -260,11 +260,15 @@ async def del_nsfw(_, message):
         file_id = await get_file_id_from_message(message)
         await message.reply_text("hmm")
         try:
-            results = await arq.nsfw_scan(file=file_id)
+            if not file_id:
+                return await m.edit("Something wrong happened.")
+            file = await pbot.download_media(file_id)
+            results = await arq.nsfw_scan(file=file)
             await message.reply_text("hmm")
             if results.ok:
                 await message.reply_text("ygfyuhmm")
                 return
+            results = results.result
             check = f"{results.is_nsfw}"
             if "True" in check:
                 await message.reply_text("hmm")
