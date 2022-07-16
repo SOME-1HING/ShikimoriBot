@@ -44,7 +44,7 @@ async def anti_service(_, message):
         )
 
 
-@app.on_message(filters.service, group=11)
+@pbot.on_message(filters.service, group=11)
 async def delete_service(_, message):
     chat_id = message.chat.id
     try:
