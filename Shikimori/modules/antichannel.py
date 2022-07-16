@@ -40,7 +40,6 @@ import Shikimori.modules.sql.antichannel_sql as sql
 from Shikimori.modules.log_channel import loggable
 
 @user_admin
-@loggable
 @pbot.on_message(filters.command("antichannel"))
 async def set_antichannel(_, message):
     chat_id = message.chat.id
