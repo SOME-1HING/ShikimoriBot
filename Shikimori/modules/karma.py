@@ -72,6 +72,7 @@ regex_downvote = r"^(\-|\-\-|\-1|👎|noob|baka|idiot|chutiya|nub|noob|wrong|inc
 )
 @capture_err
 async def upvote(_, message):
+    chat_id = message.chat.id
     is_karma = sql.is_karma(chat_id)
     if not is_karma:
         return
@@ -81,7 +82,6 @@ async def upvote(_, message):
         return
     if message.reply_to_message.from_user.id == message.from_user.id:
         return
-    chat_id = message.chat.id
     user_id = message.reply_to_message.from_user.id
     user_mention = message.reply_to_message.from_user.mention
     current_karma = await get_karma(
