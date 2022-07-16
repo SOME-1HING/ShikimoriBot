@@ -129,7 +129,7 @@ async def antinsfw(event):
 #                     return
 #                 try:
 #                     results = await arq.nsfw_scan(file=file)
-#                     await event.respond("hmm") 
+#                     await event.respond("hmm")
 #                     if results.ok:
 #                         return
 #                     await event.respond(f"{results.porn}")
@@ -146,7 +146,7 @@ async def antinsfw(event):
 #                         await dev.delete()
 #                         return final
 #                 except Exception:
-#                     return  
+#                     return
 
 
 
@@ -198,7 +198,7 @@ async def antislang(event):
     else:
         await event.reply("`You Should Be Admin To Do This!`")
         return
- 
+
 @loggable
 @tbot.on(events.NewMessage(pattern=None))
 async def del_profanity(event):
@@ -236,7 +236,7 @@ async def del_nsfw(_, message):
     try:
         sender = message.from_user
     except:
-        sender = message.sender_chat 
+        sender = message.sender_chat
     # if is_user_admin(message, sender.id):
     #     return
 
@@ -265,9 +265,9 @@ async def del_nsfw(_, message):
             file = await pbot.download_media(file_id)
             results = await arq.nsfw_scan(file=file)
             await message.reply_text("hmm")
-            if results.ok:
-                await message.reply_text("ygfyuhmm")
-                return
+            # if results.ok:
+            #     await message.reply_text("ygfyuhmm")
+            #     return
             results = results.result
             check = f"{results.is_nsfw}"
             if "True" in check:
@@ -283,4 +283,4 @@ async def del_nsfw(_, message):
                 return final
         except Exception:
             await message.reply_text("hmmjgiug76677")
-            return  
+            return
