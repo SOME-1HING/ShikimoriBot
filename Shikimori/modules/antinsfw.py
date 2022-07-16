@@ -22,7 +22,7 @@ from google_trans_new import google_translator
 from telethon import events
 from telethon.tl.types import ChatBannedRights
 from Shikimori.modules.nsfwscan import get_file_id_from_message
-from Shikimori import dispatcher
+from Shikimori import DRAGONS, dispatcher
 from Shikimori.mongo import db
 import Shikimori.modules.sql.nsfw_sql as sql
 from Shikimori.pyrogramee.telethonbasics import is_admin
@@ -229,13 +229,17 @@ async def del_profanity(event):
     filters.all
     & filters.group
 )
-async def del_nsfw(_, message):
+async def del_nsfw(client, message):
     try:
         sender = message.from_user
     except:
         sender = message.sender_chat
-    # if is_user_admin(message, sender.id):
-    #     return
+    if (
+            not client.get_chat_member(chat_id, sender.id).status
+            in ("administrator", "creator")
+            and not sender.id in DRAGONS
+        ):
+        return
 
     if (
         not message.document
@@ -245,39 +249,39 @@ async def del_nsfw(_, message):
         and not message.video
     ):
         return
-    chat_id = message.chat.id
     chats = antinsfw_chats.find({})
     for c in chats:
+        chat_id = message.chat.id
         is_nsfw = sql.is_nsfw(chat_id)
         if is_nsfw:
             return
-        file_id = await get_file_id_from_message(message)
-        try:
-            if not file_id:
-                return
-            file = await pbot.download_media(file_id)
-            results = await arq.nsfw_scan(file=file)
-            results = results.result
-            check = f"{results.is_nsfw}"
-            if "True" in check:
-                await message.delete()
-                st = sender.first_name
-                hh = sender.id
-                final = f"**NSFW DETECTED**\n\n[{st}](tg://user?id={hh}) your message contain NSFW content.. So, {bot_name} deleted the message\n\n **Nsfw Sender - User / Bot :** [{st}](tg://user?id={hh})  \n\n**Neutral:** `{results.neutral} %`\n**Porn:** `{results.porn} %`\n**Hentai:** `{results.hentai} %`\n**Sexy:** `{results.sexy} %`\n**Drawings:** `{results.drawings} %`\n**NSFW:** `{results.is_nsfw}` \n\n**#ANTI_NSFW** "
-                dev = await message.reply_text(final)
-                os.remove(file)
-                await asyncio.sleep(10)
-                await dev.delete()
-                try:
-                    log_channel = logsql.get_chat_log_channel(chat_id)
-                    if log_channel:
-                        await message.reply_text(f"{log_channel}")
-                        await pbot.send_message(
-                            log_channel,
-                            f"{final}"
-                        )
-                    return 
-                except Exception as e:
-                    return print("anti-nsfw - " + str(e))
-        except Exception as e:
-            return print("anti-nsfw - " + str(e))
+        if chat_id == c["id"]:
+            file_id = await get_file_id_from_message(message)
+            try:
+                if not file_id:
+                    return
+                file = await pbot.download_media(file_id)
+                results = await arq.nsfw_scan(file=file)
+                results = results.result
+                check = f"{results.is_nsfw}"
+                if "True" in check:
+                    await message.delete()
+                    st = sender.first_name
+                    hh = sender.id
+                    final = f"**NSFW DETECTED**\n\n[{st}](tg://user?id={hh}) your message contain NSFW content.. So, {bot_name} deleted the message\n\n **Nsfw Sender - User / Bot :** [{st}](tg://user?id={hh})  \n\n**Neutral:** `{results.neutral} %`\n**Porn:** `{results.porn} %`\n**Hentai:** `{results.hentai} %`\n**Sexy:** `{results.sexy} %`\n**Drawings:** `{results.drawings} %`\n**NSFW:** `{results.is_nsfw}` \n\n**#ANTI_NSFW** "
+                    dev = await message.reply_text(final)
+                    os.remove(file)
+                    await asyncio.sleep(10)
+                    await dev.delete()
+                    try:
+                        log_channel = logsql.get_chat_log_channel(chat_id)
+                        if log_channel:
+                            await pbot.send_message(
+                                log_channel,
+                                f"{final}"
+                            )
+                        return 
+                    except Exception as e:
+                        return print("anti-nsfw - " + str(e))
+            except Exception as e:
+                return print("anti-nsfw - " + str(e))
