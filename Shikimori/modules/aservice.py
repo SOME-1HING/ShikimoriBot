@@ -12,7 +12,7 @@ __mod_name__ = "AntiService"
 __help__ = """
 Plugin to delete service messages in a chat!
 
-/antiservice [enable|disable]
+/antiservice [ON|OFF]
 """
 
 @user_admin
@@ -29,7 +29,9 @@ async def aservice_state(_, message):
             is_aservice = sql.is_aservice(chat_id)
             if not is_aservice:
                 sql.set_aservice(chat_id)
-            await message.reply_text("Enabled AntiService System. I will Delete Service Messages from Now on.")
+                await message.reply_text("Enabled AntiService System. I will Delete Service Messages from Now on.")
+            else:
+                await message.reply_text("AntiService System is already on.")
         elif state == "off":
             is_aservice = sql.is_aservice(chat_id)
             if not is_aservice:
