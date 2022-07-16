@@ -5,38 +5,24 @@ import asyncio
 from pyrogram import filters
 
 from Shikimori import DRAGONS, pbot
-from Shikimori.pyrogramee.telethonbasics import is_admin
 import Shikimori.modules.sql.antiservice_sql as sql
-from Shikimori.core.decorators.errors import capture_err
-import json
 import re
-import os
 import html
-import requests
-from Shikimori import AI_API_KEY as api
-
-from time import sleep
 from telegram import ParseMode
 from telegram import (CallbackQuery, Chat, MessageEntity, InlineKeyboardButton,
                       InlineKeyboardMarkup, Message, ParseMode, Update, Bot, User)
-from telegram.ext import (CallbackContext, CallbackQueryHandler, CommandHandler,
-                          DispatcherHandlerStop, Filters, MessageHandler,
-                          run_async)
-from telegram.error import BadRequest, RetryAfter, Unauthorized
-from telegram.utils.helpers import mention_html, mention_markdown, escape_markdown
+from telegram.ext import (CallbackContext, CallbackQueryHandler, CommandHandler)
+from telegram.utils.helpers import mention_html
 
-from Shikimori.modules.helper_funcs.filters import CustomFilters
 from Shikimori.modules.helper_funcs.chat_status import user_admin, user_admin_no_reply
-from Shikimori import  dispatcher, updater, SUPPORT_CHAT
+from Shikimori import  dispatcher
 from Shikimori.modules.log_channel import loggable
-
-bot_name = f"{dispatcher.bot.first_name}"
 
 __mod_name__ = "AntiService"
 __help__ = """
 Plugin to delete service messages in a chat!
 
-/antiservice [ON|OFF]
+/antiservice
 """
 
 
@@ -114,32 +100,28 @@ def aservice(update: Update, context: CallbackContext):
     )
 
 
-@pbot.on_message(filters.service & filters.group)
-@capture_err
+@pbot.on_message(filters.service)
 async def del_service(_, message):
     chat_id = message.chat.id
     try:
         is_aservice = sql.is_aservice(chat_id)
-        if not is_aservice:
-            return
-        await asyncio.sleep(1)
-        await message.delete()
-        return
-
+        if is_aservice:
+            await asyncio.sleep(10)
+            await message.delete()
     except Exception as e:
-        return print("anti-service - " + str(e))
+        print("anti-service - " + str(e))
 
 
-CHATBOTK_HANDLER = CommandHandler("antiservice", aservice, run_async = True)
-ADD_CHAT_HANDLER = CallbackQueryHandler(aservice_add, pattern=r"aservice_add", run_async = True)
-RM_CHAT_HANDLER = CallbackQueryHandler(aservice_rem, pattern=r"aservice_rem", run_async = True)
+ANTISERVICE_HANDLER = CommandHandler("antiservice", aservice, run_async = True)
+ADD_ASERVICE_HANDLER = CallbackQueryHandler(aservice_add, pattern=r"aservice_add", run_async = True)
+RM_ASEVICE_HANDLER = CallbackQueryHandler(aservice_rem, pattern=r"aservice_rem", run_async = True)
 
-dispatcher.add_handler(ADD_CHAT_HANDLER)
-dispatcher.add_handler(CHATBOTK_HANDLER)
-dispatcher.add_handler(RM_CHAT_HANDLER)
+dispatcher.add_handler(ADD_ASERVICE_HANDLER)
+dispatcher.add_handler(ANTISERVICE_HANDLER)
+dispatcher.add_handler(RM_ASEVICE_HANDLER)
 
 __handlers__ = [
-    ADD_CHAT_HANDLER,
-    CHATBOTK_HANDLER,
-    RM_CHAT_HANDLER,
+    ADD_ASERVICE_HANDLER,
+    ANTISERVICE_HANDLER,
+    RM_ASEVICE_HANDLER,
 ]

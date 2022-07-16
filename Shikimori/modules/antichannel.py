@@ -1,76 +1,91 @@
-"""
-BSD 2-Clause License
+# Written By SOME-1HING for Shikimori
+# Kang With Proper Credits
 
-Copyright (C) 2017-2019, Paul Larsen
-Copyright (C) 2021-2022, Awesome-RJ, [ https://github.com/Awesome-RJ ]
-Copyright (c) 2021-2022, Yūki • Black Knights Union, [ https://github.com/Awesome-RJ/CutiepiiRobot ]
 
-All rights reserved.
-
-Redistribution and use in source and binary forms, with or without
-modification, are permitted provided that the following conditions are met:
-
-1. Redistributions of source code must retain the above copyright notice, this
-   list of conditions and the following disclaimer.
-
-2. Redistributions in binary form must reproduce the above copyright notice,
-   this list of conditions and the following disclaimer in the documentation
-   and/or other materials provided with the distribution.
-
-THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
-FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
-CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
-OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-"""
-import html
-from telegram import Update, ParseMode
-from telegram.ext import Filters, CallbackContext
-from pyrogram import filters, enums
-
-from Shikimori import DRAGONS, dispatcher, pbot
-from Shikimori.pyrogramee.telethonbasics import is_admin
 import Shikimori.modules.sql.antichannel_sql as sql
-from Shikimori.core.decorators.errors import capture_err
+import re
+import html
+from telegram import ParseMode
+from telegram import (CallbackQuery, Chat, InlineKeyboardButton,
+                      InlineKeyboardMarkup, ParseMode, Update, User, Filters)
+from telegram.ext import (CallbackContext, CallbackQueryHandler, CommandHandler, MessageHandler)
+from telegram.utils.helpers import mention_html
 
-@pbot.on_message(filters.command("antichannel") & filters.group)
-@capture_err
-async def set_antichannel(_, message):
-    user = message.from_user
-    if await is_admin(message.chat.id, message.from_user.id) or user.id in DRAGONS:
-        try:
-            usage = "**Usage:**\n/achannel [ON|OFF]"
-            if len(message.command) != 2:
-                return await message.reply_text(usage)
-            chat_id = message.chat.id
-            state = message.text.split(None, 1)[1].strip()
-            state = state.lower()
-            if state == "on":
-                sql.is_achannel = sql.is_achannel(chat_id)
-                if not sql.is_achannel:
-                    sql.set_achannel(chat_id)
-                    await message.reply_text("Enabled AntiCHannel System. I will Delete Service Messages from Now on.")
-                else:
-                    await message.reply_text("AntiCHannel System is already on.")
-            elif state == "off":
-                sql.is_achannel = sql.is_achannel(chat_id)
-                if not sql.is_achannel:
-                    await message.reply_text("AntiCHannel System is already disabled.")
-                    return ""
-                else:
-                    sql.rem_achannel(chat_id)
-                await message.reply_text("Disabled AntiCHannel System. I won't Be Deleting Service Message from Now on.")
-            else:
-                await message.reply_text(usage)
-        except Exception as e:
-            return print("achannel - " + str(e))
-    else:
-        return await message.reply_text("You need to be admin to use this command.")
+from Shikimori.modules.helper_funcs.chat_status import user_admin, user_admin_no_reply
+from Shikimori import  dispatcher
+from Shikimori.modules.log_channel import loggable
+
+@user_admin_no_reply
+@loggable
+def achannel_rem(update: Update, context: CallbackContext) -> str:
+    query: Optional[CallbackQuery] = update.callback_query
+    user: Optional[User] = update.effective_user
+    match = re.match(r"achannel_rem\((.+?)\)", query.data)
+    if match:
+        user_id = match.group(1)
+        chat: Optional[Chat] = update.effective_chat
+        is_kuki = sql.rem_achannel(chat.id)
+        if is_kuki:
+            is_kuki = sql.rem_achannel(user_id)
+            return (
+                f"<b>{html.escape(chat.title)}:</b>\n"
+                f"ANTI_CHANNEL_DISABLED\n"
+                f"<b>Admin:</b> {mention_html(user.id, html.escape(user.first_name))}\n"
+            )
+        else:
+            update.effective_message.edit_text(
+                f"Disabled AntiCHannel System. I won't Be Deleting Service Message from Now on.",
+                parse_mode=ParseMode.HTML,
+            )
+
+    return ""
+
+
+@user_admin_no_reply
+@loggable
+def achannel_add(update: Update, context: CallbackContext) -> str:
+    query: Optional[CallbackQuery] = update.callback_query
+    user: Optional[User] = update.effective_user
+    match = re.match(r"achannel_add\((.+?)\)", query.data)
+    if match:
+        user_id = match.group(1)
+        chat: Optional[Chat] = update.effective_chat
+        is_kuki = sql.set_achannel(chat.id)
+        if is_kuki:
+            is_kuki = sql.set_achannel(user_id)
+            return (
+                f"<b>{html.escape(chat.title)}:</b>\n"
+                f"ANTI_CHANNEL_ENABLE\n"
+                f"<b>Admin:</b> {mention_html(user.id, html.escape(user.first_name))}\n"
+            )
+        else:
+            update.effective_message.edit_text(
+                f"Enabled AntiCHannel System. I will Delete Service Messages from Now on.",
+                parse_mode=ParseMode.HTML,
+            )
+
+    return ""
+
+
+@user_admin
+@loggable
+def aservice(update: Update, context: CallbackContext):
+    user = update.effective_user
+    message = update.effective_message
+    msg = "Choose an option"
+    keyboard = InlineKeyboardMarkup([[
+        InlineKeyboardButton(
+            text="Enable",
+            callback_data="achannel_add({})")],
+       [
+        InlineKeyboardButton(
+            text="Disable",
+            callback_data="achannel_rem({})")]])
+    message.reply_text(
+        msg,
+        reply_markup=keyboard,
+        parse_mode=ParseMode.HTML,
+    )
 
 async def eliminate_channel(update: Update, context: CallbackContext):
     message = update.effective_message
@@ -82,6 +97,27 @@ async def eliminate_channel(update: Update, context: CallbackContext):
         await message.delete()
         sender_chat = message.sender_chat
         await bot.ban_chat_sender_chat(sender_chat_id=sender_chat.id, chat_id=chat.id)
+
+ANTICHANNEL_HANDLER = CommandHandler("antichannel", aservice, run_async = True)
+ADD_CHANNEL_HANDLER = CallbackQueryHandler(achannel_add, pattern=r"achannel_add", run_async = True)
+RM_CHANNEL_HANDLER = CallbackQueryHandler(achannel_rem, pattern=r"achannel_rem", run_async = True)
+CHANNEL_ELI_HANDLER = MessageHandler(
+    Filters.all & ~Filters.status_update & Filters.chat_type.groups, eliminate_channel, run_async = True
+)
+
+dispatcher.add_handler(ADD_CHANNEL_HANDLER)
+dispatcher.add_handler(ANTICHANNEL_HANDLER)
+dispatcher.add_handler(RM_CHANNEL_HANDLER)
+dispatcher.add_handler(CHANNEL_ELI_HANDLER)
+
+__handlers__ = [
+    ADD_CHANNEL_HANDLER,
+    ANTICHANNEL_HANDLER,
+    RM_CHANNEL_HANDLER,
+    CHANNEL_ELI_HANDLER
+]
+
+
 
 __mod_name__ = "AntiChannel"
 __help__ = """
