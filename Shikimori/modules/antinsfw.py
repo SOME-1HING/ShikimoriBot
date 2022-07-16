@@ -271,9 +271,9 @@ async def del_nsfw(_, message):
                 hh = sender.id
                 final = f"**NSFW DETECTED**\n\n[{st}](tg://user?id={hh}) your message contain NSFW content.. So, {bot_name} deleted the message\n\n **Nsfw Sender - User / Bot :** [{st}](tg://user?id={hh})  \n\n**Neutral:** `{results.neutral} %`\n**Porn:** `{results.porn} %`\n**Hentai:** `{results.hentai} %`\n**Sexy:** `{results.sexy} %`\n**Drawings:** `{results.drawings} %`\n**NSFW:** `{results.is_nsfw}` \n\n**#ANTI_NSFW** "
                 dev = await message.reply_text(final)
-                os.remove(message)
-                await dev.delete(5)
+                os.remove(file)
                 await asyncio.sleep(10)
+                await dev.delete()
                 return final
         except Exception as e:
             return print("anti-nsfw - " + str(e))
