@@ -11,7 +11,7 @@ async def is_pyroadmin(_, message):
     except:
         return False
 
-@is_pyroadmin
+
 @pbot.on_message(filters.command("check"))
 async def check(_, message):
     if is_pyroadmin:
