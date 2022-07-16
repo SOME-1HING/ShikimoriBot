@@ -55,7 +55,6 @@ from Shikimori import (
     WOLVES,
     dispatcher,
 )
-from io import BytesIO
 from Shikimori.__main__ import TOKEN, USER_INFO
 import Shikimori.modules.sql.userinfo_sql as sql
 from Shikimori.modules.disable import DisableAbleCommandHandler
@@ -263,22 +262,18 @@ def info(update: Update, context: CallbackContext):
     ]
     user_id = extract_user(update.effective_message, args)
 
-    if user_id := extract_user(update.effective_message, args):
+    if user_id:
         user = bot.get_chat(user_id)
 
     elif not message.reply_to_message and not args:
-        user = (
-            message.sender_chat
-            if message.sender_chat is not None
-            else message.from_user
-        )
+        user = message.from_user
 
     elif not message.reply_to_message and (
         not args
         or (
             len(args) >= 1
             and not args[0].startswith("@")
-            and not args[0].lstrip("-").isdigit()
+            and not args[0].isdigit()
             and not message.parse_entities([MessageEntity.TEXT_MENTION])
         )
     ):
@@ -289,127 +284,99 @@ def info(update: Update, context: CallbackContext):
         return
 
     rep = message.reply_text("<code>Appraising...</code>", parse_mode=ParseMode.HTML)
-    if user.type == "private":
-        text = (
-        f"<b>Chat Info:</b>\n"
-        f"<b>Title:</b> {user.title}"
+
+    text = (
+        f"╒═══「<b>• Appraisal results •</b> 」\n"
+        f"• ID: <code>{user.id}</code>\n"
+        f"• First Name: {html.escape(user.first_name)}"
     )
-        if user.username:
-            text += f"\n<b>Username:</b> @{html.escape(user.username)}"
-        text += f"\n<b>Chat ID:</b> <code>{user.id}</code>"
-        text += f"\n<b>Chat Type:</b> {user.type.capitalize()}"
-        try:
-            profile = bot.get_user_profile_photos(user.id).photos[0][-1]
-            _file = bot.get_file(profile["file_id"])
 
-            _file = _file.download(out=BytesIO())
-            _file.seek(0)
+    if user.last_name:
+        text += f"\n• Last Name: {html.escape(user.last_name)}"
 
-            message.reply_document(
-                    document=_file,
-                    caption=(text),
-                    parse_mode=ParseMode.HTML,
+    if user.username:
+        text += f"\n• Username: @{html.escape(user.username)}"
+
+    text += f"\n• Userlink: {mention_html(user.id, 'link')}"
+
+    if chat.type != "private" and user_id != bot.id:
+        _stext = "\n• Presence: <code>{}</code>"
+
+        afk_st = is_user_afk(user.id)
+        if afk_st:
+            text += _stext.format("AFK")
+        else:
+            status = status = bot.get_chat_member(chat.id, user.id).status
+            if status:
+                if status in {"left", "kicked"}:
+                    text += _stext.format("Not here")
+                elif status == "member":
+                    text += _stext.format("Detected")
+                elif status in {"administrator", "creator"}:
+                    text += _stext.format("Admin")
+    if user_id not in [bot.id, 777000, 1087968824]:
+        userhp = hpmanager(user)
+        text += f"\n\n<b>Health:</b> <code>{userhp['earnedhp']}/{userhp['totalhp']}</code>\n[<i>{make_bar(int(userhp['percentage']))} </i>{userhp['percentage']}%]"
+
+    disaster_level_present = False
+
+    if user.id == OWNER_ID:
+        text += "\n\nThis person is my 'Owner'."
+    elif user.id in DEV_USERS:
+        text += "\n\nThis person is my 'Best Friend'."
+        disaster_level_present = True
+    elif user.id in DRAGONS:
+        text += "\n\nThis person is my 'Friend'."
+        disaster_level_present = True
+    elif user.id in DEMONS:
+        text += "\n\nThis person is my 'Servant'."
+        disaster_level_present = True
+    elif user.id in TIGERS:
+        text += "\n\nThis person is just a 'Peasant'."
+        disaster_level_present = True
+    elif user.id in WOLVES:
+        text += "\n\nThis person is just a 'Slave'."
+        disaster_level_present = True
+
+
+    try:
+        user_member = chat.get_member(user.id)
+        if user_member.status == "administrator":
+            result = requests.post(
+                f"https://api.telegram.org/bot{TOKEN}/getChatMember?chat_id={chat.id}&user_id={user.id}",
             )
+            result = result.json()["result"]
+            if "custom_title" in result.keys():
+                custom_title = result["custom_title"]
+                text += f"\n\nTitle:\n<b>{custom_title}</b>"
+    except BadRequest:
+        pass
 
-        # Incase user don't have profile pic, send normal text
-        except IndexError:
-            message.reply_text(
-                    text, parse_mode=ParseMode.HTML, disable_web_page_preview=True
-            )
-
-    else:
-        text = (
-            f"╒═══「<b>• Appraisal results •</b> 」\n"
-            f"• ID: <code>{user.id}</code>\n"
-            f"• First Name: {html.escape(user.first_name)}"
-        )
-
-        if user.last_name:
-            text += f"\n• Last Name: {html.escape(user.last_name)}"
-
-        if user.username:
-            text += f"\n• Username: @{html.escape(user.username)}"
-
-        text += f"\n• Userlink: {mention_html(user.id, 'link')}"
-
-        if chat.type != "private" and user_id != bot.id:
-            _stext = "\n• Presence: <code>{}</code>"
-
-            afk_st = is_user_afk(user.id)
-            if afk_st:
-                text += _stext.format("AFK")
-            else:
-                status = status = bot.get_chat_member(chat.id, user.id).status
-                if status:
-                    if status in {"left", "kicked"}:
-                        text += _stext.format("Not here")
-                    elif status == "member":
-                        text += _stext.format("Detected")
-                    elif status in {"administrator", "creator"}:
-                        text += _stext.format("Admin")
-        if user_id not in [bot.id, 777000, 1087968824]:
-            userhp = hpmanager(user)
-            text += f"\n\n<b>Health:</b> <code>{userhp['earnedhp']}/{userhp['totalhp']}</code>\n[<i>{make_bar(int(userhp['percentage']))} </i>{userhp['percentage']}%]"
-
-        disaster_level_present = False
-
-        if user.id == OWNER_ID:
-            text += "\n\nThis person is my 'Owner'."
-        elif user.id in DEV_USERS:
-            text += "\n\nThis person is my 'Best Friend'."
-            disaster_level_present = True
-        elif user.id in DRAGONS:
-            text += "\n\nThis person is my 'Friend'."
-            disaster_level_present = True
-        elif user.id in DEMONS:
-            text += "\n\nThis person is my 'Servant'."
-            disaster_level_present = True
-        elif user.id in TIGERS:
-            text += "\n\nThis person is just a 'Peasant'."
-            disaster_level_present = True
-        elif user.id in WOLVES:
-            text += "\n\nThis person is just a 'Slave'."
-            disaster_level_present = True
-
-
+    for mod in USER_INFO:
         try:
-            user_member = chat.get_member(user.id)
-            if user_member.status == "administrator":
-                result = requests.post(
-                    f"https://api.telegram.org/bot{TOKEN}/getChatMember?chat_id={chat.id}&user_id={user.id}",
-                )
-                result = result.json()["result"]
-                if "custom_title" in result.keys():
-                    custom_title = result["custom_title"]
-                    text += f"\n\nTitle:\n<b>{custom_title}</b>"
-        except BadRequest:
-            pass
+            mod_info = mod.__user_info__(user.id).strip()
+        except TypeError:
+            mod_info = mod.__user_info__(user.id, chat.id).strip()
+        if mod_info:
+            text += "\n\n" + mod_info
 
-        for mod in USER_INFO:
-            try:
-                mod_info = mod.__user_info__(user.id).strip()
-            except TypeError:
-                mod_info = mod.__user_info__(user.id, chat.id).strip()
-            if mod_info:
-                text += "\n\n" + mod_info
-
-        try:
-            profile = context.bot.get_user_profile_photos(user.id).photos[0][-1]
-            context.bot.sendChatAction(chat.id, "upload_photo")
-            context.bot.send_photo(
-            chat.id,
-            photo=profile,
-            caption=(text),
-            reply_markup=InlineKeyboardMarkup(buttons),
-                parse_mode=ParseMode.HTML,            
-        )
-        # Incase user don't have profile pic, send normal text
-        except IndexError:
-            message.reply_text(
-            text,
+    try:
+        profile = context.bot.get_user_profile_photos(user.id).photos[0][-1]
+        context.bot.sendChatAction(chat.id, "upload_photo")
+        context.bot.send_photo(
+        chat.id,
+        photo=profile,
+        caption=(text),
         reply_markup=InlineKeyboardMarkup(buttons),
-                parse_mode=ParseMode.HTML,            
-                    )
+            parse_mode=ParseMode.HTML,            
+    )
+    # Incase user don't have profile pic, send normal text
+    except IndexError:
+        message.reply_text(
+        text,
+    reply_markup=InlineKeyboardMarkup(buttons),
+            parse_mode=ParseMode.HTML,            
+                )
 
     rep.delete()
 
