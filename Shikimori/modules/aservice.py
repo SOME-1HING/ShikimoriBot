@@ -1,4 +1,4 @@
-# Written By [MaskedVirus | swatv3nub] for William and Ryūga
+# Written By SOME-1HING for Shikimori
 # Kang With Proper Credits
 
 import asyncio
@@ -16,7 +16,7 @@ Plugin to delete service messages in a chat!
 """
 
 @user_admin
-@pbot.on_message(filters.command(("antiservice", "aservice")) & filters.group)
+@pbot.on_message(filters.command("antiservice") & filters.group)
 async def aservice_state(_, message):
     try:
         usage = "**Usage:**\n/antiservice [ON|OFF]"
