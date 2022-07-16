@@ -87,16 +87,16 @@ def aservice(update: Update, context: CallbackContext):
         parse_mode=ParseMode.HTML,
     )
 
-async def eliminate_channel(update: Update, context: CallbackContext):
+def eliminate_channel(update: Update, context: CallbackContext):
     message = update.effective_message
     chat = update.effective_chat
     bot = context.bot
     if not sql.is_achannel(chat.id):
         return
     if message.sender_chat and message.sender_chat.type == "channel" and not message.is_automatic_forward:
-        await message.delete()
+        message.delete()
         sender_chat = message.sender_chat
-        await bot.ban_chat_sender_chat(sender_chat_id=sender_chat.id, chat_id=chat.id)
+        bot.ban_chat_sender_chat(sender_chat_id=sender_chat.id, chat_id=chat.id)
 
 ANTICHANNEL_HANDLER = CommandHandler("antichannel", aservice, run_async = True)
 ADD_CHANNEL_HANDLER = CallbackQueryHandler(achannel_add, pattern=r"achannel_add", run_async = True)

@@ -33,13 +33,22 @@ CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
 OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 """
+import re
+import html
+from telegram import ParseMode
+from telegram import (CallbackQuery, Chat, InlineKeyboardButton,
+                      InlineKeyboardMarkup, ParseMode, Update, User)
+from telegram.ext import (CallbackContext, CallbackQueryHandler, CommandHandler)
+from telegram.utils.helpers import mention_html
+
+from Shikimori.modules.helper_funcs.chat_status import user_admin, user_admin_no_reply
+from Shikimori import  dispatcher
+from Shikimori.modules.log_channel import loggable
 
 import asyncio
 from pyrogram import filters
 
 from Shikimori import DRAGONS, pbot as app, BOT_ID
-from Shikimori.utils.errors import capture_err
-from Shikimori.pyrogramee.telethonbasics import is_admin
 import Shikimori.modules.sql.karma_sql as sql
 from Shikimori.ex_plugins.dbfunctions import (
     alpha_to_int,
@@ -183,34 +192,91 @@ async def karma(_, message):
         karma = karma["karma"] if karma else 0
         await message.reply_text(f"**Total Points**: __{karma}__")
 
-@app.on_message(filters.command("karma") & filters.group)
-@capture_err
-async def karma_state(_, message):
-    user = message.from_user
-    if await is_admin(message.chat.id, message.from_user.id) or user.id in DRAGONS:
-        usage = "**Usage:**\n/karma [ON|OFF]"
-        if len(message.command) != 2:
-            return await message.reply_text(usage)
-        chat_id = message.chat.id
-        state = message.text.split(None, 1)[1].strip()
-        state = state.lower()
-        if state == "on":
-            is_karma = sql.is_karma(chat_id)
-            if not is_karma:
-                sql.set_karma(chat_id)
-            await message.reply_text("Enabled karma system.")
-        elif state == "off":
-            is_karma = sql.is_karma(chat_id)
-            if not is_karma:
-                await message.reply_text("Karma is already Deactivated")
-                return ""
-            else:
-                sql.rem_karma(chat_id)
-            await message.reply_text("Disabled karma system.")
+@user_admin_no_reply
+@loggable
+def rem_karma(update: Update, context: CallbackContext) -> str:
+    query: Optional[CallbackQuery] = update.callback_query
+    user: Optional[User] = update.effective_user
+    match = re.match(r"rem_karma\((.+?)\)", query.data)
+    if match:
+        user_id = match.group(1)
+        chat: Optional[Chat] = update.effective_chat
+        is_kuki = sql.rem_karma(chat.id)
+        if is_kuki:
+            is_kuki = sql.rem_karma(user_id)
+            return (
+                f"<b>{html.escape(chat.title)}:</b>\n"
+                f"KARMA_DISABLED\n"
+                f"<b>Admin:</b> {mention_html(user.id, html.escape(user.first_name))}\n"
+            )
         else:
-            await message.reply_text(usage)
-    else:
-        return await message.reply_text("You need to be admin to use this command.")
+            update.effective_message.edit_text(
+                f"Disabled Karma System.",
+                parse_mode=ParseMode.HTML,
+            )
+
+    return ""
+
+
+@user_admin_no_reply
+@loggable
+def achannel_add(update: Update, context: CallbackContext) -> str:
+    query: Optional[CallbackQuery] = update.callback_query
+    user: Optional[User] = update.effective_user
+    match = re.match(r"achannel_add\((.+?)\)", query.data)
+    if match:
+        user_id = match.group(1)
+        chat: Optional[Chat] = update.effective_chat
+        is_kuki = sql.set_karma(chat.id)
+        if is_kuki:
+            is_kuki = sql.set_karma(user_id)
+            return (
+                f"<b>{html.escape(chat.title)}:</b>\n"
+                f"KARMA_ENABLE\n"
+                f"<b>Admin:</b> {mention_html(user.id, html.escape(user.first_name))}\n"
+            )
+        else:
+            update.effective_message.edit_text(
+                f"Enabled Karma System.",
+                parse_mode=ParseMode.HTML,
+            )
+
+    return ""
+
+
+@user_admin
+@loggable
+def karma_status(update: Update, context: CallbackContext):
+    user = update.effective_user
+    message = update.effective_message
+    msg = "Choose an option"
+    keyboard = InlineKeyboardMarkup([[
+        InlineKeyboardButton(
+            text="Enable",
+            callback_data="achannel_add({})")],
+       [
+        InlineKeyboardButton(
+            text="Disable",
+            callback_data="rem_karma({})")]])
+    message.reply_text(
+        msg,
+        reply_markup=keyboard,
+        parse_mode=ParseMode.HTML,
+    )
+
+KARMA_STATUS_HANDLER = CommandHandler("antichannel", karma_status, run_async = True)
+ADD_KARMA_HANDLER = CallbackQueryHandler(achannel_add, pattern=r"achannel_add", run_async = True)
+RM_KARMA_HANDLER = CallbackQueryHandler(rem_karma, pattern=r"rem_karma", run_async = True)
+
+dispatcher.add_handler(ADD_KARMA_HANDLER)
+dispatcher.add_handler(KARMA_STATUS_HANDLER)
+dispatcher.add_handler(RM_KARMA_HANDLER)
+
+__handlers__ = [
+    ADD_KARMA_HANDLER,
+    KARMA_STATUS_HANDLER,
+    RM_KARMA_HANDLER,
+]
 
 __mod_name__ = "Karma ☯️"
 __help__ = """
