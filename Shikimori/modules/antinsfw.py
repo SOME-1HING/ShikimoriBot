@@ -230,13 +230,6 @@ async def del_profanity(event):
     & filters.group
 )
 async def del_nsfw(client, message):
-    chat_id = message.chat.id
-    try:
-        sender = message.from_user
-    except:
-        sender = message.sender_chat
-    if await is_admin(message.chat.id, message.from_user.id) or sender.id in DRAGONS:
-        return
     if (
         not message.document
         and not message.photo
@@ -247,6 +240,10 @@ async def del_nsfw(client, message):
         return
     chats = antinsfw_chats.find({})
     for c in chats:
+        chat_id = message.chat.id
+        user = message.from_user
+        if await is_admin(message.chat.id, message.from_user.id) or user.id in DRAGONS:
+            return
         is_nsfw = sql.is_nsfw(chat_id)
         if is_nsfw:
             return
@@ -261,8 +258,8 @@ async def del_nsfw(client, message):
                 check = f"{results.is_nsfw}"
                 if "True" in check:
                     await message.delete()
-                    st = sender.first_name
-                    hh = sender.id
+                    st = user.first_name
+                    hh = user.id
                     final = f"**NSFW DETECTED**\n\n[{st}](tg://user?id={hh}) your message contain NSFW content.. So, {bot_name} deleted the message\n\n **Nsfw Sender - User / Bot :** [{st}](tg://user?id={hh})  \n\n**Neutral:** `{results.neutral} %`\n**Porn:** `{results.porn} %`\n**Hentai:** `{results.hentai} %`\n**Sexy:** `{results.sexy} %`\n**Drawings:** `{results.drawings} %`\n**NSFW:** `{results.is_nsfw}` \n\n**#ANTI_NSFW** "
                     dev = await message.reply_text(final)
                     os.remove(file)
@@ -277,6 +274,6 @@ async def del_nsfw(client, message):
                             )
                         return 
                     except Exception as e:
-                        return print("anti-nsfw - " + str(e))
+                        return print("anti-nsfw-log - " + str(e))
             except Exception as e:
                 return print("anti-nsfw - " + str(e))
