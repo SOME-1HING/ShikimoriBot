@@ -27,7 +27,6 @@ def split_limits(text):
 
     return result
 
-@pbot
 def capture_err(func):
     @wraps(func)
     async def capture(client, message, *args, **kwargs):
