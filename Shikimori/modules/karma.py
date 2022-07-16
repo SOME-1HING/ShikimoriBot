@@ -187,8 +187,8 @@ async def karma(_, message):
 @app.on_message(filters.command("karma") & filters.group)
 async def karma_state(_, message):
     usage = "**Usage:**\n/karma [ON|OFF]"
-    if await is_admin(message.chat.id, message.from_user.id):
-
+    check = await is_admin(message.chat.id, message.from_user.id)
+    if check:
         if len(message.command) != 2:
             return await message.reply_text(usage)
         chat_id = message.chat.id
