@@ -230,15 +230,12 @@ async def del_profanity(event):
     & filters.group
 )
 async def del_nsfw(client, message):
+    chat_id = message.chat.id
     try:
         sender = message.from_user
     except:
         sender = message.sender_chat
-    if (
-            not client.get_chat_member(chat_id, sender.id).status
-            in ("administrator", "creator")
-            and not sender.id in DRAGONS
-        ):
+    if client.get_chat_member(chat_id, sender.id).status in ("administrator", "creator") and  sender.id in DRAGONS:
         return
 
     if (
@@ -251,7 +248,6 @@ async def del_nsfw(client, message):
         return
     chats = antinsfw_chats.find({})
     for c in chats:
-        chat_id = message.chat.id
         is_nsfw = sql.is_nsfw(chat_id)
         if is_nsfw:
             return
