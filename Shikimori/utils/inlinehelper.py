@@ -39,7 +39,7 @@ import aiohttp
 from googletrans import Translator
 from motor import version as mongover
 from pykeyboard import InlineKeyboard
-from pyrogram import __version__ as pyrover, enums
+from pyrogram import __version__ as pyrover
 from pyrogram.raw.functions import Ping
 from pyrogram.types import (
     InlineKeyboardButton,
@@ -49,7 +49,7 @@ from pyrogram.types import (
 )
 from search_engine_parser import GoogleSearch
 
-from Shikimori import BOT_USERNAME, INLINE_IMG, NETWORK, NETWORK_USERNAME, OWNER_ID, OWNER_USERNAME, pbot, arq, dispatcher
+from Shikimori import BOT_USERNAME, OWNER_ID, pbot, arq
 from Shikimori.utils.pluginhelpers import convert_seconds_to_minutes as time_convert
 from Shikimori.utils.pluginhelpers import fetch
 
@@ -89,14 +89,13 @@ async def inline_help_func(__HELP__):
             title="Inline Commands",
             description="Help Related To Inline Usage.",
             input_message_content=InputTextMessageContent(__HELP__),
-            thumb_url= INLINE_IMG,
+            thumb_url="https://telegra.ph/file/ad9d8a4adb866d62c501f.png",
             reply_markup=buttons,
         )
     ]
     answerss = await alive_function(answerss)
     return answerss
 
-bot_name = f"{dispatcher.bot.first_name}"
 
 async def alive_function(answers):
     buttons = InlineKeyboard(row_width=2)
@@ -109,30 +108,44 @@ async def alive_function(answers):
                              switch_inline_query_current_chat=""),
     )
 
-    TEXT = f"""
-I'm <b>{bot_name}</b> Robot.
-
-⚪ I'm Working Properly
-
-⚪ My Owner : <a href="https://t.me/{OWNER_USERNAME}">{OWNER_USERNAME}</a></b>
-    """
-    if NETWORK:
-        TEXT = TEXT + f'\n⚪ <b>I am Powered by : <a href="https://t.me/{NETWORK_USERNAME}">{NETWORK}</a>\n\n' + 'Thanks For Adding Me Here ❤️</b>'
-    
-    else:
-        TEXT = TEXT + "\n<b>Thanks For Adding Me Here ❤️</b>"
-
+    msg = f"""
+**[Cutiepii 💜](https://github.com/Awesome-RJ/CutiepiiRobot):**
+**MainBot:** `{bot_state}`
+**UserBot:** `Alive`
+**Python:** `3.9`
+**Pyrogram:** `{pyrover}`
+**MongoDB:** `{mongover}`
+**Platform:** `{sys.platform}`
+**Profiles:** [BOT](https://telegram.dog/{BOT_USERNAME}) | [UBOT](https://telegram.dog/Awesome_Cutiepii)
+"""
     answers.append(
         InlineQueryResultArticle(
             title="Alive",
             description="Check Bot's Stats",
-            thumb_url=INLINE_IMG,
+            thumb_url="https://telegra.ph/file/0d42f41c08e511b557ecc.png",
             input_message_content=InputTextMessageContent(
-                TEXT, disable_web_page_preview=True),
+                msg, disable_web_page_preview=True),
             reply_markup=buttons,
-            parse_mode=enums.ParseMode.HTML
         ))
     return answers
+
+
+async def webss(url):
+    start_time = time()
+    if "." not in url:
+        return
+    screenshot = await fetch(f"https://patheticprogrammers.cf/ss?site={url}")
+    end_time = time()
+    # m = await app.send_photo(LOG_GROUP_ID, photo=screenshot["url"])
+    await screenshot.delete()
+    a = []
+    pic = InlineQueryResultPhoto(
+        photo_url=screenshot["url"],
+        caption=(f"`{url}`\n__Took {round(end_time - start_time)} Seconds.__"),
+    )
+    a.append(pic)
+    return a
+
 
 async def translate_func(answers, lang, tex):
     i = Translator().translate(tex, dest=lang)
