@@ -263,18 +263,22 @@ def info(update: Update, context: CallbackContext):
     ]
     user_id = extract_user(update.effective_message, args)
 
-    if user_id:
+    if user_id := extract_user(update.effective_message, args):
         user = bot.get_chat(user_id)
 
     elif not message.reply_to_message and not args:
-        user = message.from_user
+        user = (
+            message.sender_chat
+            if message.sender_chat is not None
+            else message.from_user
+        )
 
     elif not message.reply_to_message and (
         not args
         or (
             len(args) >= 1
             and not args[0].startswith("@")
-            and not args[0].isdigit()
+            and not args[0].lstrip("-").isdigit()
             and not message.parse_entities([MessageEntity.TEXT_MENTION])
         )
     ):
