@@ -249,10 +249,11 @@ async def del_nsfw(_, message):
     ):
         return
     await message.reply_text("hmm")
+    chat_id = message.chat.id
     chats = antinsfw_chats.find({})
     for c in chats:
         await message.reply_text("hmm")
-        is_nsfw = sql.is_nsfw(c["id"])
+        is_nsfw = sql.is_nsfw(chat_id)
         if not is_nsfw:
             await message.reply_text("huhmm")
             return
