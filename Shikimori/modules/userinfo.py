@@ -298,7 +298,6 @@ def info(update: Update, context: CallbackContext):
             text += f"\n<b>Username:</b> @{html.escape(user.username)}"
         text += f"\n<b>Chat ID:</b> <code>{user.id}</code>"
         text += f"\n<b>Chat Type:</b> {user.type.capitalize()}"
-        text += "\n" + get_user_num_chats(user.id)
         try:
             profile = bot.get_user_profile_photos(user.id).photos[0][-1]
             _file = bot.get_file(profile["file_id"])
