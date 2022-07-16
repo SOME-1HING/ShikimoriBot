@@ -202,7 +202,7 @@
          "value": "https://telegra.ph/file/2b04f7812f22b983f8a10.mp4"
       },
       "AI_API_KEY": {
-         "description": "AI API key, get from @Kukichatbot",
+         "description": "AI API key, get from @Void_HeadQuarters.",
          "required": false,
          "value": ""
       },
