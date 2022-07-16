@@ -271,7 +271,7 @@ async def del_nsfw(_, message):
                 try:
                     log_channel = logsql.get_chat_log_channel(chat_id)
                     if log_channel:
-                        pbot.send_message(
+                        await pbot.send_message(
                             log_channel,
                             final
                             + "\n\nFormatting has been disabled due to an unexpected error.",
