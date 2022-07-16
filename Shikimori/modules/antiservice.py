@@ -3,7 +3,7 @@
 
 from pyrogram import filters
 
-from Shikimori import app
+from Shikimori import pbot
 from .helper_funcs.anonymous import user_admin
 from Shikimori.utils.errors import capture_err
 from Shikimori.ex_plugins.dbfunctions import (
@@ -19,9 +19,7 @@ Plugin to delete service messages in a chat!
 /antiservice [enable|disable]
 """
 
-@app.on_message(
-    filters.command("antiservice")
-)
+@pbot.on_message(filters.command('antiservice'))
 async def anti_service(_, message):
     if len(message.command) != 2:
         return await message.reply_text(
