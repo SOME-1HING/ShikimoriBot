@@ -261,10 +261,13 @@ async def del_nsfw(_, message):
         await message.reply_text("hmm")
         try:
             results = await arq.nsfw_scan(file=file_id)
+            await message.reply_text("hmm")
             if results.ok:
+                await message.reply_text("ygfyuhmm")
                 return
             check = f"{results.is_nsfw}"
             if "True" in check:
+                await message.reply_text("hmm")
                 await message.delete()
                 st = sender.first_name
                 hh = sender.id
@@ -275,4 +278,5 @@ async def del_nsfw(_, message):
                 await dev.delete()
                 return final
         except Exception:
+            await message.reply_text("hmmjgiug76677")
             return  
