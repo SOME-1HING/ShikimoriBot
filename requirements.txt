@@ -21,7 +21,7 @@ geopy
 nltk
 psutil
 aiohttp
-Pillow==9.0
+Pillow>=9.0
 CurrencyConverter
 googletrans
 google-trans-new
