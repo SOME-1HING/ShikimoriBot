@@ -254,22 +254,22 @@ async def del_nsfw(_, message):
         is_nsfw = sql.is_nsfw(c["id"])
         if not is_nsfw:
             return
-        if message.chat.id == c["id"]:
-            file_id = await get_file_id_from_message(message)
-            try:
-                results = await arq.nsfw_scan(file=file_id)
-                if results.ok:
-                    return
-                check = f"{results.is_nsfw}"
-                if "True" in check:
-                    await message.delete()
-                    st = sender.first_name
-                    hh = sender.id
-                    final = f"**NSFW DETECTED**\n\n[{st}](tg://user?id={hh}) your message contain NSFW content.. So, {bot_name} deleted the message\n\n **Nsfw Sender - User / Bot :** [{st}](tg://user?id={hh})  \n\n**Neutral:** `{results.neutral} %`\n**Porn:** `{results.porn} %`\n**Hentai:** `{results.hentai} %`\n**Sexy:** `{results.sexy} %`\n**Drawings:** `{results.drawings} %`\n**NSFW:** `{results.is_nsfw}` \n**#ANTI_NSFW** "
-                    dev = await message.reply_text(final)
-                    os.remove(message)
-                    await asyncio.sleep(10)
-                    await dev.delete()
-                    return final
-            except Exception:
-                return  
+        file_id = await get_file_id_from_message(message)
+        await message.reply_text("hmm")
+        try:
+            results = await arq.nsfw_scan(file=file_id)
+            if results.ok:
+                return
+            check = f"{results.is_nsfw}"
+            if "True" in check:
+                await message.delete()
+                st = sender.first_name
+                hh = sender.id
+                final = f"**NSFW DETECTED**\n\n[{st}](tg://user?id={hh}) your message contain NSFW content.. So, {bot_name} deleted the message\n\n **Nsfw Sender - User / Bot :** [{st}](tg://user?id={hh})  \n\n**Neutral:** `{results.neutral} %`\n**Porn:** `{results.porn} %`\n**Hentai:** `{results.hentai} %`\n**Sexy:** `{results.sexy} %`\n**Drawings:** `{results.drawings} %`\n**NSFW:** `{results.is_nsfw}` \n**#ANTI_NSFW** "
+                dev = await message.reply_text(final)
+                os.remove(message)
+                await asyncio.sleep(10)
+                await dev.delete()
+                return final
+        except Exception:
+            return  
