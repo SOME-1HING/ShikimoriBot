@@ -30,13 +30,13 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 """
 import html
 from telegram import Update, ParseMode
-from telegram.ext import Filters, CallbackContext, MessageHandler
+from telegram.ext import Filters, CallbackContext
 from pyrogram import filters
 
 from Shikimori import dispatcher, pbot
 from Shikimori.modules.disable import DisableAbleCommandHandler
 from Shikimori.modules.helper_funcs.anonymous import user_admin
-from Shikimori.modules.sql.antichannel_sql import antichannel_status, disable_antichannel, enable_antichannel
+import Shikimori.modules.sql.antichannel_sql as sql
 from Shikimori.modules.log_channel import loggable
 
 @user_admin
@@ -49,16 +49,16 @@ async def set_antichannel(_, message):
         return
     if len(message.command) < 2:
         return await message.reply_text(
-        f"Antichannel setting is currently {antichannel_status(chat_id)}\n\n**Usage:**\n/antichannel [ON/OFF]"
+        f"Antichannel setting is currently {sql.is_achannel(chat_id)}\n\n**Usage:**\n/antichannel [ON/OFF]"
     )
     query = message.text.strip().split(None, 1)[1]
     query = query.lower()
     if query in ["on", "enable", "yes"]:
-        enable_antichannel(chat_id)
+        sql.set_aservice(chat_id)
         await message.reply_text(f"Enabled antichannel!!")
         return
     elif query in ["off", "disable", "no"]:
-        disable_antichannel(chat_id)
+        sql.rem_aservice(chat_id)
         await message.reply_text(f"Disabled antichannel!!")
     else:
         return await message.reply_text("**Usage:**\n/antichannel [ON/OFF]")
@@ -67,15 +67,9 @@ async def eliminate_channel(update: Update, context: CallbackContext):
     message = update.effective_message
     chat = update.effective_chat
     bot = context.bot
-    if not antichannel_status(chat.id):
+    if not sql.is_achannel(chat.id):
         return
     if message.sender_chat and message.sender_chat.type == "channel" and not message.is_automatic_forward:
         await message.delete()
         sender_chat = message.sender_chat
         await bot.ban_chat_sender_chat(sender_chat_id=sender_chat.id, chat_id=chat.id)
-
-ANTI_CHANNEL_HANDLER = MessageHandler(
-    Filters.text & (~Filters.regex(r"^#[^\s]+") & ~Filters.regex(r"^!")
-                    & ~Filters.regex(r"^\/")), eliminate_channel, run_async = True)
-
-dispatcher.add_handler(ANTI_CHANNEL_HANDLER)
