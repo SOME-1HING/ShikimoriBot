@@ -289,7 +289,7 @@ def info(update: Update, context: CallbackContext):
         return
 
     rep = message.reply_text("<code>Appraising...</code>", parse_mode=ParseMode.HTML)
-    if user.type != "private":
+    if user.type == "private":
         text = (
         f"<b>Chat Info:</b>\n"
         f"<b>Title:</b> {user.title}"
