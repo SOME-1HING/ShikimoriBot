@@ -7,15 +7,17 @@ from pyrogram import filters
 from Shikimori import DRAGONS, pbot
 from Shikimori.pyrogramee.telethonbasics import is_admin
 import Shikimori.modules.sql.antiservice_sql as sql
+from Shikimori.core.decorators.errors import capture_err
 
 __mod_name__ = "AntiService"
 __help__ = """
 Plugin to delete service messages in a chat!
 
-/aservice [ON|OFF]
+/antiservice [ON|OFF]
 """
 
-@pbot.on_message(filters.command("aservice") & filters.group)
+@pbot.on_message(filters.command("antiservice") & filters.group)
+@capture_err
 async def aservice_state(_, message):
     user = message.from_user
     if await is_admin(message.chat.id, message.from_user.id) or user.id in DRAGONS:
@@ -49,6 +51,7 @@ async def aservice_state(_, message):
         return await message.reply_text("You need to be admin to use this command.")
 
 @pbot.on_message(filters.service & filters.group)
+@capture_err
 async def del_service(_, message):
     chat_id = message.chat.id
     try:

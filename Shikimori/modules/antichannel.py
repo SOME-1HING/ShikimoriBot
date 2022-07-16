@@ -36,9 +36,10 @@ from pyrogram import filters, enums
 from Shikimori import DRAGONS, dispatcher, pbot
 from Shikimori.pyrogramee.telethonbasics import is_admin
 import Shikimori.modules.sql.antichannel_sql as sql
-from Shikimori.modules.log_channel import loggable
+from Shikimori.core.decorators.errors import capture_err
 
-@pbot.on_message(filters.command("achannel") & filters.group)
+@pbot.on_message(filters.command("antichannel") & filters.group)
+@capture_err
 async def set_antichannel(_, message):
     user = message.from_user
     if await is_admin(message.chat.id, message.from_user.id) or user.id in DRAGONS:
@@ -86,5 +87,5 @@ __mod_name__ = "AntiChannel"
 __help__ = """
 Plugin to delete service messages in a chat!
 
-/achannel [ON|OFF]
+/antichannel [ON|OFF]
 """

@@ -52,7 +52,7 @@ from Shikimori.ex_plugins.dbfunctions import (
     update_karma,
 )      
 from Shikimori.utils.filter_groups import karma_negative_group, karma_positive_group
-from Shikimori import arq
+from Shikimori.core.decorators.errors import capture_err
 
 regex_upvote = r"^((?i)\+|\+\+|\+1|thx|thanx|thanks|pro|cool|good|pro|pero|op|nice|noice|best|uwu|owo|right|correct|peru|piro|👍)$"
 regex_downvote = r"^(\-|\-\-|\-1|👎|noob|baka|idiot|chutiya|nub|noob|wrong|incorrect|chaprii|chapri|weak)$"
@@ -184,6 +184,7 @@ async def karma(_, message):
         await message.reply_text(f"**Total Points**: __{karma}__")
 
 @app.on_message(filters.command("karma") & filters.group)
+@capture_err
 async def karma_state(_, message):
     user = message.from_user
     if await is_admin(message.chat.id, message.from_user.id) or user.id in DRAGONS:
