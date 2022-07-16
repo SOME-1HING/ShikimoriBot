@@ -39,7 +39,6 @@ from Shikimori.modules.helper_funcs.anonymous import user_admin
 import Shikimori.modules.sql.antichannel_sql as sql
 from Shikimori.modules.log_channel import loggable
 
-@user_admin
 @pbot.on_message(filters.command("achannel") & filters.group)
 async def set_antichannel(_, message):
     try:

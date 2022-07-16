@@ -183,7 +183,6 @@ async def karma(_, message):
         karma = karma["karma"] if karma else 0
         await message.reply_text(f"**Total Points**: __{karma}__")
 
-@user_admin
 @app.on_message(filters.command("karma") & filters.group)
 async def karma_state(_, message):
     usage = "**Usage:**\n/karma [ON|OFF]"
