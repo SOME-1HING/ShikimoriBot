@@ -6,7 +6,6 @@ from pyrogram import filters
 
 from Shikimori import pbot
 from .helper_funcs.anonymous import user_admin
-from Shikimori.utils.errors import capture_err
 import Shikimori.modules.sql.antiservice_sql as sql
 
 __mod_name__ = "AntiService"
@@ -42,7 +41,7 @@ async def aservice_state(_, message):
         await message.reply_text(usage)
 
 @pbot.on_message(filters.service & filters.group)
-async def delete_service(_, message):
+async def del_service(_, message):
     chat_id = message.chat.id
     try:
         is_aservice = sql.is_aservice(chat_id)
@@ -53,4 +52,4 @@ async def delete_service(_, message):
         return
 
     except Exception as e:
-        return print("anti-nsfw - " + str(e))
+        return print("anti-service - " + str(e))
