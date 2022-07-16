@@ -55,7 +55,7 @@ USE_JOIN_LOGGER = True
 # enable logging
 FORMAT = "[Shikimori] %(message)s"
 logging.basicConfig(
-    handlers=[logging.FileHandler("shikimori_logs.txt"), logging.StreamHandler()],
+    handlers=[logging.FileHandler("bot_logs.txt"), logging.StreamHandler()],
     level=logging.INFO,
     format=FORMAT,
     datefmt="[%X]",
