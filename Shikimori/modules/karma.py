@@ -231,11 +231,11 @@ def rem_karma(update: Update, context: CallbackContext) -> str:
 
 @user_admin_no_reply
 @loggable
-def achannel_add(update: Update, context: CallbackContext) -> str:
+def add_karma(update: Update, context: CallbackContext) -> str:
     query: Optional[CallbackQuery] = update.callback_query
     user: Optional[User] = update.effective_user
     bot = context.bot
-    match = re.match(r"achannel_add\((.+?)\)", query.data)
+    match = re.match(r"add_karma\((.+?)\)", query.data)
     if match:
         user_id = match.group(1)
         chat: Optional[Chat] = update.effective_chat
@@ -274,7 +274,7 @@ def karma_status(update: Update, context: CallbackContext):
     keyboard = InlineKeyboardMarkup([[
         InlineKeyboardButton(
             text="Enable",
-            callback_data="achannel_add({})")],
+            callback_data="add_karma({})")],
        [
         InlineKeyboardButton(
             text="Disable",
@@ -286,7 +286,7 @@ def karma_status(update: Update, context: CallbackContext):
     )
 
 KARMA_STATUS_HANDLER = CommandHandler("antichannel", karma_status, run_async = True)
-ADD_KARMA_HANDLER = CallbackQueryHandler(achannel_add, pattern=r"achannel_add", run_async = True)
+ADD_KARMA_HANDLER = CallbackQueryHandler(add_karma, pattern=r"add_karma", run_async = True)
 RM_KARMA_HANDLER = CallbackQueryHandler(rem_karma, pattern=r"rem_karma", run_async = True)
 
 dispatcher.add_handler(ADD_KARMA_HANDLER)

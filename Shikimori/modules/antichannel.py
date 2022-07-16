@@ -45,7 +45,7 @@ def achannel_rem(update: Update, context: CallbackContext) -> str:
             return
         else:
             update.effective_message.edit_text(
-                f"Disabled AntiCHannel System. I won't Be Deleting Service Message from Now on.",
+                f"Disabled AntiCHannel System.",
                 parse_mode=ParseMode.HTML,
             )
 
@@ -81,7 +81,7 @@ def achannel_add(update: Update, context: CallbackContext) -> str:
             return
         else:
             update.effective_message.edit_text(
-                f"Enabled AntiCHannel System. I will Delete Service Messages from Now on.",
+                f"Enabled AntiChannel System.",
                 parse_mode=ParseMode.HTML,
             )
 
