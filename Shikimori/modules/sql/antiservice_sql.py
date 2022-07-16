@@ -25,22 +25,15 @@ def is_aservice(chat_id):
 
 def set_aservice(chat_id):
     with INSERTION_LOCK:
-        nsfwchat = SESSION.query(ANTISERVICEChats).get(str(chat_id))
-        if not nsfwchat:
-            nsfwchat = ANTISERVICEChats(str(chat_id))
-        SESSION.add(nsfwchat)
+        aservicechat = SESSION.query(ANTISERVICEChats).get(str(chat_id))
+        if not aservicechat:
+            aservicechat = ANTISERVICEChats(str(chat_id))
+        SESSION.add(aservicechat)
         SESSION.commit()
 
 def rem_aservice(chat_id):
     with INSERTION_LOCK:
-        nsfwchat = SESSION.query(ANTISERVICEChats).get(str(chat_id))
-        if nsfwchat:
-            SESSION.delete(nsfwchat)
+        aservicechat = SESSION.query(ANTISERVICEChats).get(str(chat_id))
+        if aservicechat:
+            SESSION.delete(aservicechat)
         SESSION.commit()
-
-
-def get_all_aservice_chats():
-    try:
-        return SESSION.query(ANTISERVICEChats.chat_id).all()
-    finally:
-        SESSION.close()
