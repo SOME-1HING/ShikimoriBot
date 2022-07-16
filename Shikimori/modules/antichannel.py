@@ -35,42 +35,29 @@ from pyrogram import filters, enums
 
 from Shikimori import dispatcher, pbot
 from Shikimori.modules.disable import DisableAbleCommandHandler
-from Shikimori.pyrogramee.telethonbasics import is_admin
+from Shikimori.modules.helper_funcs.anonymous import user_admin
 import Shikimori.modules.sql.antichannel_sql as sql
 from Shikimori.modules.log_channel import loggable
 
-administrators = []
-
-@pbot.on_message(filters.command("antichannel"))
+@user_admin
+@pbot.on_message(filters.command("antichannel") & filters.group)
 async def set_antichannel(_, message):
     chat_id = message.chat.id
-    if message.chat.type == "private":
-        await message.reply_text("This command only works in groups.")
+    if len(message.command) < 2:
+        return await message.reply_text(
+        f"Antichannel setting is currently {sql.is_achannel(chat_id)}\n\n**Usage:**\n/antichannel [ON/OFF]"
+    )
+    query = message.text.strip().split(None, 1)[1]
+    query = query.lower()
+    if query in ["on", "enable", "yes"]:
+        sql.set_aservice(chat_id)
+        await message.reply_text(f"Enabled antichannel!!")
         return
-    for m in pbot.get_chat_members(chat_id, filter=enums.ChatMembersFilter.ADMINISTRATORS):
-        administrators.append(m)
-    if message.from_user in administrators:
-        if len(message.command) < 2:
-            return await message.reply_text(
-            f"Antichannel setting is currently {sql.is_achannel(chat_id)}\n\n**Usage:**\n/antichannel [ON/OFF]"
-        )
-        query = message.text.strip().split(None, 1)[1]
-        query = query.lower()
-        if query in ["on", "enable", "yes"]:
-            sql.set_aservice(chat_id)
-            await message.reply_text(f"Enabled antichannel!!")
-            administrators =[]
-            return
-        elif query in ["off", "disable", "no"]:
-            administrators =[]
-            sql.rem_aservice(chat_id)
-            return await message.reply_text(f"Disabled antichannel!!")
-        else:
-            administrators =[]
-            return await message.reply_text("**Usage:**\n/antichannel [ON/OFF]")
+    elif query in ["off", "disable", "no"]:
+        sql.rem_aservice(chat_id)
+        return await message.reply_text(f"Disabled antichannel!!")
     else:
-        administrators =[]
-        return await message.reply_text("You need to be admin to do this.")
+        return await message.reply_text("**Usage:**\n/antichannel [ON/OFF]")
 
 async def eliminate_channel(update: Update, context: CallbackContext):
     message = update.effective_message
