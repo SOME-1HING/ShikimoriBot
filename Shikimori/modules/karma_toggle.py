@@ -67,15 +67,14 @@ def add_karma(update: Update, context: CallbackContext) -> str:
         is_kuki = ksql.set_karma(chat.id)
         if is_kuki:
             is_kuki = ksql.set_karma(user_id)
-            LOG = (
-                f"<b>{html.escape(chat.title)}:</b>\n"
-                f"KARMA_ENABLE\n"
-                f"<b>Admin:</b> {mention_html(user.id, html.escape(user.first_name))}\n"
-            )
+            LOG =f"""
+<b>{html.escape(chat.title)}:</b>\n"
+KARMA_ENABLE\n"
+<b>Admin:</b> {mention_html(user.id, html.escape(user.first_name))}\n"""
             log_channel = logsql.get_chat_log_channel(chat.id)
             if log_channel:
                 return bot.send_message(
-                log_channel,
+                log_channel.id,
                 LOG,
                 parse_mode=ParseMode.HTML,
                 disable_web_page_preview=True,
