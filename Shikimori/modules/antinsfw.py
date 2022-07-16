@@ -232,7 +232,6 @@ async def del_profanity(event):
     & filters.group
 )
 async def del_nsfw(_, message):
-    await message.reply_text("hmm")
     try:
         sender = message.from_user
     except:
@@ -248,30 +247,25 @@ async def del_nsfw(_, message):
         and not message.video
     ):
         return
-    await message.reply_text("hmm")
     chat_id = message.chat.id
     chats = antinsfw_chats.find({})
     for c in chats:
-        await message.reply_text("hmm")
         is_nsfw = sql.is_nsfw(chat_id)
         # if not is_nsfw:
         #     await message.reply_text("huhmm")
         #     return
         file_id = await get_file_id_from_message(message)
-        await message.reply_text("hmm")
         try:
             if not file_id:
-                return await m.edit("Something wrong happened.")
+                return
             file = await pbot.download_media(file_id)
             results = await arq.nsfw_scan(file=file)
-            await message.reply_text("hmm")
             # if results.ok:
             #     await message.reply_text("ygfyuhmm")
             #     return
             results = results.result
             check = f"{results.is_nsfw}"
             if "True" in check:
-                await message.reply_text("hmm")
                 await message.delete()
                 st = sender.first_name
                 hh = sender.id
@@ -282,5 +276,4 @@ async def del_nsfw(_, message):
                 await dev.delete()
                 return final
         except Exception:
-            await message.reply_text("hmmjgiug76677")
             return
