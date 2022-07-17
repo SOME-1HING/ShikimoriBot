@@ -64,13 +64,13 @@ buttons = [
 
 try:
     if NETWORK:
-        hmm = InlineKeyboardButton(text=f"{NETWORK}", url=f"https://t.me/{NETWORK_USERNAME}")
+        HMMM = InlineKeyboardButton(text=f"{NETWORK}", url=f"https://t.me/{NETWORK_USERNAME}")
     elif "voidxnetwork" in NETWORK_USERNAME:
-        hmm = InlineKeyboardButton(text="【V๏ɪ፝֟𝔡】 ✧Network✧", callback_data="void_")
+        HMMM = InlineKeyboardButton(text="【V๏ɪ፝֟𝔡】 ✧Network✧", callback_data="void_")
     else:
-        hmm = None
+        HMMM = None
 except:
-    hmm = None
+    HMMM = None
 
 def Shikimori_about_callback(update, context):
     query = update.callback_query
@@ -92,7 +92,7 @@ def Shikimori_about_callback(update, context):
                     InlineKeyboardButton(text="License", callback_data="license_"),
                     ],
                     [
-                    hmm,
+                    HMMM,
                     InlineKeyboardButton(text="Documentation", url="https://some1hing.gitbook.io/shikimori-bot/"),
                     ],
                     [
