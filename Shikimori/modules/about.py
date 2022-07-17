@@ -63,10 +63,10 @@ buttons = [
 ]
 
 try:
-    if NETWORK:
-        HMMM = InlineKeyboardButton(text=f"{NETWORK}", url=f"https://t.me/{NETWORK_USERNAME}")
-    elif NETWORK_USERNAME == "VoidxNetwork":
+    if NETWORK_USERNAME == "VoidxNetwork":
         HMMM = InlineKeyboardButton(text="【V๏ɪ፝֟𝔡】 ✧Network✧", callback_data="void_")
+    elif NETWORK:
+        HMMM = InlineKeyboardButton(text=f"{NETWORK}", url=f"https://t.me/{NETWORK_USERNAME}")
     else:
         HMMM = None
 except:
