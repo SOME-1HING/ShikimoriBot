@@ -41,8 +41,8 @@ url_nsfw = "https://api.waifu.pics/nsfw/"
 @user_admin
 @gloggable
 def add_nsfw(update: Update, context: CallbackContext):
-    chat = update.effective_chat
     msg = update.effective_message
+    chat = update.effective_chat
     user = update.effective_user
     is_nsfw = sql.is_nsfw(chat.id)
     if not is_nsfw:
@@ -96,12 +96,12 @@ def list_nsfw_chats(update: Update, context: CallbackContext):
 
 def blowjob(update, context):
     chat_id = update.effective_chat.id
+    msg = update.effective_message
     if not update.effective_message.chat.type == "private":
         is_nsfw = sql.is_nsfw(chat_id)
         if not is_nsfw:
             msg.reply_text("NSFW is not activated!!\n\nUse '/addnsfw' to activate NSFW commands.")
             return
-    msg = update.effective_message
     url = f"{url_nsfw}blowjob" 
     result = requests.get(url).json()
     img = result['url']
@@ -109,12 +109,12 @@ def blowjob(update, context):
 
 def trap(update, context):
     chat_id = update.effective_chat.id
+    msg = update.effective_message
     if not update.effective_message.chat.type == "private":
         is_nsfw = sql.is_nsfw(chat_id)
         if not is_nsfw:
             msg.reply_text("NSFW is not activated!!\n\nUse '/addnsfw' to activate NSFW commands.")
             return
-    msg = update.effective_message
     url = f"{url_nsfw}trap" 
     result = requests.get(url).json()
     img = result['url']
@@ -122,12 +122,12 @@ def trap(update, context):
 
 def nsfwwaifu(update, context):
     chat_id = update.effective_chat.id
+    msg = update.effective_message
     if not update.effective_message.chat.type == "private":
         is_nsfw = sql.is_nsfw(chat_id)
         if not is_nsfw:
             msg.reply_text("NSFW is not activated!!\n\nUse '/addnsfw' to activate NSFW commands.")
             return
-    msg = update.effective_message
     url = f"{url_nsfw}waifu" 
     result = requests.get(url).json()
     img = result['url']
@@ -135,12 +135,12 @@ def nsfwwaifu(update, context):
 
 def nsfwneko(update, context):
     chat_id = update.effective_chat.id
+    msg = update.effective_message
     if not update.effective_message.chat.type == "private":
         is_nsfw = sql.is_nsfw(chat_id)
         if not is_nsfw:
             msg.reply_text("NSFW is not activated!!\n\nUse '/addnsfw' to activate NSFW commands.")
             return
-    msg = update.effective_message
     url = f"{url_nsfw}neko" 
     result = requests.get(url).json()
     img = result['url']
@@ -148,11 +148,11 @@ def nsfwneko(update, context):
 
 def spank(update, context):
     chat_id = update.effective_chat.id
+    msg = update.effective_message
     if not update.effective_message.chat.type == "private":
         is_nsfw = sql.is_nsfw(chat_id)
         if not is_nsfw:
             return
-    msg = update.effective_message
     target = "spank"
     msg.reply_animation(nekos.img(target))
 
