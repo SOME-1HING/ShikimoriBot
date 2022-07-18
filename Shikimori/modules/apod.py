@@ -34,7 +34,7 @@ def apod(update: Update, context: CallbackContext):
     result = requests.get('https://api.nasa.gov/planetary/apod?api_key=' + APOD_API_KEY).json()
     img = result['hdurl']
     title = result['title']
-    if result['copyright]:       
+    if result['copyright']:       
         copyright = result['copyright']
         text = f'<b>Title: <u>{title}</u></b>\n\n<i>Credits: {copyright}</i>'
     else:
