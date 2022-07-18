@@ -30,12 +30,15 @@ from telegram.ext import (
 import requests
 
 def apod(update: Update, context: CallbackContext):
+    url = 'https://apod.nasa.gov/apod/'
     result = requests.get('https://api.nasa.gov/planetary/apod?api_key=' + APOD_API_KEY).json()
     img = result['hdurl']
     title = result['title']
-    copyright = result['copyright']
-    url = 'https://apod.nasa.gov/apod/'
-    text = f'<b>Title: <u>{title}</u></b>\n\n<i>Credits: {copyright}</i>'
+    if result['copyright]:       
+        copyright = result['copyright']
+        text = f'<b>Title: <u>{title}</u></b>\n\n<i>Credits: {copyright}</i>'
+    else:
+        text = f'<b>Title: <u>{title}</u></b>'
     
     update.effective_message.reply_photo(img, caption=text, reply_markup=InlineKeyboardMarkup(
         [    
