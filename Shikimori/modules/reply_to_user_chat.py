@@ -26,6 +26,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 # You are free to use this module. But don't delete this commented text. Thank you.
 
 from Shikimori import dispatcher, MEDIA_BYE, MEDIA_GM, MEDIA_GN, MEDIA_HELLO
+import Shikimori.modules.sql.chatbot_sql as sql
 from telegram import ParseMode
 from telegram.ext import Filters, MessageHandler
 import time
@@ -45,6 +46,10 @@ bye_id = IMG_BYE[-1]
 def goodnight(update, context):
     message = update.effective_message
     user1 = message.from_user.first_name
+    chat_id = update.effective_chat.id
+    is_kuki = sql.is_kuki(chat_id)
+    if not is_kuki:
+        return
     try:
         if gn_id in ("jpeg", "jpg", "png"):
             update.effective_message.reply_photo(
@@ -75,6 +80,10 @@ def goodnight(update, context):
 def goodmorning(update, context):
     message = update.effective_message
     user1 = message.from_user.first_name
+    chat_id = update.effective_chat.id
+    is_kuki = sql.is_kuki(chat_id)
+    if not is_kuki:
+        return
     try:
         if gm_id in ("jpeg", "jpg", "png"):
             update.effective_message.reply_photo(
@@ -103,6 +112,10 @@ def goodmorning(update, context):
 def hello(update, context):
     message = update.effective_message
     user1 = message.from_user.first_name
+    chat_id = update.effective_chat.id
+    is_kuki = sql.is_kuki(chat_id)
+    if not is_kuki:
+        return
     try:
         if gm_id in ("jpeg", "jpg", "png"):
             update.effective_message.reply_photo(
@@ -131,6 +144,10 @@ def hello(update, context):
 def bye(update, context):
     message = update.effective_message
     user1 = message.from_user.first_name
+    chat_id = update.effective_chat.id
+    is_kuki = sql.is_kuki(chat_id)
+    if not is_kuki:
+        return
     try:
         if bye_id in ("jpeg", "jpg", "png"):
             update.effective_message.reply_photo(
