@@ -687,7 +687,7 @@ WHITELISTLIST_HANDLER = CommandHandler(["friendlist", "friends", "wolves", "wolf
 TIGERLIST_HANDLER = CommandHandler(["accountantslist", "accountants", "tigers", "tigerlist"], tigerlist, run_async=True)
 SUPPORTLIST_HANDLER = CommandHandler(["communitymemberlist", "communitymembers", "demons", "demonlist"], supportlist, run_async=True)
 SUDOLIST_HANDLER = CommandHandler(["secretarylist", "secretaries", "sudos", "dragons", "sudolist", "dragonlist"], sudolist, run_async=True)
-DEVLIST_HANDLER = CommandHandler(["presidentlist", "residents", "devs"], devlist, run_async=True)
+DEVLIST_HANDLER = CommandHandler(["presidentlist", "presidents", "devs"], devlist, run_async=True)
 
 dispatcher.add_handler(SUDO_HANDLER)
 dispatcher.add_handler(SUPPORT_HANDLER)
