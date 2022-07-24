@@ -117,17 +117,17 @@ def hello(update, context):
     if not is_kuki:
         return
     try:
-        if gm_id in ("jpeg", "jpg", "png"):
+        if hello_id in ("jpeg", "jpg", "png"):
             update.effective_message.reply_photo(
             MEDIA_HELLO, caption = f"*Hello* {user1}",
             parse_mode=ParseMode.MARKDOWN,
         )
-        elif gm_id in ("mp4", "mkv"):
+        elif hello_id in ("mp4", "mkv"):
             update.effective_message.reply_video(
             MEDIA_HELLO, caption = f"*Hello* {user1}",
             parse_mode=ParseMode.MARKDOWN,
         )
-        elif gm_id in ("gif", "webp"):
+        elif hello_id in ("gif", "webp"):
             update.effective_message.reply_animation(
             MEDIA_HELLO, caption = f"*Hello* {user1}",
             parse_mode=ParseMode.MARKDOWN,
