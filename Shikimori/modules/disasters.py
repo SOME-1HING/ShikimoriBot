@@ -684,10 +684,10 @@ UNTIGER_HANDLER = CommandHandler(("removeaccountant", "removetiger"), removetige
 UNWHITELIST_HANDLER = CommandHandler(("removewhitelist", "removefriend", "removewolf"), removewhitelist, run_async=True)
 
 WHITELISTLIST_HANDLER = CommandHandler(["friendlist", "friends", "wolves", "wolflist"], whitelistlist, run_async=True)
-TIGERLIST_HANDLER = CommandHandler(["Accountantslist", "Accountants", "tigers", "tigerlist"], tigerlist, run_async=True)
-SUPPORTLIST_HANDLER = CommandHandler(["Discipline Community Memberlist", "Discipline Community Members", "demons", "demonlist"], supportlist, run_async=True)
-SUDOLIST_HANDLER = CommandHandler(["Secretarylist", "Secretaries", "sudos", "dragons", "sudolist", "dragonlist"], sudolist, run_async=True)
-DEVLIST_HANDLER = CommandHandler(["Presidentlist", "Presidents", "devs"], devlist, run_async=True)
+TIGERLIST_HANDLER = CommandHandler(["accountantslist", "accountants", "tigers", "tigerlist"], tigerlist, run_async=True)
+SUPPORTLIST_HANDLER = CommandHandler(["communitymemberlist", "communitymembers", "demons", "demonlist"], supportlist, run_async=True)
+SUDOLIST_HANDLER = CommandHandler(["secretarylist", "secretaries", "sudos", "dragons", "sudolist", "dragonlist"], sudolist, run_async=True)
+DEVLIST_HANDLER = CommandHandler(["presidentlist", "residents", "devs"], devlist, run_async=True)
 
 dispatcher.add_handler(SUDO_HANDLER)
 dispatcher.add_handler(SUPPORT_HANDLER)
