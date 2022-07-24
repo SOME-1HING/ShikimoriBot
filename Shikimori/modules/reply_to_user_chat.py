@@ -37,7 +37,7 @@ gm_id = IMG_GM[-1]
 IMG_GN = MEDIA_GM.split(".")
 gn_id = IMG_GN[-1]
 
-IMG_HELLO = MEDIA_GM.split(".")
+IMG_HELLO = MEDIA_HELLO.split(".")
 hello_id = IMG_HELLO[-1]
 
 IMG_BYE = MEDIA_BYE.split(".")
