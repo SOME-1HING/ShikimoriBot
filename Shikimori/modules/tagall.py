@@ -25,10 +25,10 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 
 from Shikimori import telethn
-from Shikimori.events import register as tomori
+from Shikimori.events import register
 
 
-@tomori(pattern="^/(all|mentionall|tagall|utag) ?(.*)")
+@register(pattern="^(/all|/mentionall|/tagall|/utag|@all|@mentionall|@tagall|@utag) ?(.*)")
 async def _(event):
     if event.fwd_from:
         return
@@ -38,22 +38,7 @@ async def _(event):
         mentions += f" \n [{x.first_name}](tg://user?id={x.id})"
     if event.reply_to_msg_id:
         try:
-            await event.send_text(event.chat_id, mentions, reply_to=event.reply_to_msg_id)
-        except:
-            await event.reply(mentions)
-    await event.reply(mentions)
-
-@tomori(pattern="^@(all|mentionall|tagall|utag) ?(.*)")
-async def _(event):
-    if event.fwd_from:
-        return
-    mentions = "Tagged by an admin"
-    chat = await event.get_input_chat()
-    async for x in telethn.iter_participants(chat, 99999999):
-        mentions += f" \n [{x.first_name}](tg://user?id={x.id})"
-    if event.reply_to_msg_id:
-        try:
-            await event.send_text(event.chat_id, mentions, reply_to=event.reply_to_msg_id)
+            await event.send_message(event.chat_id, mentions, reply_to=event.reply_to_msg_id)
         except:
             await event.reply(mentions)
     await event.reply(mentions)
