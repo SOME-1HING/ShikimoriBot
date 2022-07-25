@@ -20,7 +20,7 @@
     }
   ],  
    "env": {
-      "TOKEN": {
+      "BOT_TOKEN": {
          "description": "Your bot token. Get one from @BotFather duh",
          "required": true,
          "value": ""
@@ -215,26 +215,6 @@
          "description": "If you have put a netowrk name, you also have to put its username without @",
          "required": false,
          "value": "VoidxNetwork"
-      },
-      "MEDIA_GM": {
-         "description": "URL of media that you want to show when user types (good morning or goodmorning). Supported file types (jpg, png, gif, webp, mkv, mp4). If you don't want this, just type reply_to_user_chat inside NO_LOAD vars. TBH it is a shit feature.",
-         "required": false,
-         "value": "https://telegra.ph/file/fff37608fa21d9d3d0b39.jpg"
-      },
-      "MEDIA_GN": {
-         "description": "URL of media that you want to show when user types (good night or goodnight). Supported file types (jpg, png, gif, webp, mkv, mp4). If you don't want this, just type reply_to_user_chat inside NO_LOAD vars. TBH it is a shit feature.",
-         "required": false,
-         "value": "https://telegra.ph/file/1862c7260109e24ed4715.jpg"
-      },
-      "MEDIA_HELLO": {
-         "description": "URL of media that you want to show when user types (hello). Supported file types (jpg, png, gif, webp, mkv, mp4).  If you don't want this, just type reply_to_user_chat inside NO_LOAD vars. TBH it is a shit feature.",
-         "required": false,
-         "value": "https://telegra.ph/file/f3f2dc386a33e37f6cb05.png"
-      },
-      "MEDIA_BYE": {
-         "description": "URL of media that you want to show when user types (bye or afk). Supported file types (jpg, png, gif, webp, mkv, mp4). If you don't want this, just type reply_to_user_chat inside NO_LOAD vars. TBH it is a shit feature.",
-         "required": false,
-         "value": "https://telegra.ph/file/061054c8f73fe7ffbf6aa.mp4"
       },
       "OWNER_WELCOME_MEDIA": {
          "description": "URL of media that you want to show when owner of bot joins any chat. Supported file types (jpg, png, gif, webp, mkv, mp4).",

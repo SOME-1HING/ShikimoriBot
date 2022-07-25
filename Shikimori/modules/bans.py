@@ -65,7 +65,8 @@ from Shikimori.modules.helper_funcs.extraction import extract_user_and_text
 from Shikimori.modules.helper_funcs.string_handling import extract_time
 from Shikimori.modules.log_channel import gloggable, loggable
 
-
+BAN_GIF = "CgACAgUAAxkBAAK0XGLeQb3hs3yWorkBjUMFGMWENA8RAALZBAACT_vxVu249YEwNBU9KQQ"
+KICK_GIF = "CgACAgUAAxkBAAK0X2LeQev25-iVt1uCqZ2GMRpe-tnGAALbBAACT_vxVjmenxs25dq2KQQ"
 
 @connection_status
 @bot_admin
@@ -156,7 +157,7 @@ def ban(update: Update, context: CallbackContext) -> str:
             message.delete()
             return log
 
-        # bot.send_sticker(chat.id, BAN_STICKER)  # banhammer marie sticker
+        bot.send_animation(chat.id, BAN_GIF)
         reply = (
             f"{mention_html(member.user.id, html.escape(member.user.first_name))} [<code>{member.user.id}</code>] Banned."
         )
@@ -259,7 +260,7 @@ def temp_ban(update: Update, context: CallbackContext) -> str:
 
     try:
         chat.ban_member(user_id, until_date=bantime)
-        # bot.send_sticker(chat.id, BAN_STICKER)  # banhammer marie sticker
+        bot.send_animation(chat.id, BAN_GIF)
 
         reply_msg = (
             f"{mention_html(member.user.id, html.escape(member.user.first_name))} [<code>{member.user.id}</code>] Temporary Banned"
@@ -396,7 +397,7 @@ def punch(update: Update, context: CallbackContext) -> str:
 
     res = chat.unban_member(user_id)  # unban on current user = kick
     if res:
-        # bot.send_sticker(chat.id, BAN_STICKER)  # banhammer marie sticker
+        bot.send_animation(chat.id, KICK_GIF)
         bot.sendMessage(
             chat.id,
             f"{mention_html(member.user.id, html.escape(member.user.first_name))} [<code>{member.user.id}</code>] Kicked.",

@@ -77,7 +77,7 @@ if sys.version_info[0] < 3 or sys.version_info[1] < 6:
 ENV = bool(os.environ.get("ENV", True))
 
 if ENV:
-    TOKEN = os.environ.get("TOKEN", None)
+    TOKEN = os.environ.get("BOT_TOKEN", None)
 
     try:
         OWNER_ID = int(os.environ.get("OWNER_ID", None))
@@ -149,10 +149,6 @@ if ENV:
     STATS_IMG = os.environ.get("STATS_IMG", None)
     NETWORK = os.environ.get("NETWORK", None)
     NETWORK_USERNAME = os.environ.get("NETWORK_USERNAME", None)
-    MEDIA_GM = os.environ.get("MEDIA_GM", None)
-    MEDIA_GN = os.environ.get("MEDIA_GN", None)
-    MEDIA_HELLO = os.environ.get("MEDIA_HELLO", None)
-    MEDIA_BYE = os.environ.get("MEDIA_BYE", None)
     INLINE_IMG = os.environ.get("INLINE_IMG", None)
     OWNER_WELCOME_MEDIA = os.environ.get("OWNER_WELCOME_MEDIA", None)
 
@@ -171,7 +167,7 @@ if ENV:
 else:
     from Shikimori.config import Development as Config
 
-    TOKEN = Config.TOKEN
+    TOKEN = Config.BOT_TOKEN
 
     try:
         OWNER_ID = int(Config.OWNER_ID)
@@ -237,10 +233,6 @@ else:
     STATS_IMG = Config.STATS_IMG
     NETWORK = Config.NETWORK
     NETWORK_USERNAME = Config.NETWORK_USERNAME
-    MEDIA_GM = Config.MEDIA_GM
-    MEDIA_GN = Config.MEDIA_GN
-    MEDIA_HELLO = Config.MEDIA_HELLO
-    MEDIA_BYE = Config.MEDIA_BYE
     INLINE_IMG = Config.INLINE_IMG
     OWNER_WELCOME_MEDIA = Config.OWNER_WELCOME_MEDIA
 

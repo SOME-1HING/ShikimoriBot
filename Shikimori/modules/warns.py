@@ -75,7 +75,7 @@ from Shikimori.modules.sql.approve_sql import is_approved
 
 WARN_HANDLER_GROUP = 9
 CURRENT_WARNING_FILTER_STRING = "<b>Current warning filters in this chat:</b>\n"
-
+WARN_GIF = "CgACAgUAAxkBAAK0YmLeQoPUJYzCn0T3ywaOlTmLFBFgAAJFBgACp4HwVkBmUCY460XUKQQ"
 
 # Not async
 def warn(user: User,
@@ -127,7 +127,7 @@ def warn(user: User,
         for warn_reason in reasons:
             reply += f"\n - {html.escape(warn_reason)}"
 
-        # message.bot.send_sticker(chat.id, BAN_STICKER)  # Saitama's sticker
+        message.bot.send_animation(chat.id, WARN_GIF)
         keyboard = None
         log_reason = (f"<b>{html.escape(chat.title)}:</b>\n"
                       f"#WARN_BAN\n"
