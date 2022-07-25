@@ -52,9 +52,11 @@ buttons = [
     ], 
 ]
 
+network_name = NETWORK_USERNAME.lower()
+
 try:
-    if NETWORK_USERNAME == "VoidxNetwork":
-        HMMM = InlineKeyboardButton(text="【V๏ɪ፝֟𝔡】 ✧Network✧", callback_data="void_")
+    if network_name == "sernxnetwork":
+        HMMM = InlineKeyboardButton(text="⡷⠂SΞЯИ⠐⢾ THE ORGANIZATION✧", callback_data="sern_")
     elif NETWORK:
         HMMM = InlineKeyboardButton(text=f"{NETWORK}", url=f"https://t.me/{NETWORK_USERNAME}")
     else:
@@ -139,20 +141,20 @@ def git_call_back(update: Update, context: CallbackContext):
                 disable_web_page_preview=False,
         )
 
-def void_call_back(update: Update, context: CallbackContext):
+def sern_call_back(update: Update, context: CallbackContext):
     query = update.callback_query
-    if query.data == "void_":
+    if query.data == "sern_":
         query.message.edit_text(
-            text=f"๏ The Shikimori Repo is originally under Void Network. The bot made by this repo may or may not be under Void Network.\n\nWelcome to **[【V๏ɪ፝֟𝔡】 ✧Network✧](https://t.me/voidxnetwork)** \n\n◈ Void is an anime based Community with a motive to spread love and peace around telegram. Go through the channel and join the Community if it draws your attention. ◈",
+            text=f"ᴡᴇʟᴄᴏᴍᴇ ᴛᴏ 𝘚𝘌𝘙𝘕𝘹𝘕𝘦𝘵𝘸𝘰𝘳𝘬 (http://t.me/sernxnetwork), 𝙎𝙀𝙍𝙉 𝙞𝙨 𝙖𝙣 𝙖𝙣𝙞𝙢𝙚 𝙗𝙖𝙨𝙚𝙙 𝘾𝙤𝙢𝙢𝙪𝙣𝙞𝙩𝙮 𝙬𝙞𝙩𝙝 𝙖 𝙢𝙤𝙩𝙞𝙫𝙚 𝙩𝙤 𝙨𝙥𝙧𝙚𝙖𝙙 𝙡𝙤𝙫𝙚 𝙖𝙣𝙙 𝙥𝙚𝙖𝙘𝙚 𝙖𝙧𝙤𝙪𝙣𝙙 𝙩𝙚𝙡𝙚𝙜𝙧𝙖𝙢. 𝙂𝙤 𝙩𝙝𝙧𝙤𝙪𝙜𝙝 𝙩𝙝𝙚 𝙘𝙝𝙖𝙣𝙣𝙚𝙡 𝙖𝙣𝙙 𝙟𝙤𝙞𝙣 𝙩𝙝𝙚 𝘾𝙤𝙢𝙢𝙪𝙣𝙞𝙩𝙮, 𝙞𝙛 𝙞𝙩 𝙙𝙧𝙖𝙬𝙨 𝙮𝙤𝙪𝙧 𝙖𝙩𝙩𝙚𝙣𝙩𝙞𝙤𝙣.",
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=False,
             reply_markup=InlineKeyboardMarkup(
             [
+                [InlineKeyboardButton(text="⡷⠂SΞЯИ⠐⢾ THE ORGANIZATION", url="https://t.me/sernxnetwork")],
                 [
-                InlineKeyboardButton(text="【Usertag】", url="https://t.me/void_network/103"),
-                InlineKeyboardButton(text="【Owner Sama】", url="https://t.me/voidxtoxic")
+                InlineKeyboardButton(text="★彡[ᴜꜱᴇʀ ᴛᴀɢ]彡★", url="https://t.me/SERNXNETWORK/31"),
+                InlineKeyboardButton(text="★彡[ᴏᴜʀ ꜱᴛᴀꜰꜰ]彡★", url="https://t.me/SERNXNETWORK/38")
                 ],
-                [InlineKeyboardButton(text="【V๏ɪ፝֟𝔡】Network", url="https://t.me/voidxnetwork")],
                 [InlineKeyboardButton(text="Back", callback_data="Shikimori_")]
             ]
             ),
@@ -211,11 +213,11 @@ license_call_back_handler = CallbackQueryHandler(
 git_call_back_handler = CallbackQueryHandler(
     git_call_back, pattern=r"github_", run_async=True
 )
-void_call_back_handler = CallbackQueryHandler(
-    void_call_back, pattern=r"void_", run_async=True
+sern_call_back_handler = CallbackQueryHandler(
+    sern_call_back, pattern=r"sern_", run_async=True
 )
 
-dispatcher.add_handler(void_call_back_handler)
+dispatcher.add_handler(sern_call_back_handler)
 dispatcher.add_handler(git_call_back_handler)
 dispatcher.add_handler(about_callback_handler)
 dispatcher.add_handler(license_call_back_handler)
