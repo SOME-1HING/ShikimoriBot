@@ -222,10 +222,22 @@ def new_member(update: Update, context: CallbackContext):  # sourcery no-metrics
             reply = False
 
         if should_welc:
+            
+            # Give the Repo Creator a special welcome
+            if new_mem.id == 5598826878:
+                update.effective_message.reply_photo(
+                    "https://telegra.ph/file/f00a3decb0fa64900098c.jpg", reply_to_message_id=reply
+                )
+                welcome_log = (
+                    f"{html.escape(chat.title)}\n"
+                    f"#USER_JOINED\n"
+                    f"SOME1HING Joined the Chat"
+                )
+                continue
+
 
             # Give the owner a special welcome
             if new_mem.id == OWNER_ID:
-                TEXT = f"Welcome to {html.escape(chat.title)} my king.", 
                 try:
                     if wel_id in ("jpeg", "jpg", "png"):
                         update.effective_message.reply_photo(OWNER_WELCOME_MEDIA, caption=TEXT, reply_to_message_id=reply)
@@ -237,27 +249,15 @@ def new_member(update: Update, context: CallbackContext):  # sourcery no-metrics
                         update.effective_message.reply_text(TEXT, reply_to_message_id=reply)
 
                 except:
-                    update.effective_message.reply_text(TEXT, reply_to_message_id=reply)
+                    update.effective_message.reply_text("Behold!! My Owner is Here.", reply_to_message_id=reply)
 
                 welcome_log = (
                     f"{html.escape(chat.title)}\n"
                     f"#USER_JOINED\n"
-                    f"Shikimori just joined the chat"
+                    f"Bot Owner Joined The Chat"
                 )
                 continue
-
-            # Give the Repo Creator a special welcome
-            if new_mem.id == 5598826878:
-                update.effective_message.reply_photo(
-                    "https://telegra.ph/file/f00a3decb0fa64900098c.jpg", reply_to_message_id=reply
-                )
-                welcome_log = (
-                    f"{html.escape(chat.title)}\n"
-                    f"#USER_JOINED\n"
-                    f"My 'Boyfriend' just joined the chat"
-                )
-                continue
-
+                
             # Welcome Devs
             if new_mem.id in DEV_USERS:
                 update.effective_message.reply_text(
