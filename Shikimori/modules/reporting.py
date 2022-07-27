@@ -40,7 +40,8 @@ from Shikimori import LOGGER, DRAGONS, TIGERS, WOLVES, dispatcher
 from Shikimori.modules.helper_funcs.chat_status import user_admin, user_not_admin
 from Shikimori.modules.log_channel import loggable
 from Shikimori.modules.sql import reporting_sql as sql
-from telegram import Chat, InlineKeyboardButton, InlineKeyboardMarkup, ParseMode, Update
+from telegram import Chat, InlineKeyboardButton, InlineKeyboardMarkup, Update
+from telegram.constants import ParseMode
 from telegram.error import BadRequest, Unauthorized
 from telegram.ext import (
     CallbackContext,
