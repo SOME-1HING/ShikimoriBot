@@ -299,7 +299,16 @@ session = ClientSession()
 print("[INFO]: INITIALIZING ARQ CLIENT")
 arq = ARQ(ARQ_API_URL, ARQ_API_KEY, session)
 
-
+"""
+dispatcher = (
+    tg.Application.builder()
+    .token(TOKEN)
+    .base_url(BOT_API_URL)
+    .base_file_url(BOT_API_FILE_URL)
+    .concurrent_updates(True)
+    .build()
+)
+"""
 dispatcher = (tg.Application.builder().token(TOKEN).build())
 pbot = Client("ShikimoriPyro", api_id=API_ID, api_hash=API_HASH, bot_token=TOKEN)
 
@@ -313,13 +322,9 @@ TIGERS = list(TIGERS)
 # Load at end to ensure all prev variables have been set
 from Shikimori.modules.helper_funcs.handlers import (
     CustomCommandHandler,
-    CustomMessageHandler,
-    CustomRegexHandler,
 )
 
 # make sure the regex handler can take extra kwargs
-tg.RegexHandler = CustomRegexHandler
 tg.CommandHandler = CustomCommandHandler
-tg.MessageHandler = CustomMessageHandler
 
 
