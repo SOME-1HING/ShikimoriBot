@@ -43,7 +43,8 @@ from PIL import Image, ImageFont, ImageDraw
 from html import escape
 from bs4 import BeautifulSoup as bs
 
-from telegram import ParseMode, InlineKeyboardMarkup, InlineKeyboardButton
+from telegram import InlineKeyboardMarkup, InlineKeyboardButton
+from telegram.constants import ParseMode
 from telegram import TelegramError, Update
 from telegram.ext import CallbackContext
 from telegram.utils.helpers import mention_html
