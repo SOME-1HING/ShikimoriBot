@@ -60,7 +60,8 @@ from Shikimori import (
 # needed to dynamically load modules
 # NOTE: Module order is not guaranteed, specify that in the config file!
 from Shikimori.modules import ALL_MODULES
-from telegram import ParseMode, Update
+from telegram import Update
+from telegram.constants import ParseMode
 from telegram.error import (
     BadRequest,
     ChatMigrated,
