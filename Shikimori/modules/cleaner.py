@@ -45,7 +45,8 @@ from Shikimori.modules.helper_funcs.chat_status import (
     user_admin,
 )
 from Shikimori.modules.sql import cleaner_sql as sql
-from telegram import ParseMode, Update
+from telegram import Update
+from telegram.constants import ParseMode
 from telegram.ext import (
     CallbackContext,
     CommandHandler,
