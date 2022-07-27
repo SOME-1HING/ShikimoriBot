@@ -37,7 +37,7 @@ from telegram.error import BadRequest
 from Shikimori.modules.helper_funcs.misc import paginate_modules
 from Shikimori import dispatcher
 from Shikimori.__main__ import HELPABLE
-from telegram.ext import CallbackContext, CallbackQueryHandler, CommandHandler
+from telegram.ext import ContextTypes, CallbackContext, CallbackQueryHandler, CommandHandler
 
 HELP_STRINGS = """
 Click on the button bellow to get description about specifics command."""
@@ -116,7 +116,7 @@ def help_button(update, context):
     except BadRequest:
         pass
 
-def get_help(update: Update, context: CallbackContext):
+async def get_help(context: ContextTypes.DEFAULT_TYPE, chat_id, text, keyboard=None):
     chat = update.effective_chat  # type: Optional[Chat]
     args = update.effective_message.text.split(None, 1)
 
