@@ -47,7 +47,7 @@ from Shikimori import (
 from Shikimori.modules.helper_funcs.misc import paginate_modules
 from Shikimori.modules.helper_funcs.chat_status import is_user_admin
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, ParseMode, Update
-from telegram.ext import CallbackContext, CommandHandler
+from telegram.ext import ContextTypes, CallbackContext, CommandHandler
 from telegram.utils.helpers import escape_markdown
 
 bot_name = f"{dispatcher.bot.first_name}"
@@ -161,7 +161,7 @@ def start(update: Update, context: CallbackContext):
 start_handler = CommandHandler("start", start, run_async=True)
 dispatcher.add_handler(start_handler)
 
-def send_settings(chat_id, user_id, user=False):
+async def send_settings(context: ContextTypes.DEFAULT_TYPE, chat_id, user_id, user=False):
     if user:
         if USER_SETTINGS:
             settings = "\n\n".join(
