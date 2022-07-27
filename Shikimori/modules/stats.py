@@ -37,7 +37,8 @@ import time
 from psutil import cpu_percent, virtual_memory, disk_usage, boot_time
 from platform import python_version
 
-from telegram import ParseMode, __version__ as ptbver, InlineKeyboardButton, InlineKeyboardMarkup
+from telegram import __version__ as ptbver, InlineKeyboardButton, InlineKeyboardMarkup
+from telegram.constants import ParseMode
 from telegram.ext import CommandHandler
 from telegram.utils.helpers import escape_markdown
 from telethon import __version__ as tlhver
