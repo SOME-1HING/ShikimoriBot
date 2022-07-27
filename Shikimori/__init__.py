@@ -287,7 +287,6 @@ finally:
 from Shikimori.modules.sql import SESSION
 
 telethn = TelegramClient(MemorySession(), API_ID, API_HASH)
-dispatcher = updater.dispatcher
 
 aiohttpsession = ClientSession()
 
