@@ -77,7 +77,6 @@ from telegram.ext import (
     filters,
     MessageHandler,
 )
-from telegram.ext.dispatcher import DispatcherHandlerStop
 
 bot_name = f"{dispatcher.bot.first_name}"
 
@@ -255,8 +254,6 @@ def migrate_chats(update: Update, context: CallbackContext):
     for mod in MIGRATEABLE:
         mod.__migrate__(old_chat, new_chat)
 
-    LOGGER.info("Successfully migrated!")
-    raise DispatcherHandlerStop
 
 ALIVE_ID = ALIVE_MEDIA.split(".")
 alive_id = ALIVE_ID[-1]
