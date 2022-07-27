@@ -12,7 +12,8 @@ from Shikimori import AI_API_KEY as api
 from time import sleep
 from telegram import ParseMode
 from telegram import (CallbackQuery, Chat, MessageEntity, InlineKeyboardButton,
-                      InlineKeyboardMarkup, Message, ParseMode, Update, Bot, User)
+                      InlineKeyboardMarkup, Message, Update, Bot, User)
+from telegram.constants import ParseMode
 from telegram.ext import (CallbackContext, CallbackQueryHandler, CommandHandler,
                           DispatcherHandlerStop, Filters, MessageHandler,
                           run_async)
