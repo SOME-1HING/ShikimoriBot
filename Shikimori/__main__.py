@@ -68,7 +68,6 @@ from telegram.error import (
     TelegramError,
     TimedOut,
     Unauthorized,
-    Forbidden,
 )
 from telegram.ext import (
     CallbackContext,
