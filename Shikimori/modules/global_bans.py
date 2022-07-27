@@ -39,7 +39,8 @@ import time
 from datetime import datetime
 from io import BytesIO
 
-from telegram import ParseMode, Update
+from telegram import Update
+from telegram.constants import ParseMode
 from telegram.error import BadRequest, TelegramError, Unauthorized
 from telegram.ext import (
     CallbackContext,
