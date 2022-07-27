@@ -70,6 +70,7 @@ from telegram.error import (
     Unauthorized,
 )
 from telegram.ext import (
+    ContextTypes,
     CallbackContext,
     CommandHandler,
     Filters,
