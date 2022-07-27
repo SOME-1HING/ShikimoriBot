@@ -37,9 +37,10 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 import html
 import re
 
-from telegram import ParseMode, ChatPermissions
+from telegram import ChatPermissions
+from telegram.constants import ParseMode
 from telegram.error import BadRequest
-from telegram.ext import CommandHandler, MessageHandler, Filters
+from telegram.ext import CommandHandler, MessageHandler, filters as Filters
 from telegram.utils.helpers import mention_html
 
 import Shikimori.modules.sql.blacklist_sql as sql
