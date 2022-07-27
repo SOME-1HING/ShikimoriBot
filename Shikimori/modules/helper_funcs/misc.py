@@ -38,7 +38,7 @@ from typing import Dict, List
 from math import ceil
 
 from Shikimori import NO_LOAD
-from telegram import InlineKeyboardButton
+from telegram import Bot, InlineKeyboardButton
 from telegram.constants import ParseMode, MessageLimit as MAX_MESSAGE_LENGTH
 from telegram.error import TelegramError
 
