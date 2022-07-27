@@ -19,7 +19,7 @@ import time
 
 import requests
 from pytz import country_names as cname
-from telegram import ParseMode
+from telegram.constants import ParseMode
 from telegram.error import BadRequest
 
 from Shikimori import dispatcher, API_WEATHER as APPID
