@@ -74,7 +74,7 @@ from telegram.ext import (
     ContextTypes,
     CallbackContext,
     CommandHandler,
-    Filters,
+    filters,
     MessageHandler,
 )
 from telegram.ext.dispatcher import DispatcherHandlerStop
@@ -306,7 +306,7 @@ def main():
     test_handler = CommandHandler("test", test, run_async=True)
     donate_handler = CommandHandler("donate", donate, run_async=True)
     migrate_handler = MessageHandler(
-        Filters.status_update.migrate, migrate_chats, run_async=True
+        filters.status_update.migrate, migrate_chats, run_async=True
     )
     
     dispatcher.add_handler(test_handler)
