@@ -39,7 +39,7 @@ from Shikimori import ALLOW_EXCL
 from Shikimori import DEV_USERS, DRAGONS, DEMONS, TIGERS, WOLVES
 
 from telegram import Update
-from telegram.ext as tg
+import telegram.ext as tg
 from pyrate_limiter import (
     BucketFullException,
     Duration,
