@@ -43,7 +43,7 @@ import markdown2
 import emoji
 
 from telegram import MessageEntity
-from telegram.utils.helpers import escape_markdown
+from telegram.helpers import escape_markdown
 
 """
  NOTE: the url \ escape may cause double escapes
