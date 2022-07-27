@@ -41,7 +41,8 @@ from feedparser import parse
 from Shikimori import dispatcher, updater, SUPPORT_CHAT
 from Shikimori.modules.helper_funcs.chat_status import user_admin
 from Shikimori.modules.sql import rss_sql as sql
-from telegram import ParseMode, Update, constants, InlineKeyboardButton, InlineKeyboardMarkup
+from telegram import Update, constants, InlineKeyboardButton, InlineKeyboardMarkup
+from telegram.constants import ParseMode
 from telegram.ext import CallbackContext, CommandHandler
 
 @user_admin
