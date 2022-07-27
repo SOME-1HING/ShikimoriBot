@@ -37,7 +37,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 import wikipedia
 from Shikimori import dispatcher
 from Shikimori.modules.disable import DisableAbleCommandHandler
-from telegram import ParseMode, Update
+from telegram import Update
+from telegram.constants import ParseMode
 from telegram.ext import CallbackContext
 from wikipedia.exceptions import DisambiguationError, PageError
 
