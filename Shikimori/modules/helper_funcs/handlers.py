@@ -39,7 +39,7 @@ from Shikimori import ALLOW_EXCL
 from Shikimori import DEV_USERS, DRAGONS, DEMONS, TIGERS, WOLVES
 
 from telegram import Update
-from telegram.ext import CommandHandler, MessageHandler, RegexHandler, Filters
+from telegram.ext as uff
 from pyrate_limiter import (
     BucketFullException,
     Duration,
@@ -77,96 +77,61 @@ class AntiSpam:
             bucket_class=MemoryListBucket,
         )
 
-    def check_user(self, user):
+ def check_user(self, user):
         """
         Return True if user is to be ignored else False
         """
-        if user in self.whitelist:
-            return False
-        try:
-            self.limiter.try_acquire(user)
-            return False
-        except BucketFullException:
-            return True
-
+        return bool(sql.is_user_blacklisted(user))
 
 SpamChecker = AntiSpam()
 MessageHandlerChecker = AntiSpam()
 
 
-class CustomCommandHandler(CommandHandler):
-    def __init__(self, command, callback, admin_ok=False, allow_edit=False, **kwargs):
+class CustomCommandHandler(tg.CommandHandler):
+    def __init__(self, command, callback, block=False, **kwargs):
+        if "admin_ok" in kwargs:
+            del kwargs["admin_ok"]
         super().__init__(command, callback, **kwargs)
 
-        if allow_edit is False:
-            self.filters &= ~(
-                Filters.update.edited_message | Filters.update.edited_channel_post
-            )
-
     def check_update(self, update):
-        if isinstance(update, Update) and update.effective_message:
-            message = update.effective_message
+        if not isinstance(update, Update) or not update.effective_message:
+            return
+        message = update.effective_message
 
-            try:
-                user_id = update.effective_user.id
-            except:
-                user_id = None
+        try:
+            user_id = update.effective_user.id
+        except Exception:
+            user_id = None
 
-            if user_id and sql.is_user_blacklisted(user_id):
+        if message.text and len(message.text) > 1:
+            fst_word = message.text.split(None, 1)[0]
+            if len(fst_word) > 1 and any(
+                fst_word.startswith(start) for start in CMD_STARTERS
+            ):
+                args = message.text.split()[1:]
+                command = fst_word[1:].split("@")
+                command.append(
+                    message._bot.username
+                )  # in case the command was sent without a username
+
+                if not (
+                    frozenset({command[0].lower()}) in self.commands
+                    and command[1].lower() == message._bot.username.lower()
+                ):
+                    return None
+
+                if SpamChecker.check_user(user_id):
+                    return None
+
+                if filter_result := self.filters.check_update(update):
+                    return args, filter_result
                 return False
 
-            if message.text and len(message.text) > 1:
-                fst_word = message.text.split(None, 1)[0]
-                if len(fst_word) > 1 and any(
-                    fst_word.startswith(start) for start in CMD_STARTERS
-                ):
 
-                    args = message.text.split()[1:]
-                    command = fst_word[1:].split("@")
-                    command.append(message.bot.username)
-                    if user_id == 1087968824:
-                        user_id = update.effective_chat.id
-                    if not (
-                        command[0].lower() in self.command
-                        and command[1].lower() == message.bot.username.lower()
-                    ):
-                        return None
-                    if SpamChecker.check_user(user_id):
-                        return None
-                    filter_result = self.filters(update)
-                    if filter_result:
-                        return args, filter_result
-                    return False
-
-    def handle_update(self, update, dispatcher, check_result, context=None):
-        if context:
-            self.collect_additional_context(context, update, dispatcher, check_result)
-            return self.callback(update, context)
-        optional_args = self.collect_optional_args(dispatcher, update, check_result)
-        return self.callback(dispatcher.bot, update, **optional_args)
-
-    def collect_additional_context(self, context, update, dispatcher, check_result):
+    def collect_additional_context(self, context, update, SHIKIMORI_PTB, check_result):
         if isinstance(check_result, bool):
             context.args = update.effective_message.text.split()[1:]
         else:
             context.args = check_result[0]
             if isinstance(check_result[1], dict):
                 context.update(check_result[1])
-
-
-class CustomRegexHandler(RegexHandler):
-    def __init__(self, pattern, callback, friendly="", **kwargs):
-        super().__init__(pattern, callback, **kwargs)
-
-
-class CustomMessageHandler(MessageHandler):
-    def __init__(self, filters, callback, friendly="", allow_edit=False, **kwargs):
-        super().__init__(filters, callback, **kwargs)
-        if allow_edit is False:
-            self.filters &= ~(
-                Filters.update.edited_message | Filters.update.edited_channel_post
-            )
-
-        def check_update(self, update):
-            if isinstance(update, Update) and update.effective_message:
-                return self.filters(update)
