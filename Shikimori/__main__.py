@@ -68,7 +68,7 @@ from telegram.error import (
     NetworkError,
     TelegramError,
     TimedOut,
-    Unauthorized,
+    Forbidden,
 )
 from telegram.ext import (
     ContextTypes,
@@ -189,7 +189,7 @@ def error_callback(update: Update, context: CallbackContext):
     error = context.error
     try:
         raise error
-    except Unauthorized:
+    except Forbidden:
         print("no nono1")
         print(error)
         # remove update.message.chat_id from conversation list
@@ -234,7 +234,7 @@ def donate(update: Update, context: CallbackContext):
             update.effective_message.reply_text(
                 "I've PM'ed you about donating to my creator!"
             )
-        except Unauthorized:
+        except Forbidden:
             update.effective_message.reply_text(
                 "Contact me in PM first to get donation information."
             )
@@ -296,7 +296,7 @@ def main():
                 msg.delete()
             except BadRequest:
                 pass
-        except Unauthorized:
+        except Forbidden:
             LOGGER.warning(
                 "Bot isnt able to send message to support_chat, go and check!"
             )
