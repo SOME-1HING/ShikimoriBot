@@ -286,6 +286,17 @@ finally:
 
 from Shikimori.modules.sql import SESSION
 
+"""
+updater = (
+    tg.Application.builder()
+    .token(TOKEN)
+    .base_url(BOT_API_URL)
+    .base_file_url(BOT_API_FILE_URL)
+    .concurrent_updates(True)
+    .build()
+)
+"""
+updater = (tg.Application.builder().token(TOKEN).build())
 telethn = TelegramClient(MemorySession(), API_ID, API_HASH)
 
 aiohttpsession = ClientSession()
