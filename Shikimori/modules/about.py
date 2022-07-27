@@ -33,7 +33,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import time
 from Shikimori.modules.helper_funcs.readable_time import get_readable_time
-from telegram import InlineKeyboardButton, InlineKeyboardMarkup, ParseMode, Update
+from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update
+from telegram.constants import ParseMode
 from telegram.utils.helpers import escape_markdown
 from telegram.ext import CallbackContext, CallbackQueryHandler
 from Shikimori import ANIME_NAME, BOT_USERNAME, NETWORK, NETWORK_USERNAME, START_MEDIA, SUPPORT_CHAT, UPDATE_CHANNEL, StartTime, dispatcher
