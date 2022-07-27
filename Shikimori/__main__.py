@@ -78,7 +78,7 @@ from telegram.ext import (
     MessageHandler,
 )
 
-bot_name = f"{dispatcher.bot.first_name}"
+bot_name = f"Shikimori"
 
 def get_readable_time(seconds: int) -> str:
     count = 0
