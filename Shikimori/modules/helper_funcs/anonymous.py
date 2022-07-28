@@ -27,8 +27,8 @@ import functools
 from telegram import Update
 from telegram.constants import ParseMode
 from telegram.ext import CallbackContext
-from telegram InlineKeyboardButton
-from telegram InlineKeyboardMarkup
+from telegram import InlineKeyboardButton
+from telegram import InlineKeyboardMarkup
 
 from Shikimori import DEV_USERS, DRAGONS, dispatcher
 from Shikimori.modules.helper_funcs.decorators import Shikimoricallback
