@@ -492,19 +492,19 @@ BLACKLIST_HANDLER = DisableAbleCommandHandler(
     blacklist,
     pass_args=True,
     admin_ok=True,
-    run_async=True,
+    block=False,
 )
-ADD_BLACKLIST_HANDLER = CommandHandler("addblacklist", add_blacklist, run_async=True)
-UNBLACKLIST_HANDLER = CommandHandler("unblacklist", unblacklist, run_async=True)
+ADD_BLACKLIST_HANDLER = CommandHandler("addblacklist", add_blacklist, block=False)
+UNBLACKLIST_HANDLER = CommandHandler("unblacklist", unblacklist, block=False)
 BLACKLISTMODE_HANDLER = CommandHandler(
-    "blacklistmode", blacklist_mode, pass_args=True, run_async=True
+    "blacklistmode", blacklist_mode, pass_args=True, block=False
 )
 BLACKLIST_DEL_HANDLER = MessageHandler(
     (Filters.text | Filters.command | Filters.sticker | Filters.photo)
     & Filters.chat_type.groups,
     del_blacklist,
     allow_edit=True,
-    run_async=True,
+    block=False,
 )
 
 dispatcher.add_handler(BLACKLIST_HANDLER)

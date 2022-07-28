@@ -586,14 +586,14 @@ def banme(update: Update, context: CallbackContext):
 
 
 
-BAN_HANDLER = CommandHandler(["ban", "sban"], ban, run_async=True)
-TEMPBAN_HANDLER = CommandHandler(["tban"], temp_ban, run_async=True)
-KICK_HANDLER = CommandHandler(["kick", "punch"], punch, run_async=True)
-UNBAN_HANDLER = CommandHandler("unban", unban, run_async=True)
-ROAR_HANDLER = CommandHandler("roar", selfunban, run_async=True)
+BAN_HANDLER = CommandHandler(["ban", "sban"], ban, block=False)
+TEMPBAN_HANDLER = CommandHandler(["tban"], temp_ban, block=False)
+KICK_HANDLER = CommandHandler(["kick", "punch"], punch, block=False)
+UNBAN_HANDLER = CommandHandler("unban", unban, block=False)
+ROAR_HANDLER = CommandHandler("roar", selfunban, block=False)
 UNBAN_BUTTON_HANDLER = CallbackQueryHandler(unbanb_btn, pattern=r"unbanb_")
-KICKME_HANDLER = DisableAbleCommandHandler(["kickme", "punchme"], punchme, filters=Filters.chat_type.groups, run_async=True)
-BANME_HANDLER = CommandHandler("banme", banme, run_async=True)
+KICKME_HANDLER = DisableAbleCommandHandler(["kickme", "punchme"], punchme, filters=Filters.chat_type.groups, block=False)
+BANME_HANDLER = CommandHandler("banme", banme, block=False)
 
 dispatcher.add_handler(BAN_HANDLER)
 dispatcher.add_handler(TEMPBAN_HANDLER)

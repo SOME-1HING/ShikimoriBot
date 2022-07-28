@@ -54,10 +54,10 @@ def tord(update: Update, context: CallbackContext):
     update.effective_message.reply_text(random.choice(truth_and_dare_string.TORD))
 
 
-TRUTH_HANDLER = DisableAbleCommandHandler("truth", truth, run_async=True)
-DARE_HANDLER = DisableAbleCommandHandler("dare", dare, run_async=True)
-TORD_HANDLER = DisableAbleCommandHandler("tord", tord, run_async=True)
-WYR_HANDLER = DisableAbleCommandHandler(("rather", "wyr"), wyr, run_async=True)
+TRUTH_HANDLER = DisableAbleCommandHandler("truth", truth, block=False)
+DARE_HANDLER = DisableAbleCommandHandler("dare", dare, block=False)
+TORD_HANDLER = DisableAbleCommandHandler("tord", tord, block=False)
+WYR_HANDLER = DisableAbleCommandHandler(("rather", "wyr"), wyr, block=False)
 
 
 dispatcher.add_handler(TRUTH_HANDLER)

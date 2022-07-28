@@ -66,7 +66,7 @@ def waifu(update, context):
 
 
 # Code Handler (YOU CAN CHANGE 'waifu' TO ANY 'cmd' FOR THIS TO BE WORKED AS '/cmd' *IF YOU WANT*.)
-WAIFUINFO_HANDLER = CommandHandler('waifuinfo', waifu, run_async=True)
+WAIFUINFO_HANDLER = CommandHandler('waifuinfo', waifu, block=False)
 dispatcher.add_handler(WAIFUINFO_HANDLER)
 
 #  Buttons for /help .

@@ -28,7 +28,7 @@ from Shikimori import LOGGER, dispatcher
 from Shikimori.modules.disable import DisableAbleMessageHandler
 from Shikimori.modules.helper_funcs.regex_helper import (infinite_loop_check)
 from telegram import Update
-from telegram.ext import CallbackContext, Filters, run_async
+from telegram.ext import CallbackContext, Filters
 
 DELIMITERS = ("/", ":", "|", "_")
 
@@ -152,6 +152,6 @@ __mod_name__ = "Sed/Regex"
 SED_HANDLER = DisableAbleMessageHandler(
     Filters.regex(r's([{}]).*?\1.*'.format("".join(DELIMITERS))),
     sed,
-    friendly="sed", run_async = True)
+    friendly="sed", block=False)
 
 dispatcher.add_handler(SED_HANDLER)

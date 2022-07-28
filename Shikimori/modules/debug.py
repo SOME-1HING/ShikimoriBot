@@ -67,10 +67,10 @@ def logs(update: Update, context: CallbackContext):
         except BadRequest:
             pass
 
-LOG_HANDLER = CommandHandler(("logs", "log"), logs, run_async=True)
+LOG_HANDLER = CommandHandler(("logs", "log"), logs, block=False)
 dispatcher.add_handler(LOG_HANDLER)
 
-DEBUG_HANDLER = CommandHandler("debug", debug, run_async=True)
+DEBUG_HANDLER = CommandHandler("debug", debug, block=False)
 dispatcher.add_handler(DEBUG_HANDLER)
 
 __mod_name__ = "Debug"

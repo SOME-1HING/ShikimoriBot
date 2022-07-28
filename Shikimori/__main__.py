@@ -300,10 +300,10 @@ def main():
         except BadRequest as e:
             LOGGER.warning(e.message)
 
-    test_handler = CommandHandler("test", test, run_async=True)
-    donate_handler = CommandHandler("donate", donate, run_async=True)
+    test_handler = CommandHandler("test", test, block=False)
+    donate_handler = CommandHandler("donate", donate, block=False)
     migrate_handler = MessageHandler(
-        filters.status_update.migrate, migrate_chats, run_async=True
+        filters.status_update.migrate, migrate_chats, block=False
     )
     
     dispatcher.add_handler(test_handler)

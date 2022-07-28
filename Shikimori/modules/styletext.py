@@ -523,14 +523,14 @@ Here is the help for the *Style-Text* module:
  ❍ `/lined` <text>: lined your text!
  """
 
-WEEBIFY_HANDLER = DisableAbleCommandHandler("weebify", weebify, run_async=True)
-BUBBLE_HANDLER = DisableAbleCommandHandler("bubble", bubble, run_async=True)
-FBUBBLE_HANDLER = DisableAbleCommandHandler("fbubble", fbubble, run_async=True)
-SQUARE_HANDLER = DisableAbleCommandHandler("square", square, run_async=True)
-FSQUARE_HANDLER = DisableAbleCommandHandler("fsquare", fsquare, run_async=True)
-BLUE_HANDLER = DisableAbleCommandHandler("blue", blue, run_async=True)
-LATIN_HANDLER = DisableAbleCommandHandler("latin", latin, run_async=True)
-LINED_HANDLER = DisableAbleCommandHandler("lined", lined, run_async=True)
+WEEBIFY_HANDLER = DisableAbleCommandHandler("weebify", weebify, block=False)
+BUBBLE_HANDLER = DisableAbleCommandHandler("bubble", bubble, block=False)
+FBUBBLE_HANDLER = DisableAbleCommandHandler("fbubble", fbubble, block=False)
+SQUARE_HANDLER = DisableAbleCommandHandler("square", square, block=False)
+FSQUARE_HANDLER = DisableAbleCommandHandler("fsquare", fsquare, block=False)
+BLUE_HANDLER = DisableAbleCommandHandler("blue", blue, block=False)
+LATIN_HANDLER = DisableAbleCommandHandler("latin", latin, block=False)
+LINED_HANDLER = DisableAbleCommandHandler("lined", lined, block=False)
 
 dispatcher.add_handler(WEEBIFY_HANDLER)
 dispatcher.add_handler(BUBBLE_HANDLER)

@@ -60,7 +60,7 @@ class ShikimoriHandler:
         admin_ok: bool = False,
         pass_args: bool = False,
         pass_chat_data: bool = False,
-        run_async: bool = True,
+        block: bool = False,
         can_disable: bool = True,
         group: Optional[Union[int]] = 40,
     ):
@@ -72,7 +72,7 @@ class ShikimoriHandler:
                             command,
                             func,
                             filters=filters,
-                            run_async=run_async,
+                            block=block,
                             pass_args=pass_args,
                             admin_ok=admin_ok,
                         ),
@@ -84,7 +84,7 @@ class ShikimoriHandler:
                             command,
                             func,
                             filters=filters,
-                            run_async=run_async,
+                            block=block,
                             pass_args=pass_args,
                         ),
                         group,
@@ -99,7 +99,7 @@ class ShikimoriHandler:
                             command,
                             func,
                             filters=filters,
-                            run_async=run_async,
+                            block=block,
                             pass_args=pass_args,
                             admin_ok=admin_ok,
                             pass_chat_data=pass_chat_data,
@@ -111,7 +111,7 @@ class ShikimoriHandler:
                             command,
                             func,
                             filters=filters,
-                            run_async=run_async,
+                            block=block,
                             pass_args=pass_args,
                             pass_chat_data=pass_chat_data,
                         )
@@ -128,7 +128,7 @@ class ShikimoriHandler:
         self,
         pattern: Optional[str] = None,
         can_disable: bool = True,
-        run_async: bool = True,
+        block: bool = False,
         group: Optional[Union[int]] = 60,
         friendly=None,
     ):
@@ -137,13 +137,13 @@ class ShikimoriHandler:
                 if can_disable:
                     self._dispatcher.add_handler(
                         DisableAbleMessageHandler(
-                            pattern, func, friendly=friendly, run_async=run_async
+                            pattern, func, friendly=friendly, block=block
                         ),
                         group,
                     )
                 else:
                     self._dispatcher.add_handler(
-                        MessageHandler(pattern, func, run_async=run_async), group
+                        MessageHandler(pattern, func, block=block), group
                     )
                 LOGGER.debug(
                     f"[ShikimoriMSG] Loaded filter pattern {pattern} for function {func.__name__} in group {group}"
@@ -152,12 +152,12 @@ class ShikimoriHandler:
                 if can_disable:
                     self._dispatcher.add_handler(
                         DisableAbleMessageHandler(
-                            pattern, func, friendly=friendly, run_async=run_async
+                            pattern, func, friendly=friendly, block=block
                         )
                     )
                 else:
                     self._dispatcher.add_handler(
-                        MessageHandler(pattern, func, run_async=run_async)
+                        MessageHandler(pattern, func, block=block)
                     )
                 LOGGER.debug(
                     f"[ShikimoriMSG] Loaded filter pattern {pattern} for function {func.__name__}"
@@ -167,11 +167,11 @@ class ShikimoriHandler:
 
         return _message
 
-    def callbackquery(self, pattern: str = None, run_async: bool = True):
+    def callbackquery(self, pattern: str = None, block: bool = True):
         def _callbackquery(func):
             self._dispatcher.add_handler(
                 CallbackQueryHandler(
-                    pattern=pattern, callback=func, run_async=run_async
+                    pattern=pattern, callback=func, block=block
                 )
             )
             LOGGER.debug(
@@ -184,7 +184,7 @@ class ShikimoriHandler:
     def inlinequery(
         self,
         pattern: Optional[str] = None,
-        run_async: bool = True,
+        block: bool = False,
         pass_user_data: bool = True,
         pass_chat_data: bool = True,
         chat_types: List[str] = None,
@@ -194,7 +194,7 @@ class ShikimoriHandler:
                 InlineQueryHandler(
                     pattern=pattern,
                     callback=func,
-                    run_async=run_async,
+                    block=block,
                     pass_user_data=pass_user_data,
                     pass_chat_data=pass_chat_data,
                     chat_types=chat_types,

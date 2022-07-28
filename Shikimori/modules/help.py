@@ -175,9 +175,9 @@ async def get_help(context: ContextTypes.DEFAULT_TYPE, chat_id, text, keyboard=N
     else:
         send_help(chat.id, HELP_STRINGS)
 
-help_handler = CommandHandler("help", get_help, run_async=True)
+help_handler = CommandHandler("help", get_help, block=False)
 help_callback_handler = CallbackQueryHandler(
-    help_button, pattern=r"help_.*", run_async=True
+    help_button, pattern=r"help_.*", block=False
 )
 
 dispatcher.add_handler(help_callback_handler)

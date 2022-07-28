@@ -56,9 +56,9 @@ def cats(update, context):
         img = result['file']
         msg.reply_photo(photo=img)
 
-ANIMALFACT_HANDLER = DisableAbleCommandHandler("animalfacts", animalfact, run_async=True)
+ANIMALFACT_HANDLER = DisableAbleCommandHandler("animalfacts", animalfact, block=False)
 dispatcher.add_handler(ANIMALFACT_HANDLER)
-CAT_HANDLER = DisableAbleCommandHandler(("cats", "cat"), cats, run_async=True)
+CAT_HANDLER = DisableAbleCommandHandler(("cats", "cat"), cats, block=False)
 dispatcher.add_handler(CAT_HANDLER)
 
 __mod_name__ = "Animals"

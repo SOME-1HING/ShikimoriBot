@@ -133,7 +133,7 @@ def gettime(update: Update, context: CallbackContext):
     )
 
 
-TIME_HANDLER = DisableAbleCommandHandler("time", gettime, run_async=True)
+TIME_HANDLER = DisableAbleCommandHandler("time", gettime, block=False)
 
 dispatcher.add_handler(TIME_HANDLER)
 

@@ -75,7 +75,7 @@ def crypto(update: Update, context: CallbackContext):
     )
     update.effective_message.reply_text(text, reply_markup=InlineKeyboardMarkup(buttons), parse_mode=ParseMode.MARKDOWN)
 
-CRYPTO_HANDLER = CommandHandler("crypto", crypto, run_async=True)
+CRYPTO_HANDLER = CommandHandler("crypto", crypto, block=False)
 
 dispatcher.add_handler(CRYPTO_HANDLER)
 

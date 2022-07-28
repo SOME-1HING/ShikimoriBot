@@ -169,16 +169,16 @@ def bye(update, context):
 
 
 GDMORNING_HANDLER = MessageHandler(
-    Filters.regex("(?i)(good morning|goodmorning)"), goodmorning, friendly="goodmorning", run_async = True
+    Filters.regex("(?i)(good morning|goodmorning)"), goodmorning, friendly="goodmorning", block=False
 )
 GDNIGHT_HANDLER = MessageHandler(
-    Filters.regex("(?i)(good night|goodnight)"), goodnight, friendly="goodnight", run_async = True
+    Filters.regex("(?i)(good night|goodnight)"), goodnight, friendly="goodnight", block=False
 )
 BYE_HANDLER = MessageHandler(
-    Filters.regex("(?i)(bye|brb|afk)"), bye, friendly="bye", run_async = True
+    Filters.regex("(?i)(bye|brb|afk)"), bye, friendly="bye", block=False
 )
 HELLO_HANDLER = MessageHandler(
-    Filters.regex("(?i)(hello)"), hello, friendly="hello", run_async = True
+    Filters.regex("(?i)(hello)"), hello, friendly="hello", block=False
 )
 
 dispatcher.add_handler(GDMORNING_HANDLER)

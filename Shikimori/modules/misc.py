@@ -224,10 +224,10 @@ __help__ = """
 """
 
 ECHO_HANDLER = DisableAbleCommandHandler(
-    "echo", echo, filters=Filters.chat_type.groups, run_async=True)
-MD_HELP_HANDLER = CommandHandler("markdownhelp", markdown_help, run_async=True)
+    "echo", echo, filters=Filters.chat_type.groups, block=False)
+MD_HELP_HANDLER = CommandHandler("markdownhelp", markdown_help, block=False)
 WIKI_HANDLER = DisableAbleCommandHandler("wiki", wiki)
-WALLPAPER_HANDLER = DisableAbleCommandHandler("wall", wall, run_async=True)
+WALLPAPER_HANDLER = DisableAbleCommandHandler("wall", wall, block=False)
 
 dispatcher.add_handler(ECHO_HANDLER)
 dispatcher.add_handler(MD_HELP_HANDLER)

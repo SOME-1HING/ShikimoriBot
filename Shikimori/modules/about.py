@@ -64,10 +64,12 @@ buttons = [
 ]
 
 try:
-    if NETWORK:
-        hmm = InlineKeyboardButton(text=f"{NETWORK}", url=f"https://t.me/{NETWORK_USERNAME}")
-    elif "voidxnetwork" in NETWORK_USERNAME:
+    if NETWORK_USERNAME:
+        network_name = NETWORK_USERNAME.lower()
+    if network_name == "voidxnetwork":
         hmm = InlineKeyboardButton(text="【V๏ɪ፝֟𝔡】 ✧Network✧", callback_data="void_")
+    elif NETWORK:
+        hmm = InlineKeyboardButton(text=f"{NETWORK}", url=f"https://t.me/{NETWORK_USERNAME}")
     else:
         hmm = None
 except:
@@ -214,16 +216,16 @@ def license_call_back(update: Update, context: CallbackContext):
                 disable_web_page_preview=False,
         )
 about_callback_handler = CallbackQueryHandler(
-        Shikimori_about_callback, pattern=r"Shikimori_", run_async=True
+        Shikimori_about_callback, pattern=r"Shikimori_", block=False
     )
 license_call_back_handler = CallbackQueryHandler(
-    license_call_back, pattern=r"license_", run_async=True
+    license_call_back, pattern=r"license_", block=False
 )
 git_call_back_handler = CallbackQueryHandler(
-    git_call_back, pattern=r"github_", run_async=True
+    git_call_back, pattern=r"github_", block=False
 )
 void_call_back_handler = CallbackQueryHandler(
-    void_call_back, pattern=r"void_", run_async=True
+    void_call_back, pattern=r"void_", block=False
 )
 
 dispatcher.add_handler(void_call_back_handler)

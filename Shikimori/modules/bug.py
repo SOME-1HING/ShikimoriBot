@@ -151,13 +151,13 @@ def close_send_photo(update: Update, context: CallbackContext):
             return
 
 close_reply_handler = CallbackQueryHandler(
-        close_reply, pattern=r"close_reply_", run_async=True
+        close_reply, pattern=r"close_reply_", block=False
     )
 close_send_photo_handler = CallbackQueryHandler(
-    close_send_photo, pattern=r"close_send_photo_", run_async=True
+    close_send_photo, pattern=r"close_send_photo_", block=False
 )
 
-BUG_HANDLER = CommandHandler(("bug", "bugs"), bug, run_async = True)
+BUG_HANDLER = CommandHandler(("bug", "bugs"), bug, block=False)
 
 dispatcher.add_handler(BUG_HANDLER)
 dispatcher.add_handler(close_reply_handler)

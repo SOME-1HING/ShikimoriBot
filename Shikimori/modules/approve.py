@@ -230,13 +230,13 @@ def unapproveall_btn(update: Update, context: CallbackContext):
 
 
 
-APPROVE = DisableAbleCommandHandler("approve", approve, run_async=True)
-DISAPPROVE = DisableAbleCommandHandler("unapprove", disapprove, run_async=True)
-APPROVED = DisableAbleCommandHandler("approved", approved, run_async=True)
-APPROVAL = DisableAbleCommandHandler("approval", approval, run_async=True)
-UNAPPROVEALL = DisableAbleCommandHandler("unapproveall", unapproveall, run_async=True)
+APPROVE = DisableAbleCommandHandler("approve", approve, block=False)
+DISAPPROVE = DisableAbleCommandHandler("unapprove", disapprove, block=False)
+APPROVED = DisableAbleCommandHandler("approved", approved, block=False)
+APPROVAL = DisableAbleCommandHandler("approval", approval, block=False)
+UNAPPROVEALL = DisableAbleCommandHandler("unapproveall", unapproveall, block=False)
 UNAPPROVEALL_BTN = CallbackQueryHandler(
-    unapproveall_btn, pattern=r"unapproveall_.*", run_async=True
+    unapproveall_btn, pattern=r"unapproveall_.*", block=False
 )
 
 dispatcher.add_handler(APPROVE)

@@ -62,7 +62,7 @@ def plet(update: Update, context: CallbackContext):
         context.bot.send_sticker(chat_id=message.chat_id, sticker=buffer)
 
 
-PLET_HANDLER = DisableAbleCommandHandler("plet", plet, run_async= True)
+PLET_HANDLER = DisableAbleCommandHandler("plet", plet, block= False)
 
 dispatcher.add_handler(PLET_HANDLER)
 

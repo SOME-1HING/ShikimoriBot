@@ -303,19 +303,19 @@ def kill(update: Update, context: CallbackContext):
     msg.edit_text("⚰")
 
 
-KILL_HANDLER = DisableAbleCommandHandler("kill", kill, run_async=True)
-LOVE_HANDLER = DisableAbleCommandHandler("love", love, run_async=True)
-HACK_HANDLER = DisableAbleCommandHandler("hack", hack, run_async=True)
-BOMBS_HANDLER = DisableAbleCommandHandler("bombs", bombs, run_async=True)
-MOONANIMATION_HANDLER = DisableAbleCommandHandler("moon", moonanimation, run_async=True)
+KILL_HANDLER = DisableAbleCommandHandler("kill", kill, block=False)
+LOVE_HANDLER = DisableAbleCommandHandler("love", love, block=False)
+HACK_HANDLER = DisableAbleCommandHandler("hack", hack, block=False)
+BOMBS_HANDLER = DisableAbleCommandHandler("bombs", bombs, block=False)
+MOONANIMATION_HANDLER = DisableAbleCommandHandler("moon", moonanimation, block=False)
 CLOCKANIMATION_HANDLER = DisableAbleCommandHandler(
-    "clock", clockanimation, run_async=True
+    "clock", clockanimation, block=False
 )
 BLOCKANIMATION_HANDLER = DisableAbleCommandHandler(
-    "block", blockanimation, run_async=True
+    "block", blockanimation, block=False
 )
 EARTHANIMATION_HANDLER = DisableAbleCommandHandler(
-    "earth", earthanimation, run_async=True
+    "earth", earthanimation, block=False
 )
 dispatcher.add_handler(KILL_HANDLER)
 dispatcher.add_handler(LOVE_HANDLER)

@@ -256,7 +256,7 @@ def react(update: Update, context: CallbackContext):
         message.reply_text(react)
 
 
-REACT_HANDLER = DisableAbleCommandHandler("react", react, run_async=True)
+REACT_HANDLER = DisableAbleCommandHandler("react", react, block=False)
 
 dispatcher.add_handler(REACT_HANDLER)
 

@@ -84,7 +84,7 @@ def awake(update: Update, context: CallbackContext):
     except:
         message.reply_text(TEXT, reply_markup=InlineKeyboardMarkup(buttons),parse_mode=ParseMode.HTML)
 
-ALIVE_HANDLER = DisableAbleCommandHandler("alive", awake, run_async=True)
+ALIVE_HANDLER = DisableAbleCommandHandler("alive", awake, block=False)
 dispatcher.add_handler(ALIVE_HANDLER)
 __command_list__ = ["alive"]
 __handlers__ = [

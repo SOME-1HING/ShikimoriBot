@@ -252,31 +252,31 @@ def bluetext_ignore_list(update: Update, context: CallbackContext):
 
 
 SET_CLEAN_BLUE_TEXT_HANDLER = CommandHandler(
-    "cleanblue", set_blue_text_must_click, run_async=True
+    "cleanblue", set_blue_text_must_click, block=False
 )
 ADD_CLEAN_BLUE_TEXT_HANDLER = CommandHandler(
-    "ignoreblue", add_bluetext_ignore, run_async=True
+    "ignoreblue", add_bluetext_ignore, block=False
 )
 REMOVE_CLEAN_BLUE_TEXT_HANDLER = CommandHandler(
-    "unignoreblue", remove_bluetext_ignore, run_async=True
+    "unignoreblue", remove_bluetext_ignore, block=False
 )
 ADD_CLEAN_BLUE_TEXT_GLOBAL_HANDLER = CommandHandler(
     "gignoreblue",
     add_bluetext_ignore_global,
-    run_async=True,
+    block=False,
 )
 REMOVE_CLEAN_BLUE_TEXT_GLOBAL_HANDLER = CommandHandler(
     "ungignoreblue",
     remove_bluetext_ignore_global,
-    run_async=True,
+    block=False,
 )
 LIST_CLEAN_BLUE_TEXT_HANDLER = CommandHandler(
-    "listblue", bluetext_ignore_list, run_async=True
+    "listblue", bluetext_ignore_list, block=False
 )
 CLEAN_BLUE_TEXT_HANDLER = MessageHandler(
     Filters.command & Filters.chat_type.groups,
     clean_blue_text_must_click,
-    run_async=True,
+    block=False,
 )
 
 dispatcher.add_handler(SET_CLEAN_BLUE_TEXT_HANDLER)

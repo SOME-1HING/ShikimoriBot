@@ -195,7 +195,7 @@ def get_settings(update: Update, context: CallbackContext):
     else:
         send_settings(chat.id, user.id, True)
 
-settings_handler = CommandHandler("settings", get_settings, run_async=True)
-settings_callback_handler = CallbackQueryHandler(settings_button, pattern=r"stngs_", run_async=True)
+settings_handler = CommandHandler("settings", get_settings, block=False)
+settings_callback_handler = CallbackQueryHandler(settings_button, pattern=r"stngs_", block=False)
 dispatcher.add_handler(settings_callback_handler)
 dispatcher.add_handler(settings_handler)

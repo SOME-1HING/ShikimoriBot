@@ -46,7 +46,7 @@ from Shikimori import LOGGER, dispatcher
 from Shikimori.modules.helper_funcs.chat_status import dev_plus
 from telegram import Update
 from telegram.constants import ParseMode
-from telegram.ext import CallbackContext, CommandHandler, run_async
+from telegram.ext import CallbackContext, CommandHandler
 
 namespaces = {}
 
@@ -153,8 +153,8 @@ def clear(update: Update, context: CallbackContext):
     send("Cleared locals.", bot, update)
 
 
-EXEC_HANDLER = CommandHandler(("x", "ex", "exe", "exec", "py"), execute, run_async=True)
-CLEAR_HANDLER = CommandHandler("clearlocals", clear, run_async=True)
+EXEC_HANDLER = CommandHandler(("x", "ex", "exe", "exec", "py"), execute, block=False)
+CLEAR_HANDLER = CommandHandler("clearlocals", clear, block=False)
 
 dispatcher.add_handler(EXEC_HANDLER)
 dispatcher.add_handler(CLEAR_HANDLER)

@@ -89,10 +89,10 @@ def speedtestxyz_callback(update: Update, context: CallbackContext):
 
 
 SPEED_TEST_HANDLER = DisableAbleCommandHandler(
-    "speedtest", speedtestxyz, run_async=True
+    "speedtest", speedtestxyz, block=False
 )
 SPEED_TEST_CALLBACKHANDLER = CallbackQueryHandler(
-    speedtestxyz_callback, pattern="speedtest_.*", run_async=True
+    speedtestxyz_callback, pattern="speedtest_.*", block=False
 )
 
 dispatcher.add_handler(SPEED_TEST_HANDLER)

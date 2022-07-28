@@ -62,7 +62,7 @@ def ann(update, context):
         msg.reply_text(text, parse_mode=ParseMode.HTML)
 
 # Code Handler (YOU CAN CHANGE 'ann' TO ANY 'cmd' FOR THIS TO BE WORKED AS '/cmd' *IF YOU WANT*.)
-ANN_HANDLER = CommandHandler('ann', ann, run_async=True)
+ANN_HANDLER = CommandHandler('ann', ann, block=False)
 dispatcher.add_handler(ANN_HANDLER)
 
 #  Buttons for /help .

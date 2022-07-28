@@ -188,9 +188,9 @@ def __user_info__(user_id):
     return text
 
 
-BL_HANDLER = CommandHandler("ignore", bl_user, run_async=True)
-UNBL_HANDLER = CommandHandler("notice", unbl_user, run_async=True)
-BLUSERS_HANDLER = CommandHandler("ignoredlist", bl_users, run_async=True)
+BL_HANDLER = CommandHandler("ignore", bl_user, block=False)
+UNBL_HANDLER = CommandHandler("notice", unbl_user, block=False)
+BLUSERS_HANDLER = CommandHandler("ignoredlist", bl_users, block=False)
 
 dispatcher.add_handler(BL_HANDLER)
 dispatcher.add_handler(UNBL_HANDLER)

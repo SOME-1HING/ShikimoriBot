@@ -136,13 +136,13 @@ def system_status(update: Update, context: CallbackContext):
 
 
 IP_HANDLER = CommandHandler(
-    "ip", get_bot_ip, filters=Filters.chat(OWNER_ID), run_async=True
+    "ip", get_bot_ip, filters=Filters.chat(OWNER_ID), block=False
 )
 PING_HANDLER = CommandHandler(
-    "ping", ping, run_async=True
+    "ping", ping, block=False
 )
 SYS_STATUS_HANDLER = CommandHandler(
-    "sysinfo", system_status, filters=CustomFilters.dev_filter, run_async=True
+    "sysinfo", system_status, filters=CustomFilters.dev_filter, block=False
 )
 
 dispatcher.add_handler(IP_HANDLER)

@@ -55,7 +55,7 @@ def apod(update: Update, context: CallbackContext):
         ]),
         parse_mode=ParseMode.HTML)
 
-apod_handler = CommandHandler("apod", apod, run_async = True)
+apod_handler = CommandHandler("apod", apod, block=False)
 dispatcher.add_handler(apod_handler)
 
 __mod_name__ = "NASA"

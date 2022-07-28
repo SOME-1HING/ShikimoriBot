@@ -38,7 +38,7 @@ import requests
 from Shikimori import CASH_API_KEY, dispatcher
 from telegram import Update
 from telegram.constants import ParseMode
-from telegram.ext import CallbackContext, CommandHandler, run_async
+from telegram.ext import CallbackContext, CommandHandler
 
 
 
@@ -87,7 +87,7 @@ def convert(update: Update, context: CallbackContext):
         )
 
 
-CONVERTER_HANDLER = CommandHandler("cash", convert, run_async = True)
+CONVERTER_HANDLER = CommandHandler("cash", convert, block=False)
 
 dispatcher.add_handler(CONVERTER_HANDLER)
 

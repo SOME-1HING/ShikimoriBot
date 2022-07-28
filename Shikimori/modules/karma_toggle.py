@@ -110,9 +110,9 @@ def karma_status(update: Update, context: CallbackContext):
         parse_mode=ParseMode.HTML,
     )
 
-KARMA_STATUS_HANDLER = CommandHandler("karma", karma_status, run_async = True)
-ADD_KARMA_HANDLER = CallbackQueryHandler(add_karma, pattern=r"add_karma", run_async = True)
-RM_KARMA_HANDLER = CallbackQueryHandler(rem_karma, pattern=r"rem_karma", run_async = True)
+KARMA_STATUS_HANDLER = CommandHandler("karma", karma_status, block=False)
+ADD_KARMA_HANDLER = CallbackQueryHandler(add_karma, pattern=r"add_karma", block=False)
+RM_KARMA_HANDLER = CallbackQueryHandler(rem_karma, pattern=r"rem_karma", block=False)
 
 dispatcher.add_handler(ADD_KARMA_HANDLER)
 dispatcher.add_handler(KARMA_STATUS_HANDLER)

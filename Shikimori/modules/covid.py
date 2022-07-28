@@ -57,7 +57,7 @@ def covid(update: Update, context: CallbackContext):
     message.reply_text(reply_text, parse_mode=ParseMode.MARKDOWN)
 
 
-COVID_HANDLER = DisableAbleCommandHandler(["covid", "corona"], covid, run_async = True)
+COVID_HANDLER = DisableAbleCommandHandler(["covid", "corona"], covid, block=False)
 dispatcher.add_handler(COVID_HANDLER)
 
 __mod_name__ = "COVID 19 🦠"

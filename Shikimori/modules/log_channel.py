@@ -241,9 +241,9 @@ if is_module_loaded(FILENAME):
 
     __mod_name__ = "Log Channel 📢​"
 
-    LOG_HANDLER = CommandHandler("logchannel", logging, run_async=True)
-    SET_LOG_HANDLER = CommandHandler("setlog", setlog, run_async=True)
-    UNSET_LOG_HANDLER = CommandHandler("unsetlog", unsetlog, run_async=True)
+    LOG_HANDLER = CommandHandler("logchannel", logging, block=False)
+    SET_LOG_HANDLER = CommandHandler("setlog", setlog, block=False)
+    UNSET_LOG_HANDLER = CommandHandler("unsetlog", unsetlog, block=False)
 
     dispatcher.add_handler(LOG_HANDLER)
     dispatcher.add_handler(SET_LOG_HANDLER)

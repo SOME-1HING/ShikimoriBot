@@ -95,8 +95,8 @@ def changek_quote(update: Update, context: CallbackContext):
     keyboard = [[InlineKeyboardButton(text="Change", callback_data="quotek_change")]]
     message.reply_photo(random.choice(QUOTES_IMG),reply_markup=InlineKeyboardMarkup(keyboard))
 
-ANIMEQUOTES_HANDLER = DisableAbleCommandHandler("animequotes", animequotes, run_async = True)
-QUOTES_HANDLER = DisableAbleCommandHandler("quote", quotes, run_async = True)
+ANIMEQUOTES_HANDLER = DisableAbleCommandHandler("animequotes", animequotes, block=False)
+QUOTES_HANDLER = DisableAbleCommandHandler("quote", quotes, block=False)
 
 CHANGE_QUOTE = CallbackQueryHandler(
     change_quote, pattern=r"change_.*")

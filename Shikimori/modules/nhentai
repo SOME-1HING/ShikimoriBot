@@ -116,7 +116,7 @@ def close_reply(update: Update, context: CallbackContext):
         query.message.delete()
 
 close_reply_handler = CallbackQueryHandler(
-        close_reply, pattern=r"close_reply_", run_async=True
+        close_reply, pattern=r"close_reply_", block=False
     )
 
 dispatcher.add_handler(close_reply_handler)

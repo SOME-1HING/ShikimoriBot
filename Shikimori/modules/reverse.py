@@ -511,13 +511,13 @@ def scam(imgspage, lim):
 
 
 REVERSE_HANDLER = DisableAbleCommandHandler(
-    ["reverse", "pp","PP", "Pp"], reverse, pass_args=True, admin_ok=True, run_async=True
+    ["reverse", "pp","PP", "Pp"], reverse, pass_args=True, admin_ok=True, block=False
 )
 GRS_HANDLER = DisableAbleCommandHandler(
-    "grs", grs, pass_args=True, admin_ok=True, run_async=True
+    "grs", grs, pass_args=True, admin_ok=True, block=False
 )
 GG_HANDLER = DisableAbleCommandHandler(
-    "gg", gg, pass_args=True, admin_ok=True, run_async=True
+    "gg", gg, pass_args=True, admin_ok=True, block=False
 )
 
 dispatcher.add_handler(REVERSE_HANDLER)
