@@ -53,10 +53,10 @@ from telegram import (
     MAX_MESSAGE_LENGTH,
     InlineKeyboardMarkup,
     Message,
-    ParseMode,
     Update,
     InlineKeyboardButton,
 )
+from telegram.constants import ParseMode
 from telegram.error import BadRequest
 from telegram.utils.helpers import escape_markdown, mention_markdown
 from telegram.ext import (
