@@ -49,9 +49,9 @@ from Shikimori.modules.helper_funcs.chat_status import is_user_admin
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update
 from telegram.constants import ParseMode
 from telegram.ext import ContextTypes, CallbackContext, CommandHandler
-from telegram.utils.helpers import escape_markdown
+from telegram.helpers import escape_markdown
 
-bot_name = f"{dispatcher.bot.first_name}"
+bot_name = f"Shikimori"
 
 IMG_START = START_MEDIA.split(".")
 start_id = IMG_START[-1]
