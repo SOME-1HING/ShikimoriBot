@@ -45,10 +45,10 @@ from telegram.error import BadRequest, TelegramError, Unauthorized
 from telegram.ext import (
     CallbackContext,
     CommandHandler,
-    Filters,
+    filters as Filters,
     MessageHandler,
 )
-from telegram.utils.helpers import mention_html
+from telegram.helpers import mention_html
 
 import Shikimori.modules.sql.global_bans_sql as sql
 from Shikimori.modules.sql.users_sql import get_user_com_chats
