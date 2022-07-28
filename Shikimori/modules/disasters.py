@@ -56,10 +56,11 @@ from Shikimori.modules.helper_funcs.chat_status import (
 )
 from Shikimori.modules.helper_funcs.extraction import extract_user
 from Shikimori.modules.log_channel import gloggable
-from telegram import TelegramError, Update
+from telegram import Update
 from telegram.constants import ParseMode
 from telegram.ext import CallbackContext, CommandHandler
 from telegram.helpers import mention_html
+from telegram.error TelegramError
 
 ELEVATED_USERS_FILE = os.path.join(os.getcwd(), "Shikimori/elevated_users.json")
 
