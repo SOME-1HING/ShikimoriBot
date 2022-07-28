@@ -42,8 +42,9 @@ from Shikimori.modules.helper_funcs.misc import is_module_loaded
 FILENAME = __name__.rsplit(".", 1)[-1]
 
 if is_module_loaded(FILENAME):
-    from telegram import ParseMode, Update
-    from telegram.error import BadRequest, Unauthorized
+    from telegram import Update
+    from telegram.constants import ParseMode
+    from telegram.error import BadRequest, Forbidden as Unauthorized
     from telegram.ext import CommandHandler, JobQueue
     from telegram.utils.helpers import escape_markdown
 
