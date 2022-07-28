@@ -45,9 +45,10 @@ from bs4 import BeautifulSoup as bs
 
 from telegram import InlineKeyboardMarkup, InlineKeyboardButton
 from telegram.constants import ParseMode
-from telegram import TelegramError, Update
+from telegram import Update
+from telegram.error TelegramError
 from telegram.ext import CallbackContext
-from telegram.utils.helpers import mention_html
+from telegram.helpers import mention_html
 
 from Shikimori import dispatcher
 from Shikimori.modules.disable import DisableAbleCommandHandler
