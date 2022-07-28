@@ -50,13 +50,12 @@ from Shikimori.modules.helper_funcs.string_handling import (
     escape_invalid_curly_brackets,
 )
 from telegram import (
-    MAX_MESSAGE_LENGTH,
     InlineKeyboardMarkup,
     Message,
     Update,
     InlineKeyboardButton,
 )
-from telegram.constants import ParseMode
+from telegram.constants import ParseMode, MessageLimit
 from telegram.error import BadRequest
 from telegram.utils.helpers import escape_markdown, mention_markdown
 from telegram.ext import (
