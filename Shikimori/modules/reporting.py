@@ -42,7 +42,7 @@ from Shikimori.modules.log_channel import loggable
 from Shikimori.modules.sql import reporting_sql as sql
 from telegram import Chat, InlineKeyboardButton, InlineKeyboardMarkup, Update
 from telegram.constants import ParseMode
-from telegram.error import BadRequest, Unauthorized
+from telegram.error import BadRequest, Forbidded as Unauthorized
 from telegram.ext import (
     CallbackContext,
     CallbackQueryHandler,
