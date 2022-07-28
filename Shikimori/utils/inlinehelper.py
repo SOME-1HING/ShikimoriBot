@@ -55,7 +55,7 @@ from Shikimori.utils.pluginhelpers import fetch
 
 SUDOERS = OWNER_ID
 app = pbot
-bot_name = f"{dispatcher.bot.first_name}"
+bot_name = f"Shikimori"
 
 async def _netcat(host, port, content):
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
