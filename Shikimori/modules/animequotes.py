@@ -42,7 +42,8 @@ from Shikimori import dispatcher
 from Shikimori.modules.disable import DisableAbleCommandHandler
 from Shikimori.strings.animequotes_string import QUOTES_IMG
 from telegram.ext import CallbackContext, CallbackQueryHandler
-from telegram import ParseMode, Update, InlineKeyboardMarkup, InlineKeyboardButton
+from telegram import Update, InlineKeyboardMarkup, InlineKeyboardButton
+from telegram.constants import ParseMode
 
 def anime_quote():
     url = "https://animechan.vercel.app/api/random"
