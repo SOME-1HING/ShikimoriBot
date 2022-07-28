@@ -168,7 +168,7 @@ def list_urls(update: Update, context: CallbackContext):
     if len(final_content) == 0:
         bot.send_message(
             chat_id=tg_chat_id, text="This chat is not subscribed to any links")
-    elif len(final_content) <= constants.MAX_MESSAGE_LENGTH:
+    elif len(final_content) <= constants.MessageLimit:
         bot.send_message(
             chat_id=tg_chat_id,
             text="This chat is subscribed to the following links:\n" +
@@ -289,7 +289,7 @@ def rss_update(context: CallbackContext):
                     html.escape(title), html.escape(description), html.escape(link))
                 buttons = [[InlineKeyboardButton("More Info", url=link)]]
 
-                if len(final_message) <= constants.MAX_MESSAGE_LENGTH:
+                if len(final_message) <= constants.MessageLimit:
                     bot.send_message(
                         chat_id=tg_chat_id,
                         text=final_message,
