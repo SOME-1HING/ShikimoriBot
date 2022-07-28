@@ -39,7 +39,7 @@ from countryinfo import CountryInfo
 from Shikimori import dispatcher, telethn as borg
 from Shikimori.events import register
 
-bot_name = f"{dispatcher.bot.first_name}"
+bot_name = f"Shikimori"
 
 
 @register(pattern="^/country (.*)")
