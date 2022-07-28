@@ -38,7 +38,8 @@ import re
 import random
 from html import escape
 import telegram
-from telegram import ParseMode, InlineKeyboardMarkup, Message, InlineKeyboardButton
+from telegram import InlineKeyboardMarkup, Message, InlineKeyboardButton
+from telegram.constants import ParseMode
 from telegram.error import BadRequest
 from telegram.ext import (
     CommandHandler,
