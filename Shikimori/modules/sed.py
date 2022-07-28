@@ -152,6 +152,6 @@ __mod_name__ = "Sed/Regex"
 SED_HANDLER = DisableAbleMessageHandler(
     Filters.Regex(r's([{}]).*?\1.*'.format("".join(DELIMITERS))),
     sed,
-    friendly="sed", block=False)
+    friendly="sed")
 
 dispatcher.add_handler(SED_HANDLER)
