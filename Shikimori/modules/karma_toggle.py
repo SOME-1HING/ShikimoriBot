@@ -6,12 +6,12 @@ import re
 import Shikimori.modules.sql.karma_sql as ksql
 from Shikimori.modules.sql import log_channel_sql as logsql
 import html
-from telegram import ParseMode
+from telegram.constants import ParseMode
 from telegram import (CallbackQuery, Chat, InlineKeyboardButton,
                       InlineKeyboardMarkup, Update, User)
 from telegram.ext import (CallbackContext, CallbackQueryHandler, CommandHandler, MessageHandler, Filters)
 from telegram.constants import ParseMode
-from telegram.utils.helpers import mention_html
+from telegram.helpers import mention_html
 
 from Shikimori.modules.helper_funcs.chat_status import user_admin, user_admin_no_reply
 from Shikimori import  dispatcher
