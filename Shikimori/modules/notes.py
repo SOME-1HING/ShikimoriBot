@@ -62,7 +62,7 @@ from telegram.ext import (
     CallbackContext,
     CommandHandler,
     CallbackQueryHandler,
-    Filters,
+    filters as Filters,
     MessageHandler,
 )
 
