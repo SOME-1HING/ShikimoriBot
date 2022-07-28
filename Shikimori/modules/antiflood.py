@@ -57,7 +57,7 @@ from telegram.ext import (
     Filters,
     MessageHandler,
 )
-from telegram.utils.helpers import mention_html
+from telegram.helpers import mention_html
 from Shikimori.modules.helper_funcs.string_handling import extract_time
 from Shikimori.modules.connection import connected
 from Shikimori.modules.helper_funcs.alternate import send_message
