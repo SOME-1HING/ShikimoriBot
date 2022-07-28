@@ -213,8 +213,8 @@ __help__ = ""  # no help string
 BROADCAST_HANDLER = CommandHandler(
     ["broadcastall", "broadcastusers", "broadcastgroups"], broadcast
 , block=False)
-USER_HANDLER = MessageHandler(Filters.ALL & Filters.ChatType._groups, log_user, block=False)
-CHAT_CHECKER_HANDLER = MessageHandler(Filters.ALL & Filters.ChatType._groups, chat_checker, block=False)
+USER_HANDLER = MessageHandler(Filters.ALL & Filters.ChatType._Groups, log_user, block=False)
+CHAT_CHECKER_HANDLER = MessageHandler(Filters.ALL & Filters.ChatType._Groups, chat_checker, block=False)
 CHATLIST_HANDLER = CommandHandler("groups", chats, block=False)
 
 dispatcher.add_handler(USER_HANDLER, USERS_GROUP)
