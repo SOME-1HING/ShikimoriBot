@@ -45,7 +45,7 @@ from telegram import Update, MessageEntity, InlineKeyboardButton, InlineKeyboard
 from telegram.constants import ParseMode, MessageLimit  as MAX_MESSAGE_LENGTH
 from telegram.ext import CallbackContext
 from telegram.error import BadRequest
-from telegram.utils.helpers import escape_markdown, mention_html
+from telegram.helpers import escape_markdown, mention_html
     
 from Shikimori import (
     DEV_USERS,
