@@ -39,7 +39,7 @@ import threading
 from Shikimori import dispatcher
 from Shikimori.modules.sql import BASE, SESSION
 from sqlalchemy import Boolean, Column, String, UnicodeText, Integer
-from telegram.error import BadRequest, Unauthorized
+from telegram.error import BadRequest, Forbidden as Unauthorized
 from sqlalchemy.sql.sqltypes import BigInteger
 
 
