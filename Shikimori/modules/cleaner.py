@@ -50,7 +50,7 @@ from telegram.constants import ParseMode
 from telegram.ext import (
     CallbackContext,
     CommandHandler,
-    Filters,
+    filters as Filters,
     MessageHandler,
 )
 
