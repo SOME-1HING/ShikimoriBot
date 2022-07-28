@@ -109,7 +109,7 @@ def bl_user(update: Update, context: CallbackContext) -> str:
 def unbl_user(update: Update, context: CallbackContext) -> str:
     message = update.effective_message
     user = update.effective_user
-    bot, args = context.bot, context.args
+    bot, args = context.bot, context.args #bruh
     user_id = extract_user(message, args)
 
     if not user_id:
