@@ -38,7 +38,8 @@ from Shikimori.core.sections import section
 import requests
 from Shikimori import dispatcher
 from telegram.ext import CommandHandler, CallbackContext
-from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, ParseMode
+from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
+from telegram.constants import ParseMode
 
 def crypto(update: Update, context: CallbackContext):
     message = update.effective_message
