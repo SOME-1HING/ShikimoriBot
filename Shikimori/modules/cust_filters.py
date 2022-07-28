@@ -46,9 +46,9 @@ from telegram.ext import (
     MessageHandler,
     DispatcherHandlerStop,
     CallbackQueryHandler,
-    Filters,
+    filters as Filters,
 )
-from telegram.utils.helpers import mention_html, escape_markdown
+from telegram.helpers import mention_html, escape_markdown
 from Shikimori import dispatcher, LOGGER, DRAGONS
 from Shikimori.modules.disable import DisableAbleCommandHandler
 from Shikimori.modules.helper_funcs.handlers import MessageHandlerChecker
