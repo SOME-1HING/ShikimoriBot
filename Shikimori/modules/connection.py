@@ -39,7 +39,7 @@ import re
 
 from telegram import InlineKeyboardMarkup, InlineKeyboardButton, Update, Bot
 from telegram.constants import ParseMode
-from telegram.error import BadRequest, Unauthorized
+from telegram.error import BadRequest, Forbidden as Unauthorized
 from telegram.ext import CommandHandler, CallbackQueryHandler
 
 import Shikimori.modules.sql.connection_sql as sql
