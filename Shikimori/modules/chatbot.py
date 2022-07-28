@@ -15,16 +15,16 @@ from telegram import (CallbackQuery, Chat, MessageEntity, InlineKeyboardButton,
                       InlineKeyboardMarkup, Message, Update, Bot, User)
 from telegram.constants import ParseMode
 from telegram.ext import (CallbackContext, CallbackQueryHandler, CommandHandler,
-                          DispatcherHandlerStop, Filters, MessageHandler)
-from telegram.error import BadRequest, RetryAfter, Unauthorized
-from telegram.utils.helpers import mention_html, mention_markdown, escape_markdown
+                          DispatcherHandlerStop, filters as Filters, MessageHandler)
+from telegram.error import BadRequest, RetryAfter, Forbidden as Unauthorized
+from telegram.helpers import mention_html, mention_markdown, escape_markdown
 
 from Shikimori.modules.helper_funcs.filters import CustomFilters
 from Shikimori.modules.helper_funcs.chat_status import user_admin, user_admin_no_reply
 from Shikimori import  dispatcher, updater, SUPPORT_CHAT
 from Shikimori.modules.log_channel import loggable
 
-bot_name = f"{dispatcher.bot.first_name}"
+bot_name = f"Shikimori"
 
 @user_admin_no_reply
 @loggable
