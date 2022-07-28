@@ -45,7 +45,7 @@ from telegram.error import BadRequest, RetryAfter, forbidden as Unauthorized
 from telegram.ext import CommandHandler, CallbackContext
 from Shikimori.modules.helper_funcs.filters import CustomFilters
 from Shikimori.modules.helper_funcs.chat_status import user_admin
-from telegram.utils.helpers import mention_html
+from telegram.helpers import mention_html
 url_nsfw = "https://api.waifu.pics/nsfw/"
 
 @user_admin
