@@ -44,7 +44,7 @@ import requests
 import io
 import glob
 
-bot_name = f"{dispatcher.bot.first_name}"
+bot_name = f"Shikimori"
 
 FONT_FILE_TO_USE = "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"
 
