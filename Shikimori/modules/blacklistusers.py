@@ -53,7 +53,8 @@ from Shikimori.modules.helper_funcs.extraction import (
     extract_user_and_text,
 )
 from Shikimori.modules.log_channel import gloggable
-from telegram import ParseMode, Update
+from telegram import Update
+from telegram.constants import ParseMode
 from telegram.error import BadRequest
 from telegram.ext import CallbackContext, CommandHandler
 from telegram.utils.helpers import mention_html
