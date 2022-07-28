@@ -35,7 +35,7 @@ import re
 from Shikimori.__main__ import USER_SETTINGS, CHAT_SETTINGS
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update
 from telegram.constants import ParseMode
-from telegram.utils.helpers import escape_markdown
+from telegram.helpers import escape_markdown
 from telegram.ext import CallbackContext, CallbackQueryHandler, CommandHandler
 from telegram.error import BadRequest
 from Shikimori import dispatcher, LOGGER
