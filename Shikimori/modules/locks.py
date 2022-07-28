@@ -40,10 +40,10 @@ import ast
 
 from telegram import Message, Chat, MessageEntity
 from telegram.constants import ParseMode
-from telegram import TelegramError, ChatPermissions
-from telegram.error import BadRequest
+from telegram import  ChatPermissions
+from telegram.error import TelegramError, BadRequest
 from telegram.ext import CommandHandler, MessageHandler, Filters
-from telegram.utils.helpers import mention_html
+from telegram.helpers import mention_html
 from alphabet_detector import AlphabetDetector
 from Shikimori import dispatcher, LOGGER
 from Shikimori.modules.disable import DisableAbleCommandHandler
