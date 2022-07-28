@@ -79,7 +79,7 @@ from telegram.ext import (
     Filters,
     MessageHandler,
 )
-from telegram.utils.helpers import mention_html
+from telegram.helpers import mention_html
 from Shikimori.modules.sql.approve_sql import is_approved
 
 WARN_HANDLER_GROUP = 9
