@@ -55,7 +55,7 @@ from telegram import (
     Update,
     InlineKeyboardButton,
 )
-from telegram.constants import ParseMode, MessageLimit
+from telegram.constants import ParseMode, MessageLimit as MAX_MESSAGE_LIMIT
 from telegram.error import BadRequest
 from telegram.utils.helpers import escape_markdown, mention_markdown
 from telegram.ext import (
