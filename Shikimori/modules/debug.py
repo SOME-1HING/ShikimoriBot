@@ -3,7 +3,8 @@ import datetime
 import time
 
 from telethon import events
-from telegram import Update, ParseMode
+from telegram import Update
+from telegram.constants import ParseMode
 from telegram.ext import CallbackContext, CommandHandler
 from telegram.error import BadRequest
 
