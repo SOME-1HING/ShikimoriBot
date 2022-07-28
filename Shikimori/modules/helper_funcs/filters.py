@@ -36,7 +36,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 from Shikimori import DEV_USERS, DRAGONS, DEMONS
 from telegram import Message
-from telegram.ext import MessageFilter
+from telegram.ext.filters import MessageFilter
 
 
 class CustomFilters(object):
