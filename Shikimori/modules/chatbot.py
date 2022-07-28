@@ -10,7 +10,7 @@ import Shikimori.modules.sql.chatbot_sql as sql
 from Shikimori import AI_API_KEY as api
 
 from time import sleep
-from telegram import ParseMode
+from telegram.constants import ParseMode
 from telegram import (CallbackQuery, Chat, MessageEntity, InlineKeyboardButton,
                       InlineKeyboardMarkup, Message, Update, Bot, User)
 from telegram.constants import ParseMode
