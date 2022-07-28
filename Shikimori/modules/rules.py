@@ -50,7 +50,7 @@ from telegram import (
 from telegram.constants import ParseMode
 from telegram.error import BadRequest
 from telegram.ext import CallbackContext, CommandHandler, Filters
-from telegram.utils.helpers import escape_markdown
+from telegram.helpers import escape_markdown
 
 
 def get_rules(update: Update, context: CallbackContext):
