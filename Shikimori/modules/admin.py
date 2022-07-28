@@ -43,7 +43,7 @@ from telegram.constants import ParseMode
 from telegram.error import BadRequest
 from telethon import events
 from telegram.ext import CallbackContext, CommandHandler, filters as Filters
-from telegram.utils.helpers import mention_html
+from telegram.helpers import mention_html
 from telethon.tl import functions, types
 from telegram import User, Chat
 
