@@ -44,7 +44,7 @@ from telegram import (
 from telegram.constants import ParseMode
 from telegram.error import BadRequest
 from telegram.ext import CallbackContext, filters as Filters, CommandHandler, CallbackQueryHandler
-from telegram.utils.helpers import mention_html
+from telegram.helpers import mention_html
 from typing import Optional
 
 from Shikimori.modules.disable import DisableAbleCommandHandler
