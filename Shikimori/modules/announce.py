@@ -38,7 +38,7 @@ import html
 
 from telegram import Update
 from telegram.ext import CallbackContext
-from telegram.utils.helpers import mention_html
+from telegram.helpers import mention_html
 
 from Shikimori.modules.log_channel import loggable
 from Shikimori.modules.helper_funcs.decorators import Shikimoricmd
