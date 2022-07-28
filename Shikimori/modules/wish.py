@@ -33,7 +33,7 @@ import random
 from Shikimori import DEV_USERS, OWNER_ID, telethn
 
 from telethon import events, Button
-from telegram import ParseMode
+from telegram.constants import ParseMode
 
 BUTTON = [[Button.url("❓ What Is This", "https://t.me/Shikimori_bot_Updates/34")]]
 COMET = "https://telegra.ph/file/713fbfbdde25cc1726866.mp4"
