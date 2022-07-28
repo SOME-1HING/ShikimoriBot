@@ -40,7 +40,7 @@ from platform import python_version
 from telegram import __version__ as ptbver, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.constants import ParseMode
 from telegram.ext import CommandHandler
-from telegram.utils.helpers import escape_markdown
+from telegram.helpers import escape_markdown
 from telethon import __version__ as tlhver
 from pyrogram import __version__ as pyrover
     
