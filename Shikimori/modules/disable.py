@@ -44,11 +44,10 @@ from Shikimori.modules.helper_funcs.misc import is_module_loaded
 from telegram import Update
 from telegram.constants import ParseMode
 from telegram.ext import (
-    CallbackContext,
+    ContextTypes,
     CommandHandler,
     filters as Filters,
     MessageHandler,
-    RegexHandler,
 )
 from telegram.utils.helpers import escape_markdown
 
@@ -151,7 +150,7 @@ if is_module_loaded(FILENAME):
                     return False
                 return args, filter_result
 
-    class DisableAbleRegexHandler(RegexHandler):
+    class DisableAbleMessageHandler(MessageHandler):
         def __init__(self, pattern, callback, friendly="", filters=None, **kwargs):
             super().__init__(pattern, callback, filters, **kwargs)
             DISABLE_OTHER.append(friendly)
@@ -378,7 +377,6 @@ if is_module_loaded(FILENAME):
 
 else:
     DisableAbleCommandHandler = CommandHandler
-    DisableAbleRegexHandler = RegexHandler
     DisableAbleMessageHandler = MessageHandler
 
 __mod_name__ = "Disabling ⃠"
