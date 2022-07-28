@@ -33,7 +33,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 # Imports from external libraries. (DON'T EDIT)
 import requests
-from telegram import ParseMode
+from telegram.constants import ParseMode
 from telegram.ext import CommandHandler
 
 # Imports dispatcher = updater.dispatcher from __init__.py (*MUST EDIT* CHANGE MODULE NAME TO THE FOLDER NAME OF MODULES IN YOUR BOT)
