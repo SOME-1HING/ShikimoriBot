@@ -38,7 +38,8 @@ import Shikimori.modules.sql.locks_sql as sql
 import html
 import ast
 
-from telegram import Message, Chat, ParseMode, MessageEntity
+from telegram import Message, Chat, MessageEntity
+from telegram.constants import ParseMode
 from telegram import TelegramError, ChatPermissions
 from telegram.error import BadRequest
 from telegram.ext import CommandHandler, MessageHandler, Filters
