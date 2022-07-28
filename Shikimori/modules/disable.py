@@ -44,7 +44,7 @@ from Shikimori.modules.helper_funcs.misc import is_module_loaded
 from telegram import Update
 from telegram.constants import ParseMode
 from telegram.ext import (
-    ContextTypes,
+    CallbackContext,
     CommandHandler,
     filters as Filters,
     MessageHandler,
