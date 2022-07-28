@@ -355,16 +355,12 @@ if is_module_loaded(FILENAME):
 
 
 
-    DISABLE_HANDLER = CommandHandler("disable", disable, run_async=True)
-    DISABLE_MODULE_HANDLER = CommandHandler(
-        "disablemodule", disable_module, run_async=True
-    )
-    ENABLE_HANDLER = CommandHandler("enable", enable, run_async=True)
-    ENABLE_MODULE_HANDLER = CommandHandler(
-        "enablemodule", enable_module, run_async=True
-    )
-    COMMANDS_HANDLER = CommandHandler(["cmds", "disabled"], commands, run_async=True)
-    TOGGLE_HANDLER = CommandHandler("listcmds", list_cmds, run_async=True)
+    DISABLE_HANDLER = CommandHandler("disable", disable)
+    DISABLE_MODULE_HANDLER = CommandHandler("disablemodule", disable_module)
+    ENABLE_HANDLER = CommandHandler("enable", enable)
+    ENABLE_MODULE_HANDLER = CommandHandler("enablemodule", enable_module)
+    COMMANDS_HANDLER = CommandHandler(["cmds", "disabled"], commands)
+    TOGGLE_HANDLER = CommandHandler("listcmds", list_cmds)
 
     dispatcher.add_handler(DISABLE_HANDLER)
     dispatcher.add_handler(DISABLE_MODULE_HANDLER)
