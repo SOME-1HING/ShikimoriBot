@@ -59,7 +59,7 @@ from Shikimori.modules.log_channel import gloggable
 from telegram import TelegramError, Update
 from telegram.constants import ParseMode
 from telegram.ext import CallbackContext, CommandHandler
-from telegram.utils.helpers import mention_html
+from telegram.helpers import mention_html
 
 ELEVATED_USERS_FILE = os.path.join(os.getcwd(), "Shikimori/elevated_users.json")
 
