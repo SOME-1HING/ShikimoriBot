@@ -56,7 +56,8 @@ from Shikimori.modules.helper_funcs.chat_status import (
 )
 from Shikimori.modules.helper_funcs.extraction import extract_user
 from Shikimori.modules.log_channel import gloggable
-from telegram import ParseMode, TelegramError, Update
+from telegram import TelegramError, Update
+from telegram.constants import ParseMode
 from telegram.ext import CallbackContext, CommandHandler
 from telegram.utils.helpers import mention_html
 
