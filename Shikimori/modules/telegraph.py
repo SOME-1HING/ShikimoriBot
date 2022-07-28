@@ -36,7 +36,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 from Shikimori.events import register
 from Shikimori import telethn as tbot
-from telegram import ParseMode  
+from telegram.constants import ParseMode
 TMP_DOWNLOAD_DIRECTORY = "./"
 import os
 from PIL import Image
