@@ -114,7 +114,7 @@ INSERTION_LOCK = threading.RLock()
 
 def ensure_bot_in_db():
     with INSERTION_LOCK:
-        bot = Users(dispatcher.bot.id, dispatcher.bot.username)
+        bot = Users(1241223850, micchon_shikimori_bot)
         SESSION.merge(bot)
         SESSION.commit()
 
