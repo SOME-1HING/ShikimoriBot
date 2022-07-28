@@ -50,7 +50,7 @@ from Shikimori import DRAGONS as SUDO_USERS
 from Shikimori import pbot, dispatcher
 from Shikimori.modules.sql import forceSubscribe_sql as sql
 
-bot_name = f"{dispatcher.bot.first_name}"
+bot_name = f"Shikimori"
 
 logging.basicConfig(level=logging.INFO)
 
