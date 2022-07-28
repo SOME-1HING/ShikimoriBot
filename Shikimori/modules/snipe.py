@@ -34,7 +34,7 @@ OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 """
 
-from telegram import TelegramError
+from telegram.error import TelegramError
 from telegram import Update
 from telegram.ext import CommandHandler
 from telegram.ext.dispatcher import CallbackContext
