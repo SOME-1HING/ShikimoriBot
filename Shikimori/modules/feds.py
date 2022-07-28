@@ -67,9 +67,9 @@ from telegram import (
     InlineKeyboardButton,
     InlineKeyboardMarkup,
     MessageEntity,
-    ParseMode,
     Update,
 )
+from telegram.constants import ParseMode
 from telegram.error import BadRequest, TelegramError, Unauthorized
 from telegram.ext import (
     CallbackContext,
