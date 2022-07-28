@@ -37,12 +37,12 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 from io import BytesIO
 from time import sleep
 
-from telegram import TelegramError, Update
-from telegram.error import BadRequest, Unauthorized
+from telegram import Update
+from telegram.error import BadRequest, Forbidden as Unauthorized, TelegramError
 from telegram.ext import (
     CallbackContext,
     CommandHandler,
-    Filters,
+    filters as Filters,
     MessageHandler,
 )
 
