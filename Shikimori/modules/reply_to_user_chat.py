@@ -37,7 +37,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 from Shikimori import dispatcher, MEDIA_BYE, MEDIA_GM, MEDIA_GN, MEDIA_HELLO
 from telegram.constants import ParseMode
-from telegram.ext import Filters, MessageHandler
+from telegram.ext import filters as Filters, MessageHandler
 import time
 
 IMG_GM = MEDIA_GM.split(".")
