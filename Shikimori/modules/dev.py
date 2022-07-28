@@ -43,8 +43,8 @@ from time import sleep
 
 from Shikimori import dispatcher
 from Shikimori.modules.helper_funcs.chat_status import dev_plus
-from telegram import TelegramError, Update
-from telegram.error import Unauthorized
+from telegram import Update
+from telegram.error import Forbidden as Unauthorized, TelegramError
 from telegram.ext import CallbackContext, CommandHandler
 
 
