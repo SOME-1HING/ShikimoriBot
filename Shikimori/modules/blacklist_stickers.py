@@ -51,8 +51,8 @@ from Shikimori.modules.warns import warn
 from telegram import Chat, Message, Update, User, ChatPermissions
 from telegram.constants import ParseMode
 from telegram.error import BadRequest
-from telegram.ext import CallbackContext, CommandHandler, Filters, MessageHandler
-from telegram.utils.helpers import mention_html, mention_markdown
+from telegram.ext import CallbackContext, CommandHandler, filters as Filters, MessageHandler
+from telegram.helpers import mention_html, mention_markdown
 
 
 def blackliststicker(update: Update, context: CallbackContext):
