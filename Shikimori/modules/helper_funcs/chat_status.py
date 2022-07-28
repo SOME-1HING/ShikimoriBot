@@ -415,22 +415,15 @@ def user_can_ban(func):
 
 def connection_status(func):
     @wraps(func)
-    def connected_status(update: Update, context: CallbackContext, *args, **kwargs):
-        conn = connected(
-            context.bot,
-            update,
-            update.effective_chat,
-            update.effective_user.id,
-            need_admin=False,
-        )
-
-        if conn:
-            chat = dispatcher.bot.getChat(conn)
-            update.__setattr__("_effective_chat", chat)
-            return func(update, context, *args, **kwargs)
-        if update.effective_message.chat.type == "private":
-            update.effective_message.reply_text(
-                "Send /connect in a group that you and I have in common first.",
+    async def connected_status(update: Update, context: ContextTypes.DEFAULT_TYPE, *args, **kwargs):
+        if update.effective_chat is None or update.effective_user is None:
+            return
+        if conn := await connected(context.bot, update, update.effective_chat, update.effective_user.id, need_admin=False):
+            chat = await dispatcher.bot.getChat(conn)
+            await update.__setattr__("_effective_chat", chat)
+        elif update.effective_message.chat.type == ChatType.PRIVATE:
+            await update.effective_message.reply_text(
+                "Send /connect in a group that you and I have in common first."
             )
             return connected_status
 
