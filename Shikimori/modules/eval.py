@@ -44,7 +44,8 @@ from contextlib import redirect_stdout
 
 from Shikimori import LOGGER, dispatcher
 from Shikimori.modules.helper_funcs.chat_status import dev_plus
-from telegram import ParseMode, Update
+from telegram import Update
+from telegram.constants import ParseMode
 from telegram.ext import CallbackContext, CommandHandler, run_async
 
 namespaces = {}
