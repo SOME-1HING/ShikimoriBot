@@ -37,7 +37,8 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 import time
 import re
 
-from telegram import ParseMode, InlineKeyboardMarkup, InlineKeyboardButton, Update, Bot
+from telegram import InlineKeyboardMarkup, InlineKeyboardButton, Update, Bot
+from telegram.constants import ParseMode
 from telegram.error import BadRequest, Unauthorized
 from telegram.ext import CommandHandler, CallbackQueryHandler
 
