@@ -42,7 +42,8 @@ from telegram.ext import CallbackContext, CallbackQueryHandler
 import Shikimori.modules.sql.approve_sql as sql
 from Shikimori.modules.helper_funcs.chat_status import user_admin
 from Shikimori.modules.log_channel import loggable
-from telegram import ParseMode, InlineKeyboardMarkup, InlineKeyboardButton, Update
+from telegram import InlineKeyboardMarkup, InlineKeyboardButton, Update
+from telegram.constants import ParseMode
 from telegram.utils.helpers import mention_html
 from telegram.error import BadRequest
 
