@@ -69,7 +69,7 @@ from telegram import (
     Update,
     User,
 )
-from telegram.constants import ParseMode
+from telegram.constants import ParseMode, MessageLimit as MAX_MESSAGE_LENGTH
 from telegram.error import BadRequest
 from telegram.ext import (
     CallbackContext,
