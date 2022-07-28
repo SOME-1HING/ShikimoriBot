@@ -5,7 +5,7 @@ import Shikimori.modules.sql.users_sql as user_sql
 from Shikimori import DEV_USERS, OWNER_ID, dispatcher
 from Shikimori.modules.helper_funcs.chat_status import dev_plus
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update
-from telegram.error import BadRequest, Unauthorized
+from telegram.error import BadRequest, Forbidden as Unauthorized
 from telegram.ext import (
     CallbackContext,
     CallbackQueryHandler,
