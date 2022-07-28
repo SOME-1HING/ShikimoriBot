@@ -41,7 +41,7 @@ from Shikimori import SUPPORT_CHAT, dispatcher, pbot
 import Shikimori.modules.sql.nsfw_sql as sql
 from Shikimori.modules.log_channel import gloggable
 from telegram import Update
-from telegram.error import BadRequest, RetryAfter, Unauthorized
+from telegram.error import BadRequest, RetryAfter, forbidden as Unauthorized
 from telegram.ext import CommandHandler, CallbackContext
 from Shikimori.modules.helper_funcs.filters import CustomFilters
 from Shikimori.modules.helper_funcs.chat_status import user_admin
