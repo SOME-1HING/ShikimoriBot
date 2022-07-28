@@ -76,7 +76,7 @@ from telegram.ext import (
     CallbackQueryHandler,
     CommandHandler,
 )
-from telegram.utils.helpers import mention_html, mention_markdown
+from telegram.helpers import mention_html, mention_markdown
 
 # Hello bot owner, I spended for feds many hours of my life, Please don't remove this if you still respect MrYacha and peaktogoo and AyraHikari too
 # Federation by MrYacha 2018-2019
