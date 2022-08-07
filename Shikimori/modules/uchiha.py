@@ -59,7 +59,7 @@ if network_name == "uchihaxnetwork":
         )
 
 
-    uchiha_handler = CommandHandler(("uchiha", "network", "net"), sern, run_async = True)
+    uchiha_handler = CommandHandler(("uchiha", "network", "net"), uchiha, run_async = True)
     dispatcher.add_handler(uchiha_handler)
 
     __help__ = """
