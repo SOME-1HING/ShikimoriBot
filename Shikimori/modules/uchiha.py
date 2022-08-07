@@ -37,7 +37,7 @@ if network_name == "uchihaxnetwork":
     def uchiha(update: Update, context: CallbackContext):
 
         TEXT = f"""
-        ᴡᴇʟᴄᴏᴍᴇ ᴛᴏ ❟❛❟ 𝖀𝖈𝖍𝖎𝖍𝖆 ❟❛❟ 𝘕𝘌𝘛𝘞𝘖𝘙𝘒 (https://t.me/UchihaXNetwork/70),
+        ᴡᴇʟᴄᴏᴍᴇ ᴛᴏ [❟❛❟ 𝖀𝖈𝖍𝖎𝖍𝖆 ❟❛❟ 𝘕𝘌𝘛𝘞𝘖𝘙𝘒](https://t.me/UchihaXNetwork/70),
  𝖀𝖈𝖍𝖎𝖍𝖆 𝙞𝙨 𝙖𝙣 𝙖𝙣𝙞𝙢𝙚 𝙗𝙖𝙨𝙚𝙙 𝘾𝙤𝙢𝙢𝙪𝙣𝙞𝙩𝙮 𝙬𝙞𝙩𝙝 𝙖 𝙢𝙤𝙩𝙞𝙫𝙚 𝙩𝙤
 𝙨𝙥𝙧𝙚𝙖𝙙 𝙡𝙤𝙫𝙚 𝙖𝙣𝙙 𝙥𝙚𝙖𝙘𝙚 𝙖𝙧𝙤𝙪𝙣𝙙 𝙩𝙚𝙡𝙚𝙜𝙧𝙖𝙢. 𝙂𝙤 𝙩𝙝𝙧𝙤𝙪𝙜𝙝 𝙩𝙝𝙚
         𝙘𝙝𝙖𝙣𝙣𝙚𝙡 𝙖𝙣𝙙 𝙟𝙤𝙞𝙣 𝙩𝙝𝙚 𝘾𝙤𝙢𝙢𝙪𝙣𝙞𝙩𝙮,
