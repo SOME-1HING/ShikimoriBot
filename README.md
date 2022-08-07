@@ -1,7 +1,7 @@
-![Shikimori](https://telegra.ph/file/d0c1cd93423c66c099b48.jpg)
+![Shikimori](https://telegra.ph/file/6a79f37b4cdc0ca0c9a43.jpg)
 
 <h2 align="center">
-    ──「 SHIKIMORI IS A MODULAR BOT WITH ANIME THEME 」──
+    ──「 GOJO神 IS A MODULAR BOT WITH ANIME THEME 」──
 </h2>
 
 <p align="center">
