@@ -5,7 +5,7 @@ STATUS: Code is working. ✅
 """
 GNU General Public License v3.0
 
-Copyright (C) 2022, SOME-1HING [https://github.com/SOME-1HING]
+Copyright (C) 2022, SOME-1HING [https://github.com/Alonebots]
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
