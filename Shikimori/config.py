@@ -19,8 +19,8 @@ class Config(object):
     API_ID = 123456  # integer value, dont use ""
     API_HASH = "awoo"
     BOT_TOKEN = "BOT_TOKEN"  # This var used to be API_KEY but it is now TOKEN, adjust accordingly.
-    OWNER_ID = 1606221784  # If you dont know, run the bot and do /id in your private chat with it, also an integer
-    OWNER_USERNAME = "SOME1HING"
+    OWNER_ID = 5001899507  # If you dont know, run the bot and do /id in your private chat with it, also an integer
+    OWNER_USERNAME = "Mr_nack_nack"
     SUPPORT_CHAT = "tyranteyeeee"  # Your own group for support, do not add the @
     JOIN_LOGGER = (
         -1001432609692
@@ -73,18 +73,18 @@ class Config(object):
     ARQ_API = "awoo"
     APOD_API_KEY = "awoo"
     REDIS_URL = "awoo"
-    ANIME_NAME = "Shikimori's Not Just a Cutie"
-    START_MEDIA = "https://telegra.ph/file/9235d57807362b4e227a3.mp4"
-    BOT_USERNAME = "micchon_shikimori_bot"
-    UPDATE_CHANNEL = "Shikimori_bot_Updates"
-    ALIVE_MEDIA = "https://telegra.ph/file/2b04f7812f22b983f8a10.mp4"
-    BOT_ID = 5169508699
+    ANIME_NAME = "Jujutsu" Kaisen"
+    START_MEDIA = "https://telegra.ph/file/32e63739fec478a1a9dcb.mp4"
+    BOT_USERNAME = "gojo_support"
+    UPDATE_CHANNEL = "gojo_bot_updates"
+    ALIVE_MEDIA = "https://telegra.ph/file/87618c0b4c3029ff82924.mp4"
+    BOT_ID = 5484116052
     STATS_IMG = "awoo"
     NETWORK_USERNAME = "VoidxNetwork"
     NETWORK = "【V๏ɪ፝֟𝔡】»Network«"
-    INLINE_IMG = "https://telegra.ph/file/8cec66d01df8c0071ebaa.jpg"
+    INLINE_IMG = "https://telegra.ph/file/0711bd434bca4b03c690d.jpg"
     API_WEATHER = "awoo"
-    OWNER_WELCOME_MEDIA = ""
+    OWNER_WELCOME_MEDIA = "https://telegra.ph/file/1191f48d752522097948a.jpg"
 
 class Production(Config):
     LOGGER = True
