@@ -171,7 +171,7 @@ def bot(**args):
     return decorator
 
 
-def EmikoRobot(**args):
+def Shikimori(**args):
     pattern = args.get("pattern", None)
     disable_edited = args.get("disable_edited", False)
     ignore_unsafe = args.get("ignore_unsafe", False)
