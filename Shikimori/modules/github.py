@@ -20,35 +20,37 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
-from Shikimori import SUPPORT_CHAT
+from Shikimori import SUPPORT_CHAT,dispatcher
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update, ParseMode
-
+import requests
 from telegram.ext import (
     CallbackContext,
     CommandHandler,
 )
 
 def github(update: Update, context: CallbackContext):
-    if len(message.command) != 2:
+    args = update.effective_message.text.split(None, 1)
+    msg = update.effective_message
+    if len(args) <= 2:
         update.effective_message.reply_text("/github Username")
         return
-    username = message.text.split(None, 1)[1]
+    username = args[1]
     URL = f'https://api.github.com/users/{username}'
-        result = request.json()
-        try:
-            m = message.reply_text("`Searching.....`")
-            url = result['html_url']
-            name = result['name']
-            company = result['company']
-            bio = result['bio']
-            created_at = result['created_at']
-            avatar_url = result['avatar_url']
-            blog = result['blog']
-            location = result['location']
-            repositories = result['public_repos']
-            followers = result['followers']
-            following = result['following']
-            caption = f"""**Info Of {name}**
+    result = requests.get(URL).json()
+    try:
+        m = msg.reply_text("`Searching.....`")
+        url = result['html_url']
+        name = result['name']
+        company = result['company']
+        bio = result['bio']
+        created_at = result['created_at']
+        avatar_url = result['avatar_url']
+        blog = result['blog']
+        location = result['location']
+        repositories = result['public_repos']
+        followers = result['followers']
+        following = result['following']
+        caption = f"""**Info Of {name}**
 **Username:** `{username}`
 **Bio:** `{bio}`
 **Profile Link:** [Here]({url})
@@ -59,22 +61,23 @@ def github(update: Update, context: CallbackContext):
 **Location:** `{location}`
 **Followers:** `{followers}`
 **Following:** `{following}`"""
-            update.effective_message.reply_photo(avatar_url, caption=caption,reply_markup=InlineKeyboardMarkup(
+        m.delete()
+        update.effective_message.reply_photo(avatar_url, caption=caption,reply_markup=InlineKeyboardMarkup(
+                [
                     [
-                        [
-                            InlineKeyboardButton(
-                                text="Profile",
-                                url=url,
-                            ),
-                        ],
+                        InlineKeyboardButton(
+                            text="Profile",
+                            url=url,
+                        ),
                     ],
-                ), parse_mode=ParseMode.MARKDOWN)
-        except Exception as e:
-            print(str(e))
-            update.effective_message.reply_text(f"ERROR!! Contact @{SUPPORT_CHAT}")
-            pass
+                ],
+            ), parse_mode=ParseMode.MARKDOWN)
+    except Exception as e:
+        print(str(e))
+        update.effective_message.reply_text(f"ERROR!! Contact @{SUPPORT_CHAT}")
+        pass
 
-git_handler = CommandHandler(("git", "github"), uchiha, run_async = True)
+git_handler = CommandHandler(("git", "github"), github, run_async = True)
 dispatcher.add_handler(git_handler)
 
 __mod_name__ = "Github 🐱‍💻"
