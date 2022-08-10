@@ -20,43 +20,35 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
+from Shikimori import SUPPORT_CHAT
+from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update, ParseMode
 
-import aiohttp
-from pyrogram import filters, enums
-from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
-from Shikimori import SUPPORT_CHAT, pbot
-from Shikimori.Extras.errors import capture_err
+from telegram.ext import (
+    CallbackContext,
+    CommandHandler,
+)
 
-
-
-@pbot.on_message(filters.command(['github', 'git']))
-@capture_err
-async def github(_, message):
+def github(update: Update, context: CallbackContext):
     if len(message.command) != 2:
-        await message.reply_text("/github Username")
+        update.effective_message.reply_text("/github Username")
         return
     username = message.text.split(None, 1)[1]
     URL = f'https://api.github.com/users/{username}'
-    async with aiohttp.ClientSession() as session:
-        async with session.get(URL) as request:
-            if request.status == 404:
-                return await message.reply_text(f"ERROR!! Contact @{SUPPORT_CHAT}")
-
-            result = await request.json()
-            try:
-                m = message.reply_text("`Searching.....`")
-                url = result['html_url']
-                name = result['name']
-                company = result['company']
-                bio = result['bio']
-                created_at = result['created_at']
-                avatar_url = result['avatar_url']
-                blog = result['blog']
-                location = result['location']
-                repositories = result['public_repos']
-                followers = result['followers']
-                following = result['following']
-                caption = f"""**Info Of {name}**
+        result = request.json()
+        try:
+            m = message.reply_text("`Searching.....`")
+            url = result['html_url']
+            name = result['name']
+            company = result['company']
+            bio = result['bio']
+            created_at = result['created_at']
+            avatar_url = result['avatar_url']
+            blog = result['blog']
+            location = result['location']
+            repositories = result['public_repos']
+            followers = result['followers']
+            following = result['following']
+            caption = f"""**Info Of {name}**
 **Username:** `{username}`
 **Bio:** `{bio}`
 **Profile Link:** [Here]({url})
@@ -67,22 +59,23 @@ async def github(_, message):
 **Location:** `{location}`
 **Followers:** `{followers}`
 **Following:** `{following}`"""
-                await message.reply_photo(photo=avatar_url, caption=caption,reply_markup=InlineKeyboardMarkup(
+            update.effective_message.reply_photo(avatar_url, caption=caption,reply_markup=InlineKeyboardMarkup(
+                    [
                         [
-                            [
-                                InlineKeyboardButton(
-                                    text="Profile",
-                                    url=url,
-                                ),
-                            ],
+                            InlineKeyboardButton(
+                                text="Profile",
+                                url=url,
+                            ),
                         ],
-                        disable_web_page_preview=True,
-                    ), parse_mode= enums.ParseMode.MARKDOWN)
-            except Exception as e:
-                print(str(e))
-                await message.reply_text(f"ERROR!! Contact @{SUPPORT_CHAT}")
-                pass
+                    ],
+                ), parse_mode=ParseMode.MARKDOWN)
+        except Exception as e:
+            print(str(e))
+            update.effective_message.reply_text(f"ERROR!! Contact @{SUPPORT_CHAT}")
+            pass
 
+git_handler = CommandHandler(("git", "github"), uchiha, run_async = True)
+dispatcher.add_handler(git_handler)
 
 __mod_name__ = "Github 🐱‍💻"
 __help__ = """
