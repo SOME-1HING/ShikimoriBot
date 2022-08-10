@@ -145,7 +145,7 @@ def start(update: Update, context: CallbackContext):
                 parse_mode=ParseMode.MARKDOWN,)
 
         except:
-            update.effective_message.reply_text(START_MEDIA, caption = start_text, reply_markup=InlineKeyboardMarkup(start_buttons),
+            update.effective_message.reply_text(start_text, reply_markup=InlineKeyboardMarkup(start_buttons),
                 parse_mode=ParseMode.MARKDOWN,)
 
 start_handler = CommandHandler("start", start, run_async=True)

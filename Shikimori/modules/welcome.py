@@ -238,6 +238,7 @@ def new_member(update: Update, context: CallbackContext):  # sourcery no-metrics
 
             # Give the owner a special welcome
             if new_mem.id == OWNER_ID:
+                TEXT = "Behold!! My Owner is Here."
                 try:
                     if wel_id in ("jpeg", "jpg", "png"):
                         update.effective_message.reply_photo(OWNER_WELCOME_MEDIA, caption=TEXT, reply_to_message_id=reply)

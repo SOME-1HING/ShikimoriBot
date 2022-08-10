@@ -31,7 +31,7 @@ from telegram.ext import (
 def github(update: Update, context: CallbackContext):
     args = update.effective_message.text.split(None, 1)
     msg = update.effective_message
-    if len(args) <= 2:
+    if len(args) != 2:
         update.effective_message.reply_text("/github Username")
         return
     username = args[1]
