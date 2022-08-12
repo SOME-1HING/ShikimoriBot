@@ -110,7 +110,7 @@ def git_call_back(update: Update, context: CallbackContext):
     query = update.callback_query
     if query.data == "github_":
         query.message.edit_text(
-            text=f"Orginal Repositiory created by [Alonebots](https://github.com/Alonebots) on [github](https://github.com/Alonebots/Gojo-bot) for [GOJO Bot](https://t.me/Gojoa_satoru_bot)",
+            text=f"Repositiory created by [Alonebots](https://github.com/Alonebots) on [github](https://github.com/Alonebots/Gojo-bot) for [GOJO Bot](https://t.me/Gojoa_satoru_bot)",
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(
@@ -120,7 +120,6 @@ def git_call_back(update: Update, context: CallbackContext):
                     [
                     InlineKeyboardButton(text="Back", callback_data="Shikimori_"),
                     ],
-                ]
             )
     elif query.data == "Shikimori_back":
         first_name = update.effective_user.first_name
