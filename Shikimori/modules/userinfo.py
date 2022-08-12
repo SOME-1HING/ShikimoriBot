@@ -244,10 +244,10 @@ def info(update: Update, context: CallbackContext):
     [
                         InlineKeyboardButton(
                              text="Health",
-                             url="https://t.me/Shikimori_bot_Updates/9"),
+                             url="https://t.me/gojo_bot_updates/9"),
                        InlineKeyboardButton(
                              text="Sorcerer level",
-                             url="https://t.me/Shikimori_bot_Updates/6"),
+                             url="https://t.me/gojo_bot_updates/6"),
                     ],
     ]
     user_id = extract_user(update.effective_message, args)
