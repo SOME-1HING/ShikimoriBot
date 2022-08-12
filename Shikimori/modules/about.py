@@ -121,8 +121,7 @@ def git_call_back(update: Update, context: CallbackContext):
                     InlineKeyboardButton(text="Back", callback_data="Shikimori_"),
                     ],
                 ]
-            ),
-        )
+            )
     elif query.data == "Shikimori_back":
         first_name = update.effective_user.first_name
         uptime = get_readable_time((time.time() - StartTime))
