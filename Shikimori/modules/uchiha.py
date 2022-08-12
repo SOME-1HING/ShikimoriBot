@@ -29,16 +29,21 @@ from telegram.ext import (
     CommandHandler,
 )
 
-PHOTO = "https://telegra.ph/file/7cb643db87efa3a111744.jpg"
+PHOTO = "https://telegra.ph/file/43d9fb78973ec724c41e5.jpg"
 
 network_name = NETWORK_USERNAME.lower()
 
-if network_name == "uchihaxnetwork":
-    def uchiha(update: Update, context: CallbackContext):
+if network_name == "Anteiku_cafe_fed":
+    def anteiku(update: Update, context: CallbackContext):
 
         TEXT = f"""
-ᴡᴇʟᴄᴏᴍᴇ ᴛᴏ [❟❛❟ 𝖀𝖈𝖍𝖎𝖍𝖆 ❟❛❟ 𝘕𝘌𝘛𝘞𝘖𝘙𝘒](https://t.me/UchihaXNetwork/70),
-𝖀𝖈𝖍𝖎𝖍𝖆 𝙞𝙨 𝙖𝙣 𝙖𝙣𝙞𝙢𝙚 𝙗𝙖𝙨𝙚𝙙 𝘾𝙤𝙢𝙢𝙪𝙣𝙞𝙩𝙮 𝙬𝙞𝙩𝙝 𝙖 𝙢𝙤𝙩𝙞𝙫𝙚 𝙩𝙤 𝙨𝙥𝙧𝙚𝙖𝙙 𝙡𝙤𝙫𝙚 𝙖𝙣𝙙 𝙥𝙚𝙖𝙘𝙚 𝙖𝙧𝙤𝙪𝙣𝙙 𝙩𝙚𝙡𝙚𝙜𝙧𝙖𝙢. 𝙂𝙤 𝙩𝙝𝙧𝙤𝙪𝙜𝙝 𝙩𝙝𝙚 𝙘𝙝𝙖𝙣𝙣𝙚𝙡 𝙖𝙣𝙙 𝙟𝙤𝙞𝙣 𝙩𝙝𝙚 𝘾𝙤𝙢𝙢𝙪𝙣𝙞𝙩𝙮, 𝙞𝙛 𝙞𝙩 𝙙𝙧𝙖𝙬𝙨 𝙮𝙤𝙪𝙧 𝙖𝙩𝙩𝙚𝙣𝙩𝙞𝙤𝙣.
+ᴡᴇʟᴄᴏᴍᴇ ᴛᴏ [ΛПƬΣ𝐈𝐊Ц Federations](https://t.me/Anteiku_cafe_fed/47),
+ΛПƬΣ𝐈𝐊Ц ɪꜱ ᴀɴ ᴀɴɪᴍᴇ ʙᴀꜱᴇᴅ ʟᴇᴀɢᴜᴇ ᴏꜰ ɢʀᴇᴀᴛ ᴀᴅᴍɪɴɪꜱᴛʀᴀᴛᴏʀꜱ 
+ᴀɴᴅ ᴅɪʟɪɢᴇɴᴛ ɢᴜʏꜱ ᴄᴏɴꜱɪꜱᴛᴇɴᴛʟʏ ᴡᴏʀᴋɪɴɢ ꜰᴏʀ ᴀ ᴍᴏᴛɪᴠᴇ ᴛᴏ ꜱᴛᴏᴘ ᴛʜᴇ 
+ᴛᴏxɪᴄɪᴛʏ ᴀɴᴅ ꜱᴘʀᴇᴀᴅ ʟᴏᴠᴇ, ᴘᴇᴀᴄᴇ ᴀɴᴅ ʜᴀʀᴍᴏɴʏ ᴀʀᴏᴜɴᴅ ᴛᴇʟᴇɢʀᴀᴍ. 
+ᴏᴜʀ ᴍᴏᴛᴛᴏ ɪꜱ - ꜱᴇʀᴇɴɪᴛʏ ᴀʙᴏᴠᴇ ɢʀᴇᴀᴛɴᴇꜱꜱ. ᴅɪɢ ɪɴᴛᴏ ᴛʜᴇ ᴄʜᴀɴɴᴇʟꜱ 
+ᴀɴᴅ ɢʀᴏᴜᴘꜱ ᴄᴏɴɴᴇᴄᴛᴇᴅ ᴀɴᴅ ᴊᴏɪɴ ᴏᴜʀ ᴄᴏᴍᴍᴜɴɪᴛʏ 
+ɪꜰ ɪᴛ ᴀᴄᴄᴇɴᴛᴜᴀᴛᴇꜱ ᴛʜᴇ ᴘᴜʀᴘᴏꜱᴇ.
 """
 
         update.effective_message.reply_photo(
@@ -47,22 +52,22 @@ if network_name == "uchihaxnetwork":
 
                 reply_markup=InlineKeyboardMarkup(
                 [
-                    [InlineKeyboardButton(text="❟❛❟ 𝖀𝖈𝖍𝖎𝖍𝖆 ❟❛❟ 𝙉𝙚𝙩𝙬𝙤𝙧𝙠", url="https://t.me/UchihaXNetwork/70")],
+                    [InlineKeyboardButton(text="ΛПƬΣ𝐈𝐊Ц Federations", url="https://t.me/Anteiku_cafe_fed/47")],
                     [
-                    InlineKeyboardButton(text="★彡[ᴜꜱᴇʀ ᴛᴀɢ]彡★", url="https://t.me/UchihaXNetwork/74"),
-                    InlineKeyboardButton(text="★彡[ᴏꜰꜰɪᴄɪᴀʟ ɢʀᴏᴜᴘ]彡★", url="https://t.me/Uchihashrine")
+                    InlineKeyboardButton(text="ᴜꜱᴇʀ ᴛᴀɢ", url="https://t.me/Anteiku_cafe_fed/38"),
+                    InlineKeyboardButton(text="ᴏꜰꜰɪᴄɪᴀʟ ɢʀᴏᴜᴘ", url="https://t.me/Anteiku_cafe_fed")
                     ],
                 ]
             ),
         )
 
 
-    uchiha_handler = CommandHandler(("uchiha", "network", "net"), uchiha, run_async = True)
-    dispatcher.add_handler(uchiha_handler)
+    anteiku_handler = CommandHandler(("anteiku", "federation", "net"), anteiku, run_async = True)
+    dispatcher.add_handler(anteiku_handler)
 
     __help__ = """
-    ──「❟❛❟ 𝖀𝖈𝖍𝖎𝖍𝖆 ❟❛❟ 𝘕𝘌𝘛𝘞𝘖𝘙𝘒」──                         
+    ──「ΛПƬΣ𝐈𝐊Ц Federations」──                         
     
-    ❂ /uchiha: Get information about our community! Using it in groups may create promotion so we don't support using it in groups."""
+    ❂ /anteiku : Get information about our community! Using it in groups may create promotion so we don't support using it in groups."""
     
-    __mod_name__ = "❟❛❟ 𝖀𝖈𝖍𝖎𝖍𝖆 ❟❛❟"
+    __mod_name__ = "ΛПƬΣ𝐈𝐊Ц "
