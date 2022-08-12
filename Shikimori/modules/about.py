@@ -85,8 +85,6 @@ def Shikimori_about_callback(update, context):
                     ],
                     [
                     HMMM,
-                    InlineKeyboardButton(text="Documentation", url="https://some1hing.gitbook.io/shikimori-bot/"),
-                    ],
                     [
                     InlineKeyboardButton(text="Back", callback_data="Shikimori_back"),
                     ],
@@ -112,14 +110,12 @@ def git_call_back(update: Update, context: CallbackContext):
     query = update.callback_query
     if query.data == "github_":
         query.message.edit_text(
-            text=f"Orginal Repositiory created by [SOME1HING](https://github.com/SOME-1HING) on [github](https://github.com/SOME-1HING/ShikimoriBot) for [Shikimori Bot](https://t.me/micchon_shikimori_bot)",
+            text=f"Orginal Repositiory created by [Alonebots](https://github.com/Alonebots) on [github](https://github.com/Alonebots/Gojo-bot) for [GOJO Bot](https://t.me/Gojoa_satoru_bot)",
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(
                 [
-                    [
-                    InlineKeyboardButton(text="Repo", url="https://github.com/SOME-1HING/ShikimoriBot"),
-                    InlineKeyboardButton(text="Creator", url="https://github.com/SOME-1HING"),
+                    InlineKeyboardButton(text="Creator", url="https://github.com/Alonebots"),
                     ],
                     [
                     InlineKeyboardButton(text="Back", callback_data="Shikimori_"),
