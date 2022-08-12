@@ -68,13 +68,14 @@ def Shikimori_about_callback(update, context):
     query = update.callback_query
     if query.data == "Shikimori_":
         query.message.edit_text(
-            text=f"๏ I'm *{bot_name}*, a powerful group management bot built to help you manage your group easily."
-            "\n• I can restrict users."
-            "\n• I can greet users with customizable welcome messages and even set a group's rules."
-            "\n• I have an advanced anti-flood system."
-            "\n• I can warn users until they reach max warns, with each predefined actions such as ban, mute, kick, etc."
-            "\n• I have a note keeping system, blacklists, and even predetermined replies on certain keywords."
-            "\n• I check for admins' permissions before executing any command and more stuffs",
+            text=f"""
+๏ I'm *{bot_name}*, a powerful group management bot built to help you manage your group easily.
+• I can restrict users.
+• I can greet users with customizable welcome messages and even set a group's rules.
+• I have an advanced anti-flood system.
+• I can warn users until they reach max warns, with each predefined actions such as ban, mute, kick, etc.
+• I have a note keeping system, blacklists, and even predetermined replies on certain keywords.
+• I check for admins' permissions before executing any command and more stuffs""",
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(
@@ -89,7 +90,8 @@ def Shikimori_about_callback(update, context):
                     InlineKeyboardButton(text="Back", callback_data="Shikimori_back"),
                     ],
                 ]
-            ),
+                ),
+            )
         )
 
     elif query.data == "Shikimori_back":
@@ -121,6 +123,8 @@ def git_call_back(update: Update, context: CallbackContext):
                     InlineKeyboardButton(text="Back", callback_data="Shikimori_"),
                     ],
             )
+        )
+
     elif query.data == "Shikimori_back":
         first_name = update.effective_user.first_name
         uptime = get_readable_time((time.time() - StartTime))
