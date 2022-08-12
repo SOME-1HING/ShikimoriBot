@@ -78,7 +78,7 @@ def Shikimori_about_callback(update, context):
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(
-                [
+                (
                     [
                     InlineKeyboardButton(text="Github", callback_data="github_"),
                     InlineKeyboardButton(text="License", callback_data="license_"),
