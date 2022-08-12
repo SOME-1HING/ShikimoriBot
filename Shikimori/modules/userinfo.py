@@ -246,7 +246,7 @@ def info(update: Update, context: CallbackContext):
                              text="Health",
                              url="https://t.me/Shikimori_bot_Updates/9"),
                        InlineKeyboardButton(
-                             text="Disasters",
+                             text="Sorcerer level",
                              url="https://t.me/Shikimori_bot_Updates/6"),
                     ],
     ]
@@ -311,21 +311,21 @@ def info(update: Update, context: CallbackContext):
     disaster_level_present = False
 
     if user.id == OWNER_ID:
-        text += "\n\nThis person is my 'Owner'."
+        text += "\n\nThis person is my rival 'Geto Suguru'."
     elif user.id in DEV_USERS:
-        text += "\n\nThis person is my 'Best Friend'."
+        text += "\n\nThis person is a 'Special Grade Sorcerer'."
         disaster_level_present = True
     elif user.id in DRAGONS:
-        text += "\n\nThis person is my 'Friend'."
+        text += "\n\nThis person is a 'Grade 1 Sorcerer'."
         disaster_level_present = True
     elif user.id in DEMONS:
-        text += "\n\nThis person is my 'Servant'."
+        text += "\n\nThis person is a 'Grade 2 Sorcerer'."
         disaster_level_present = True
     elif user.id in TIGERS:
-        text += "\n\nThis person is just a 'Peasant'."
+        text += "\n\nThis person is just a 'Grade 3 Sorcerer'."
         disaster_level_present = True
     elif user.id in WOLVES:
-        text += "\n\nThis person is just a 'Slave'."
+        text += "\n\nThis person is just a 'Grade 4 Sorcerer'."
         disaster_level_present = True
 
 
