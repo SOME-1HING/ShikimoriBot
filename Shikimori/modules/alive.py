@@ -55,10 +55,10 @@ def awake(update: Update, context: CallbackContext):
 ⚪ My Owner : <a href="https://t.me/{OWNER_USERNAME}">{OWNER_USERNAME}</a></b>
     """
     if NETWORK:
-        TEXT = TEXT + f'\n⚪ <b>I am Powered by : <a href="https://t.me/{NETWORK_USERNAME}">{NETWORK}</a>\n\n' + 'Thanks For Adding Me Here 😘</b>'
+        TEXT = TEXT + f'\n⚪ <b>I am Powered by : <a href="https://t.me/{NETWORK_USERNAME}">{NETWORK}</a>\n\n' + 'Thanks For Adding Me Here 😘😘 </b>'
     
     else:
-        TEXT = TEXT + "\n<b>Thanks For Adding Me Here 😘 </b>"
+        TEXT = TEXT + "\n<b>Thanks For Adding Me Here 😘😘 </b>"
 
     try:
         if alive_id in ("jpeg", "jpg", "png"):
