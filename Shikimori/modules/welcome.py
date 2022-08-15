@@ -226,12 +226,12 @@ def new_member(update: Update, context: CallbackContext):  # sourcery no-metrics
             # Give the Repo Creator a special welcome
             if new_mem.id == 5598826878:
                 update.effective_message.reply_photo(
-                    "https://telegra.ph/file/f00a3decb0fa64900098c.jpg", reply_to_message_id=reply
+                    "https://telegra.ph/file/6a79f37b4cdc0ca0c9a43.jpg", reply_to_message_id=reply
                 )
                 welcome_log = (
                     f"{html.escape(chat.title)}\n"
                     f"#USER_JOINED\n"
-                    f"SOME1HING Joined the Chat"
+                    f"Mr_nack_nack Joined the Chat"
                 )
                 continue
 
