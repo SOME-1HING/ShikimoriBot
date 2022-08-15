@@ -44,7 +44,6 @@ SESSION = start()
 import threading
 
 from Shikimori import dispatcher
-from Shikimori.modules.sql import BASE, SESSION
 from sqlalchemy import (
     Column,
     ForeignKey,
