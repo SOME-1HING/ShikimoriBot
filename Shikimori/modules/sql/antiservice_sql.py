@@ -21,42 +21,24 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 
-import threading
-from sqlalchemy import Column, String
-from Shikimori.modules.sql import BASE, SESSION
+from Shikimori.mongo import db
 
-class ANTISERVICEChats(BASE):
-    __tablename__ = "antiservice_chats"
-    chat_id = Column(String(14), primary_key=True)
+aservice = db.aservice
 
-    def __init__(self, chat_id):
-        self.chat_id = chat_id
-
-ANTISERVICEChats.__table__.create(checkfirst=True)
-INSERTION_LOCK = threading.RLock()
-
-
-def is_aservice(chat_id):
-    try:
-        chat = SESSION.query(ANTISERVICEChats).get(str(chat_id))
-        if chat:
-            return True
-        else:
-            return False
-    finally:
-        SESSION.close()
+def is_aservice(chat_id: int) -> bool:
+    chat = aservice.find_one({"chat_id": chat_id})
+    if not chat:
+        return True
+    return False
 
 def set_aservice(chat_id):
-    with INSERTION_LOCK:
-        aservicechat = SESSION.query(ANTISERVICEChats).get(str(chat_id))
-        if not aservicechat:
-            aservicechat = ANTISERVICEChats(str(chat_id))
-        SESSION.add(aservicechat)
-        SESSION.commit()
+    is_achannel = is_achannel(chat_id)
+    if not is_achannel:
+        return
+    return aservice.insert_one({"chat_id": chat_id})
 
 def rem_aservice(chat_id):
-    with INSERTION_LOCK:
-        aservicechat = SESSION.query(ANTISERVICEChats).get(str(chat_id))
-        if aservicechat:
-            SESSION.delete(aservicechat)
-        SESSION.commit()
+    is_achannel = is_achannel(chat_id)
+    if is_achannel:
+        return
+    return aservice.delete_one({"chat_id": chat_id})
