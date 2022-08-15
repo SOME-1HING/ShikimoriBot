@@ -1,39 +1,21 @@
-import threading
-from sqlalchemy import Column, String
-from Shikimori.modules.sql import BASE, SESSION
+from Shikimori.mongo import db
 
-class ANTICHANNELChats(BASE):
-    __tablename__ = "antichannel_chats"
-    chat_id = Column(String(14), primary_key=True)
+antichanneldb = db.antichannel
 
-    def __init__(self, chat_id):
-        self.chat_id = chat_id
-
-ANTICHANNELChats.__table__.create(checkfirst=True)
-INSERTION_LOCK = threading.RLock()
-
-
-def is_achannel(chat_id):
-    try:
-        chat = SESSION.query(ANTICHANNELChats).get(str(chat_id))
-        if chat:
-            return True
-        else:
-            return False
-    finally:
-        SESSION.close()
+async def is_achannel(chat_id: int) -> bool:
+    chat = antichanneldb.find_one({"chat_id": chat_id})
+    if not chat:
+        return True
+    return False
 
 def set_achannel(chat_id):
-    with INSERTION_LOCK:
-        achannnelchat = SESSION.query(ANTICHANNELChats).get(str(chat_id))
-        if not achannnelchat:
-            achannnelchat = ANTICHANNELChats(str(chat_id))
-        SESSION.add(achannnelchat)
-        SESSION.commit()
+    is_achannel = is_achannel(chat_id)
+    if not is_achannel:
+        return
+    return antichanneldb.insert_one({"chat_id": chat_id})
 
 def rem_achannel(chat_id):
-    with INSERTION_LOCK:
-        achannnelchat = SESSION.query(ANTICHANNELChats).get(str(chat_id))
-        if achannnelchat:
-            SESSION.delete(achannnelchat)
-        SESSION.commit()
+    is_achannel = is_achannel(chat_id)
+    if is_achannel:
+        return
+    return antichanneldb.delete_one({"chat_id": chat_id})
