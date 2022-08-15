@@ -30,8 +30,8 @@ from Shikimori.modules.helper_funcs.chat_status import user_admin
 from Shikimori.modules.disable import DisableAbleCommandHandler
 from Shikimori import (
     dispatcher,
-    WALL_API,
 )
+from Shikimori.vars import WALL_API
 import requests as r
 import wikipedia
 from telegram import (
