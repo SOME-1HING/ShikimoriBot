@@ -28,7 +28,7 @@ from Shikimori.mongo import db
 
 antichanneldb = db.antichannel
 
-async def antichannel_status(chat_id: int) -> bool:
+def antichannel_status(chat_id: int) -> bool:
     chat = antichanneldb.find_one({"chat_id": chat_id})
     if not chat:
         return True
