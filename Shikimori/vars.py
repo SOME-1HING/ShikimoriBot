@@ -4,7 +4,7 @@ import os
 ENV = bool(os.environ.get("ENV", True))
 
 if ENV:
-    TOKEN = os.environ.get("TOKEN", None)
+    TOKEN = os.environ.get("BOT_TOKEN", None)
 
     try:
         OWNER_ID = int(os.environ.get("OWNER_ID", None))
