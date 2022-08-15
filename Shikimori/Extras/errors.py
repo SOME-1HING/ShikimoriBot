@@ -28,7 +28,8 @@ import sys
 import traceback
 from functools import wraps
 from pyrogram.errors.exceptions.forbidden_403 import ChatWriteForbidden
-from Shikimori import LOG_CHANNEL, pbot as app
+from Shikimori import pbot as app
+from Shikimori.vars import LOG_CHANNEL
 
 
 def split_limits(text):

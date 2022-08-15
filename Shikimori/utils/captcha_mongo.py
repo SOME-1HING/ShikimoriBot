@@ -26,7 +26,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 from pymongo import MongoClient
 
-from Shikimori import MONGO_DB_URI
+from Shikimori.vars import MONGO_DB_URI
 
 
 class manage_db:

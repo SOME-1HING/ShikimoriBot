@@ -34,12 +34,12 @@ from telethon import __version__ as tlhver
 from pyrogram import __version__ as pyrover
     
 from Shikimori import (
-    SUPPORT_CHAT,
-    UPDATE_CHANNEL,
     dispatcher,
     StartTime,
-    STATS_IMG,
 )
+from Shikimori.vars import (SUPPORT_CHAT,
+    UPDATE_CHANNEL,
+    STATS_IMG,)
 from Shikimori.__main__ import STATS
 from Shikimori.modules.helper_funcs.chat_status import sudo_plus
 

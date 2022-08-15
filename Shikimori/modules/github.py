@@ -20,7 +20,8 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
-from Shikimori import SUPPORT_CHAT,dispatcher
+from Shikimori.vars import SUPPORT_CHAT
+from Shikimori import dispatcher
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update, ParseMode
 import requests
 from telegram.ext import (

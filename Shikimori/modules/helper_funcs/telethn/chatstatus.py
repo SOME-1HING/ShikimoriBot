@@ -24,8 +24,8 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 
-from Shikimori.modules.helper_funcs.telethn import IMMUNE_USERS, telethn
-from Shikimori import DRAGONS
+from Shikimori.modules.helper_funcs.telethn import IMMUNE_USERS
+from Shikimori import DRAGONS, telethn
 from telethon.tl.types import ChannelParticipantsAdmins
 
 

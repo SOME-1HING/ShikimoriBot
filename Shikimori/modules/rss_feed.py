@@ -28,7 +28,8 @@ import html
 import re
 
 from feedparser import parse
-from Shikimori import dispatcher, updater, SUPPORT_CHAT
+from Shikimori import dispatcher, updater
+from Shikimori.vars import SUPPORT_CHAT
 from Shikimori.modules.helper_funcs.chat_status import user_admin
 from Shikimori.modules.sql import rss_sql as sql
 from telegram import ParseMode, Update, constants, InlineKeyboardButton, InlineKeyboardMarkup

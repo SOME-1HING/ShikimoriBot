@@ -26,14 +26,15 @@ import re
 from Shikimori.__main__ import HELPABLE, IMPORTED, USER_SETTINGS, CHAT_SETTINGS
 from Shikimori.modules.helper_funcs.readable_time import get_readable_time
 from Shikimori import (
+    dispatcher,
+    StartTime,
+)
+from Shikimori.vars import (
     BOT_USERNAME,
     UPDATE_CHANNEL,
     SUPPORT_CHAT,
-    dispatcher,
-    StartTime,
     ANIME_NAME,
-    START_MEDIA,
-)
+    START_MEDIA,)
 from Shikimori.modules.helper_funcs.misc import paginate_modules
 from Shikimori.modules.helper_funcs.chat_status import is_user_admin
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, ParseMode, Update

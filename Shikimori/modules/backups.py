@@ -32,7 +32,8 @@ from telegram.error import BadRequest
 from telegram.ext import CommandHandler
 
 import Shikimori.modules.sql.notes_sql as sql
-from Shikimori import dispatcher, LOGGER, OWNER_ID, JOIN_LOGGER, SUPPORT_CHAT
+from Shikimori import dispatcher, LOGGER, OWNER_ID
+from Shikimori.vars import JOIN_LOGGER, SUPPORT_CHAT
 from Shikimori.__main__ import DATA_IMPORT
 from Shikimori.modules.helper_funcs.chat_status import user_admin
 from Shikimori.modules.helper_funcs.alternate import typing_action

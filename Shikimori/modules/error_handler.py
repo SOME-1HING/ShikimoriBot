@@ -35,7 +35,8 @@ import requests
 from telegram import Update, InlineKeyboardMarkup, InlineKeyboardButton
 from telegram.ext import CallbackContext, CommandHandler
 
-from Shikimori import dispatcher, DEV_USERS, ERROR_LOG_CHANNEL
+from Shikimori import dispatcher, DEV_USERS
+from Shikimori.vars import ERROR_LOG_CHANNEL
 
 pretty_errors.mono()
 

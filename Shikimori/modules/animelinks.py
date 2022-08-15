@@ -23,7 +23,8 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 from Shikimori.imports.animedev import client as animedev_client, exceptions
 from Shikimori.events import register
-from Shikimori import telethn, SUPPORT_CHAT
+from Shikimori import telethn
+from Shikimori.vars import SUPPORT_CHAT
 from telethon import Button
 
 

@@ -31,7 +31,7 @@ import zipfile
 from telethon import types
 from telethon.tl import functions
 
-from Shikimori import TEMP_DOWNLOAD_DIRECTORY
+from Shikimori.vars import TEMP_DOWNLOAD_DIRECTORY
 from Shikimori import telethn as client
 from Shikimori.events import register
 

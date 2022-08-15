@@ -29,7 +29,8 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 from os import remove
 from pyrogram import filters
 
-from Shikimori import BOT_USERNAME, DEV_USERS, arq, pbot
+from Shikimori import DEV_USERS, arq, pbot
+from Shikimori.vars import BOT_USERNAME
 from Shikimori.utils.errors import capture_err
 from .helper_funcs.anonymous import user_admin
 import Shikimori.modules.sql.nsfw_sql as sql

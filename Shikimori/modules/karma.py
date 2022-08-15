@@ -26,16 +26,13 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 import asyncio
 from pyrogram import filters
 
-from Shikimori import DRAGONS, pbot as app, BOT_ID
+from Shikimori import DRAGONS, pbot as app
 import Shikimori.modules.sql.karma_sql as sql
 from Shikimori.ex_plugins.dbfunctions import (
     alpha_to_int,
     get_karma,
     get_karmas,
     int_to_alpha,
-    is_karma_on,
-    karma_off,
-    karma_on,
     update_karma,
 )      
 from Shikimori.utils.filter_groups import karma_negative_group, karma_positive_group

@@ -35,7 +35,7 @@ from bs4 import BeautifulSoup
 from telethon import events
 
 from Shikimori import telethn as tbot
-from Shikimori import BOT_USERNAME
+from Shikimori.vars import BOT_USERNAME
 
 @tbot.on(events.NewMessage(pattern="^/book (.*)"))
 async def _(event):

@@ -43,17 +43,14 @@ import Shikimori.modules.sql.global_bans_sql as sql
 from Shikimori.modules.sql.users_sql import get_user_com_chats
 from Shikimori import (
     DEV_USERS,
-    LOG_CHANNEL,
     OWNER_ID,
-    STRICT_GBAN,
     DRAGONS,
-    SUPPORT_CHAT,
-    SPAMWATCH_SUPPORT_CHAT,
     DEMONS,
     TIGERS,
     WOLVES,
     dispatcher,
 )
+from Shikimori.vars import STRICT_GBAN, SUPPORT_CHAT, LOG_CHANNEL
 from Shikimori.modules.helper_funcs.chat_status import (
     is_user_admin,
     support_plus,

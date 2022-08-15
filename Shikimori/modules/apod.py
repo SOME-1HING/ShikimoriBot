@@ -21,7 +21,8 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 
-from Shikimori import dispatcher, APOD_API_KEY
+from Shikimori import dispatcher
+from Shikimori.vars import APOD_API_KEY
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update, ParseMode
 from telegram.ext import (
     CallbackContext,

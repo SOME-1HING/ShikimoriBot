@@ -29,7 +29,7 @@ from Shikimori import dispatcher
 from Shikimori.modules.disable import DisableAbleCommandHandler
 from telegram import (InlineKeyboardButton, InlineKeyboardMarkup, ParseMode,
                       Update)
-from telegram.ext import CallbackContext, run_async
+from telegram.ext import CallbackContext
 
 info_btn = "More Information"
 kayo_btn = "Kayo 🏴‍☠️"

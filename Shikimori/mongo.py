@@ -28,7 +28,7 @@ import asyncio
 import sys
 
 from motor import motor_asyncio
-from Shikimori import MONGO_DB_URI 
+from Shikimori.vars import MONGO_DB_URI 
 from pymongo import MongoClient
 from pymongo.errors import ServerSelectionTimeoutError
 from Shikimori.confing import get_int_key, get_str_key

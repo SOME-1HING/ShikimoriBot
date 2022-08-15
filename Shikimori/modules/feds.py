@@ -35,15 +35,14 @@ from io import BytesIO
 
 import Shikimori.modules.sql.feds_sql as sql
 from Shikimori import (
-    LOG_CHANNEL,
     LOGGER,
-    SUPPORT_CHAT,
     OWNER_ID,
     DRAGONS,
     TIGERS,
     WOLVES,
     dispatcher,
 )
+from Shikimori.vars import LOG_CHANNEL, SUPPORT_CHAT
 from Shikimori.modules.disable import DisableAbleCommandHandler
 from Shikimori.modules.helper_funcs.alternate import send_message
 from Shikimori.modules.helper_funcs.chat_status import is_user_admin

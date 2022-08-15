@@ -31,16 +31,17 @@ import time
 import traceback
 from sys import argv
 from typing import Optional
-from Shikimori import (
+from Shikimori.vars import (
     ALIVE_MEDIA,
     CERT_PATH,
-    LOGGER,
     OWNER_ID,
     PORT,
     SUPPORT_CHAT,
     TOKEN,
     URL,
-    WEBHOOK,
+    WEBHOOK,)
+from Shikimori import(
+    LOGGER,
     dispatcher,
     telethn,
     pbot,

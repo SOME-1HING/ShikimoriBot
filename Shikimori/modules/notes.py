@@ -30,7 +30,8 @@ import random
 from typing import Optional
 
 import Shikimori.modules.sql.notes_sql as sql
-from Shikimori import LOGGER, JOIN_LOGGER, SUPPORT_CHAT, dispatcher, DRAGONS
+from Shikimori import LOGGER, dispatcher, DRAGONS
+from Shikimori.vars import JOIN_LOGGER, SUPPORT_CHAT
 from Shikimori.modules.disable import DisableAbleCommandHandler
 from Shikimori.modules.helper_funcs.handlers import MessageHandlerChecker
 from Shikimori.modules.helper_funcs.chat_status import user_admin, connection_status

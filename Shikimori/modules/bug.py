@@ -22,13 +22,12 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 
 from datetime import datetime
-from Shikimori import DEV_USERS, OWNER_ID, STATS_IMG
+from Shikimori import DEV_USERS, OWNER_ID
 from Shikimori import (
     OWNER_ID,
-    OWNER_USERNAME,
-    SUPPORT_CHAT,
     dispatcher
 )
+from Shikimori.vars import OWNER_USERNAME, SUPPORT_CHAT, STATS_IMG
 import time
 from telegram import InlineKeyboardButton, ParseMode, InlineKeyboardMarkup, Update
 from telegram.ext import CallbackContext, CallbackQueryHandler, CommandHandler

@@ -26,7 +26,8 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import html
 
-from Shikimori import ALLOW_EXCL, CustomCommandHandler, dispatcher
+from Shikimori import CustomCommandHandler, dispatcher
+from Shikimori.vars import ALLOW_EXCL
 from Shikimori.modules.disable import DisableAbleCommandHandler
 from Shikimori.modules.helper_funcs.chat_status import (
     bot_can_delete,

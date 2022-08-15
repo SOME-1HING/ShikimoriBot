@@ -36,13 +36,11 @@ from Shikimori import (
     OWNER_ID,
     DRAGONS,
     DEMONS,
-    OWNER_WELCOME_MEDIA,
-    SUPPORT_CHAT,
-    UPDATE_CHANNEL,
     WOLVES,
     LOGGER,
     dispatcher,
 )
+from Shikimori.vars import  OWNER_WELCOME_MEDIA, SUPPORT_CHAT, UPDATE_CHANNEL
 from Shikimori.modules.helper_funcs.chat_status import (
     is_user_ban_protected,
     user_admin,

@@ -37,7 +37,8 @@ if is_module_loaded(FILENAME):
     from telegram.ext import CommandHandler, JobQueue
     from telegram.utils.helpers import escape_markdown
 
-    from Shikimori import LOG_CHANNEL, LOGGER, dispatcher
+    from Shikimori import LOGGER, dispatcher
+    from Shikimori.vars import LOG_CHANNEL
     from Shikimori.modules.helper_funcs.chat_status import user_admin
     from Shikimori.modules.sql import log_channel_sql as sql
 

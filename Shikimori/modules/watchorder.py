@@ -26,7 +26,8 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import requests
 from Shikimori.events import register
-from Shikimori import telethn, SUPPORT_CHAT
+from Shikimori import telethn
+from Shikimori.vars import SUPPORT_CHAT
 from bs4 import BeautifulSoup
 
 @register(pattern='/watchorder')

@@ -27,7 +27,8 @@ import requests
 from pyrogram import filters
 import nekos
 from Shikimori.imports.hmfull.src import hmfull
-from Shikimori import SUPPORT_CHAT, dispatcher, pbot
+from Shikimori import dispatcher, pbot
+from Shikimori.vars import SUPPORT_CHAT
 import Shikimori.modules.sql.nsfw_sql as sql
 from Shikimori.modules.log_channel import gloggable
 from telegram import Update

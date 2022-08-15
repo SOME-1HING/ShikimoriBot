@@ -35,10 +35,10 @@
          "required": true,
          "value": ""
       },    
-      "SQLALCHEMY_DATABASE_URI": {
-         "description": "Your postgres sql db, empty this field if you dont have one.",
+      "STATS_DB_URL": {
+         "description": "Your postgres sql db that will store user and chat stats.",
          "required": true,
-         "value": "postgresql://username:pw@hostname:port/db_name"
+         "value": ""
       },      
       "OWNER_ID": {
          "description": "Your user ID as an integer.",

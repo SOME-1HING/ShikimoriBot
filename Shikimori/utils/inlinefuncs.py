@@ -49,9 +49,9 @@ from pyrogram.types import (CallbackQuery,
                             InputTextMessageContent)
 from search_engine_parser import GoogleSearch
 
-from Shikimori import (
+from Shikimori import DEV_USERS
+from Shikimori.vars import (
     ALIVE_MEDIA,
-    DEV_USERS,
     LOG_CHANNEL, 
     BOT_USERNAME,
     STATS_IMG,

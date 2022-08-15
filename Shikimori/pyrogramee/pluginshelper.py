@@ -39,7 +39,7 @@ from pyrogram import Client
 from pyrogram.errors import FloodWait, MessageNotModified
 from pyrogram.types import Chat, Message, User
 
-from Shikimori  import OWNER_ID, SUPPORT_CHAT
+from Shikimori.vars  import OWNER_ID, SUPPORT_CHAT
 from Shikimori import pbot
 
 

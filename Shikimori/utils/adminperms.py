@@ -24,9 +24,6 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 
-import asyncio
-from pyrogram import filters
-from pyrogram.types import ChatPermissions, Message
 from Shikimori import pbot as app
 
 

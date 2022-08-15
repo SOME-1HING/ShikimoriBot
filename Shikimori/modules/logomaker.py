@@ -25,7 +25,8 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 
 from Shikimori.events import register
-from Shikimori import OWNER_ID, BOT_USERNAME, SUPPORT_CHAT, dispatcher
+from Shikimori import OWNER_ID, dispatcher
+from Shikimori.vars import BOT_USERNAME, SUPPORT_CHAT
 from Shikimori import telethn as tbot
 import os 
 from PIL import Image, ImageDraw, ImageFont

@@ -25,7 +25,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 
 import Shikimori.modules.sql.blacklistusers_sql as sql
-from Shikimori import ALLOW_EXCL
+from Shikimori.vars import ALLOW_EXCL
 from Shikimori import DEV_USERS, DRAGONS, DEMONS, TIGERS, WOLVES
 
 from telegram import Update

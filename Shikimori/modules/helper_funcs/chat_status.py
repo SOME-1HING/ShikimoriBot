@@ -29,15 +29,14 @@ from functools import wraps
 from cachetools import TTLCache
 from threading import RLock
 from Shikimori import (
-    DEL_CMDS,
     DEV_USERS,
     DRAGONS,
-    SUPPORT_CHAT,
     DEMONS,
     TIGERS,
     WOLVES,
     dispatcher,
 )
+from Shikimori.vars import DEL_CMDS, SUPPORT_CHAT
 
 from telegram import Chat, ChatMember, ParseMode, Update
 from telegram.ext import CallbackContext

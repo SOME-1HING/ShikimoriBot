@@ -25,9 +25,10 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 
 import requests
-from Shikimori import CASH_API_KEY, dispatcher
+from Shikimori import dispatcher
 from telegram import Update, ParseMode
-from telegram.ext import CallbackContext, CommandHandler, run_async
+from telegram.ext import CallbackContext, CommandHandler
+from Shikimori.vars import CASH_API_KEY
 
 
 

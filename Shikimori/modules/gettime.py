@@ -28,7 +28,8 @@ import datetime
 from typing import List
 
 import requests
-from Shikimori import TIME_API_KEY, dispatcher
+from Shikimori import dispatcher
+from Shikimori.vars import TIME_API_KEY
 from Shikimori.modules.disable import DisableAbleCommandHandler
 from telegram import ParseMode, Update
 from telegram.ext import CallbackContext

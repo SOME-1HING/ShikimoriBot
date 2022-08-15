@@ -27,7 +27,6 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 import asyncio
 import datetime
 import html
-import ffmpeg
 import os
 import tempfile
 import time

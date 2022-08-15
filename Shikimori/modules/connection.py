@@ -33,8 +33,8 @@ from telegram.ext import CommandHandler, CallbackQueryHandler
 
 import Shikimori.modules.sql.connection_sql as sql
 from Shikimori import dispatcher, DRAGONS, DEV_USERS
-from Shikimori.modules.helper_funcs import chat_status
 from Shikimori.modules.helper_funcs.alternate import send_message, typing_action
+from Shikimori.modules.helper_funcs import chat_status
 
 user_admin = chat_status.user_admin
 

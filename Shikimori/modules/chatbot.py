@@ -4,24 +4,23 @@ import json
 import re
 import os
 import html
+from typing import Optional
 import requests
 from Shikimori.modules.sql import log_channel_sql as logsql
 import Shikimori.modules.sql.chatbot_sql as sql
-from Shikimori import AI_API_KEY as api
+from Shikimori.vars import AI_API_KEY as api
 
 from time import sleep
 from telegram import ParseMode
-from telegram import (CallbackQuery, Chat, MessageEntity, InlineKeyboardButton,
-                      InlineKeyboardMarkup, Message, ParseMode, Update, Bot, User)
-from telegram.ext import (CallbackContext, CallbackQueryHandler, CommandHandler,
-                          DispatcherHandlerStop, Filters, MessageHandler,
-                          run_async)
+from telegram import (CallbackQuery, Chat, InlineKeyboardButton,
+                      InlineKeyboardMarkup, ParseMode, Update, User)
+from telegram.ext import (CallbackContext, CallbackQueryHandler, CommandHandler, Filters, MessageHandler)
 from telegram.error import BadRequest, RetryAfter, Unauthorized
-from telegram.utils.helpers import mention_html, mention_markdown, escape_markdown
+from telegram.utils.helpers import mention_html
 
 from Shikimori.modules.helper_funcs.filters import CustomFilters
 from Shikimori.modules.helper_funcs.chat_status import user_admin, user_admin_no_reply
-from Shikimori import  dispatcher, updater, SUPPORT_CHAT
+from Shikimori import  dispatcher
 from Shikimori.modules.log_channel import loggable
 
 bot_name = f"{dispatcher.bot.first_name}"

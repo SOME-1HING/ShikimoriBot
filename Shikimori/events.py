@@ -33,7 +33,7 @@ from pathlib import Path
 from telethon import events
 
 from pymongo import MongoClient
-from Shikimori import MONGO_DB_URI
+from Shikimori.vars import MONGO_DB_URI
 from Shikimori import telethn
 
 client = MongoClient()

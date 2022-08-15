@@ -33,12 +33,12 @@ from Shikimori import (
     DEV_USERS,
     OWNER_ID,
     DRAGONS,
-    SUPPORT_CHAT,
     DEMONS,
     TIGERS,
     WOLVES,
     dispatcher,
 )
+from Shikimori.vars import SUPPORT_CHAT
 from Shikimori.modules.helper_funcs.chat_status import (
     dev_plus,
     sudo_plus,
