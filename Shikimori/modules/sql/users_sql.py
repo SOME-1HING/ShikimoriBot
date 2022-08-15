@@ -24,23 +24,6 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 
-from Shikimori.vars import STATS_DB_URL
-from sqlalchemy import create_engine
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import scoped_session, sessionmaker
-
-
-def start() -> scoped_session:
-    engine = create_engine(STATS_DB_URL, client_encoding="utf8")
-    BASE.metadata.bind = engine
-    BASE.metadata.create_all(engine)
-    return scoped_session(sessionmaker(bind=engine, autoflush=True))
-
-
-BASE = declarative_base()
-SESSION = start()
-
-
 import threading
 
 from Shikimori import dispatcher
@@ -54,6 +37,8 @@ from sqlalchemy import (
     func,
 )
 from sqlalchemy.sql.sqltypes import BigInteger
+
+from . import BASE, SESSION
 
 
 class Users(BASE):

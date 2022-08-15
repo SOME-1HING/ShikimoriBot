@@ -35,11 +35,6 @@
          "required": true,
          "value": ""
       },    
-      "STATS_DB_URL": {
-         "description": "Your postgres sql db that will store user and chat stats.",
-         "required": true,
-         "value": ""
-      },      
       "OWNER_ID": {
          "description": "Your user ID as an integer.",
          "required": true,
