@@ -147,42 +147,22 @@ def chatbot(update: Update, context: CallbackContext):
         sleep(0.3)
         message.reply_text(kuki, timeout=60)
 
-def list_all_chats(update: Update, context: CallbackContext):
-    chats = sql.get_all_kuki_chats()
-    text = "<b>CHATBOT-Enabled Chats</b>\n"
-    for chat in chats:
-        try:
-            x = context.bot.get_chat(int(*chat))
-            name = x.title or x.first_name
-            text += f"• <code>{name}</code>\n"
-        except (BadRequest, Unauthorized):
-            sql.rem_kuki(*chat)
-        except RetryAfter as e:
-            sleep(e.retry_after)
-    update.effective_message.reply_text(text, parse_mode="HTML")
-
-
-
 CHATBOTK_HANDLER = CommandHandler("chatbot", kuki, run_async = True)
 ADD_CHAT_HANDLER = CallbackQueryHandler(kukiadd, pattern=r"add_chat", run_async = True)
 RM_CHAT_HANDLER = CallbackQueryHandler(kukirm, pattern=r"rm_chat", run_async = True)
 CHATBOT_HANDLER = MessageHandler(
     Filters.text & (~Filters.regex(r"^#[^\s]+") & ~Filters.regex(r"^!")
                     & ~Filters.regex(r"^\/")), chatbot, run_async = True)
-LIST_ALL_CHATS_HANDLER = CommandHandler(
-    "allchats", list_all_chats, filters=CustomFilters.dev_filter, run_async = True)
 
 dispatcher.add_handler(ADD_CHAT_HANDLER)
 dispatcher.add_handler(CHATBOTK_HANDLER)
 dispatcher.add_handler(RM_CHAT_HANDLER)
-dispatcher.add_handler(LIST_ALL_CHATS_HANDLER)
 dispatcher.add_handler(CHATBOT_HANDLER)
 
 __handlers__ = [
     ADD_CHAT_HANDLER,
     CHATBOTK_HANDLER,
     RM_CHAT_HANDLER,
-    LIST_ALL_CHATS_HANDLER,
     CHATBOT_HANDLER,
 ]
 

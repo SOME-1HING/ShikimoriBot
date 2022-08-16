@@ -6,6 +6,8 @@ import traceback
 from functools import wraps
 
 from pyrogram.errors.exceptions.forbidden_403 import ChatWriteForbidden
+from Shikimori.modules.helper_funcs.chat_status import dev_plus
+
 
 from Shikimori import LOGGER, pbot as app
 
@@ -28,7 +30,7 @@ def split_limits(text):
 
     return result
 
-
+@dev_plus
 def capture_err(func):
     @wraps(func)
     async def capture(client, message, *args, **kwargs):

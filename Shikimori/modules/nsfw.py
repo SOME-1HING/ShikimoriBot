@@ -79,22 +79,6 @@ def rem_nsfw(update: Update, context: CallbackContext):
         )
         return message
 
-def list_nsfw_chats(update: Update, context: CallbackContext):
-    chats = sql.get_all_nsfw_chats()
-    text = "<b>NSFW Activated Chats</b>\n"
-    for chat in chats:
-        try:
-            x = context.bot.get_chat(int(*chat))
-            name = x.title if x.title else x.first_name
-            text += f"• <code>{name}</code>\n"
-        except BadRequest:
-            sql.rem_nsfw(*chat)
-        except Unauthorized:
-            sql.rem_nsfw(*chat)
-        except RetryAfter as e:
-            time.sleep(e.retry_after)
-    update.effective_message.reply_text(text, parse_mode="HTML")
-
 def blowjob(update, context):
     chat_id = update.effective_chat.id
     msg = update.effective_message
@@ -159,8 +143,6 @@ def spank(update, context):
 
 ADD_NSFW_HANDLER = CommandHandler("addnsfw", add_nsfw)
 REMOVE_NSFW_HANDLER = CommandHandler("rmnsfw", rem_nsfw)
-LIST_NSFW_CHATS_HANDLER = CommandHandler(
-    "nsfwchats", list_nsfw_chats, filters=CustomFilters.dev_filter)
 NSFWWAIFU_HANDLER = CommandHandler(("nsfwwaifu", "nwaifu"), nsfwwaifu, run_async=True)
 BLOWJOB_HANDLER = CommandHandler(("blowjob", "bj"), blowjob, run_async=True)
 TRAP_HANDLER = CommandHandler("trap", trap, run_async=True)
@@ -169,7 +151,6 @@ SPANK_HANDLER = CommandHandler("spank", spank, run_async=True)
 
 dispatcher.add_handler(ADD_NSFW_HANDLER)
 dispatcher.add_handler(REMOVE_NSFW_HANDLER)
-dispatcher.add_handler(LIST_NSFW_CHATS_HANDLER)
 dispatcher.add_handler(NSFWWAIFU_HANDLER)
 dispatcher.add_handler(BLOWJOB_HANDLER)
 dispatcher.add_handler(SPANK_HANDLER)
@@ -179,10 +160,6 @@ dispatcher.add_handler(NSFWNEKO_HANDLER)
 __handlers__ = [
     ADD_NSFW_HANDLER,
     REMOVE_NSFW_HANDLER,
-    LIST_NSFW_CHATS_HANDLER,
-    ADD_NSFW_HANDLER,
-    REMOVE_NSFW_HANDLER,
-    LIST_NSFW_CHATS_HANDLER,
     NSFWWAIFU_HANDLER,
     SPANK_HANDLER,
     BLOWJOB_HANDLER,
@@ -197,7 +174,6 @@ __mod_name__ = "NSFW 🔞"
 __help__ = """
 ❍ `/addnsfw` : To Activate NSFW commands.
 ❍ `/rmnsfw` : To Deactivate NSFW commands.
-❍ `/nsfwchats` : Lists NSFW chats.
 
 ❍ `/nsfw` ['ass', 'bdsm', 'cum', 'creampie', 'manga', 'blowjob', 'bj', 'boobjob', 'vagina', 'uniform', 'foot', 'femdom', 'gangbang', 'hentai', 'incest', 'ahegao', 'neko', 'gif', 'ero', 'cuckold', 'orgy', 'elves', 'pantsu', 'mobile', 'glasses', 'tentacles', 'tentacle', 'thighs', 'yuri', 'zettai', 'masturbation', 'public', 'wallpaper', 'nekolewd', 'nekogif', 'henti', 'hass', 'boobs', 'paizuri', 'hyuri', 'hthigh', 'midriff', 'kitsune', 'tentacle', 'anal', 'hanal', 'hneko']
 
