@@ -56,7 +56,7 @@ buttons = [
     ],
     [
         InlineKeyboardButton(text="❓About", callback_data="Shikimori_"),
-        InlineKeyboardButton(text=" 💬Commands", callback_data="help_back"),
+        InlineKeyboardButton(text=" 💬Commands", callback_data="send_help"),
     ],
     [
         InlineKeyboardButton(text="🚨Support Grp", url=f"https://t.me/{SUPPORT_CHAT}"),

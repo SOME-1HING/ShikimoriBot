@@ -43,6 +43,7 @@ def send_help(chat_id, text, keyboard=None):
         reply_markup=keyboard,
     )
 
+
 def help_button(update, context):
     query = update.callback_query
     mod_match = re.match(r"help_module\((.+?)\)", query.data)
@@ -109,9 +110,9 @@ def help_button(update, context):
 def get_help(update: Update, context: CallbackContext):
     chat = update.effective_chat  # type: Optional[Chat]
     args = update.effective_message.text.split(None, 1)
-
+    query = update.callback_query
     # ONLY send help in PM
-    if chat.type != chat.PRIVATE:
+    if chat.type != chat.PRIVATE or query.data =="send_help":
         if len(args) >= 2 and any(args[1].lower() == x for x in HELPABLE):
             module = args[1].lower()
             update.effective_message.reply_text(
@@ -168,6 +169,6 @@ help_handler = CommandHandler("help", get_help, run_async=True)
 help_callback_handler = CallbackQueryHandler(
     help_button, pattern=r"help_.*", run_async=True
 )
-
-dispatcher.add_handler(help_callback_handler)
 dispatcher.add_handler(help_handler)
+dispatcher.add_handler(help_callback_handler)
+dispatcher.add_handler(CallbackQueryHandler(get_help, pattern="send_help", run_async=True))
