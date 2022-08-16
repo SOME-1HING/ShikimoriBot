@@ -47,7 +47,7 @@ IMG_START = START_MEDIA.split(".")
 start_id = IMG_START[-1]
 
 PM_START_TEXT = f"""
-\nI am *{bot_name}* , a group management bot based on the anime *{ANIME_NAME}*![ ]({START_MEDIA})
+\nI am *{bot_name}* , a group management bot based on the anime *{ANIME_NAME}*!
 
 *Click on the Commands Button below to go through my commands.*
 """
