@@ -1,3 +1,22 @@
+# Copyright (C) 2021 dihan official
+
+# This file is part of Mizuhara (Telegram Bot)
+
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as
+# published by the Free Software Foundation, either version 3 of the
+# License, or (at your option) any later version.
+
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU Affero General Public License for more details.
+
+# You should have received a copy of the GNU Affero General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+
+
 import asyncio
 import math
 import os
@@ -5,8 +24,8 @@ import os
 import heroku3
 import requests
 
-from horisan import telethn as borg, HEROKU_APP_NAME, HEROKU_API_KEY, OWNER_ID
-from horisan.events import register
+from Shikimori import DEV_USERS, telethn as HEROKU_APP_NAME, HEROKU_API_KEY
+from Shikimori.events import register
 
 heroku_api = "https://api.heroku.com"
 Heroku = heroku3.from_key(HEROKU_API_KEY)
@@ -16,7 +35,7 @@ Heroku = heroku3.from_key(HEROKU_API_KEY)
 async def variable(var):
     if var.fwd_from:
         return
-    if var.sender_id == OWNER_ID:
+    if var.sender_id == DEV_USERS:
         pass
     else:
         return
@@ -79,14 +98,16 @@ async def variable(var):
                 return await s.edit(">`/set var <ConfigVars-name> <value>`")
         await asyncio.sleep(1.5)
         if variable in heroku_var:
-            await s.edit(f"**{variable}**  `successfully changed to`  ->  **{value}**")
+            await s.edit(
+                f"**{variable}**  `successfully changed to`  ->  **{value}**"
+            )
         else:
             await s.edit(
                 f"**{variable}**  `successfully added with value`  ->  **{value}**"
             )
         heroku_var[variable] = value
     elif exe == "del":
-        m = await var.reply("`Getting information to deleting variable...`")
+        m = await var.edit("`Getting information to deleting variable...`")
         try:
             variable = var.pattern_match.group(2).split()[0]
         except IndexError:
@@ -103,14 +124,14 @@ async def variable(var):
 async def dyno_usage(dyno):
     if dyno.fwd_from:
         return
-    if dyno.sender_id == OWNER_ID:
+    if dyno.sender_id == DEV_USERS:
         pass
     else:
         return
     """
     Get your account Dyno Usage
     """
-    die = await dyno.reply("`Processing...`")
+    die = await dyno.reply("Processing..")
     useragent = (
         "Mozilla/5.0 (Linux; Android 10; SM-G975F) "
         "AppleWebKit/537.36 (KHTML, like Gecko) "
@@ -125,7 +146,9 @@ async def dyno_usage(dyno):
     path = "/accounts/" + user_id + "/actions/get-quota"
     r = requests.get(heroku_api + path, headers=headers)
     if r.status_code != 200:
-        return await die.edit("`Error: something bad happened`\n\n" f">.`{r.reason}`\n")
+        return await die.edit(
+            "`Error: something bad happened`\n\n" f">.`{r.reason}`\n"
+        )
     result = r.json()
     quota = result["account_quota"]
     quota_used = result["quota_used"]
@@ -136,7 +159,6 @@ async def dyno_usage(dyno):
     minutes_remaining = remaining_quota / 60
     hours = math.floor(minutes_remaining / 60)
     minutes = math.floor(minutes_remaining % 60)
-    day = math.floor(hours / 24)
 
     """ - Current - """
     App = result["apps"]
@@ -150,18 +172,18 @@ async def dyno_usage(dyno):
         AppPercentage = math.floor(App[0]["quota_used"] * 100 / quota)
     AppHours = math.floor(AppQuotaUsed / 60)
     AppMinutes = math.floor(AppQuotaUsed % 60)
+
     await asyncio.sleep(1.5)
 
     return await die.edit(
-        "❂ **Dyno Usage **:\n\n"
-        f" » Dyno usage for **{HEROKU_APP_NAME}**:\n"
-        f"      •  `{AppHours}`**h**  `{AppMinutes}`**m**  "
+        "**Dyno Usage**:\n\n"
+        f" -> `Dyno usage for`  **{HEROKU_APP_NAME}**:\n"
+        f"     •  `{AppHours}`**h**  `{AppMinutes}`**m**  "
         f"**|**  [`{AppPercentage}`**%**]"
         "\n\n"
-        "  » Dyno hours quota remaining this month:\n"
-        f"      •  `{hours}`**h**  `{minutes}`**m**  "
+        " -> `Dyno hours quota remaining this month`:\n"
+        f"     •  `{hours}`**h**  `{minutes}`**m**  "
         f"**|**  [`{percentage}`**%**]"
-        f"\n\n  » Dynos heroku {day} days left"
     )
 
 
@@ -169,7 +191,7 @@ async def dyno_usage(dyno):
 async def _(dyno):
     if dyno.fwd_from:
         return
-    if dyno.sender_id == OWNER_ID:
+    if dyno.sender_id == DEV_USERS:
         pass
     else:
         return
@@ -188,7 +210,7 @@ async def _(dyno):
         dyno.chat_id,
         "logs.txt",
         reply_to=dyno.id,
-        caption="Emiko logs.",
+        caption="Shikimori Bot Logs.",
     )
 
     await asyncio.sleep(5)

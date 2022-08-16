@@ -3,25 +3,35 @@ STATUS: Code is working. ✅
 """
 
 """
-GNU General Public License v3.0
+BSD 2-Clause License
 
 Copyright (C) 2022, SOME-1HING [https://github.com/SOME-1HING]
 
 Credits:-
     I don't know who originally wrote this code. If you originally wrote this code, please reach out to me. 
 
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
+All rights reserved.
 
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
 
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <https://www.gnu.org/licenses/>.
+1. Redistributions of source code must retain the above copyright notice, this
+   list of conditions and the following disclaimer.
+
+2. Redistributions in binary form must reproduce the above copyright notice,
+   this list of conditions and the following disclaimer in the documentation
+   and/or other materials provided with the distribution.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 """
 
 import html
@@ -65,8 +75,7 @@ from Shikimori.modules.helper_funcs.extraction import extract_user_and_text
 from Shikimori.modules.helper_funcs.string_handling import extract_time
 from Shikimori.modules.log_channel import gloggable, loggable
 
-BAN_GIF = "CgACAgUAAxkBAAK0XGLeQb3hs3yWorkBjUMFGMWENA8RAALZBAACT_vxVu249YEwNBU9KQQ"
-KICK_GIF = "CgACAgUAAxkBAAK0X2LeQev25-iVt1uCqZ2GMRpe-tnGAALbBAACT_vxVjmenxs25dq2KQQ"
+
 
 @connection_status
 @bot_admin
@@ -157,7 +166,7 @@ def ban(update: Update, context: CallbackContext) -> str:
             message.delete()
             return log
 
-        bot.send_animation(chat.id, BAN_GIF)
+        # bot.send_sticker(chat.id, BAN_STICKER)  # banhammer marie sticker
         reply = (
             f"{mention_html(member.user.id, html.escape(member.user.first_name))} [<code>{member.user.id}</code>] Banned."
         )
@@ -260,7 +269,7 @@ def temp_ban(update: Update, context: CallbackContext) -> str:
 
     try:
         chat.ban_member(user_id, until_date=bantime)
-        bot.send_animation(chat.id, BAN_GIF)
+        # bot.send_sticker(chat.id, BAN_STICKER)  # banhammer marie sticker
 
         reply_msg = (
             f"{mention_html(member.user.id, html.escape(member.user.first_name))} [<code>{member.user.id}</code>] Temporary Banned"
@@ -397,7 +406,7 @@ def punch(update: Update, context: CallbackContext) -> str:
 
     res = chat.unban_member(user_id)  # unban on current user = kick
     if res:
-        bot.send_animation(chat.id, KICK_GIF)
+        # bot.send_sticker(chat.id, BAN_STICKER)  # banhammer marie sticker
         bot.sendMessage(
             chat.id,
             f"{mention_html(member.user.id, html.escape(member.user.first_name))} [<code>{member.user.id}</code>] Kicked.",

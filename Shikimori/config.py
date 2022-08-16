@@ -2,7 +2,8 @@
 import json
 import os
 
-from Shikimori.vars import HEROKU_API_KEY, HEROKU_APP_NAME, REDIS_URL
+from Shikimori import HEROKU_API_KEY, HEROKU_APP_NAME, REDIS_URL, SS_TOKEN, SS_USERNAME
+
 
 def get_user_list(config, key):
     with open("{}/Senku/{}".format(os.getcwd(), config), "r") as json_file:
@@ -17,7 +18,7 @@ class Config(object):
 
     API_ID = 123456  # integer value, dont use ""
     API_HASH = "awoo"
-    BOT_TOKEN = "BOT_TOKEN"  # This var used to be API_KEY but it is now TOKEN, adjust accordingly.
+    TOKEN = "BOT_TOKEN"  # This var used to be API_KEY but it is now TOKEN, adjust accordingly.
     OWNER_ID = 1606221784  # If you dont know, run the bot and do /id in your private chat with it, also an integer
     OWNER_USERNAME = "SOME1HING"
     SUPPORT_CHAT = "tyranteyeeee"  # Your own group for support, do not add the @
@@ -53,6 +54,7 @@ class Config(object):
     WORKERS = (
         8  # Number of subthreads to use. Set as number of threads your processor uses
     )
+    BAN_STICKER = ""  # banhammer marie sticker id, the bot will send this sticker before banning or kicking a user in chat.
     ALLOW_EXCL = True  # Allow ! commands as well as / (Leave this to true so that blacklist can work)
     CASH_API_KEY = (
         "awoo"  # Get your API key from https://www.alphavantage.co/support/#api-key
@@ -81,6 +83,10 @@ class Config(object):
     STATS_IMG = "awoo"
     NETWORK_USERNAME = "VoidxNetwork"
     NETWORK = "【V๏ɪ፝֟𝔡】»Network«"
+    MEDIA_GM = "https://telegra.ph/file/fff37608fa21d9d3d0b39.jpg"
+    MEDIA_GN = "https://telegra.ph/file/1862c7260109e24ed4715.jpg"
+    MEDIA_HELLO = "https://telegra.ph/file/f3f2dc386a33e37f6cb05.png"
+    MEDIA_BYE = "https://telegra.ph/file/061054c8f73fe7ffbf6aa.mp4"
     INLINE_IMG = "https://telegra.ph/file/8cec66d01df8c0071ebaa.jpg"
     API_WEATHER = "awoo"
     OWNER_WELCOME_MEDIA = ""

@@ -2,30 +2,6 @@
 # Kang With Proper Credits
 
 
-"""
-STATUS: Code is working. ✅
-"""
-
-"""
-GNU General Public License v3.0
-
-Copyright (C) 2022, SOME-1HING [https://github.com/SOME-1HING]
-
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <https://www.gnu.org/licenses/>.
-"""
-
-
 import re
 import Shikimori.modules.sql.karma_sql as ksql
 from Shikimori.modules.sql import log_channel_sql as logsql
@@ -33,7 +9,7 @@ import html
 from telegram import ParseMode
 from telegram import (CallbackQuery, Chat, InlineKeyboardButton,
                       InlineKeyboardMarkup, ParseMode, Update, User)
-from telegram.ext import (CallbackContext, CallbackQueryHandler, CommandHandler)
+from telegram.ext import (CallbackContext, CallbackQueryHandler, CommandHandler, MessageHandler, Filters)
 from telegram.utils.helpers import mention_html
 
 from Shikimori.modules.helper_funcs.chat_status import user_admin, user_admin_no_reply

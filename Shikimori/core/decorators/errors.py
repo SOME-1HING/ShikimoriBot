@@ -3,9 +3,11 @@
 import sys
 import traceback
 from functools import wraps
-from Shikimori import pbot
-from Shikimori.vars import LOG_CHANNEL
+from Shikimori import LOG_CHANNEL, pbot
 from pyrogram.errors.exceptions.forbidden_403 import ChatWriteForbidden
+
+
+
 
 def split_limits(text):
     if len(text) < 2048:

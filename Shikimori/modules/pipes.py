@@ -60,6 +60,7 @@ pipes_list_userbot = {}
 
 
 @pbot.on_message(~filters.me, group=500)
+@capture_err
 async def pipes_worker_bot(_, message: Message):
     chat_id = message.chat.id
     if chat_id in pipes_list_bot:
@@ -67,6 +68,7 @@ async def pipes_worker_bot(_, message: Message):
 
 
 @pbot.on_message(filters.command("activate_pipe") & filters.user(DRAGONS))
+@capture_err
 async def activate_pipe_func(_, message: Message):
     global pipes_list_bot, pipes_list_userbot
 
@@ -96,6 +98,7 @@ async def activate_pipe_func(_, message: Message):
 
 
 @pbot.on_message(filters.command("deactivate_pipe") & filters.user(DRAGONS))
+@capture_err
 async def deactivate_pipe_func(_, message: Message):
     global pipes_list_bot, pipes_list_userbot
 
@@ -117,6 +120,7 @@ async def deactivate_pipe_func(_, message: Message):
 
 
 @pbot.on_message(filters.command("pipes") & filters.user(DRAGONS))
+@capture_err
 async def show_pipes_func(_, message: Message):
     pipes_list_bot.update(pipes_list_userbot)
     if not pipes_list_bot:

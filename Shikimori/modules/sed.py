@@ -28,7 +28,7 @@ from Shikimori import LOGGER, dispatcher
 from Shikimori.modules.disable import DisableAbleMessageHandler
 from Shikimori.modules.helper_funcs.regex_helper import (infinite_loop_check)
 from telegram import Update
-from telegram.ext import CallbackContext, Filters
+from telegram.ext import CallbackContext, Filters, run_async
 
 DELIMITERS = ("/", ":", "|", "_")
 
