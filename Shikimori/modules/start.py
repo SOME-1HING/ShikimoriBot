@@ -105,15 +105,30 @@ def start(update: Update, context: CallbackContext):
         else:
             first_name = update.effective_user.first_name
             hmm = "Hello *{}*! Nice to meet you!".format(escape_markdown(first_name))
-            HMM = hmm + PM_START_TEXT
+            start_text = hmm + PM_START_TEXT
+            try:
+                if start_id in ("jpeg", "jpg", "png"):
+                    update.effective_message.reply_photo(
+                        START_MEDIA, caption = start_text, reply_markup=InlineKeyboardMarkup(buttons),
+                    parse_mode=ParseMode.MARKDOWN,
+                )
+                elif start_id in ("mp4", "mkv"):
+                    update.effective_message.reply_video(
+                    START_MEDIA, caption = start_text, reply_markup=InlineKeyboardMarkup(buttons),
+                    parse_mode=ParseMode.MARKDOWN,
+                )
+                elif start_id in ("gif", "webp"):
+                    update.effective_message.reply_animation(
+                    START_MEDIA, caption = start_text, reply_markup=InlineKeyboardMarkup(buttons),
+                    parse_mode=ParseMode.MARKDOWN,
+                )
+                else:
+                    update.effective_message.reply_text(start_text, reply_markup=InlineKeyboardMarkup(buttons),
+                    parse_mode=ParseMode.MARKDOWN,)
 
-            update.effective_message.reply_text(
-                HMM,                        
-                reply_markup=InlineKeyboardMarkup(buttons),
-                parse_mode=ParseMode.MARKDOWN,
-                timeout=60,
-                disable_web_page_preview=False,
-            )
+            except:
+                update.effective_message.reply_text(start_text, reply_markup=InlineKeyboardMarkup(buttons),
+                    parse_mode=ParseMode.MARKDOWN,)
     else:
         start_buttons = [
                  [
