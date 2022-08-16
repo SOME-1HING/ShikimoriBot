@@ -26,7 +26,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import time
 import re
-from .helper_funcs.anonymous import AdminPerms, user_admin
+from .helper_funcs.admin_status import AdminPerms, user_admin
 
 from telegram import ParseMode, InlineKeyboardMarkup, InlineKeyboardButton, Update, Bot
 from telegram.error import BadRequest, Unauthorized
