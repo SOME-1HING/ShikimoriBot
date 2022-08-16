@@ -36,12 +36,12 @@ def antichannel_status(chat_id: int) -> bool:
 
 def enable_antichannel(chat_id):
     is_achannel = antichannel_status(chat_id)
-    if not is_achannel:
+    if is_achannel:
         return
     return antichanneldb.insert_one({"chat_id": chat_id})
 
 def disable_antichannel(chat_id):
     is_achannel = antichannel_status(chat_id)
-    if is_achannel:
+    if not is_achannel:
         return
     return antichanneldb.delete_one({"chat_id": chat_id})
