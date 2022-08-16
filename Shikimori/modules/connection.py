@@ -36,7 +36,7 @@ import Shikimori.modules.sql.connection_sql as sql
 from Shikimori import dispatcher, DRAGONS, DEV_USERS
 from Shikimori.modules.helper_funcs.alternate import send_message, typing_action
 
-@user_admin(AdminPerms.CAN_RESTRICT_MEMBERS)
+@user_admin(AdminPerms.CAN_CHANGE_INFO)
 @typing_action
 def allow_connections(update, context) -> str:
 
