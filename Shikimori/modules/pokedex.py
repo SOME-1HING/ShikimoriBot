@@ -29,7 +29,6 @@ from Shikimori import pbot
 from Shikimori.Extras.errors import capture_err
 
 @pbot.on_message(filters.command(['pokedex', 'pokemon']))
-@capture_err
 async def PokeDex(_, message):
     if len(message.command) != 2:
         await message.reply_text("/pokedex Pokemon Name")

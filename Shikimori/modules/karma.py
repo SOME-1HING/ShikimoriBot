@@ -54,7 +54,6 @@ regex_downvote = r"^(\-|\-\-|\-1|👎|noob|baka|idiot|chutiya|nub|noob|wrong|inc
     & ~filters.bot,
     group=karma_positive_group,
 )
-@capture_err
 async def upvote(_, message):
     chat_id = message.chat.id
     is_karma = sql.is_karma(chat_id)
@@ -95,7 +94,6 @@ async def upvote(_, message):
     & ~filters.bot,
     group=karma_negative_group,
 )
-@capture_err
 async def downvote(_, message):
     is_karma = sql.is_karma(chat_id)
     if not is_karma:
@@ -124,7 +122,6 @@ async def downvote(_, message):
 
 
 @app.on_message(filters.command("karmastat") & filters.group)
-@capture_err
 async def karma(_, message):
     chat_id = message.chat.id
     if not message.reply_to_message:
