@@ -26,6 +26,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import time
 import re
+from .helper_funcs.anonymous import AdminPerms, user_admin
 
 from telegram import ParseMode, InlineKeyboardMarkup, InlineKeyboardButton, Update, Bot
 from telegram.error import BadRequest, Unauthorized
@@ -34,12 +35,8 @@ from telegram.ext import CommandHandler, CallbackQueryHandler
 import Shikimori.modules.sql.connection_sql as sql
 from Shikimori import dispatcher, DRAGONS, DEV_USERS
 from Shikimori.modules.helper_funcs.alternate import send_message, typing_action
-from Shikimori.modules.helper_funcs import chat_status
 
-user_admin = chat_status.user_admin
-
-
-@user_admin
+@user_admin(AdminPerms.CAN_RESTRICT_MEMBERS)
 @typing_action
 def allow_connections(update, context) -> str:
 
