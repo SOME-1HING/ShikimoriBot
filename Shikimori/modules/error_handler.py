@@ -106,10 +106,7 @@ def error_callback(update: Update, context: CallbackContext):
             update.effective_message.text if update.effective_message else "No message",
             tb,
         )
-        key = requests.post(
-            "https://www.toptal.com/developers/hastebin/documents",
-            data=pretty_message.encode("UTF-8"),
-        ).json()
+        key = requests.post("https://www.toptal.com/developers/hastebin/documents").json()
         e = html.escape(f"{context.error}")
         if not key.get("key"):
             with open("error.txt", "w+") as f:
@@ -124,7 +121,7 @@ def error_callback(update: Update, context: CallbackContext):
             return
         key = key.get("key")
         url = f"https://www.toptal.com/developers/hastebin/{key}"
-        context.bot.send_message(
+        context.bot.send_text(
             ERROR_LOG_CHANNEL,
             text=f"#{context.error.identifier}\n<b>Error!!:"
             f"</b>\n<code>{e}</code>",

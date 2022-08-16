@@ -15,8 +15,6 @@ import asyncio
 import os
 import better_profanity
 from pyrogram import filters
-from Shikimori.modules.helper_funcs.chat_status import is_user_admin
-from better_profanity import profanity
 from google_trans_new import google_translator
 from telethon import events
 from telethon.tl.types import ChatBannedRights
@@ -189,7 +187,10 @@ async def del_nsfw(_, message):
     for c in chats:
         chat_id = message.chat.id
         user = message.from_user
-        if await is_admin(chat_id, user.id) or user.id in DRAGONS:
+        if user.id in DRAGONS:
+            return
+        member = await pbot.get_chat_member(chat_id, user.id)
+        if member.can_restrict_members:
             return
         is_nsfw = sql.is_nsfw(chat_id)
         if is_nsfw:

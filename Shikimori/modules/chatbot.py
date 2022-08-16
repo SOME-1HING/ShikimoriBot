@@ -1,8 +1,6 @@
 # Credits to MetaVoid Team for making this module.
 
 import json
-import re
-import os
 import html
 from typing import Optional
 import requests
@@ -12,13 +10,10 @@ from Shikimori.vars import AI_API_KEY as api
 
 from time import sleep
 from telegram import ParseMode
-from telegram import (CallbackQuery, Chat, InlineKeyboardButton,
-                      InlineKeyboardMarkup, ParseMode, Update, User)
+from telegram import ( Chat, InlineKeyboardButton,
+                      InlineKeyboardMarkup, ParseMode, Update)
 from telegram.ext import (CallbackContext, CallbackQueryHandler, CommandHandler, Filters, MessageHandler)
-from telegram.error import BadRequest, RetryAfter, Unauthorized
 from telegram.utils.helpers import mention_html
-
-from Shikimori.modules.helper_funcs.filters import CustomFilters
 from Shikimori.modules.helper_funcs.chat_status import user_admin, user_admin_no_reply
 from Shikimori import  dispatcher
 from Shikimori.modules.log_channel import loggable
@@ -27,55 +22,15 @@ bot_name = f"{dispatcher.bot.first_name}"
 
 @user_admin_no_reply
 @loggable
-def kukirm(update: Update, context: CallbackContext) -> str:
-    query: Optional[CallbackQuery] = update.callback_query
+def chatbot_status(update: Update, context: CallbackContext):
+    query= update.callback_query
     bot = context.bot
-    user: Optional[User] = update.effective_user
-    match = re.match(r"rm_chat\((.+?)\)", query.data)
-    if match:
+    user = update.effective_user
+    if query.data == "add_chatbot":
         chat: Optional[Chat] = update.effective_chat
-        is_kuki = sql.rm_chatbot(chat.id)
-        if not is_kuki:
-            LOG = (
-                f"<b>{html.escape(chat.title)}:</b>\n"
-                f"AI_DISABLED\n"
-                f"<b>Admin:</b> {mention_html(user.id, html.escape(user.first_name))}\n"
-            )
-            log_channel = logsql.get_chat_log_channel(chat.id)
-            if log_channel:
-                return bot.send_message(
-                log_channel,
-                LOG,
-                parse_mode=ParseMode.HTML,
-                disable_web_page_preview=True,
-            )
-            update.effective_message.edit_text(
-                f"{bot_name} Chatbot disable by {mention_html(user.id, user.first_name)}.",
-                parse_mode=ParseMode.HTML,
-            )
-            return
-        else:
-            update.effective_message.edit_text(
-                "ERROR!!.",
-                parse_mode=ParseMode.HTML,
-            )
-
-    return ""
-
-
-@user_admin_no_reply
-@loggable
-def kukiadd(update: Update, context: CallbackContext) -> str:
-    query: Optional[CallbackQuery] = update.callback_query
-    bot = context.bot
-    user: Optional[User] = update.effective_user
-    match = re.match(r"add_chat\((.+?)\)", query.data)
-    if match:
-        user_id = match.group(1)
-        chat: Optional[Chat] = update.effective_chat
-        is_kuki = sql.add_chatbot(chat.id)
-        if is_kuki:
-            is_kuki = sql.add_chatbot(user_id)
+        is_chatbot = sql.is_chatbot(chat.id)
+        if not is_chatbot:
+            is_chatbot = sql.add_chatbot(user.id)
             LOG = (
                 f"<b>{html.escape(chat.title)}:</b>\n"
                 f"AI_ENABLE\n"
@@ -89,48 +44,83 @@ def kukiadd(update: Update, context: CallbackContext) -> str:
                 parse_mode=ParseMode.HTML,
                 disable_web_page_preview=True,
             )
-            return
-        else:
             update.effective_message.edit_text(
-                f"{bot_name} Chatbot enable by {mention_html(user.id, user.first_name)}.",
+                f"{bot_name} Chatbot Enabled by {mention_html(user.id, user.first_name)}.",
+                parse_mode=ParseMode.HTML,
+            )
+            return
+        elif is_chatbot:
+            return update.effective_message.edit_text(
+                f"{bot_name} Chatbot Already Enabled.",
+                parse_mode=ParseMode.HTML,
+            )
+        else:
+            return update.effective_message.edit_text(
+                "Error!",
+                parse_mode=ParseMode.HTML,
+            )
+    elif query.data == "rem_chatbot":
+        chat: Optional[Chat] = update.effective_chat
+        is_chatbot = sql.is_chatbot(chat.id)
+        if is_chatbot:
+            is_chatbot = sql.rm_chatbot(user.id)
+            LOG = (
+                f"<b>{html.escape(chat.title)}:</b>\n"
+                f"AI_DISABLE\n"
+                f"<b>Admin:</b> {mention_html(user.id, html.escape(user.first_name))}\n"
+            )
+            log_channel = logsql.get_chat_log_channel(chat.id)
+            if log_channel:
+                return bot.send_message(
+                log_channel,
+                LOG,
+                parse_mode=ParseMode.HTML,
+                disable_web_page_preview=True,
+            )
+            update.effective_message.edit_text(
+                f"{bot_name} Chatbot disabled by {mention_html(user.id, user.first_name)}.",
+                parse_mode=ParseMode.HTML,
+            )
+            return
+        elif not is_chatbot:
+            return update.effective_message.edit_text(
+                f"{bot_name} Chatbot Already Disabled.",
+                parse_mode=ParseMode.HTML,
+            )
+        else:
+            return update.effective_message.edit_text(
+                "Error!",
                 parse_mode=ParseMode.HTML,
             )
 
-    return ""
-
-
 @user_admin
 @loggable
-def kuki(update: Update, context: CallbackContext):
-    user = update.effective_user
+def chatbot(update: Update, context: CallbackContext):
     message = update.effective_message
     msg = "Choose an option"
     keyboard = InlineKeyboardMarkup([[
         InlineKeyboardButton(
             text="Enable",
-            callback_data="add_chat({})")],
+            callback_data="add_chatbot")],
        [
         InlineKeyboardButton(
             text="Disable",
-            callback_data="rm_chat({})")]])
+            callback_data="rem_chatbot")]])
     message.reply_text(
         msg,
         reply_markup=keyboard,
         parse_mode=ParseMode.HTML,
     )
 
-def kuki_message(context: CallbackContext, message):
+def bot_message(context: CallbackContext, message):
     reply_message = message.reply_to_message
-    if message.text.lower() == "Yuzuki":
-        return True
     if reply_message:
         if reply_message.from_user.id == context.bot.get_me().id:
             return True
     else:
         return False
-        
 
-def chatbot(update: Update, context: CallbackContext):
+def chatbot_msg(update: Update, context: CallbackContext):
     message = update.effective_message
     chat_id = update.effective_chat.id
     bot = context.bot
@@ -139,19 +129,19 @@ def chatbot(update: Update, context: CallbackContext):
         return
 	
     if message.text and not message.document:
-        if not kuki_message(context, message):
+        if not bot_message(context, message):
             return
         Message = message.text
         bot.send_chat_action(chat_id, action="typing")
-        kukiurl = requests.get('https://itsprodev.cf/chatbot/SOME1HING.php?api=' + api + '&message=' + Message)
-        Kuki = json.loads(kukiurl.text)
-        kuki = Kuki['reply']
+        chatbot = requests.get('https://itsprodev.cf/chatbot/SOME1HING.php?api=' + api + '&message=' + Message)
+        Chat = json.loads(chatbot.text)
+        Chat = Chat['reply']
         sleep(0.3)
-        message.reply_text(kuki, timeout=60)
+        message.reply_text(Chat, timeout=60)
 
-CHATBOTK_HANDLER = CommandHandler("chatbot", kuki, run_async = True)
-ADD_CHAT_HANDLER = CallbackQueryHandler(kukiadd, pattern=r"add_chat", run_async = True)
-RM_CHAT_HANDLER = CallbackQueryHandler(kukirm, pattern=r"rm_chat", run_async = True)
+CHATBOTK_HANDLER = CommandHandler("chatbot", chatbot, run_async = True)
+ADD_CHAT_HANDLER = CallbackQueryHandler(chatbot_status, pattern=r"add_chatbot", run_async = True)
+RM_CHAT_HANDLER = CallbackQueryHandler(chatbot_status, pattern=r"rem_chatbot", run_async = True)
 CHATBOT_HANDLER = MessageHandler(
     Filters.text & (~Filters.regex(r"^#[^\s]+") & ~Filters.regex(r"^!")
                     & ~Filters.regex(r"^\/")), chatbot, run_async = True)
