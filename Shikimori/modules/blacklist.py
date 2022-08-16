@@ -32,7 +32,7 @@ from telegram.error import BadRequest
 from telegram.ext import CommandHandler, MessageHandler, Filters
 from telegram.utils.helpers import mention_html
 
-import Shikimori.modules.sql.blacklist_sql as sql
+import Shikimori.modules.sql_2.blacklist_sql as sql
 from Shikimori import dispatcher, LOGGER
 from Shikimori.modules.disable import DisableAbleCommandHandler
 from Shikimori.modules.helper_funcs.chat_status import user_admin, user_not_admin
@@ -42,7 +42,7 @@ from Shikimori.modules.log_channel import loggable
 from Shikimori.modules.warns import warn
 from Shikimori.modules.helper_funcs.string_handling import extract_time
 from Shikimori.modules.connection import connected
-from Shikimori.modules.sql.approve_sql import is_approved
+from Shikimori.modules.sql_2.approve_sql import is_approved
 from Shikimori.modules.helper_funcs.alternate import send_message, typing_action
 
 BLACKLIST_GROUP = 11

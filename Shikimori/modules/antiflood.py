@@ -51,7 +51,7 @@ from telegram.utils.helpers import mention_html
 from Shikimori.modules.helper_funcs.string_handling import extract_time
 from Shikimori.modules.connection import connected
 from Shikimori.modules.helper_funcs.alternate import send_message
-from Shikimori.modules.sql.approve_sql import is_approved
+from Shikimori.modules.sql_2.approve_sql import is_approved
 
 FLOOD_GROUP = 3
 

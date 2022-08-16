@@ -30,7 +30,7 @@ import re
 import time
 from functools import partial
 from io import BytesIO
-import Shikimori.modules.sql.welcome_sql as sql
+import Shikimori.modules.sql_2.welcome_sql as sql
 from Shikimori import (
     DEV_USERS,
     OWNER_ID,

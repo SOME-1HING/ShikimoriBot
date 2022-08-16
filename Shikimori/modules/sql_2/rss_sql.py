@@ -26,7 +26,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import threading
 
-from Shikimori.modules.sql import BASE, SESSION
+from Shikimori.modules.sql_2 import BASE, SESSION
 from sqlalchemy import Column, Integer, UnicodeText
 
 

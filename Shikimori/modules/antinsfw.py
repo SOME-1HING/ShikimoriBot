@@ -23,7 +23,7 @@ from telethon.tl.types import ChatBannedRights
 from Shikimori.modules.nsfwscan import get_file_id_from_message
 from Shikimori import DRAGONS, dispatcher
 from Shikimori.mongo import db
-import Shikimori.modules.sql.nsfw_sql as sql
+import Shikimori.modules.sql_2.nsfw_sql as sql
 from Shikimori.pyrogramee.telethonbasics import is_admin
 from Shikimori.events import register
 from Shikimori import telethn as tbot, arq, pbot

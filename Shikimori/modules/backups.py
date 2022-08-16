@@ -39,10 +39,10 @@ from Shikimori.modules.helper_funcs.chat_status import user_admin
 from Shikimori.modules.helper_funcs.alternate import typing_action
 
 # from Shikimori.modules.rules import get_rules
-import Shikimori.modules.sql.rules_sql as rulessql
+import Shikimori.modules.sql_2.rules_sql as rulessql
 
 # from Shikimori.modules.sql import warns_sql as warnssql
-import Shikimori.modules.sql.blacklist_sql as blacklistsql
+import Shikimori.modules.sql_2.blacklist_sql as blacklistsql
 from Shikimori.modules.sql import disable_sql as disabledsql
 
 # from Shikimori.modules.sql import cust_filters_sql as filtersql

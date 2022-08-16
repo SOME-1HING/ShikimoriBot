@@ -49,7 +49,7 @@ from Shikimori.modules.helper_funcs.filters import CustomFilters
 from Shikimori.modules.helper_funcs.misc import split_message
 from Shikimori.modules.helper_funcs.string_handling import split_quotes
 from Shikimori.modules.log_channel import loggable
-from Shikimori.modules.sql import warns_sql as sql
+from Shikimori.modules.sql_2 import warns_sql as sql
 from telegram import (
     CallbackQuery,
     Chat,
@@ -71,7 +71,7 @@ from telegram.ext import (
     run_async,
 )
 from telegram.utils.helpers import mention_html
-from Shikimori.modules.sql.approve_sql import is_approved
+from Shikimori.modules.sql_2.approve_sql import is_approved
 
 WARN_HANDLER_GROUP = 9
 CURRENT_WARNING_FILTER_STRING = "<b>Current warning filters in this chat:</b>\n"

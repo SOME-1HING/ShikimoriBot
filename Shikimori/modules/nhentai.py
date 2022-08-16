@@ -29,7 +29,7 @@ from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from telegram import Update
 from telegram.ext import CallbackContext, CallbackQueryHandler
 from Shikimori import pbot, dispatcher
-import Shikimori.modules.sql.nsfw_sql as sql
+import Shikimori.modules.sql_2.nsfw_sql as sql
 
 @pbot.on_message(filters.command("sauce"))
 async def sauce(_, message):

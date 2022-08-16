@@ -29,7 +29,7 @@ from Shikimori.modules.disable import DisableAbleCommandHandler
 from Shikimori import dispatcher, DRAGONS
 from Shikimori.modules.helper_funcs.extraction import extract_user
 from telegram.ext import CallbackContext, CallbackQueryHandler
-import Shikimori.modules.sql.approve_sql as sql
+import Shikimori.modules.sql_2.approve_sql as sql
 from Shikimori.modules.helper_funcs.chat_status import user_admin
 from Shikimori.modules.log_channel import loggable
 from telegram import ParseMode, InlineKeyboardMarkup, InlineKeyboardButton, Update

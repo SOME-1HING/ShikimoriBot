@@ -29,7 +29,7 @@ import nekos
 from Shikimori.imports.hmfull.src import hmfull
 from Shikimori import dispatcher, pbot
 from Shikimori.vars import SUPPORT_CHAT
-import Shikimori.modules.sql.nsfw_sql as sql
+import Shikimori.modules.sql_2.nsfw_sql as sql
 from Shikimori.modules.log_channel import gloggable
 from telegram import Update
 from telegram.error import BadRequest, RetryAfter, Unauthorized
