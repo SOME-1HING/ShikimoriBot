@@ -35,9 +35,9 @@ def kukirm(update: Update, context: CallbackContext) -> str:
     if match:
         user_id = match.group(1)
         chat: Optional[Chat] = update.effective_chat
-        is_kuki = sql.rem_kuki(chat.id)
+        is_kuki = sql.rm_chatbot(chat.id)
         if is_kuki:
-            is_kuki = sql.rem_kuki(user_id)
+            is_kuki = sql.rm_chatbot(user_id)
             LOG = (
                 f"<b>{html.escape(chat.title)}:</b>\n"
                 f"AI_DISABLED\n"
@@ -71,9 +71,9 @@ def kukiadd(update: Update, context: CallbackContext) -> str:
     if match:
         user_id = match.group(1)
         chat: Optional[Chat] = update.effective_chat
-        is_kuki = sql.set_kuki(chat.id)
+        is_kuki = sql.add_chatbot(chat.id)
         if is_kuki:
-            is_kuki = sql.set_kuki(user_id)
+            is_kuki = sql.add_chatbot(user_id)
             LOG = (
                 f"<b>{html.escape(chat.title)}:</b>\n"
                 f"AI_ENABLE\n"
@@ -132,7 +132,7 @@ def chatbot(update: Update, context: CallbackContext):
     message = update.effective_message
     chat_id = update.effective_chat.id
     bot = context.bot
-    is_kuki = sql.is_kuki(chat_id)
+    is_kuki = sql.is_chatbot(chat_id)
     if not is_kuki:
         return
 	
