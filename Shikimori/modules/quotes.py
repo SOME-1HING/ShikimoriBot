@@ -27,7 +27,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 from PIL import Image, ImageDraw, ImageFont, ImageOps
 from telethon.tl import types, functions
 from fontTools.ttLib import TTFont 
-import emoji
+import emoji_unicode
 import textwrap
 import urllib
 import random
@@ -222,7 +222,7 @@ async def process(msg, user, client, reply, replied=None):
         space = pfpbg.width + 30
         namefallback = ImageFont.truetype("resources/Quivira.otf", 43, encoding="utf-16")
         for letter in tot:
-            if letter in emoji.UNICODE_EMOJI:
+            if letter in emoji_unicode.Emoji:
                 newemoji, mask = await emoji_fetch(letter)
                 canvas.paste(newemoji, (space, 24), mask)
                 space += 40
@@ -262,7 +262,7 @@ async def process(msg, user, client, reply, replied=None):
                     if index in range(offset, length):
                         font2 = ImageFont.truetype("resources/Roboto-Regular.ttf", 30, encoding="utf-16")
                         textcolor = "#898989"
-                if letter in emoji.UNICODE_EMOJI:
+                if letter in emoji_unicode.Emoji:
                     newemoji, mask = await emoji_fetch(letter)
                     canvas.paste(newemoji, (x, y - 2), mask)
                     x += 45
