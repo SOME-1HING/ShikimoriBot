@@ -45,13 +45,13 @@ from Shikimori.modules.log_channel import loggable
 @user_admin_no_reply
 @loggable
 def rem_karma(update: Update, context: CallbackContext) -> str:
-    query: Optional[CallbackQuery] = update.callback_query
-    user: Optional[User] = update.effective_user
+    query = update.callback_query
+    user = update.effective_user
     bot = context.bot
     match = re.match(r"rem_karma\((.+?)\)", query.data)
     if match:
         user_id = match.group(1)
-        chat: Optional[Chat] = update.effective_chat
+        chat = update.effective_chat
         is_kuki = ksql.rem_karma(chat.id)
         if is_kuki:
             is_kuki = ksql.rem_karma(user_id)
@@ -81,13 +81,13 @@ def rem_karma(update: Update, context: CallbackContext) -> str:
 @user_admin_no_reply
 @loggable
 def add_karma(update: Update, context: CallbackContext) -> str:
-    query: Optional[CallbackQuery] = update.callback_query
-    user: Optional[User] = update.effective_user
+    query= update.callback_query
+    user = update.effective_user
     bot = context.bot
     match = re.match(r"add_karma\((.+?)\)", query.data)
     if match:
         user_id = match.group(1)
-        chat: Optional[Chat] = update.effective_chat
+        chat = update.effective_chat
         is_kuki = ksql.set_karma(chat.id)
         if is_kuki:
             is_kuki = ksql.set_karma(user_id)
