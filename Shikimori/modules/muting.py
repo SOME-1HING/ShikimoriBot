@@ -54,7 +54,7 @@ from telegram import (
     InlineKeyboardMarkup
 )
 from telegram.error import BadRequest
-from telegram.ext import CallbackContext, CommandHandler, CallbackQueryHandler
+from telegram.ext import CallbackContext, CommandHandler, CallbackQueryHandler, Filters
 from telegram.utils.helpers import mention_html
 
 
@@ -325,9 +325,9 @@ def button(update: Update, context: CallbackContext) -> str:
         return ""
             
 
-MUTE_HANDLER = CommandHandler("mute", mute, run_async=True)
-UNMUTE_HANDLER = CommandHandler("unmute", unmute, run_async=True)
-TEMPMUTE_HANDLER = CommandHandler(["tmute", "tempmute"], temp_mute, run_async=True)
+MUTE_HANDLER = CommandHandler("mute", mute, run_async=True, filters=Filters.chat_type.groups)
+UNMUTE_HANDLER = CommandHandler("unmute", unmute, run_async=True, filters=Filters.chat_type.groups)
+TEMPMUTE_HANDLER = CommandHandler(["tmute", "tempmute"], temp_mute, run_async=True,filters=Filters.chat_type.groups)
 UNMUTE_BUTTON_HANDLER = CallbackQueryHandler(button, pattern=r"unmute_")
 
 dispatcher.add_handler(MUTE_HANDLER)

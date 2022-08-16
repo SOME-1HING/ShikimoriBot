@@ -577,14 +577,14 @@ def banme(update: Update, context: CallbackContext):
 
 
 
-BAN_HANDLER = CommandHandler(["ban", "sban"], ban, run_async=True)
-TEMPBAN_HANDLER = CommandHandler(["tban"], temp_ban, run_async=True)
-KICK_HANDLER = CommandHandler(["kick", "punch"], punch, run_async=True)
-UNBAN_HANDLER = CommandHandler("unban", unban, run_async=True)
-ROAR_HANDLER = CommandHandler("roar", selfunban, run_async=True)
+BAN_HANDLER = CommandHandler(["ban", "sban"], ban, filters=Filters.chat_type.groups, run_async=True)
+TEMPBAN_HANDLER = CommandHandler(["tban"], temp_ban, run_async=True, filters=Filters.chat_type.groups)
+KICK_HANDLER = CommandHandler(["kick", "punch"], punch, run_async=True, filters=Filters.chat_type.groups)
+UNBAN_HANDLER = CommandHandler("unban", unban, run_async=True, filters=Filters.chat_type.groups)
+ROAR_HANDLER = CommandHandler("roar", selfunban, run_async=True, filters=Filters.chat_type.groups)
 UNBAN_BUTTON_HANDLER = CallbackQueryHandler(unbanb_btn, pattern=r"unbanb_")
-KICKME_HANDLER = DisableAbleCommandHandler(["kickme", "punchme"], punchme, filters=Filters.chat_type.groups, run_async=True)
-BANME_HANDLER = CommandHandler("banme", banme, run_async=True)
+KICKME_HANDLER = DisableAbleCommandHandler(["kickme", "punchme"], punchme, filters=Filters.chat_type.groups, run_async=True, filters=Filters.chat_type.groups)
+BANME_HANDLER = CommandHandler("banme", banme, run_async=True, filters=Filters.chat_type.groups)
 
 dispatcher.add_handler(BAN_HANDLER)
 dispatcher.add_handler(TEMPBAN_HANDLER)

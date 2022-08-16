@@ -7,7 +7,7 @@ import html
 from ..modules.sql.antichannel_sql import antichannel_status, disable_antichannel, enable_antichannel
 
 
-@Shikimoricmd(command="antichannel", group=100)
+@Shikimoricmd(Filters.chat_type.groups, command="antichannel", group=100)
 @user_admin(AdminPerms.CAN_RESTRICT_MEMBERS)
 def set_antichannel(update: Update, context: CallbackContext):
     message = update.effective_message

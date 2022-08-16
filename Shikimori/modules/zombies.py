@@ -75,6 +75,8 @@ async def is_administrator(user_id: int, message):
 
 @telethn.on(events.NewMessage(pattern="^[!/]zombies ?(.*)"))
 async def rm_deletedacc(show):
+    if not show.is_group:
+        return
     con = show.pattern_match.group(1).lower()
     del_u = 0
     del_status = "**This Village is clean. Can't find any dead bodies here.**"
@@ -86,7 +88,7 @@ async def rm_deletedacc(show):
                 await sleep(1)
         if del_u > 0:
             del_status = (
-                f"**Founding** `{del_u}` **Dead body/bodies found,"
+                f"**Found** `{del_u}` **Dead body/bodies.,"
                 "\nClean it with command** `/zombies clean`"
             )
         return await kontol.edit(del_status)

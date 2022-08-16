@@ -61,8 +61,6 @@ __mod_name__ = 'Anime News Network'  # *IF YOU WANT* EDIT NAME OF BUTTON IN '/he
 # *IF YOU WANT* EDIT MESSAGE FOR HELP OF THIS MODULE.
 __help__ = '''
 ❍ `/ann` : Gives latest Anime news.
-❍ `/subscribe` : Suscribes to Anime News Network feeds.
-❍ `/unsubscribe` : Suscribes to Anime News Network feeds.
 '''
 
 # DON'T EDIT

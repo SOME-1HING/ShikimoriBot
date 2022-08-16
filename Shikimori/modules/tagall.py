@@ -30,6 +30,8 @@ from Shikimori.events import register
 
 @register(pattern="^(/all|/mentionall|/tagall|/utag|@all|@mentionall|@tagall|@utag) ?(.*)")
 async def _(event):
+    if not event.is_group:
+        return
     if event.fwd_from:
         return
     mentions = "Tagged by an admin"

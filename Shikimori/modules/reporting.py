@@ -301,7 +301,7 @@ __help__ = """
 ❂ If in group, toggles that groups's status.
 """
 
-SETTING_HANDLER = CommandHandler("reports", report_setting, run_async=True)
+SETTING_HANDLER = CommandHandler("reports", report_setting, run_async=True, filters=Filters.chat_type.groups,)
 REPORT_HANDLER = CommandHandler(
     "report", report, filters=Filters.chat_type.groups, run_async=True
 )

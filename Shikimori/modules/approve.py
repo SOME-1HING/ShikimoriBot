@@ -28,7 +28,7 @@ import html
 from Shikimori.modules.disable import DisableAbleCommandHandler
 from Shikimori import dispatcher, DRAGONS
 from Shikimori.modules.helper_funcs.extraction import extract_user
-from telegram.ext import CallbackContext, CallbackQueryHandler
+from telegram.ext import CallbackContext, CallbackQueryHandler, Filters
 import Shikimori.modules.sql_2.approve_sql as sql
 from Shikimori.modules.helper_funcs.chat_status import user_admin
 from Shikimori.modules.log_channel import loggable
@@ -219,11 +219,11 @@ def unapproveall_btn(update: Update, context: CallbackContext):
 
 
 
-APPROVE = DisableAbleCommandHandler("approve", approve, run_async=True)
-DISAPPROVE = DisableAbleCommandHandler("unapprove", disapprove, run_async=True)
-APPROVED = DisableAbleCommandHandler("approved", approved, run_async=True)
-APPROVAL = DisableAbleCommandHandler("approval", approval, run_async=True)
-UNAPPROVEALL = DisableAbleCommandHandler("unapproveall", unapproveall, run_async=True)
+APPROVE = DisableAbleCommandHandler("approve", approve, filters=Filters.chat_type.groups, run_async=True)
+DISAPPROVE = DisableAbleCommandHandler("unapprove", disapprove, filters=Filters.chat_type.groups, run_async=True)
+APPROVED = DisableAbleCommandHandler("approved", approved, filters=Filters.chat_type.groups, run_async=True)
+APPROVAL = DisableAbleCommandHandler("approval", approval, filters=Filters.chat_type.groups, run_async=True)
+UNAPPROVEALL = DisableAbleCommandHandler("unapproveall", unapproveall, filters=Filters.chat_type.groups, run_async=True)
 UNAPPROVEALL_BTN = CallbackQueryHandler(
     unapproveall_btn, pattern=r"unapproveall_.*", run_async=True
 )

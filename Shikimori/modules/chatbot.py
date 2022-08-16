@@ -33,11 +33,9 @@ def kukirm(update: Update, context: CallbackContext) -> str:
     user: Optional[User] = update.effective_user
     match = re.match(r"rm_chat\((.+?)\)", query.data)
     if match:
-        user_id = match.group(1)
         chat: Optional[Chat] = update.effective_chat
         is_kuki = sql.rm_chatbot(chat.id)
-        if is_kuki:
-            is_kuki = sql.rm_chatbot(user_id)
+        if not is_kuki:
             LOG = (
                 f"<b>{html.escape(chat.title)}:</b>\n"
                 f"AI_DISABLED\n"
@@ -51,10 +49,14 @@ def kukirm(update: Update, context: CallbackContext) -> str:
                 parse_mode=ParseMode.HTML,
                 disable_web_page_preview=True,
             )
+            update.effective_message.edit_text(
+                f"{bot_name} Chatbot disable by {mention_html(user.id, user.first_name)}.",
+                parse_mode=ParseMode.HTML,
+            )
             return
         else:
             update.effective_message.edit_text(
-                f"{bot_name} Chatbot disable by {mention_html(user.id, user.first_name)}.",
+                "ERROR!!.",
                 parse_mode=ParseMode.HTML,
             )
 

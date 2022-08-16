@@ -24,7 +24,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 import html
 
 from telegram import Update
-from telegram.ext import CallbackContext
+from telegram.ext import CallbackContext, Filters
 from telegram.utils.helpers import mention_html
 
 from Shikimori.modules.log_channel import loggable
@@ -34,7 +34,7 @@ import Shikimori.modules.sql.logger_sql as sql
 from Shikimori.modules.helper_funcs.anonymous import user_admin as u_admin, AdminPerms
 
 
-@Shikimoricmd(command="announce", pass_args=True)
+@Shikimoricmd(Filters.chat_type.groups, command="announce", pass_args=True)
 @u_admin(AdminPerms.CAN_CHANGE_INFO)
 @loggable
 def announcestat(update: Update, context: CallbackContext) -> str:
