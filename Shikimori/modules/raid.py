@@ -14,7 +14,7 @@ from .helper_funcs.chat_status import bot_admin, connection_status, user_admin_n
 from .helper_funcs.decorators import Shikimoricmd, Shikimoricallback
 from .. import LOGGER, updater
 
-import Shikimori.modules.sql_2.welcome_sql as sql
+import Shikimori.modules.sql.welcome_sql as sql
 
 j = updater.job_queue
 

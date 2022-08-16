@@ -3,47 +3,80 @@ STATUS: Code is working. ✅
 """
 
 """
-GNU General Public License v3.0
+BSD 2-Clause License
 
 Copyright (C) 2022, SOME-1HING [https://github.com/SOME-1HING]
 
 Credits:-
     I don't know who originally wrote this code. If you originally wrote this code, please reach out to me. 
 
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
+All rights reserved.
 
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
 
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <https://www.gnu.org/licenses/>.
+1. Redistributions of source code must retain the above copyright notice, this
+   list of conditions and the following disclaimer.
+
+2. Redistributions in binary form must reproduce the above copyright notice,
+   this list of conditions and the following disclaimer in the documentation
+   and/or other materials provided with the distribution.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 """
 
 from Shikimori import telethn
-from Shikimori.events import register
+from Shikimori.events import register as tomori
 
 
-@register(pattern="^(/all|/mentionall|/tagall|/utag|@all|@mentionall|@tagall|@utag) ?(.*)")
+@tomori(pattern="^/(all|mentionall|tagall|utag) ?(.*)")
 async def _(event):
-    if not event.is_group:
-        return
     if event.fwd_from:
         return
     mentions = "Tagged by an admin"
     chat = await event.get_input_chat()
-    async for x in telethn.iter_participants(chat, 99999999):
+    async for x in telethn.iter_participants(chat, 100):
         mentions += f" \n [{x.first_name}](tg://user?id={x.id})"
-    if event.reply_to_msg_id:
-        try:
-            await event.send_message(event.chat_id, mentions, reply_to=event.reply_to_msg_id)
-        except:
-            await event.reply(mentions)
     await event.reply(mentions)
+    await event.delete()
+
+@tomori(pattern="^@(all|mentionall|tagall|utag) ?(.*)")
+async def _(event):
+    if event.fwd_from:
+        return
+    mentions = "Tagged by an admin"
+    chat = await event.get_input_chat()
+    async for x in telethn.iter_participants(chat, 100):
+        mentions += f" \n [{x.first_name}](tg://user?id={x.id})"
+    await event.reply(mentions)
+    await event.delete()
+
+
+# @tomori(pattern="^/users ?(.*)")
+# async def _(event):
+#     if event.fwd_from:
+#         return
+#     mentions = "Users : "
+#     chat = await event.get_input_chat()
+#     async for x in telethn.iter_participants(chat, filter=ChannelParticipantsAdmins):
+#         mentions += f" \n [{x.first_name}](tg://user?id={x.id})"
+#     reply_message = None
+#     if event.reply_to_msg_id:
+#         reply_message = await event.get_reply_message()
+#         await reply_message.reply(mentions)
+#     else:
+#         await event.reply(mentions)
+#     await event.delete()
+
 
 __mod_name__ = "TagAll"
 __help__ = """

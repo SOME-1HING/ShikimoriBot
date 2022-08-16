@@ -3,8 +3,7 @@
 from telethon import events, Button
 import logging
 from telethon.tl.functions.users import GetFullUserRequest as us
-from Shikimori import telethn as bot
-from Shikimori.vars import BOT_USERNAME
+from Shikimori import BOT_USERNAME, telethn as bot
 
 logging.basicConfig(level=logging.INFO)
 

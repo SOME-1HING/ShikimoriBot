@@ -26,8 +26,7 @@ from youtubesearchpython import VideosSearch
 
 from Shikimori.utils.inlinehelper import *
 from Shikimori.utils.pluginhelpers import fetch, json_prettify
-from Shikimori import pbot
-from Shikimori.vars import API_WEATHER, TIME_API_KEY, SUPPORT_CHAT, BOT_USERNAME
+from Shikimori import pbot, API_WEATHER, TIME_API_KEY, SUPPORT_CHAT, BOT_USERNAME
 
 dictionary = PyDictionary()
 

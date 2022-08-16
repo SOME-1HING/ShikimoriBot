@@ -3,22 +3,32 @@ STATUS: Code is working. ✅
 """
 
 """
-GNU General Public License v3.0
+BSD 2-Clause License
 
 Copyright (C) 2022, SOME-1HING [https://github.com/SOME-1HING]
 
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
+All rights reserved.
 
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
 
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <https://www.gnu.org/licenses/>.
+1. Redistributions of source code must retain the above copyright notice, this
+   list of conditions and the following disclaimer.
+
+2. Redistributions in binary form must reproduce the above copyright notice,
+   this list of conditions and the following disclaimer in the documentation
+   and/or other materials provided with the distribution.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 """
 
 import html
@@ -27,9 +37,8 @@ import requests
 from pyrogram import filters
 import nekos
 from Shikimori.imports.hmfull.src import hmfull
-from Shikimori import dispatcher, pbot
-from Shikimori.vars import SUPPORT_CHAT
-import Shikimori.modules.sql_2.nsfw_sql as sql
+from Shikimori import SUPPORT_CHAT, dispatcher, pbot
+import Shikimori.modules.sql.nsfw_sql as sql
 from Shikimori.modules.log_channel import gloggable
 from telegram import Update
 from telegram.error import BadRequest, RetryAfter, Unauthorized
@@ -42,8 +51,8 @@ url_nsfw = "https://api.waifu.pics/nsfw/"
 @user_admin
 @gloggable
 def add_nsfw(update: Update, context: CallbackContext):
-    msg = update.effective_message
     chat = update.effective_chat
+    msg = update.effective_message
     user = update.effective_user
     is_nsfw = sql.is_nsfw(chat.id)
     if not is_nsfw:
@@ -79,14 +88,30 @@ def rem_nsfw(update: Update, context: CallbackContext):
         )
         return message
 
+def list_nsfw_chats(update: Update, context: CallbackContext):
+    chats = sql.get_all_nsfw_chats()
+    text = "<b>NSFW Activated Chats</b>\n"
+    for chat in chats:
+        try:
+            x = context.bot.get_chat(int(*chat))
+            name = x.title if x.title else x.first_name
+            text += f"• <code>{name}</code>\n"
+        except BadRequest:
+            sql.rem_nsfw(*chat)
+        except Unauthorized:
+            sql.rem_nsfw(*chat)
+        except RetryAfter as e:
+            time.sleep(e.retry_after)
+    update.effective_message.reply_text(text, parse_mode="HTML")
+
 def blowjob(update, context):
     chat_id = update.effective_chat.id
-    msg = update.effective_message
     if not update.effective_message.chat.type == "private":
         is_nsfw = sql.is_nsfw(chat_id)
         if not is_nsfw:
             msg.reply_text("NSFW is not activated!!\n\nUse '/addnsfw' to activate NSFW commands.")
             return
+    msg = update.effective_message
     url = f"{url_nsfw}blowjob" 
     result = requests.get(url).json()
     img = result['url']
@@ -94,12 +119,12 @@ def blowjob(update, context):
 
 def trap(update, context):
     chat_id = update.effective_chat.id
-    msg = update.effective_message
     if not update.effective_message.chat.type == "private":
         is_nsfw = sql.is_nsfw(chat_id)
         if not is_nsfw:
             msg.reply_text("NSFW is not activated!!\n\nUse '/addnsfw' to activate NSFW commands.")
             return
+    msg = update.effective_message
     url = f"{url_nsfw}trap" 
     result = requests.get(url).json()
     img = result['url']
@@ -107,12 +132,12 @@ def trap(update, context):
 
 def nsfwwaifu(update, context):
     chat_id = update.effective_chat.id
-    msg = update.effective_message
     if not update.effective_message.chat.type == "private":
         is_nsfw = sql.is_nsfw(chat_id)
         if not is_nsfw:
             msg.reply_text("NSFW is not activated!!\n\nUse '/addnsfw' to activate NSFW commands.")
             return
+    msg = update.effective_message
     url = f"{url_nsfw}waifu" 
     result = requests.get(url).json()
     img = result['url']
@@ -120,12 +145,12 @@ def nsfwwaifu(update, context):
 
 def nsfwneko(update, context):
     chat_id = update.effective_chat.id
-    msg = update.effective_message
     if not update.effective_message.chat.type == "private":
         is_nsfw = sql.is_nsfw(chat_id)
         if not is_nsfw:
             msg.reply_text("NSFW is not activated!!\n\nUse '/addnsfw' to activate NSFW commands.")
             return
+    msg = update.effective_message
     url = f"{url_nsfw}neko" 
     result = requests.get(url).json()
     img = result['url']
@@ -133,16 +158,18 @@ def nsfwneko(update, context):
 
 def spank(update, context):
     chat_id = update.effective_chat.id
-    msg = update.effective_message
     if not update.effective_message.chat.type == "private":
         is_nsfw = sql.is_nsfw(chat_id)
         if not is_nsfw:
             return
+    msg = update.effective_message
     target = "spank"
     msg.reply_animation(nekos.img(target))
 
 ADD_NSFW_HANDLER = CommandHandler("addnsfw", add_nsfw)
 REMOVE_NSFW_HANDLER = CommandHandler("rmnsfw", rem_nsfw)
+LIST_NSFW_CHATS_HANDLER = CommandHandler(
+    "nsfwchats", list_nsfw_chats, filters=CustomFilters.dev_filter)
 NSFWWAIFU_HANDLER = CommandHandler(("nsfwwaifu", "nwaifu"), nsfwwaifu, run_async=True)
 BLOWJOB_HANDLER = CommandHandler(("blowjob", "bj"), blowjob, run_async=True)
 TRAP_HANDLER = CommandHandler("trap", trap, run_async=True)
@@ -151,6 +178,7 @@ SPANK_HANDLER = CommandHandler("spank", spank, run_async=True)
 
 dispatcher.add_handler(ADD_NSFW_HANDLER)
 dispatcher.add_handler(REMOVE_NSFW_HANDLER)
+dispatcher.add_handler(LIST_NSFW_CHATS_HANDLER)
 dispatcher.add_handler(NSFWWAIFU_HANDLER)
 dispatcher.add_handler(BLOWJOB_HANDLER)
 dispatcher.add_handler(SPANK_HANDLER)
@@ -160,6 +188,10 @@ dispatcher.add_handler(NSFWNEKO_HANDLER)
 __handlers__ = [
     ADD_NSFW_HANDLER,
     REMOVE_NSFW_HANDLER,
+    LIST_NSFW_CHATS_HANDLER,
+    ADD_NSFW_HANDLER,
+    REMOVE_NSFW_HANDLER,
+    LIST_NSFW_CHATS_HANDLER,
     NSFWWAIFU_HANDLER,
     SPANK_HANDLER,
     BLOWJOB_HANDLER,
@@ -174,6 +206,7 @@ __mod_name__ = "NSFW 🔞"
 __help__ = """
 ❍ `/addnsfw` : To Activate NSFW commands.
 ❍ `/rmnsfw` : To Deactivate NSFW commands.
+❍ `/nsfwchats` : Lists NSFW chats.
 
 ❍ `/nsfw` ['ass', 'bdsm', 'cum', 'creampie', 'manga', 'blowjob', 'bj', 'boobjob', 'vagina', 'uniform', 'foot', 'femdom', 'gangbang', 'hentai', 'incest', 'ahegao', 'neko', 'gif', 'ero', 'cuckold', 'orgy', 'elves', 'pantsu', 'mobile', 'glasses', 'tentacles', 'tentacle', 'thighs', 'yuri', 'zettai', 'masturbation', 'public', 'wallpaper', 'nekolewd', 'nekogif', 'henti', 'hass', 'boobs', 'paizuri', 'hyuri', 'hthigh', 'midriff', 'kitsune', 'tentacle', 'anal', 'hanal', 'hneko']
 

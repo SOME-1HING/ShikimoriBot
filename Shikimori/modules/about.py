@@ -3,22 +3,32 @@ STATUS: Code is working. ✅
 """
 
 """
-GNU General Public License v3.0
+BSD 2-Clause License
 
 Copyright (C) 2022, SOME-1HING [https://github.com/SOME-1HING]
 
-This program is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
+All rights reserved.
 
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
 
-You should have received a copy of the GNU General Public License
-along with this program.  If not, see <https://www.gnu.org/licenses/>.
+1. Redistributions of source code must retain the above copyright notice, this
+   list of conditions and the following disclaimer.
+
+2. Redistributions in binary form must reproduce the above copyright notice,
+   this list of conditions and the following disclaimer in the documentation
+   and/or other materials provided with the distribution.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 """
 
 import time
@@ -26,8 +36,7 @@ from Shikimori.modules.helper_funcs.readable_time import get_readable_time
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, ParseMode, Update
 from telegram.utils.helpers import escape_markdown
 from telegram.ext import CallbackContext, CallbackQueryHandler
-from Shikimori.vars import ANIME_NAME, BOT_USERNAME, NETWORK, NETWORK_USERNAME, START_MEDIA, SUPPORT_CHAT, UPDATE_CHANNEL
-from Shikimori import StartTime, dispatcher
+from Shikimori import ANIME_NAME, BOT_USERNAME, NETWORK, NETWORK_USERNAME, START_MEDIA, SUPPORT_CHAT, UPDATE_CHANNEL, StartTime, dispatcher
 
 bot_name = f"{dispatcher.bot.first_name}"
 
@@ -53,17 +62,15 @@ buttons = [
     ], 
 ]
 
-network_name = NETWORK_USERNAME.lower()
-
 try:
-    if network_name == "sernxnetwork":
-        HMMM = InlineKeyboardButton(text="⡷⠂SΞЯИ⠐⢾ THE ORGANIZATION✧", callback_data="sern_")
-    elif NETWORK:
-        HMMM = InlineKeyboardButton(text=f"{NETWORK}", url=f"https://t.me/{NETWORK_USERNAME}")
+    if NETWORK:
+        hmm = InlineKeyboardButton(text=f"{NETWORK}", url=f"https://t.me/{NETWORK_USERNAME}")
+    elif "voidxnetwork" in NETWORK_USERNAME:
+        hmm = InlineKeyboardButton(text="【V๏ɪ፝֟𝔡】 ✧Network✧", callback_data="void_")
     else:
-        HMMM = None
+        hmm = None
 except:
-    HMMM = None
+    hmm = None
 
 def Shikimori_about_callback(update, context):
     query = update.callback_query
@@ -85,7 +92,7 @@ def Shikimori_about_callback(update, context):
                     InlineKeyboardButton(text="License", callback_data="license_"),
                     ],
                     [
-                    HMMM,
+                    hmm,
                     InlineKeyboardButton(text="Documentation", url="https://some1hing.gitbook.io/shikimori-bot/"),
                     ],
                     [
@@ -142,20 +149,20 @@ def git_call_back(update: Update, context: CallbackContext):
                 disable_web_page_preview=False,
         )
 
-def sern_call_back(update: Update, context: CallbackContext):
+def void_call_back(update: Update, context: CallbackContext):
     query = update.callback_query
-    if query.data == "sern_":
+    if query.data == "void_":
         query.message.edit_text(
-            text=f"ᴡᴇʟᴄᴏᴍᴇ ᴛᴏ 𝘚𝘌𝘙𝘕𝘹𝘕𝘦𝘵𝘸𝘰𝘳𝘬 (http://t.me/sernxnetwork), 𝙎𝙀𝙍𝙉 𝙞𝙨 𝙖𝙣 𝙖𝙣𝙞𝙢𝙚 𝙗𝙖𝙨𝙚𝙙 𝘾𝙤𝙢𝙢𝙪𝙣𝙞𝙩𝙮 𝙬𝙞𝙩𝙝 𝙖 𝙢𝙤𝙩𝙞𝙫𝙚 𝙩𝙤 𝙨𝙥𝙧𝙚𝙖𝙙 𝙡𝙤𝙫𝙚 𝙖𝙣𝙙 𝙥𝙚𝙖𝙘𝙚 𝙖𝙧𝙤𝙪𝙣𝙙 𝙩𝙚𝙡𝙚𝙜𝙧𝙖𝙢. 𝙂𝙤 𝙩𝙝𝙧𝙤𝙪𝙜𝙝 𝙩𝙝𝙚 𝙘𝙝𝙖𝙣𝙣𝙚𝙡 𝙖𝙣𝙙 𝙟𝙤𝙞𝙣 𝙩𝙝𝙚 𝘾𝙤𝙢𝙢𝙪𝙣𝙞𝙩𝙮, 𝙞𝙛 𝙞𝙩 𝙙𝙧𝙖𝙬𝙨 𝙮𝙤𝙪𝙧 𝙖𝙩𝙩𝙚𝙣𝙩𝙞𝙤𝙣.",
+            text=f"๏ The Shikimori Repo is originally under Void Network. The bot made by this repo may or may not be under Void Network.\n\nWelcome to **[【V๏ɪ፝֟𝔡】 ✧Network✧](https://t.me/voidxnetwork)** \n\n◈ Void is an anime based Community with a motive to spread love and peace around telegram. Go through the channel and join the Community if it draws your attention. ◈",
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=False,
             reply_markup=InlineKeyboardMarkup(
             [
-                [InlineKeyboardButton(text="⡷⠂SΞЯИ⠐⢾ THE ORGANIZATION", url="https://t.me/sernxnetwork")],
                 [
-                InlineKeyboardButton(text="★彡[ᴜꜱᴇʀ ᴛᴀɢ]彡★", url="https://t.me/SERNXNETWORK/31"),
-                InlineKeyboardButton(text="★彡[ᴏᴜʀ ꜱᴛᴀꜰꜰ]彡★", url="https://t.me/SERNXNETWORK/38")
+                InlineKeyboardButton(text="【Usertag】", url="https://t.me/void_network/103"),
+                InlineKeyboardButton(text="【Owner Sama】", url="https://t.me/voidxtoxic")
                 ],
+                [InlineKeyboardButton(text="【V๏ɪ፝֟𝔡】Network", url="https://t.me/voidxnetwork")],
                 [InlineKeyboardButton(text="Back", callback_data="Shikimori_")]
             ]
             ),
@@ -214,11 +221,11 @@ license_call_back_handler = CallbackQueryHandler(
 git_call_back_handler = CallbackQueryHandler(
     git_call_back, pattern=r"github_", run_async=True
 )
-sern_call_back_handler = CallbackQueryHandler(
-    sern_call_back, pattern=r"sern_", run_async=True
+void_call_back_handler = CallbackQueryHandler(
+    void_call_back, pattern=r"void_", run_async=True
 )
 
-dispatcher.add_handler(sern_call_back_handler)
+dispatcher.add_handler(void_call_back_handler)
 dispatcher.add_handler(git_call_back_handler)
 dispatcher.add_handler(about_callback_handler)
 dispatcher.add_handler(license_call_back_handler)

@@ -27,6 +27,8 @@ __mod_name__ = "Reddit"
 
 
 @app.on_message(filters.command("reddit"))
+
+@capture_err
 async def reddit(_, message):
     if len(message.command) != 2:
         return await message.reply_text("/reddit needs an argument")
