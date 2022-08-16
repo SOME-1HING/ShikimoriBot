@@ -38,11 +38,13 @@ from Shikimori.modules.helper_funcs.anonymous import user_admin as u_admin, Admi
 @u_admin(AdminPerms.CAN_CHANGE_INFO)
 @loggable
 def announcestat(update: Update, context: CallbackContext) -> str:
+    chat = update.effective_chat
+    if chat.type == "private":
+        return
     args = context.args
     if len(args) > 0:
         u = update.effective_user
         message = update.effective_message
-        chat = update.effective_chat
         user = update.effective_user
         if args[0].lower() in ["on", "yes", "true"]:
             sql.enable_chat_log(update.effective_chat.id)
