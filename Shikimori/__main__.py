@@ -54,10 +54,6 @@ from Shikimori.modules import ALL_MODULES
 from telegram import ParseMode, Update
 from telegram.error import (
     BadRequest,
-    ChatMigrated,
-    NetworkError,
-    TelegramError,
-    TimedOut,
     Unauthorized,
 )
 from telegram.ext import (

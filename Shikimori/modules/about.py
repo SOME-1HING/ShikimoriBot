@@ -56,8 +56,8 @@ buttons = [
 network_name = NETWORK_USERNAME.lower()
 
 try:
-    if network_name == "sernxnetwork":
-        HMMM = InlineKeyboardButton(text="⡷⠂SΞЯИ⠐⢾ THE ORGANIZATION✧", callback_data="sern_")
+    if network_name == "uchihaxnetwork":
+        HMMM = InlineKeyboardButton(text="❟❛❟ 𝖀𝖈𝖍𝖎𝖍𝖆 ❟❛❟ 𝙉𝙚𝙩𝙬𝙤𝙧𝙠", callback_data="sern_")
     elif NETWORK:
         HMMM = InlineKeyboardButton(text=f"{NETWORK}", url=f"https://t.me/{NETWORK_USERNAME}")
     else:
@@ -146,18 +146,20 @@ def sern_call_back(update: Update, context: CallbackContext):
     query = update.callback_query
     if query.data == "sern_":
         query.message.edit_text(
-            text=f"ᴡᴇʟᴄᴏᴍᴇ ᴛᴏ 𝘚𝘌𝘙𝘕𝘹𝘕𝘦𝘵𝘸𝘰𝘳𝘬 (http://t.me/sernxnetwork), 𝙎𝙀𝙍𝙉 𝙞𝙨 𝙖𝙣 𝙖𝙣𝙞𝙢𝙚 𝙗𝙖𝙨𝙚𝙙 𝘾𝙤𝙢𝙢𝙪𝙣𝙞𝙩𝙮 𝙬𝙞𝙩𝙝 𝙖 𝙢𝙤𝙩𝙞𝙫𝙚 𝙩𝙤 𝙨𝙥𝙧𝙚𝙖𝙙 𝙡𝙤𝙫𝙚 𝙖𝙣𝙙 𝙥𝙚𝙖𝙘𝙚 𝙖𝙧𝙤𝙪𝙣𝙙 𝙩𝙚𝙡𝙚𝙜𝙧𝙖𝙢. 𝙂𝙤 𝙩𝙝𝙧𝙤𝙪𝙜𝙝 𝙩𝙝𝙚 𝙘𝙝𝙖𝙣𝙣𝙚𝙡 𝙖𝙣𝙙 𝙟𝙤𝙞𝙣 𝙩𝙝𝙚 𝘾𝙤𝙢𝙢𝙪𝙣𝙞𝙩𝙮, 𝙞𝙛 𝙞𝙩 𝙙𝙧𝙖𝙬𝙨 𝙮𝙤𝙪𝙧 𝙖𝙩𝙩𝙚𝙣𝙩𝙞𝙤𝙣.",
+            text=f"""
+ᴡᴇʟᴄᴏᴍᴇ ᴛᴏ [❟❛❟ 𝖀𝖈𝖍𝖎𝖍𝖆 ❟❛❟ 𝘕𝘌𝘛𝘞𝘖𝘙𝘒](https://t.me/UchihaXNetwork/70),
+𝖀𝖈𝖍𝖎𝖍𝖆 𝙞𝙨 𝙖𝙣 𝙖𝙣𝙞𝙢𝙚 𝙗𝙖𝙨𝙚𝙙 𝘾𝙤𝙢𝙢𝙪𝙣𝙞𝙩𝙮 𝙬𝙞𝙩𝙝 𝙖 𝙢𝙤𝙩𝙞𝙫𝙚 𝙩𝙤 𝙨𝙥𝙧𝙚𝙖𝙙 𝙡𝙤𝙫𝙚 𝙖𝙣𝙙 𝙥𝙚𝙖𝙘𝙚 𝙖𝙧𝙤𝙪𝙣𝙙 𝙩𝙚𝙡𝙚𝙜𝙧𝙖𝙢. 𝙂𝙤 𝙩𝙝𝙧𝙤𝙪𝙜𝙝 𝙩𝙝𝙚 𝙘𝙝𝙖𝙣𝙣𝙚𝙡 𝙖𝙣𝙙 𝙟𝙤𝙞𝙣 𝙩𝙝𝙚 𝘾𝙤𝙢𝙢𝙪𝙣𝙞𝙩𝙮, 𝙞𝙛 𝙞𝙩 𝙙𝙧𝙖𝙬𝙨 𝙮𝙤𝙪𝙧 𝙖𝙩𝙩𝙚𝙣𝙩𝙞𝙤𝙣.
+""",
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=False,
             reply_markup=InlineKeyboardMarkup(
-            [
-                [InlineKeyboardButton(text="⡷⠂SΞЯИ⠐⢾ THE ORGANIZATION", url="https://t.me/sernxnetwork")],
                 [
-                InlineKeyboardButton(text="★彡[ᴜꜱᴇʀ ᴛᴀɢ]彡★", url="https://t.me/SERNXNETWORK/31"),
-                InlineKeyboardButton(text="★彡[ᴏᴜʀ ꜱᴛᴀꜰꜰ]彡★", url="https://t.me/SERNXNETWORK/38")
-                ],
-                [InlineKeyboardButton(text="Back", callback_data="Shikimori_")]
-            ]
+                    [InlineKeyboardButton(text="❟❛❟ 𝖀𝖈𝖍𝖎𝖍𝖆 ❟❛❟ 𝙉𝙚𝙩𝙬𝙤𝙧𝙠", url="https://t.me/UchihaXNetwork/70")],
+                    [
+                    InlineKeyboardButton(text="★彡[ᴜꜱᴇʀ ᴛᴀɢ]彡★", url="https://t.me/UchihaXNetwork/74"),
+                    InlineKeyboardButton(text="★彡[ᴏꜰꜰɪᴄɪᴀʟ ɢʀᴏᴜᴘ]彡★", url="https://t.me/Uchihashrine")
+                    ],
+                ]
             ),
         )
     elif query.data == "Shikimori_back":
