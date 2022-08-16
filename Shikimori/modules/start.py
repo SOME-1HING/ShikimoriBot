@@ -31,6 +31,8 @@ from Shikimori import (
 )
 from Shikimori.vars import (
     BOT_USERNAME,
+    HELP_STRINGS,
+    PM_START_TEXT,
     UPDATE_CHANNEL,
     SUPPORT_CHAT,
     ANIME_NAME,
@@ -40,20 +42,12 @@ from Shikimori.modules.helper_funcs.chat_status import is_user_admin
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, ParseMode, Update
 from telegram.ext import CallbackContext, CommandHandler
 from telegram.utils.helpers import escape_markdown
+import Shikimori.modules.sql.users_sql as sql
 
 bot_name = f"{dispatcher.bot.first_name}"
 
 IMG_START = START_MEDIA.split(".")
 start_id = IMG_START[-1]
-
-PM_START_TEXT = f"""
-\nI am *{bot_name}* , a group management bot based on the anime *{ANIME_NAME}*!
-
-*Click on the Commands Button below to go through my commands.*
-"""
-
-HELP_STRINGS = """
-Click on the button bellow to get description about specifics command."""
 
 buttons = [
     [
@@ -103,9 +97,10 @@ def start(update: Update, context: CallbackContext):
                 IMPORTED["rules"].send_rules(update, args[0], from_pm=True)
 
         else:
+            users = f"{sql.num_users}"
+            chats = f"{sql.num_chats}"
             first_name = update.effective_user.first_name
-            hmm = "Hello *{}*! Nice to meet you!".format(escape_markdown(first_name))
-            start_text = hmm + PM_START_TEXT
+            start_text = PM_START_TEXT.format(escape_markdown(first_name), bot_name, ANIME_NAME, users, chats, uptime)
             try:
                 if start_id in ("jpeg", "jpg", "png"):
                     update.effective_message.reply_photo(

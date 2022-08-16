@@ -26,16 +26,14 @@ from Shikimori.modules.helper_funcs.readable_time import get_readable_time
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, ParseMode, Update
 from telegram.utils.helpers import escape_markdown
 from telegram.ext import CallbackContext, CallbackQueryHandler
-from Shikimori.vars import ANIME_NAME, BOT_USERNAME, NETWORK, NETWORK_USERNAME, START_MEDIA, SUPPORT_CHAT, UPDATE_CHANNEL
+from Shikimori.vars import ANIME_NAME, BOT_USERNAME, NETWORK, NETWORK_USERNAME, PM_START_TEXT, START_MEDIA, SUPPORT_CHAT, UPDATE_CHANNEL
 from Shikimori import StartTime, dispatcher
+import Shikimori.modules.sql.users_sql as sql
 
 bot_name = f"{dispatcher.bot.first_name}"
 
-PM_START_TEXT = f"""
-\nI am *{bot_name}* , a group management bot based on the anime *{ANIME_NAME}*![ ]({START_MEDIA})
-
-*Click on the Commands Button below to go through my commands.*
-"""
+IMG_START = START_MEDIA.split(".")
+start_id = IMG_START[-1]
 
 buttons = [
     [
@@ -89,24 +87,10 @@ def Shikimori_about_callback(update, context):
                     InlineKeyboardButton(text="Documentation", url="https://some1hing.gitbook.io/shikimori-bot/"),
                     ],
                     [
-                    InlineKeyboardButton(text="Back", callback_data="Shikimori_back"),
+                    InlineKeyboardButton(text="Back", callback_data="home_"),
                     ],
                 ]
             ),
-        )
-
-    elif query.data == "Shikimori_back":
-        first_name = update.effective_user.first_name
-        uptime = get_readable_time((time.time() - StartTime))
-        hmm = "Hello *{}*! Nice to meet you!".format(escape_markdown(first_name))
-        HMM = hmm + PM_START_TEXT
-     
-        query.message.edit_text(
-                HMM,
-                reply_markup=InlineKeyboardMarkup(buttons),
-                parse_mode=ParseMode.MARKDOWN,
-                timeout=60,
-                disable_web_page_preview=False,
         )
 
 def git_call_back(update: Update, context: CallbackContext):
@@ -128,19 +112,40 @@ def git_call_back(update: Update, context: CallbackContext):
                 ]
             ),
         )
-    elif query.data == "Shikimori_back":
+def home_back(update: Update, context: CallbackContext):
+    query = update.callback_query
+    if query.data == "home_":
         first_name = update.effective_user.first_name
+        users = f"{sql.num_users}"
         uptime = get_readable_time((time.time() - StartTime))
-        hmm = "Hello *{}*! Nice to meet you!".format(escape_markdown(first_name))
-        HMM = hmm + PM_START_TEXT
-    
-        query.message.edit_text(
-                HMM,
-                reply_markup=InlineKeyboardMarkup(buttons),
+        chats = f"{sql.num_chats}"
+        first_name = update.effective_user.first_name
+        start_text = PM_START_TEXT.format(escape_markdown(first_name), bot_name, ANIME_NAME, users, chats, uptime)
+        query.message.delete()
+        try:
+            if start_id in ("jpeg", "jpg", "png"):
+                query.edit_photo(
+                    START_MEDIA, caption = start_text, reply_markup=InlineKeyboardMarkup(buttons),
                 parse_mode=ParseMode.MARKDOWN,
-                timeout=60,
-                disable_web_page_preview=False,
-        )
+            )
+            elif start_id in ("mp4", "mkv"):
+                update.effective_message.reply_video(
+                START_MEDIA, caption = start_text, reply_markup=InlineKeyboardMarkup(buttons),
+                parse_mode=ParseMode.MARKDOWN,
+            )
+            elif start_id in ("gif", "webp"):
+                update.effective_message.reply_animation(
+                START_MEDIA, caption = start_text, reply_markup=InlineKeyboardMarkup(buttons),
+                parse_mode=ParseMode.MARKDOWN,
+            )
+            else:
+                update.effective_message.reply_text(start_text, reply_markup=InlineKeyboardMarkup(buttons),
+                parse_mode=ParseMode.MARKDOWN,)
+
+        except:
+            update.effective_message.reply_text(start_text, reply_markup=InlineKeyboardMarkup(buttons),
+                parse_mode=ParseMode.MARKDOWN,)
+    
 
 def sern_call_back(update: Update, context: CallbackContext):
     query = update.callback_query
@@ -148,9 +153,7 @@ def sern_call_back(update: Update, context: CallbackContext):
         query.message.edit_text(
             text=f"""
 ᴡᴇʟᴄᴏᴍᴇ ᴛᴏ [❟❛❟ 𝖀𝖈𝖍𝖎𝖍𝖆 ❟❛❟ 𝘕𝘌𝘛𝘞𝘖𝘙𝘒](https://t.me/UchihaXNetwork/70),
-𝖀𝖈𝖍𝖎𝖍𝖆 𝙞𝙨 𝙖𝙣 𝙖𝙣𝙞𝙢𝙚 𝙗𝙖𝙨𝙚𝙙 𝘾𝙤𝙢𝙢𝙪𝙣𝙞𝙩𝙮 𝙬𝙞𝙩𝙝 𝙖 𝙢𝙤𝙩𝙞𝙫𝙚 𝙩𝙤 𝙨𝙥𝙧𝙚𝙖𝙙 𝙡𝙤𝙫𝙚 𝙖𝙣𝙙 𝙥𝙚𝙖𝙘𝙚 𝙖𝙧𝙤𝙪𝙣𝙙 𝙩𝙚𝙡𝙚𝙜𝙧𝙖𝙢. 𝙂𝙤 𝙩𝙝𝙧𝙤𝙪𝙜𝙝 𝙩𝙝𝙚 𝙘𝙝𝙖𝙣𝙣𝙚𝙡 𝙖𝙣𝙙 𝙟𝙤𝙞𝙣 𝙩𝙝𝙚 𝘾𝙤𝙢𝙢𝙪𝙣𝙞𝙩𝙮, 𝙞𝙛 𝙞𝙩 𝙙𝙧𝙖𝙬𝙨 𝙮𝙤𝙪𝙧 𝙖𝙩𝙩𝙚𝙣𝙩𝙞𝙤𝙣.
-""",
-            parse_mode=ParseMode.MARKDOWN,
+𝖀𝖈𝖍𝖎𝖍𝖆 𝙞𝙨 𝙖𝙣 𝙖𝙣𝙞𝙢𝙚 𝙗𝙖𝙨𝙚𝙙 𝘾𝙤𝙢𝙢𝙪𝙣𝙞𝙩𝙮 𝙬𝙞𝙩𝙝 𝙖 𝙢𝙤𝙩𝙞𝙫𝙚 𝙩𝙤 𝙨𝙥𝙧𝙚𝙖𝙙 𝙡𝙤𝙫𝙚 𝙖𝙣𝙙 𝙥𝙚𝙖𝙘𝙚 𝙖𝙧𝙤𝙪𝙣𝙙 𝙩𝙚𝙡𝙚𝙜𝙧𝙖𝙢. 𝙂𝙤 𝙩𝙝𝙧𝙤𝙪𝙜𝙝 𝙩𝙝𝙚 𝙘𝙝𝙖𝙣𝙣𝙚𝙡 𝙖𝙣𝙙 𝙟𝙤𝙞𝙣 𝙩𝙝𝙚 𝘾𝙤𝙢𝙢𝙪𝙣𝙞𝙩𝙮, 𝙞𝙛 𝙞𝙩 𝙙𝙧𝙖𝙬𝙨 𝙮𝙤𝙪𝙧 𝙖𝙩𝙩𝙚𝙣𝙩𝙞𝙤𝙣.""", parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=False,
             reply_markup=InlineKeyboardMarkup(
                 [
@@ -161,19 +164,6 @@ def sern_call_back(update: Update, context: CallbackContext):
                     ],
                 ]
             ),
-        )
-    elif query.data == "Shikimori_back":
-        first_name = update.effective_user.first_name
-        uptime = get_readable_time((time.time() - StartTime))
-        hmm = "Hello *{}*! Nice to meet you!".format(escape_markdown(first_name))
-        HMM = hmm + PM_START_TEXT
-    
-        query.message.edit_text(
-                HMM,
-                reply_markup=InlineKeyboardMarkup(buttons),
-                parse_mode=ParseMode.MARKDOWN,
-                timeout=60,
-                disable_web_page_preview=False,
         )
 
 def license_call_back(update: Update, context: CallbackContext):
@@ -194,19 +184,7 @@ def license_call_back(update: Update, context: CallbackContext):
                 ]
             ),
         )
-    elif query.data == "Shikimori_back":
-        first_name = update.effective_user.first_name
-        uptime = get_readable_time((time.time() - StartTime))
-        hmm = "Hello *{}*! Nice to meet you!".format(escape_markdown(first_name))
-        HMM = hmm + PM_START_TEXT
-    
-        query.message.edit_text(
-                HMM,
-                reply_markup=InlineKeyboardMarkup(buttons),
-                parse_mode=ParseMode.MARKDOWN,
-                timeout=60,
-                disable_web_page_preview=False,
-        )
+
 about_callback_handler = CallbackQueryHandler(
         Shikimori_about_callback, pattern=r"Shikimori_", run_async=True
     )
@@ -219,8 +197,12 @@ git_call_back_handler = CallbackQueryHandler(
 sern_call_back_handler = CallbackQueryHandler(
     sern_call_back, pattern=r"sern_", run_async=True
 )
+home_handler = CallbackQueryHandler(
+    home_back, pattern=r"home_", run_async=True
+)
 
 dispatcher.add_handler(sern_call_back_handler)
+dispatcher.add_handler(home_handler)
 dispatcher.add_handler(git_call_back_handler)
 dispatcher.add_handler(about_callback_handler)
 dispatcher.add_handler(license_call_back_handler)
