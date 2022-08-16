@@ -126,7 +126,7 @@ def error_callback(update: Update, context: CallbackContext):
         url = f"https://www.toptal.com/developers/hastebin/{key}"
         context.bot.send_message(
             ERROR_LOG_CHANNEL,
-            text=f"#{context.error.identifier}\n<b>Error Aagya Yash Bhai😐:"
+            text=f"#{context.error.identifier}\n<b>Error!!:"
             f"</b>\n<code>{e}</code>",
             reply_markup=InlineKeyboardMarkup(
                 [[InlineKeyboardButton("See Errors", url=url)]],
