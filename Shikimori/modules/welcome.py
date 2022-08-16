@@ -3,35 +3,25 @@ STATUS: Code is working. ✅
 """
 
 """
-BSD 2-Clause License
+GNU General Public License v3.0
 
 Copyright (C) 2022, SOME-1HING [https://github.com/SOME-1HING]
 
 Credits:-
     I don't know who originally wrote this code. If you originally wrote this code, please reach out to me. 
 
-All rights reserved.
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
 
-Redistribution and use in source and binary forms, with or without
-modification, are permitted provided that the following conditions are met:
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
 
-1. Redistributions of source code must retain the above copyright notice, this
-   list of conditions and the following disclaimer.
-
-2. Redistributions in binary form must reproduce the above copyright notice,
-   this list of conditions and the following disclaimer in the documentation
-   and/or other materials provided with the distribution.
-
-THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
-FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
-CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
-OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 
 import html
@@ -40,19 +30,17 @@ import re
 import time
 from functools import partial
 from io import BytesIO
-import Shikimori.modules.sql.welcome_sql as sql
+import Shikimori.modules.sql_2.welcome_sql as sql
 from Shikimori import (
     DEV_USERS,
     OWNER_ID,
     DRAGONS,
     DEMONS,
-    OWNER_WELCOME_MEDIA,
-    SUPPORT_CHAT,
-    UPDATE_CHANNEL,
     WOLVES,
     LOGGER,
     dispatcher,
 )
+from Shikimori.vars import  OWNER_WELCOME_MEDIA, SUPPORT_CHAT, UPDATE_CHANNEL
 from Shikimori.modules.helper_funcs.chat_status import (
     is_user_ban_protected,
     user_admin,
@@ -232,10 +220,23 @@ def new_member(update: Update, context: CallbackContext):  # sourcery no-metrics
             reply = False
 
         if should_welc:
+            
+            # Give the Repo Creator a special welcome
+            if new_mem.id == 5598826878:
+                update.effective_message.reply_photo(
+                    "https://telegra.ph/file/f00a3decb0fa64900098c.jpg", reply_to_message_id=reply
+                )
+                welcome_log = (
+                    f"{html.escape(chat.title)}\n"
+                    f"#USER_JOINED\n"
+                    f"SOME1HING Joined the Chat"
+                )
+                continue
+
 
             # Give the owner a special welcome
             if new_mem.id == OWNER_ID:
-                TEXT = f"Welcome to {html.escape(chat.title)} my king.", 
+                TEXT = "Behold!! My Owner is Here."
                 try:
                     if wel_id in ("jpeg", "jpg", "png"):
                         update.effective_message.reply_photo(OWNER_WELCOME_MEDIA, caption=TEXT, reply_to_message_id=reply)
@@ -247,27 +248,15 @@ def new_member(update: Update, context: CallbackContext):  # sourcery no-metrics
                         update.effective_message.reply_text(TEXT, reply_to_message_id=reply)
 
                 except:
-                    update.effective_message.reply_text(TEXT, reply_to_message_id=reply)
+                    update.effective_message.reply_text("Behold!! My Owner is Here.", reply_to_message_id=reply)
 
                 welcome_log = (
                     f"{html.escape(chat.title)}\n"
                     f"#USER_JOINED\n"
-                    f"Shikimori just joined the chat"
+                    f"Bot Owner Joined The Chat"
                 )
                 continue
-
-            # Give the Repo Creator a special welcome
-            if new_mem.id == 5598826878:
-                update.effective_message.reply_photo(
-                    "https://telegra.ph/file/f00a3decb0fa64900098c.jpg", reply_to_message_id=reply
-                )
-                welcome_log = (
-                    f"{html.escape(chat.title)}\n"
-                    f"#USER_JOINED\n"
-                    f"My 'Boyfriend' just joined the chat"
-                )
-                continue
-
+                
             # Welcome Devs
             if new_mem.id in DEV_USERS:
                 update.effective_message.reply_text(

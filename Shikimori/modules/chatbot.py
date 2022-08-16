@@ -4,24 +4,23 @@ import json
 import re
 import os
 import html
+from typing import Optional
 import requests
 from Shikimori.modules.sql import log_channel_sql as logsql
 import Shikimori.modules.sql.chatbot_sql as sql
-from Shikimori import AI_API_KEY as api
+from Shikimori.vars import AI_API_KEY as api
 
 from time import sleep
 from telegram import ParseMode
-from telegram import (CallbackQuery, Chat, MessageEntity, InlineKeyboardButton,
-                      InlineKeyboardMarkup, Message, ParseMode, Update, Bot, User)
-from telegram.ext import (CallbackContext, CallbackQueryHandler, CommandHandler,
-                          DispatcherHandlerStop, Filters, MessageHandler,
-                          run_async)
+from telegram import (CallbackQuery, Chat, InlineKeyboardButton,
+                      InlineKeyboardMarkup, ParseMode, Update, User)
+from telegram.ext import (CallbackContext, CallbackQueryHandler, CommandHandler, Filters, MessageHandler)
 from telegram.error import BadRequest, RetryAfter, Unauthorized
-from telegram.utils.helpers import mention_html, mention_markdown, escape_markdown
+from telegram.utils.helpers import mention_html
 
 from Shikimori.modules.helper_funcs.filters import CustomFilters
 from Shikimori.modules.helper_funcs.chat_status import user_admin, user_admin_no_reply
-from Shikimori import  dispatcher, updater, SUPPORT_CHAT
+from Shikimori import  dispatcher
 from Shikimori.modules.log_channel import loggable
 
 bot_name = f"{dispatcher.bot.first_name}"
@@ -34,11 +33,9 @@ def kukirm(update: Update, context: CallbackContext) -> str:
     user: Optional[User] = update.effective_user
     match = re.match(r"rm_chat\((.+?)\)", query.data)
     if match:
-        user_id = match.group(1)
         chat: Optional[Chat] = update.effective_chat
-        is_kuki = sql.rem_kuki(chat.id)
-        if is_kuki:
-            is_kuki = sql.rem_kuki(user_id)
+        is_kuki = sql.rm_chatbot(chat.id)
+        if not is_kuki:
             LOG = (
                 f"<b>{html.escape(chat.title)}:</b>\n"
                 f"AI_DISABLED\n"
@@ -52,10 +49,14 @@ def kukirm(update: Update, context: CallbackContext) -> str:
                 parse_mode=ParseMode.HTML,
                 disable_web_page_preview=True,
             )
+            update.effective_message.edit_text(
+                f"{bot_name} Chatbot disable by {mention_html(user.id, user.first_name)}.",
+                parse_mode=ParseMode.HTML,
+            )
             return
         else:
             update.effective_message.edit_text(
-                f"{bot_name} Chatbot disable by {mention_html(user.id, user.first_name)}.",
+                "ERROR!!.",
                 parse_mode=ParseMode.HTML,
             )
 
@@ -72,9 +73,9 @@ def kukiadd(update: Update, context: CallbackContext) -> str:
     if match:
         user_id = match.group(1)
         chat: Optional[Chat] = update.effective_chat
-        is_kuki = sql.set_kuki(chat.id)
+        is_kuki = sql.add_chatbot(chat.id)
         if is_kuki:
-            is_kuki = sql.set_kuki(user_id)
+            is_kuki = sql.add_chatbot(user_id)
             LOG = (
                 f"<b>{html.escape(chat.title)}:</b>\n"
                 f"AI_ENABLE\n"
@@ -133,7 +134,7 @@ def chatbot(update: Update, context: CallbackContext):
     message = update.effective_message
     chat_id = update.effective_chat.id
     bot = context.bot
-    is_kuki = sql.is_kuki(chat_id)
+    is_kuki = sql.is_chatbot(chat_id)
     if not is_kuki:
         return
 	
@@ -148,42 +149,22 @@ def chatbot(update: Update, context: CallbackContext):
         sleep(0.3)
         message.reply_text(kuki, timeout=60)
 
-def list_all_chats(update: Update, context: CallbackContext):
-    chats = sql.get_all_kuki_chats()
-    text = "<b>CHATBOT-Enabled Chats</b>\n"
-    for chat in chats:
-        try:
-            x = context.bot.get_chat(int(*chat))
-            name = x.title or x.first_name
-            text += f"• <code>{name}</code>\n"
-        except (BadRequest, Unauthorized):
-            sql.rem_kuki(*chat)
-        except RetryAfter as e:
-            sleep(e.retry_after)
-    update.effective_message.reply_text(text, parse_mode="HTML")
-
-
-
 CHATBOTK_HANDLER = CommandHandler("chatbot", kuki, run_async = True)
 ADD_CHAT_HANDLER = CallbackQueryHandler(kukiadd, pattern=r"add_chat", run_async = True)
 RM_CHAT_HANDLER = CallbackQueryHandler(kukirm, pattern=r"rm_chat", run_async = True)
 CHATBOT_HANDLER = MessageHandler(
     Filters.text & (~Filters.regex(r"^#[^\s]+") & ~Filters.regex(r"^!")
                     & ~Filters.regex(r"^\/")), chatbot, run_async = True)
-LIST_ALL_CHATS_HANDLER = CommandHandler(
-    "allchats", list_all_chats, filters=CustomFilters.dev_filter, run_async = True)
 
 dispatcher.add_handler(ADD_CHAT_HANDLER)
 dispatcher.add_handler(CHATBOTK_HANDLER)
 dispatcher.add_handler(RM_CHAT_HANDLER)
-dispatcher.add_handler(LIST_ALL_CHATS_HANDLER)
 dispatcher.add_handler(CHATBOT_HANDLER)
 
 __handlers__ = [
     ADD_CHAT_HANDLER,
     CHATBOTK_HANDLER,
     RM_CHAT_HANDLER,
-    LIST_ALL_CHATS_HANDLER,
     CHATBOT_HANDLER,
 ]
 

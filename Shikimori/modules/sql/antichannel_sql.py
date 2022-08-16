@@ -1,39 +1,47 @@
-import threading
-from sqlalchemy import Column, String
-from Shikimori.modules.sql import BASE, SESSION
+"""
+STATUS: Code is working. ✅
+"""
 
-class ANTICHANNELChats(BASE):
-    __tablename__ = "antichannel_chats"
-    chat_id = Column(String(14), primary_key=True)
+"""
+GNU General Public License v3.0
 
-    def __init__(self, chat_id):
-        self.chat_id = chat_id
+Copyright (C) 2022, SOME-1HING [https://github.com/SOME-1HING]
 
-ANTICHANNELChats.__table__.create(checkfirst=True)
-INSERTION_LOCK = threading.RLock()
+Credits:-
+    I don't know who originally wrote this code. If you originally wrote this code, please reach out to me. 
 
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
 
-def is_achannel(chat_id):
-    try:
-        chat = SESSION.query(ANTICHANNELChats).get(str(chat_id))
-        if chat:
-            return True
-        else:
-            return False
-    finally:
-        SESSION.close()
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
 
-def set_achannel(chat_id):
-    with INSERTION_LOCK:
-        achannnelchat = SESSION.query(ANTICHANNELChats).get(str(chat_id))
-        if not achannnelchat:
-            achannnelchat = ANTICHANNELChats(str(chat_id))
-        SESSION.add(achannnelchat)
-        SESSION.commit()
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
+"""
 
-def rem_achannel(chat_id):
-    with INSERTION_LOCK:
-        achannnelchat = SESSION.query(ANTICHANNELChats).get(str(chat_id))
-        if achannnelchat:
-            SESSION.delete(achannnelchat)
-        SESSION.commit()
+from Shikimori.mongo import db
+
+antichanneldb = db.antichannel
+
+def antichannel_status(chat_id: int) -> bool:
+    chat = antichanneldb.find_one({"chat_id": chat_id})
+    if not chat:
+        return False
+    return True
+
+def enable_antichannel(chat_id):
+    is_achannel = antichannel_status(chat_id)
+    if is_achannel:
+        return
+    return antichanneldb.insert_one({"chat_id": chat_id})
+
+def disable_antichannel(chat_id):
+    is_achannel = antichannel_status(chat_id)
+    if not is_achannel:
+        return
+    return antichanneldb.delete_one({"chat_id": chat_id})

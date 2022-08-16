@@ -22,7 +22,8 @@ from pytz import country_names as cname
 from telegram import ParseMode
 from telegram.error import BadRequest
 
-from Shikimori import dispatcher, API_WEATHER as APPID
+from Shikimori import dispatcher
+from Shikimori.vars import API_WEATHER as APPID
 from Shikimori.modules.disable import DisableAbleCommandHandler
 from Shikimori.modules.helper_funcs.alternate import typing_action
 

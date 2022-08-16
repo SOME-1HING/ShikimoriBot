@@ -24,9 +24,9 @@ SOFTWARE.
 from pyrogram import filters as filters_
 from pyrogram.types import Message
 
-from wbb import SUDOERS
-from wbb import USERBOT_ID as OWNER_ID
-from wbb.utils.functions import get_urls_from_text
+from Shikimori import SUDOERS
+from Shikimori.vars import OWNER_ID
+from Shikimori.utils.functions import get_urls_from_text
 
 
 def url(_, __, message: Message) -> bool:
