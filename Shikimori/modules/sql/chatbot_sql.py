@@ -27,7 +27,7 @@ chatbotdb = db.chatbot
 
 def is_chatbot(chat_id: int) -> bool:
     chatbot = chatbotdb.find_one({"chat_id": chat_id})
-    if not chatbot:
+    if chatbot:
         return True
     return False
 
