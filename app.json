@@ -104,6 +104,11 @@
         "value": "postgres://dsnjbjab:saifhsudfasfihaif@sdsfs.db.elephantsql.com/dsnjbjab",
         "required": true
       },
+      "FUNC_DB_URL": {
+         "description": "Put sql based database link. Recommended to use Elephant SQL.",
+         "value": "postgres://dsnjbjab:saifhsudfasfihaif@sdsfs.db.elephantsql.com/dsnjbjab",
+         "required": true
+       },
       "DEV_USERS": {
          "description": "ID of users who are Devs of your bot (can use /py, /sh, /eval etc.). If you are a noob and would come and bother Masha support then keep the current ID's here at they are and add yours.",
          "required": false,
