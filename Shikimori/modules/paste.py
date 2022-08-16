@@ -34,7 +34,6 @@ from pyrogram import filters
 from pyrogram.types import InlineKeyboardButton
 
 from Shikimori import pbot, aiohttpsession
-from Shikimori.utils.errors import capture_err
 from Shikimori.utils.pastebin import paste
 
 pattern = re.compile(
@@ -59,8 +58,6 @@ async def isPreviewUp(preview: str) -> bool:
 
 
 @pbot.on_message(filters.command("paste"))
-
-@capture_err
 async def paste_func(_, message):
     if not message.reply_to_message:
         return await message.reply_text(
