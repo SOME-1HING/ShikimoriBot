@@ -189,8 +189,8 @@ async def del_nsfw(_, message):
         user = message.from_user
         if user.id in DRAGONS:
             return
-        member = await pbot.get_chat_member(chat_id, user.id)
-        if member.can_restrict_members:
+        member = await pbot.get_chat_member(chat_id, user.id).status
+        if member in {"administrator", "creator"}:
             return
         is_nsfw = sql.is_nsfw(chat_id)
         if is_nsfw:
