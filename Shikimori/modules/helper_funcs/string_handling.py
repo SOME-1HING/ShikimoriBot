@@ -30,7 +30,7 @@ from typing import Dict, List
 
 import bleach
 import markdown2
-import emoji_unicode
+import Shikimori.imports.emoji_pip as emo
 
 from telegram import MessageEntity
 from telegram.utils.helpers import escape_markdown
@@ -78,7 +78,7 @@ def _selective_escape(to_parse: str) -> str:
 # This is a fun one.
 def _calc_emoji_offset(to_calc) -> int:
     # Get all emoji in text.
-    emoticons = emoji_unicode.Emoji().finditer(to_calc)
+    emoticons = emo.get_emoji_regexp().finditer(to_calc)
     # Check the utf16 length of the emoji to determine the offset it caused.
     # Normal, 1 character emoji don't affect; hence sub 1.
     # special, eg with two emoji characters (eg face, and skin col) will have length 2, so by subbing one we

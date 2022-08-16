@@ -1,5 +1,4 @@
 future
-emoji-unicode
 lxml
 wget
 gtts
