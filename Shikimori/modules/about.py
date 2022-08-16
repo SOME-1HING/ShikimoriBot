@@ -26,31 +26,32 @@ from Shikimori.modules.helper_funcs.readable_time import get_readable_time
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, ParseMode, Update
 from telegram.utils.helpers import escape_markdown
 from telegram.ext import CallbackContext, CallbackQueryHandler
-from Shikimori.vars import ANIME_NAME, BOT_USERNAME, NETWORK, NETWORK_USERNAME, START_MEDIA, SUPPORT_CHAT, UPDATE_CHANNEL
+from Shikimori.vars import ANIME_NAME, BOT_USERNAME, NETWORK, NETWORK_USERNAME, OWNER_USERNAME, START_MEDIA, SUPPORT_CHAT, UPDATE_CHANNEL
 from Shikimori import StartTime, dispatcher
 
 bot_name = f"{dispatcher.bot.first_name}"
 
-PM_START_TEXT = f"""
-\nI am *{bot_name}* , a group management bot based on the anime *{ANIME_NAME}*![ ]({START_MEDIA})
-
-*Click on the Commands Button below to go through my commands.*
+PM_START_TEXT = """
+\n◍ I'ᴍ Kᴀᴏʀɪ Mɪʏᴀᴢᴏɴᴏ Fʀᴏᴍ Yᴏᴜʀ Lɪᴇ Iɴ Aᴘʀɪʟ
+◍ I'ᴍ Hɪɢʜʟʏ Aᴅᴠᴀɴᴄᴇ Gʀᴏᴜᴘ Mᴀɴᴀɢᴇᴍᴇɴᴛ Bᴏᴛ 
+────────────────────────
+× Uᴘᴛɪᴍᴇ: {}
+────────────────────────
+✪ Hɪᴛ /help Tᴏ Sᴇᴇ Mʏ Aᴠᴀɪʟᴀʙʟᴇ Cᴏᴍᴍᴀɴᴅs.
 """
 
 buttons = [
     [
         InlineKeyboardButton(
-            text=f" Add {bot_name} to your Group", url=f"t.me/{BOT_USERNAME}?startgroup=true"),
+            text=f"➕ Aᴅᴅ Mᴇ Tᴏ Yᴏᴜʀ Cʜᴀᴛ ➕", url=f"t.me/{BOT_USERNAME}?startgroup=true"),
     ],
     [
-        InlineKeyboardButton(text="❓About", callback_data="Shikimori_"),
-        InlineKeyboardButton(text=" 💬Commands", callback_data="help_back"),
-    ],
-    [
-        InlineKeyboardButton(text="🚨Support Grp", url=f"https://t.me/{SUPPORT_CHAT}"),
-        InlineKeyboardButton(text="❗Updates", url=f"https://t.me/{UPDATE_CHANNEL}"),
-   
+        InlineKeyboardButton(text="Sᴜᴘᴘᴏʀᴛ", url=f"https://t.me/{SUPPORT_CHAT}"),
+        InlineKeyboardButton(text="Uᴘᴅᴀᴛᴇ", url=f"https://t.me/{UPDATE_CHANNEL}"),
     ], 
+    [
+        InlineKeyboardButton(text=f"Mʏ Hᴜsʙᴀɴᴅ", url=f"t.me/{OWNER_USERNAME}?startgroup=true"),
+    ],
 ]
 
 network_name = NETWORK_USERNAME.lower()
@@ -98,8 +99,8 @@ def Shikimori_about_callback(update, context):
     elif query.data == "Shikimori_back":
         first_name = update.effective_user.first_name
         uptime = get_readable_time((time.time() - StartTime))
-        hmm = "Hello *{}*! Nice to meet you!".format(escape_markdown(first_name))
-        HMM = hmm + PM_START_TEXT
+        hmm = "◍ Hᴇʟʟᴏ *{}*!".format(escape_markdown(first_name))
+        HMM = hmm + PM_START_TEXT.format(uptime)
      
         query.message.edit_text(
                 HMM,
@@ -131,8 +132,8 @@ def git_call_back(update: Update, context: CallbackContext):
     elif query.data == "Shikimori_back":
         first_name = update.effective_user.first_name
         uptime = get_readable_time((time.time() - StartTime))
-        hmm = "Hello *{}*! Nice to meet you!".format(escape_markdown(first_name))
-        HMM = hmm + PM_START_TEXT
+        hmm = "◍ Hᴇʟʟᴏ *{}*!".format(escape_markdown(first_name))
+        HMM = hmm + PM_START_TEXT.format(uptime)
     
         query.message.edit_text(
                 HMM,
@@ -165,8 +166,8 @@ def sern_call_back(update: Update, context: CallbackContext):
     elif query.data == "Shikimori_back":
         first_name = update.effective_user.first_name
         uptime = get_readable_time((time.time() - StartTime))
-        hmm = "Hello *{}*! Nice to meet you!".format(escape_markdown(first_name))
-        HMM = hmm + PM_START_TEXT
+        hmm = "◍ Hᴇʟʟᴏ *{}*!".format(escape_markdown(first_name))
+        HMM = hmm + PM_START_TEXT.format(uptime)
     
         query.message.edit_text(
                 HMM,
@@ -197,8 +198,8 @@ def license_call_back(update: Update, context: CallbackContext):
     elif query.data == "Shikimori_back":
         first_name = update.effective_user.first_name
         uptime = get_readable_time((time.time() - StartTime))
-        hmm = "Hello *{}*! Nice to meet you!".format(escape_markdown(first_name))
-        HMM = hmm + PM_START_TEXT
+        hmm = "◍ Hᴇʟʟᴏ *{}*!".format(escape_markdown(first_name))
+        HMM = hmm + PM_START_TEXT.format(uptime)
     
         query.message.edit_text(
                 HMM,
