@@ -116,9 +116,9 @@ def home_back(update: Update, context: CallbackContext):
     query = update.callback_query
     if query.data == "home_":
         first_name = update.effective_user.first_name
-        users = f"{sql.num_users}"
+        users = f"{sql.num_users()}"
         uptime = get_readable_time((time.time() - StartTime))
-        chats = f"{sql.num_chats}"
+        chats = f"{sql.num_chats()}"
         first_name = update.effective_user.first_name
         start_text = PM_START_TEXT.format(escape_markdown(first_name), bot_name, ANIME_NAME, users, chats, uptime)
         query.message.delete()

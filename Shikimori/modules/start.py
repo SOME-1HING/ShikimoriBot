@@ -97,8 +97,8 @@ def start(update: Update, context: CallbackContext):
                 IMPORTED["rules"].send_rules(update, args[0], from_pm=True)
 
         else:
-            users = f"{sql.num_users}"
-            chats = f"{sql.num_chats}"
+            users = f"{sql.num_users()}"
+            chats = f"{sql.num_chats()}"
             first_name = update.effective_user.first_name
             start_text = PM_START_TEXT.format(escape_markdown(first_name), bot_name, ANIME_NAME, users, chats, uptime)
             try:
