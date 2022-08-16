@@ -95,6 +95,7 @@ async def upvote(_, message):
     group=karma_negative_group,
 )
 async def downvote(_, message):
+    chat_id = message.chat.id
     is_karma = sql.is_karma(chat_id)
     if not is_karma:
         return
@@ -105,7 +106,6 @@ async def downvote(_, message):
     if message.reply_to_message.from_user.id == message.from_user.id:
         return
 
-    chat_id = message.chat.id
     user_id = message.reply_to_message.from_user.id
     user_mention = message.reply_to_message.from_user.mention
     current_karma = await get_karma(chat_id, await int_to_alpha(user_id))

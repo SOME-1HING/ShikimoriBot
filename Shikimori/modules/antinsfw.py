@@ -189,7 +189,7 @@ async def del_nsfw(_, message):
     for c in chats:
         chat_id = message.chat.id
         user = message.from_user
-        if await is_admin(message.chat.id, message.from_user.id) or user.id in DRAGONS:
+        if await is_admin(chat_id, user.id) or user.id in DRAGONS:
             return
         is_nsfw = sql.is_nsfw(chat_id)
         if is_nsfw:
