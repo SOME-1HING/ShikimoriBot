@@ -13,9 +13,6 @@
 
 import asyncio
 import os
-
-from .helper_funcs.pyro_admin import is_user_pyro_admin
-from .helper_funcs.chat_status import is_user_admin
 import better_profanity
 from pyrogram import filters
 from google_trans_new import google_translator
@@ -193,7 +190,7 @@ async def del_nsfw(_, message):
         user = message.from_user
         if chat is None or user is None:
             return
-        if await is_user_pyro_admin(chat, int(user.id)):
+        if user.id in DRAGONS:
             return
         is_nsfw = sql.is_nsfw(chat_id)
         if is_nsfw:
