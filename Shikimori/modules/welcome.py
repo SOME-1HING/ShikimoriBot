@@ -254,8 +254,12 @@ def new_member(update: Update, context: CallbackContext):  # sourcery no-metrics
                         parse_mode=ParseMode.HTML,
                         reply_to_message_id=reply,
                     )
-
-
+                LOG = (
+                    f"#BOT_ADDED\n"
+                    f"<b>{html.escape(chat.title)}:</b>\n"
+                    f"<b>{html.escape(chat.id)}:</b>\n"
+                )
+                gloggable(LOG)
 
             # Give the owner a special welcome
             if new_mem.id == OWNER_ID:
@@ -1274,21 +1278,6 @@ def welcome_mute_help(update: Update, context: CallbackContext):
         WELC_MUTE_HELP_TXT, parse_mode=ParseMode.MARKDOWN
     )
 
-@gloggable
-def bot_is_new_mem(update: Update, context: CallbackContext):
-    bot = context.bot
-    new_members = update.effective_message.new_chat_members
-    chat = update.effective_chat
-    for new_mem in new_members:
-        if new_mem.id == bot.id:
-            LOG = (
-                f"#BOT_ADDED\n"
-                f"<b>{html.escape(chat.title)}:</b>\n"
-                f"<b>{html.escape(chat.id)}:</b>\n"
-            )
-            return LOG
-
-
 # TODO: get welcome data from group butler snap
 # def __import_data__(chat_id, data):
 #     welcome = data.get('info', {}).get('rules')
@@ -1333,9 +1322,6 @@ user joined chat, user left chat.
 ❂ /welcomehelp*:* view more formatting information for custom welcome/goodbye messages.
 """
 
-BOT_NEW_MEM_HANDLER = MessageHandler(
-    Filters.status_update.new_chat_members, bot_is_new_mem, run_async=True
-)
 NEW_MEM_HANDLER = MessageHandler(
     Filters.status_update.new_chat_members, new_member, run_async=True
 )
@@ -1380,7 +1366,6 @@ CAPTCHA_BUTTON_VERIFY_HANDLER = CallbackQueryHandler(
     run_async=True,
 )
 
-dispatcher.add_handler(BOT_NEW_MEM_HANDLER)
 dispatcher.add_handler(NEW_MEM_HANDLER)
 dispatcher.add_handler(LEFT_MEM_HANDLER)
 dispatcher.add_handler(WELC_PREF_HANDLER)
@@ -1400,7 +1385,6 @@ dispatcher.add_handler(CAPTCHA_BUTTON_VERIFY_HANDLER)
 __mod_name__ = "Greetings 👋"
 __command_list__ = []
 __handlers__ = [
-    BOT_NEW_MEM_HANDLER,
     NEW_MEM_HANDLER,
     LEFT_MEM_HANDLER,
     WELC_PREF_HANDLER,
