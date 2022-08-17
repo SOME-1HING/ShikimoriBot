@@ -124,8 +124,8 @@ def chatbot_msg(update: Update, context: CallbackContext):
     message = update.effective_message
     chat_id = update.effective_chat.id
     bot = context.bot
-    is_kuki = sql.is_chatbot(chat_id)
-    if not is_kuki:
+    is_chatbot = sql.is_chatbot(chat_id)
+    if not is_chatbot:
         return
 	
     if message.text and not message.document:

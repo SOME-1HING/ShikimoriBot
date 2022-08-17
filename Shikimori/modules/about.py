@@ -99,9 +99,6 @@ def git_call_back(update: Update, context: CallbackContext):
                     InlineKeyboardButton(text="Repo", url="https://github.com/SOME-1HING/ShikimoriBot"),
                     InlineKeyboardButton(text="Creator", url="https://github.com/SOME-1HING"),
                     ],
-                    [
-                    InlineKeyboardButton(text="Back", callback_data="Shikimori_"),
-                    ],
                 ]
             ),
         )
@@ -170,9 +167,6 @@ def license_call_back(update: Update, context: CallbackContext):
                 [
                     [
                     InlineKeyboardButton(text="License", url="https://github.com/SOME-1HING/ShikimoriBot/blob/master/LICENSE"),
-                    ],
-                    [
-                    InlineKeyboardButton(text="Back", callback_data="Shikimori_"),
                     ],
                 ]
             ),
