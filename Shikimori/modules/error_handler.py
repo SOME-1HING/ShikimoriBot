@@ -29,6 +29,7 @@ import io
 import random
 import sys
 import traceback
+from ..utils.pastebin import paste
 
 import pretty_errors
 import requests
@@ -106,31 +107,14 @@ def error_callback(update: Update, context: CallbackContext):
             update.effective_message.text if update.effective_message else "No message",
             tb,
         )
-        key = requests.post(
-            "https://hastebin.com/documents",
-            data=pretty_message.encode("UTF-8"),
-        )
-        print(key.content)
         e = html.escape(f"{context.error}")
-        if not key.get("key"):
-            with open("error.txt", "w+") as f:
-                f.write(pretty_message)
-            context.bot.send_document(
-                ERROR_LOG_CHANNEL,
-                open("error.txt", "rb"),
-                caption=f"#{context.error.identifier}\n<b>Your enemy's make an error for you, demon king:"
-                f"</b>\n<code>{e}</code>",
-                parse_mode="html",
-            )
-            return
-        key = key.get("key")
-        url = f"https://www.toptal.com/developers/hastebin/{key}"
+        link = paste(pretty_message)
         context.bot.send_message(
             ERROR_LOG_CHANNEL,
             text=f"#{context.error.identifier}\n<b>An Error has occurred:"
             f"</b>\n<code>{e}</code>",
             reply_markup=InlineKeyboardMarkup(
-                [[InlineKeyboardButton("See Errors", url=url)]],
+                [[InlineKeyboardButton("See Errors", url=link)]],
             ),
             parse_mode="html",
         )
