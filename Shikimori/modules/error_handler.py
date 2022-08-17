@@ -106,7 +106,10 @@ def error_callback(update: Update, context: CallbackContext):
             update.effective_message.text if update.effective_message else "No message",
             tb,
         )
-        key = requests.post("https://hastebin.com/documents").json()
+        key = requests.post(
+            "https://hastebin.com/documents",
+            data=pretty_message.encode("UTF-8"),
+        ).json()
         e = html.escape(f"{context.error}")
         if not key.get("key"):
             with open("error.txt", "w+") as f:
@@ -120,10 +123,10 @@ def error_callback(update: Update, context: CallbackContext):
             )
             return
         key = key.get("key")
-        url = f"https://hastebin.com/{key}"
-        context.bot.send_text(
+        url = f"https://www.toptal.com/developers/hastebin/{key}"
+        context.bot.send_message(
             ERROR_LOG_CHANNEL,
-            text=f"#{context.error.identifier}\n<b>Error!!:"
+            text=f"#{context.error.identifier}\n<b>Error Aagya Yash Bhai😐:"
             f"</b>\n<code>{e}</code>",
             reply_markup=InlineKeyboardMarkup(
                 [[InlineKeyboardButton("See Errors", url=url)]],
