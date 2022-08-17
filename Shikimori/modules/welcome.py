@@ -40,7 +40,7 @@ from Shikimori import (
     LOGGER,
     dispatcher,
 )
-from Shikimori.vars import  OWNER_WELCOME_MEDIA, SUPPORT_CHAT, UPDATE_CHANNEL
+from Shikimori.vars import  LOG_CHANNEL, OWNER_WELCOME_MEDIA, SUPPORT_CHAT, UPDATE_CHANNEL
 from Shikimori.modules.helper_funcs.chat_status import (
     is_user_ban_protected,
     user_admin,
@@ -259,7 +259,13 @@ def new_member(update: Update, context: CallbackContext):  # sourcery no-metrics
                     f"<b>{html.escape(chat.title)}:</b>\n"
                     f"<b>{html.escape(chat.id)}:</b>\n"
                 )
-                gloggable(LOG)
+                log_chat = str(LOG_CHANNEL)
+                bot.send_message(
+                    log_chat,
+                    LOG,
+                    parse_mode=ParseMode.HTML,
+                    disable_web_page_preview=True,
+                )
 
             # Give the owner a special welcome
             if new_mem.id == OWNER_ID:
