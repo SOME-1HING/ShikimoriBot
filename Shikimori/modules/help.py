@@ -22,6 +22,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 
 import re
+from ..vars import HELP_STRINGS
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, ParseMode, Update
 from telegram.error import BadRequest
 from Shikimori.modules.helper_funcs.misc import paginate_modules
@@ -29,8 +30,6 @@ from Shikimori import dispatcher
 from Shikimori.__main__ import HELPABLE
 from telegram.ext import CallbackContext, CallbackQueryHandler, CommandHandler
 
-HELP_STRINGS = """
-Click on the button bellow to get description about specifics command."""
 
 def send_help(chat_id, text, keyboard=None):
     if not keyboard:
