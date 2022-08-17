@@ -501,8 +501,6 @@ def lined(update, context):
 __mod_name__ = "Styletext"
 
 __help__ = """
-Here is the help for the *Style-Text* module:
-
  ❍ `/weebify` <text>: returns a weebified text
  ❍ `/bubble` <text>: bubble your text!
  ❍ `/fbuble` <text>: bubble-filled your text!
