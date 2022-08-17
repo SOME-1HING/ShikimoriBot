@@ -52,7 +52,7 @@ from Shikimori.modules.helper_funcs.string_handling import (
     escape_invalid_curly_brackets,
     markdown_parser,
 )
-from Shikimori.modules.log_channel import loggable
+from Shikimori.modules.log_channel import gloggable, loggable
 from Shikimori.modules.sql.global_bans_sql import is_user_gbanned
 from telegram import (
     ChatPermissions,
@@ -233,6 +233,29 @@ def new_member(update: Update, context: CallbackContext):  # sourcery no-metrics
                 )
                 continue
 
+            if new_mem.id == bot.id:
+                profile = context.bot.get_user_profile_photos(bot.id).photos[0][-1]
+                update.effective_message.reply_photo(
+                        profile,
+                        caption= "❤️ <b>Thanks for adding me to this group!</b>\n\n<b>Promote me as administrator of the group, to access all my commands.</b>",
+                        reply_markup=InlineKeyboardMarkup(
+                            [
+                                {
+                                    InlineKeyboardButton(
+                                        text="Support",
+                                        url=f"https://t.me/{SUPPORT_CHAT}"),
+                                    InlineKeyboardButton(
+                                        text="Updates",
+                                        url=f"https://t.me/{UPDATE_CHANNEL}",
+                                    )
+                                }
+                            ]
+                        ),
+                        parse_mode=ParseMode.HTML,
+                        reply_to_message_id=reply,
+                    )
+
+
 
             # Give the owner a special welcome
             if new_mem.id == OWNER_ID:
@@ -364,28 +387,6 @@ def new_member(update: Update, context: CallbackContext):  # sourcery no-metrics
             should_mute = False
 
         # Join welcome: soft mute
-        if new_mem.id == bot.id:
-                profile = context.bot.get_user_profile_photos(bot.id).photos[0][-1]
-                update.effective_message.reply_photo(
-                        profile,
-                        caption= "❤️ <b>Thanks for adding me to this group!</b>\n\n<b>Promote me as administrator of the group, to access all my commands.</b>",
-                        reply_markup=InlineKeyboardMarkup(
-                            [
-                                {
-                                    InlineKeyboardButton(
-                                        text="Support",
-                                        url=f"https://t.me/{SUPPORT_CHAT}"),
-                                    InlineKeyboardButton(
-                                        text="Updates",
-                                        url=f"https://t.me/{UPDATE_CHANNEL}",
-                                    )
-                                }
-                            ]
-                        ),
-                        parse_mode=ParseMode.HTML,
-                        reply_to_message_id=reply,
-                    )
-
 
         if user.id == new_mem.id and should_mute:
             if welc_mutes == "soft":
@@ -1273,6 +1274,20 @@ def welcome_mute_help(update: Update, context: CallbackContext):
         WELC_MUTE_HELP_TXT, parse_mode=ParseMode.MARKDOWN
     )
 
+@gloggable
+def bot_is_new_mem(update: Update, context: CallbackContext):
+    bot = context.bot
+    new_members = update.effective_message.new_chat_members
+    chat = update.effective_chat
+    for new_mem in new_members:
+        if new_mem.id == bot.id:
+            LOG = (
+                f"#BOT_ADDED\n"
+                f"<b>{html.escape(chat.title)}:</b>\n"
+                f"<b>{html.escape(chat.id)}:</b>\n"
+            )
+            return LOG
+
 
 # TODO: get welcome data from group butler snap
 # def __import_data__(chat_id, data):
@@ -1318,6 +1333,9 @@ user joined chat, user left chat.
 ❂ /welcomehelp*:* view more formatting information for custom welcome/goodbye messages.
 """
 
+BOT_NEW_MEM_HANDLER = MessageHandler(
+    Filters.status_update.new_chat_members, bot_is_new_mem, run_async=True
+)
 NEW_MEM_HANDLER = MessageHandler(
     Filters.status_update.new_chat_members, new_member, run_async=True
 )
@@ -1362,6 +1380,7 @@ CAPTCHA_BUTTON_VERIFY_HANDLER = CallbackQueryHandler(
     run_async=True,
 )
 
+dispatcher.add_handler(BOT_NEW_MEM_HANDLER)
 dispatcher.add_handler(NEW_MEM_HANDLER)
 dispatcher.add_handler(LEFT_MEM_HANDLER)
 dispatcher.add_handler(WELC_PREF_HANDLER)
@@ -1381,6 +1400,7 @@ dispatcher.add_handler(CAPTCHA_BUTTON_VERIFY_HANDLER)
 __mod_name__ = "Greetings 👋"
 __command_list__ = []
 __handlers__ = [
+    BOT_NEW_MEM_HANDLER,
     NEW_MEM_HANDLER,
     LEFT_MEM_HANDLER,
     WELC_PREF_HANDLER,

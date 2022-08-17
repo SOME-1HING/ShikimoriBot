@@ -36,12 +36,13 @@ from telegram.utils.helpers import mention_html
 
 from Shikimori.modules.helper_funcs.chat_status import user_admin, user_admin_no_reply
 from Shikimori import  dispatcher
-from Shikimori.modules.log_channel import loggable
+from Shikimori.modules.log_channel import gloggable, loggable
 
 bot_name = f"{dispatcher.bot.first_name}"
 
 @user_admin_no_reply
 @loggable
+@gloggable
 def karma_status(update: Update, context: CallbackContext):
     query= update.callback_query
     bot = context.bot
@@ -68,7 +69,7 @@ def karma_status(update: Update, context: CallbackContext):
                 f"{bot_name} Karma System Enabled by {mention_html(user.id, user.first_name)}.",
                 parse_mode=ParseMode.HTML,
             )
-            return
+            return LOG
         elif is_chatbot:
             return update.effective_message.edit_text(
                 f"{bot_name} Karma System Already Enabled.",
@@ -101,7 +102,7 @@ def karma_status(update: Update, context: CallbackContext):
                 f"{bot_name} Karma System disabled by {mention_html(user.id, user.first_name)}.",
                 parse_mode=ParseMode.HTML,
             )
-            return
+            return LOG
         elif not is_chatbot:
             return update.effective_message.edit_text(
                 f"{bot_name} Karma System Already Disabled.",

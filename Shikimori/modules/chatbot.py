@@ -2,7 +2,6 @@
 
 import json
 import html
-from typing import Optional
 import requests
 from Shikimori.modules.sql import log_channel_sql as logsql
 import Shikimori.modules.sql.chatbot_sql as sql
@@ -10,18 +9,19 @@ from Shikimori.vars import AI_API_KEY as api
 
 from time import sleep
 from telegram import ParseMode
-from telegram import ( Chat, InlineKeyboardButton,
+from telegram import (InlineKeyboardButton,
                       InlineKeyboardMarkup, ParseMode, Update)
 from telegram.ext import (CallbackContext, CallbackQueryHandler, CommandHandler, Filters, MessageHandler)
 from telegram.utils.helpers import mention_html
 from Shikimori.modules.helper_funcs.chat_status import user_admin, user_admin_no_reply
 from Shikimori import  dispatcher
-from Shikimori.modules.log_channel import loggable
+from Shikimori.modules.log_channel import gloggable, loggable
 
 bot_name = f"{dispatcher.bot.first_name}"
 
 @user_admin_no_reply
 @loggable
+@gloggable
 def chatbot_status(update: Update, context: CallbackContext):
     query= update.callback_query
     bot = context.bot
@@ -48,7 +48,7 @@ def chatbot_status(update: Update, context: CallbackContext):
                 f"{bot_name} Chatbot Enabled by {mention_html(user.id, user.first_name)}.",
                 parse_mode=ParseMode.HTML,
             )
-            return
+            return LOG
         elif is_chatbot:
             return update.effective_message.edit_text(
                 f"{bot_name} Chatbot Already Enabled.",
@@ -81,7 +81,7 @@ def chatbot_status(update: Update, context: CallbackContext):
                 f"{bot_name} Chatbot disabled by {mention_html(user.id, user.first_name)}.",
                 parse_mode=ParseMode.HTML,
             )
-            return
+            return LOG
         elif not is_chatbot:
             return update.effective_message.edit_text(
                 f"{bot_name} Chatbot Already Disabled.",
