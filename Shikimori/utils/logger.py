@@ -47,4 +47,4 @@ logger.add(
     diagnose=True,
     level="INFO",
 )
-log.info("Enabled logging intro bot.log file.")
+log.info("Enabled logging intro bot_logs.txt file.")

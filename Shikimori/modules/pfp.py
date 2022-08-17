@@ -74,4 +74,4 @@ if 1 == 1:
                     await event.edit("<code>No photo found with that id</code>")
                     return
         except:
-            await borg.send_text("Reply to user mate")
+            await borg.send_message("Reply to user mate")

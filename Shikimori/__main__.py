@@ -214,7 +214,7 @@ def main():
                 parse_mode=ParseMode.MARKDOWN
                 )
             else:
-                msg = dispatcher.bot.send_text(
+                msg = dispatcher.bot.send_message(
                 f"@{SUPPORT_CHAT}",
                 "👋 Hi, i'm alive.",
                 parse_mode=ParseMode.MARKDOWN
