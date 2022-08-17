@@ -66,7 +66,7 @@ class ErrorsDict(dict):
 errors = ErrorsDict()
 
 
-def error_callback(update: Update, context: CallbackContext):
+async def error_callback(update: Update, context: CallbackContext):
     if not update:
         return
     if context.error not in errors:
@@ -108,8 +108,8 @@ def error_callback(update: Update, context: CallbackContext):
             tb,
         )
         e = html.escape(f"{context.error}")
-        link = paste(pretty_message)
-        context.bot.send_message(
+        link = await paste(pretty_message)
+        await context.bot.send_message(
             ERROR_LOG_CHANNEL,
             text=f"#{context.error.identifier}\n<b>An Error has occurred:"
             f"</b>\n<code>{e}</code>",
