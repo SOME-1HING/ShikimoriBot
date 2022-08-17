@@ -33,7 +33,7 @@ from telegram.ext import CommandHandler
 
 import Shikimori.modules.sql.notes_sql as sql
 from Shikimori import dispatcher, LOGGER, OWNER_ID
-from Shikimori.vars import JOIN_LOGGER, SUPPORT_CHAT
+from Shikimori.vars import LOG_CHANNEL, SUPPORT_CHAT
 from Shikimori.__main__ import DATA_IMPORT
 from Shikimori.modules.helper_funcs.chat_status import user_admin
 from Shikimori.modules.helper_funcs.alternate import typing_action
@@ -366,7 +366,7 @@ def export_data(update, context):
     tgl = time.strftime("%H:%M:%S - %d/%m/%Y", time.localtime(time.time()))
     try:
         context.bot.sendMessage(
-            JOIN_LOGGER,
+            LOG_CHANNEL,
             "*Successfully imported backup:*\nChat: `{}`\nChat ID: `{}`\nOn: `{}`".format(
                 chat.title,
                 chat_id,

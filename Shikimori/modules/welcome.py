@@ -40,7 +40,7 @@ from Shikimori import (
     LOGGER,
     dispatcher,
 )
-from Shikimori.vars import  JOIN_LOGGER, LOG_CHANNEL, OWNER_WELCOME_MEDIA, SUPPORT_CHAT, UPDATE_CHANNEL
+from Shikimori.vars import LOG_CHANNEL, OWNER_WELCOME_MEDIA, SUPPORT_CHAT, UPDATE_CHANNEL
 from Shikimori.modules.helper_funcs.chat_status import (
     is_user_ban_protected,
     user_admin,
@@ -254,16 +254,6 @@ def new_member(update: Update, context: CallbackContext):  # sourcery no-metrics
                         parse_mode=ParseMode.HTML,
                         reply_to_message_id=reply,
                     )
-                LOG = (
-                    f"#BOT_ADDED\n"
-                    f"<b>{html.escape(chat.title)}:</b>\n"
-                    f"<b>{html.escape(chat.id)}:</b>\n"
-                )
-                context.bot.sendMessage(
-                    JOIN_LOGGER,
-                    LOG,
-                    parse_mode=ParseMode.HTML,
-                )
 
             # Give the owner a special welcome
             if new_mem.id == OWNER_ID:

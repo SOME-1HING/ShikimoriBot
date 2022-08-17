@@ -12,7 +12,6 @@ if ENV:
         raise Exception("Your OWNER_ID env variable is not a valid integer.")
      
     ERROR_LOG_CHANNEL = os.environ.get("ERROR_LOG_CHANNEL", None)
-    JOIN_LOGGER = os.environ.get("JOIN_LOGGER", None)
     OWNER_USERNAME = os.environ.get("OWNER_USERNAME", None)
 
     try:
@@ -106,8 +105,6 @@ else:
         OWNER_ID = int(Config.OWNER_ID)
     except ValueError:
         raise Exception("Your OWNER_ID variable is not a valid integer.")
-
-    JOIN_LOGGER = Config.JOIN_LOGGER
     ERROR_LOG_CHANNEL = Config.ERROR_LOG_CHANNEL
     OWNER_USERNAME = Config.OWNER_USERNAME
 

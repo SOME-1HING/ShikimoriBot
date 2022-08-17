@@ -21,9 +21,6 @@ class Config(object):
     OWNER_ID = 1606221784  # If you dont know, run the bot and do /id in your private chat with it, also an integer
     OWNER_USERNAME = "SOME1HING"
     SUPPORT_CHAT = "tyranteyeeee"  # Your own group for support, do not add the @
-    JOIN_LOGGER = (
-        -1001432609692
-    )  # Prints any new group the bot is added to, prints just the name and ID.
     LOG_CHANNEL = (
         -1001150905176
     )  # Prints information like gbans, sudo promotes, AI enabled disable states that may help in debugging and shit

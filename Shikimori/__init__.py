@@ -41,7 +41,6 @@ from telethon.sessions import MemorySession
 
 
 StartTime = time.time()
-USE_JOIN_LOGGER = True
 
 # enable logging
 FORMAT = "[Shikimori] %(message)s"

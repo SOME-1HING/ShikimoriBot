@@ -13,6 +13,7 @@
 
 import asyncio
 import os
+from .helper_funcs.chat_status import is_user_admin
 import better_profanity
 from pyrogram import filters
 from google_trans_new import google_translator
@@ -185,12 +186,12 @@ async def del_nsfw(_, message):
         return
     chats = antinsfw_chats.find({})
     for c in chats:
-        chat_id = message.chat.id
+        chat = message.chat
+        chat_id = chat.id
         user = message.from_user
         if user.id in DRAGONS:
             return
-        member = await pbot.get_chat_member(chat_id, user.id).status
-        if member in {"administrator", "creator"}:
+        if is_user_admin(chat, int(user.id)):
             return
         is_nsfw = sql.is_nsfw(chat_id)
         if is_nsfw:

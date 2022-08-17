@@ -31,7 +31,7 @@ from typing import Optional
 
 import Shikimori.modules.sql.notes_sql as sql
 from Shikimori import LOGGER, dispatcher, DRAGONS
-from Shikimori.vars import JOIN_LOGGER, SUPPORT_CHAT
+from Shikimori.vars import LOG_CHANNEL, SUPPORT_CHAT
 from Shikimori.modules.disable import DisableAbleCommandHandler
 from Shikimori.modules.helper_funcs.handlers import MessageHandlerChecker
 from Shikimori.modules.helper_funcs.chat_status import user_admin, connection_status
@@ -97,11 +97,11 @@ def get(update, context, notename, show_none=True, no_format=False):
         else:
             reply_id = message.message_id
         if note.is_reply:
-            if JOIN_LOGGER:
+            if LOG_CHANNEL:
                 try:
                     bot.forward_message(
                         chat_id=chat_id,
-                        from_chat_id=JOIN_LOGGER,
+                        from_chat_id=LOG_CHANNEL,
                         message_id=note.value,
                     )
                 except BadRequest as excp:
