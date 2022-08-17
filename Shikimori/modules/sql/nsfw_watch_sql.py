@@ -2,20 +2,23 @@ from Shikimori.mongo import db
 
 Nsfwatchdb = db.Nsfwatch
 
-def is_nsfwatch_indb(chat_id: int) -> bool:
+def is_nsfwatch_indb(chat_id):
     nsfwm = Nsfwatchdb.find_one({"chat_id": chat_id})
-    if nsfwm:
+    if not nsfwm:
+        return False
+    else:
         return True
-    return False
 
-def add_nsfwatch(chat_id):
+def add_nsfwm(chat_id):
     nsfwm = is_nsfwatch_indb(chat_id)
     if nsfwm:
         return
-    return Nsfwatchdb.insert_one({"chat_id": chat_id})
+    else:
+        return Nsfwatchdb.insert_one({"chat_id": chat_id})
 
-def rmnsfwatch(chat_id):
+def rm_nsfwm(chat_id):
     nsfwm = is_nsfwatch_indb(chat_id)
     if not nsfwm:
         return
-    return Nsfwatchdb.delete_one({"chat_id": chat_id})
+    else:
+        return Nsfwatchdb.delete_one({"chat_id": chat_id})

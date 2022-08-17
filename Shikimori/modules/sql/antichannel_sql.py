@@ -28,20 +28,23 @@ from Shikimori.mongo import db
 
 antichanneldb = db.antichannel
 
-def antichannel_status(chat_id: int) -> bool:
-    chat = antichanneldb.find_one({"chat_id": chat_id})
-    if not chat:
+def antichannel_status(chat_id):
+    is_achannel = antichanneldb.find_one({"chat_id": chat_id})
+    if not is_achannel:
         return False
-    return True
+    else:
+        return True
 
 def enable_antichannel(chat_id):
     is_achannel = antichannel_status(chat_id)
     if is_achannel:
         return
-    return antichanneldb.insert_one({"chat_id": chat_id})
+    else:
+        return antichanneldb.insert_one({"chat_id": chat_id})
 
 def disable_antichannel(chat_id):
     is_achannel = antichannel_status(chat_id)
     if not is_achannel:
         return
-    return antichanneldb.delete_one({"chat_id": chat_id})
+    else:
+        return antichanneldb.delete_one({"chat_id": chat_id})
