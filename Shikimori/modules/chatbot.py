@@ -27,7 +27,7 @@ def chatbot_status(update: Update, context: CallbackContext):
     bot = context.bot
     user = update.effective_user
     if query.data == "add_chatbot":
-        chat: Optional[Chat] = update.effective_chat
+        chat = update.effective_chat
         is_chatbot = sql.is_chatbot(chat.id)
         if not is_chatbot:
             is_chatbot = sql.add_chatbot(user.id)
@@ -38,7 +38,7 @@ def chatbot_status(update: Update, context: CallbackContext):
             )
             log_channel = logsql.get_chat_log_channel(chat.id)
             if log_channel:
-                return bot.send_message(
+                bot.send_message(
                 log_channel,
                 LOG,
                 parse_mode=ParseMode.HTML,
@@ -60,7 +60,7 @@ def chatbot_status(update: Update, context: CallbackContext):
                 parse_mode=ParseMode.HTML,
             )
     elif query.data == "rem_chatbot":
-        chat: Optional[Chat] = update.effective_chat
+        chat = update.effective_chat
         is_chatbot = sql.is_chatbot(chat.id)
         if is_chatbot:
             is_chatbot = sql.rm_chatbot(user.id)
@@ -71,7 +71,7 @@ def chatbot_status(update: Update, context: CallbackContext):
             )
             log_channel = logsql.get_chat_log_channel(chat.id)
             if log_channel:
-                return bot.send_message(
+                bot.send_message(
                 log_channel,
                 LOG,
                 parse_mode=ParseMode.HTML,
@@ -101,11 +101,11 @@ def chatbot(update: Update, context: CallbackContext):
     keyboard = InlineKeyboardMarkup([[
         InlineKeyboardButton(
             text="Enable",
-            callback_data="add_chatbot")],
+            callback_data=r"add_chatbot")],
        [
         InlineKeyboardButton(
             text="Disable",
-            callback_data="rem_chatbot")]])
+            callback_data=r"rem_chatbot")]])
     message.reply_text(
         msg,
         reply_markup=keyboard,

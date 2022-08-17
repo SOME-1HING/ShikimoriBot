@@ -25,7 +25,7 @@ import time
 from Shikimori.modules.helper_funcs.readable_time import get_readable_time
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, ParseMode, Update
 from telegram.utils.helpers import escape_markdown
-from telegram.ext import CallbackContext, CallbackQueryHandler
+from telegram.ext import CallbackContext, CallbackQueryHandler, CommandHandler
 from Shikimori.vars import ANIME_NAME, BOT_USERNAME, NETWORK, NETWORK_USERNAME, PM_START_TEXT, START_MEDIA, SUPPORT_CHAT, UPDATE_CHANNEL
 from Shikimori import StartTime, dispatcher
 import Shikimori.modules.sql.users_sql as sql
@@ -38,16 +38,11 @@ start_id = IMG_START[-1]
 buttons = [
     [
         InlineKeyboardButton(
-            text=f" Add {bot_name} to your Group", url=f"t.me/{BOT_USERNAME}?startgroup=true"),
+            text=f"➕ Aᴅᴅ Mᴇ Tᴏ Yᴏᴜʀ Cʜᴀᴛ ➕", url=f"t.me/{BOT_USERNAME}?startgroup=true"),
     ],
     [
-        InlineKeyboardButton(text="❓About", callback_data="Shikimori_"),
-        InlineKeyboardButton(text=" 💬Commands", callback_data="help_back"),
-    ],
-    [
-        InlineKeyboardButton(text="🚨Support Grp", url=f"https://t.me/{SUPPORT_CHAT}"),
-        InlineKeyboardButton(text="❗Updates", url=f"https://t.me/{UPDATE_CHANNEL}"),
-   
+        InlineKeyboardButton(text="Sᴜᴘᴘᴏʀᴛ", url=f"https://t.me/{SUPPORT_CHAT}"),
+        InlineKeyboardButton(text="Uᴘᴅᴀᴛᴇ", url=f"https://t.me/{UPDATE_CHANNEL}"),   
     ], 
 ]
 
@@ -63,35 +58,33 @@ try:
 except:
     HMMM = None
 
-def Shikimori_about_callback(update, context):
-    query = update.callback_query
-    if query.data == "Shikimori_":
-        query.message.edit_text(
-            text=f"๏ I'm *{bot_name}*, a powerful group management bot built to help you manage your group easily."
-            "\n• I can restrict users."
-            "\n• I can greet users with customizable welcome messages and even set a group's rules."
-            "\n• I have an advanced anti-flood system."
-            "\n• I can warn users until they reach max warns, with each predefined actions such as ban, mute, kick, etc."
-            "\n• I have a note keeping system, blacklists, and even predetermined replies on certain keywords."
-            "\n• I check for admins' permissions before executing any command and more stuffs",
-            parse_mode=ParseMode.MARKDOWN,
-            disable_web_page_preview=True,
-            reply_markup=InlineKeyboardMarkup(
+def Shikimori_about_callback(update: Update, context: CallbackContext):
+    update.effective_message.reply_text(
+        text=f"๏ I'm *{bot_name}*, a powerful group management bot built to help you manage your group easily."
+        "\n• I can restrict users."
+        "\n• I can greet users with customizable welcome messages and even set a group's rules."
+        "\n• I have an advanced anti-flood system."
+        "\n• I can warn users until they reach max warns, with each predefined actions such as ban, mute, kick, etc."
+        "\n• I have a note keeping system, blacklists, and even predetermined replies on certain keywords."
+        "\n• I check for admins' permissions before executing any command and more stuffs",
+        parse_mode=ParseMode.MARKDOWN,
+        disable_web_page_preview=True,
+        reply_markup=InlineKeyboardMarkup(
+            [
                 [
-                    [
-                    InlineKeyboardButton(text="Github", callback_data="github_"),
-                    InlineKeyboardButton(text="License", callback_data="license_"),
-                    ],
-                    [
-                    HMMM,
-                    InlineKeyboardButton(text="Documentation", url="https://some1hing.gitbook.io/shikimori-bot/"),
-                    ],
-                    [
-                    InlineKeyboardButton(text="Back", callback_data="home_"),
-                    ],
-                ]
-            ),
-        )
+                InlineKeyboardButton(text="Github", callback_data="github_"),
+                InlineKeyboardButton(text="License", callback_data="license_"),
+                ],
+                [
+                HMMM,
+                InlineKeyboardButton(text="Documentation", url="https://some1hing.gitbook.io/shikimori-bot/"),
+                ],
+                [
+                InlineKeyboardButton(text="Back", callback_data="home_"),
+                ],
+            ]
+        ),
+    )
 
 def git_call_back(update: Update, context: CallbackContext):
     query = update.callback_query
@@ -185,8 +178,8 @@ def license_call_back(update: Update, context: CallbackContext):
             ),
         )
 
-about_callback_handler = CallbackQueryHandler(
-        Shikimori_about_callback, pattern=r"Shikimori_", run_async=True
+about_callback_handler = CommandHandler(
+        "about", Shikimori_about_callback, run_async=True
     )
 license_call_back_handler = CallbackQueryHandler(
     license_call_back, pattern=r"license_", run_async=True

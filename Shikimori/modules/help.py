@@ -110,9 +110,8 @@ def help_button(update, context):
 def get_help(update: Update, context: CallbackContext):
     chat = update.effective_chat  # type: Optional[Chat]
     args = update.effective_message.text.split(None, 1)
-    query = update.callback_query
     # ONLY send help in PM
-    if chat.type != chat.PRIVATE or query.data =="send_help":
+    if chat.type != chat.PRIVATE:
         if len(args) >= 2 and any(args[1].lower() == x for x in HELPABLE):
             module = args[1].lower()
             update.effective_message.reply_text(
@@ -171,4 +170,3 @@ help_callback_handler = CallbackQueryHandler(
 )
 dispatcher.add_handler(help_handler)
 dispatcher.add_handler(help_callback_handler)
-dispatcher.add_handler(CallbackQueryHandler(get_help, pattern="send_help", run_async=True))
