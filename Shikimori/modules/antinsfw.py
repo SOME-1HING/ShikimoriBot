@@ -191,6 +191,8 @@ async def del_nsfw(_, message):
         chat = message.chat
         chat_id = chat.id
         user = message.from_user
+        if chat == None or user.id == None:
+            return
         if await is_user_pyro_admin(chat, int(user.id)):
             return
         is_nsfw = sql.is_nsfw(chat_id)
