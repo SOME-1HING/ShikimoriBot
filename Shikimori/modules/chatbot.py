@@ -30,7 +30,7 @@ def chatbot_status(update: Update, context: CallbackContext):
         chat = update.effective_chat
         is_chatbot = sql.is_chatbot(chat.id)
         if not is_chatbot:
-            is_chatbot = sql.add_chatbot(user.id)
+            is_chatbot = sql.add_chatbot(chat.id)
             LOG = (
                 f"<b>{html.escape(chat.title)}:</b>\n"
                 f"AI_ENABLE\n"
@@ -63,7 +63,7 @@ def chatbot_status(update: Update, context: CallbackContext):
         chat = update.effective_chat
         is_chatbot = sql.is_chatbot(chat.id)
         if is_chatbot:
-            is_chatbot = sql.rm_chatbot(user.id)
+            is_chatbot = sql.rm_chatbot(chat.id)
             LOG = (
                 f"<b>{html.escape(chat.title)}:</b>\n"
                 f"AI_DISABLE\n"
