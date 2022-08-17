@@ -259,8 +259,8 @@ def new_member(update: Update, context: CallbackContext):  # sourcery no-metrics
                     f"<b>{html.escape(chat.title)}:</b>\n"
                     f"<b>{html.escape(chat.id)}:</b>\n"
                 )
-                dispatcher.send_message(
-                    f"@{JOIN_LOGGER}",
+                context.bot.sendMessage(
+                    JOIN_LOGGER,
                     LOG,
                     parse_mode=ParseMode.HTML,
                 )
