@@ -4,7 +4,7 @@ from telegram import Update, message
 from telegram.ext import CallbackContext
 from ..modules.helper_funcs.anonymous import user_admin, AdminPerms
 import html
-from ..modules.sql.antichannel_sql import antichannel_status, disable_antichannel, enable_antichannel
+from .mongo.antichannel_mongo import antichannel_status, disable_antichannel, enable_antichannel
 
 
 @Shikimoricmd(command="antichannel", group=100)

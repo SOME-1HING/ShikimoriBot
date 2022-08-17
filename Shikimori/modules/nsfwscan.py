@@ -33,7 +33,7 @@ from Shikimori import DEV_USERS, arq, pbot
 from Shikimori.vars import BOT_USERNAME
 from Shikimori.utils.errors import capture_err
 from .helper_funcs.anonymous import user_admin
-import Shikimori.modules.sql_2.nsfw_sql as sql
+import Shikimori.modules.mongo.nsfw_mongo as sql
 
 async def get_file_id_from_message(message):
     file_id = None

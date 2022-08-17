@@ -27,7 +27,7 @@ import asyncio
 from pyrogram import filters
 
 from Shikimori import DRAGONS, pbot as app
-import Shikimori.modules.sql.karma_sql as sql
+import Shikimori.modules.mongo.karma_mongo as sql
 from Shikimori.ex_plugins.dbfunctions import (
     alpha_to_int,
     get_karma,

@@ -25,7 +25,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 
-import Shikimori.modules.sql.karma_sql as ksql
+import Shikimori.modules.mongo.karma_mongo as ksql
 from Shikimori.modules.sql import log_channel_sql as logsql
 import html
 from telegram import ParseMode
