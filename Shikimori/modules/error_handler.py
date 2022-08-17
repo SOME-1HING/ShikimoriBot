@@ -109,7 +109,8 @@ def error_callback(update: Update, context: CallbackContext):
         key = requests.post(
             "https://hastebin.com/documents",
             data=pretty_message.encode("UTF-8"),
-        ).json()
+        )
+        print(key.content)
         e = html.escape(f"{context.error}")
         if not key.get("key"):
             with open("error.txt", "w+") as f:
