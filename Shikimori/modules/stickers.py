@@ -522,7 +522,10 @@ async def handler(event):
     meme = await drawText(file, text)
     await bot.send_file(event.chat_id, file=meme, force_document=False)   
     await msg.delete()    
-    os.remove(meme)
+    try:
+        os.remove(meme)
+    except:
+        return
 
 
 
