@@ -24,6 +24,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 
+import asyncio
 import html
 import io
 import random
@@ -66,7 +67,7 @@ class ErrorsDict(dict):
 errors = ErrorsDict()
 
 
-async def error_callback(update: Update, context: CallbackContext):
+def error_callback(update: Update, context: CallbackContext):
     if not update:
         return
     if context.error not in errors:
@@ -108,8 +109,8 @@ async def error_callback(update: Update, context: CallbackContext):
             tb,
         )
         e = html.escape(f"{context.error}")
-        link = await paste(pretty_message)
-        await context.bot.send_message(
+        link = asyncio.run(paste(pretty_message))
+        context.bot.send_message(
             ERROR_LOG_CHANNEL,
             text=f"#{context.error.identifier}\n<b>An Error has occurred:"
             f"</b>\n<code>{e}</code>",
