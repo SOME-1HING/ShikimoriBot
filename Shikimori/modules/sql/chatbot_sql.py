@@ -27,7 +27,7 @@ def is_chatbot(chat_id):
     rget = REDIS.get(f'is_chatbot_{chat_id}')
     return bool(rget)
 
-def add_chatbot(chat_id, reason):
+def add_chatbot(chat_id):
     REDIS.set(f'is_chatbot_{chat_id}')
 
 def rm_chatbot(chat_id):
