@@ -186,12 +186,9 @@ def unmute(update: Update, context: CallbackContext) -> str:
             bot.restrict_chat_member(chat.id, int(user_id), chat_permissions)
         except BadRequest:
             pass
-        bot.sendMessage(
-        chat.id,
-        "{} [<code>{}</code>] Was 🔊 Unmuted.\n\nReason: <code>{}</code>".format(
-            mention_html(member.user.first_name), member.user.id, reason
-        ),
-        parse_mode=ParseMode.HTML,
+        update.effective_message.reply_text(
+            f"{mention_html(member.user.id, member.user.first_name)} [<code>{member.user.id}</code>] Now can 🔊 speak again.",
+            parse_mode=ParseMode.HTML,
         )
         return (
             f"<b>{html.escape(chat.title)}:</b>\n"
