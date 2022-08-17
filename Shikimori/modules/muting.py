@@ -188,8 +188,8 @@ def unmute(update: Update, context: CallbackContext) -> str:
             pass
         bot.sendMessage(
         chat.id,
-        "{} [<code>{}</code>] {} Was 🔊 Unmuted.\n\nReason: <code>{}</code>".format(
-            mention_html(member.user.id, member.user.first_name), member.user.id, reason
+        "{} [<code>{}</code>] Was 🔊 Unmuted.\n\nReason: <code>{}</code>".format(
+            mention_html(member.user.first_name), member.user.id, reason
         ),
         parse_mode=ParseMode.HTML,
         )

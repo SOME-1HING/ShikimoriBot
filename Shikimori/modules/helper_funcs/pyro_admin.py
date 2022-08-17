@@ -9,7 +9,6 @@ from pyrogram.types import Chat, ChatMember
 from pyrogram import enums
 from Shikimori import pbot
 
-# stores admemes in memory for 10 min.
 ADMIN_CACHE = TTLCache(maxsize=512, ttl=60 * 10, timer=perf_counter)
 THREAD_LOCK = RLock()
 
