@@ -24,7 +24,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 
-from Shikimori import REDIS
+from Shikimori.modules.redis import REDIS
 
 # AFK
 def is_user_afk(userid):
