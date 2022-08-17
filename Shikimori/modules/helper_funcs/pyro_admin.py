@@ -24,7 +24,7 @@ async def is_user_pyro_admin(chat: Chat, user_id: int, member: ChatMember = None
     if not member:
         with THREAD_LOCK:
             try:
-                return await user_id in ADMIN_CACHE[chat.id]
+                return user_id in ADMIN_CACHE[chat.id]
             except KeyError:
                 chat_admins = await pbot.get_chat_members(chat.id, filter=enums.ChatMembersFilter.ADMINISTRATORS)
                 admin_list = [x.user.id async for x in chat_admins]
