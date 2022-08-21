@@ -11,6 +11,12 @@
     
    "logo":    "https://i.imgur.com/1bgC3Yb.jpg",  
    "repository": "https://github.com/SOME-1HING/ShikimoriBot",
+   "formation": {
+    "web": {
+      "quantity": 1,
+      "size": "free"
+    }
+   },
    "buildpacks": [
     {
       "url": "https://github.com/heroku/heroku-buildpack-python"
@@ -224,3 +230,4 @@
       }
    }  
 }
+
