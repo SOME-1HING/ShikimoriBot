@@ -5,7 +5,7 @@ from telegram.ext import CommandHandler
 from Shikimori.vars import OWNER_ID, TOKEN
 from Shikimori import dispatcher, updater
 
-PORT = 8433
+PORT = '8443'
 
 def logg(m):
   m.forward(OWNER_ID)
