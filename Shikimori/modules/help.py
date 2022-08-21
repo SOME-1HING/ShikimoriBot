@@ -29,11 +29,10 @@ from Shikimori import dispatcher
 from Shikimori.__main__ import HELPABLE
 from telegram.ext import CallbackContext, CallbackQueryHandler, CommandHandler
 
-HELP_STRINGS = """
-Gᴏᴊᴏ神 Here with
+HELP_STRINGS = """Gᴏᴊᴏ神 Here with
 AI Chatbot, Anime, Music, Notes, Filters, NSFW and more!
  All commands can either be used with / or !.
- Reach out for support: @gojo_support Oᴡɴᴇʀ: @Mr_nack_nack ."""
+ Reach out for support: @gojo_support Oᴡɴᴇʀ: @Mr_nack_nack."""
 
 def send_help(chat_id, text, keyboard=None):
     if not keyboard:
