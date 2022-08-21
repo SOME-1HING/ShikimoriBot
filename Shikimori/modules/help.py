@@ -29,7 +29,7 @@ from Shikimori import dispatcher
 from Shikimori.__main__ import HELPABLE
 from telegram.ext import CallbackContext, CallbackQueryHandler, CommandHandler
 
-HELP_STRINGS = """Click on the button bellow to get description about specifics command.."""
+HELP_STRINGS = """Click on the button bellow to get description about specifics command."""
 
 def send_help(chat_id, text, keyboard=None):
     if not keyboard:
