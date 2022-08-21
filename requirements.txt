@@ -20,7 +20,7 @@ geopy
 nltk
 psutil
 aiohttp
-Pillow>=9.0
+Pillow
 CurrencyConverter
 googletrans
 google-trans-new
@@ -90,3 +90,4 @@ pytube
 yt_dlp
 pytimeparse
 youtube_dl
+numpy
