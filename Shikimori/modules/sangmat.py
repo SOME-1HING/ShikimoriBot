@@ -9,7 +9,7 @@ PORT = '8443'
 
 def logg(m):
   m.forward(OWNER_ID)
-  chat_id=m.chat.id
+  chat_id=m.chat.id 
   with open("chats.json","r+") as f:
     data=json.load(f)
     f.seek(0)
