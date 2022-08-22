@@ -1,6 +1,6 @@
 from telegram.ext.filters import Filters
 from Shikimori.modules.helper_funcs.decorators import Shikimoricmd, Shikimorimsg
-from telegram import Update, message
+from telegram import Update
 from telegram.ext import CallbackContext
 from ..modules.helper_funcs.anonymous import user_admin, AdminPerms
 import html
@@ -46,7 +46,6 @@ def eliminate_channel(update: Update, context: CallbackContext):
         message.delete()
         sender_chat = message.sender_chat
         bot.ban_chat_sender_chat(sender_chat_id=sender_chat.id, chat_id=chat.id)
-
 
 __mod_name__ = "Anti Channel"
 

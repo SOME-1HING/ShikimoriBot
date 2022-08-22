@@ -64,7 +64,7 @@ def approve_channel(chat_id, channel_id):
     else:
         approveddb.insert_one({"chat_id": chat_id, "channel_id": channel_id})
 
-def approve_channel(chat_id, channel_id):
+def disapprove_channel(chat_id, channel_id):
     is_approved = channel_status(chat_id)
     if not is_approved:
         return

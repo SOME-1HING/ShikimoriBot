@@ -28,6 +28,7 @@ import html
 from Shikimori.modules.disable import DisableAbleCommandHandler
 from Shikimori import dispatcher, DRAGONS
 from Shikimori.modules.helper_funcs.extraction import extract_user
+from Shikimori.modules.mongo.antichannel_mongo import approve_channel, channel_status, disapprove_channel
 from telegram.ext import CallbackContext, CallbackQueryHandler, Filters
 import Shikimori.modules.sql_2.approve_sql as sql
 from Shikimori.modules.helper_funcs.chat_status import user_admin
@@ -51,6 +52,19 @@ def approve(update, context):
             "I don't know who you're talking about, you're going to need to specify a user!",
         )
         return ""
+    if chat.type == chat.CHANNEL:
+        if channel_status(chat.id, user.id):
+            message.reply_text(
+                f"[{user.first_name}](tg://user?id={user.id}) is already approved in {chat_title}",
+                parse_mode=ParseMode.MARKDOWN,
+            )
+            return ""
+        approve_channel(chat.id, user.id)
+        message.reply_text(
+            f"[{user.first_name}](tg://user?id={user.id}) has been approved in {chat_title}! The message from this channel will no loger be deleted.",
+            parse_mode=ParseMode.MARKDOWN,
+        )
+        return ""
     try:
         member = chat.get_member(user_id)
     except BadRequest:
@@ -70,7 +84,7 @@ def approve(update, context):
     message.reply_text(
         f"[{member.user['first_name']}](tg://user?id={member.user['id']}) has been approved in {chat_title}! They will now be ignored by automated admin actions like locks, blocklists, and antiflood.",
         parse_mode=ParseMode.MARKDOWN,
-    )
+    )   
     log_message = (
         f"<b>{html.escape(chat.title)}:</b>\n"
         f"#APPROVED\n"
@@ -95,6 +109,19 @@ def disapprove(update, context):
             "I don't know who you're talking about, you're going to need to specify a user!",
         )
         return ""
+    if chat.type == chat.CHANNEL:
+        if not channel_status(chat.id, user.id):
+            message.reply_text(
+                f"{user.first_name} isn't approved yet!",
+                parse_mode=ParseMode.MARKDOWN,
+            )
+            return ""
+        disapprove_channel(chat.id, user.id)
+        message.reply_text(
+            f"{user.first_name} is no longer approved in {chat_title}.",
+            parse_mode=ParseMode.MARKDOWN,
+        )
+        return "" 
     try:
         member = chat.get_member(user_id)
     except BadRequest:
