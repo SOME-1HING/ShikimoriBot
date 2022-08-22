@@ -25,11 +25,11 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 
 import os
-
+import time
+from Shikimori import LOGGER
 from telethon.tl.types import *
-
-from Shikimori.pyrogramee.pluginshelper import runcmd
-
+from Shikimori.utils.pluginhelpers import runcmd
+import math
 
 async def convert_to_image(event, borg):
     lmao = await event.get_reply_message()
@@ -109,7 +109,7 @@ async def take_screen_shot(
     video_file: str, duration: int, path: str = ""
 ) -> Optional[str]:
     """ take a screenshot """
-    logger.info(
+    LOGGER.info(
         "[[[Extracting a frame from %s ||| Video duration => %s]]]",
         video_file,
         duration,
@@ -119,7 +119,7 @@ async def take_screen_shot(
     command = f'''ffmpeg -ss {ttl} -i "{video_file}" -vframes 1 "{thumb_image_path}"'''
     err = (await runcmd(command))[1]
     if err:
-        logger.error(err)
+        LOGGER.error(err)
     return thumb_image_path if os.path.exists(thumb_image_path) else None
 
 
