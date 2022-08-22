@@ -52,16 +52,17 @@ def approve(update, context):
             "I don't know who you're talking about, you're going to need to specify a user!",
         )
         return ""
-    if chat.type == chat.CHANNEL:
-        if channel_status(chat.id, user.id):
+    if message.sender_chat.type == "channel":
+        sender_chat = message.sender_chat
+        if channel_status(chat.id, sender_chat.id):
             message.reply_text(
-                f"[{user.first_name}](tg://user?id={user.id}) is already approved in {chat_title}",
+                f"[{sender_chat.title}](tg://user?id={sender_chat.id}) is already approved in {chat_title}",
                 parse_mode=ParseMode.MARKDOWN,
             )
             return ""
-        approve_channel(chat.id, user.id)
+        approve_channel(chat.id, sender_chat.id)
         message.reply_text(
-            f"[{user.first_name}](tg://user?id={user.id}) has been approved in {chat_title}! The message from this channel will no loger be deleted.",
+            f"{sender_chat.title} has been approved in {chat_title}! The message from this channel will no loger be deleted.",
             parse_mode=ParseMode.MARKDOWN,
         )
         return ""
@@ -109,16 +110,17 @@ def disapprove(update, context):
             "I don't know who you're talking about, you're going to need to specify a user!",
         )
         return ""
-    if chat.type == chat.CHANNEL:
-        if not channel_status(chat.id, user.id):
+    if message.sender_chat.type == "channel":
+        sender_chat = message.sender_chat
+        if not channel_status(chat.id, sender_chat.id):
             message.reply_text(
-                f"{user.first_name} isn't approved yet!",
+                f"{sender_chat.title} isn't approved yet!",
                 parse_mode=ParseMode.MARKDOWN,
             )
             return ""
-        disapprove_channel(chat.id, user.id)
+        disapprove_channel(chat.id, sender_chat.id)
         message.reply_text(
-            f"{user.first_name} is no longer approved in {chat_title}.",
+            f"{sender_chat.title} is no longer approved in {chat_title}.",
             parse_mode=ParseMode.MARKDOWN,
         )
         return "" 
@@ -247,7 +249,7 @@ def unapproveall_btn(update: Update, context: CallbackContext):
 
 
 APPROVE = DisableAbleCommandHandler("approve", approve, filters=Filters.chat_type.groups, run_async=True)
-DISAPPROVE = DisableAbleCommandHandler("unapprove", disapprove, filters=Filters.chat_type.groups, run_async=True)
+DISAPPROVE = DisableAbleCommandHandler(("unapprove", "disapprove"), disapprove, filters=Filters.chat_type.groups, run_async=True)
 APPROVED = DisableAbleCommandHandler("approved", approved, filters=Filters.chat_type.groups, run_async=True)
 APPROVAL = DisableAbleCommandHandler("approval", approval, filters=Filters.chat_type.groups, run_async=True)
 UNAPPROVEALL = DisableAbleCommandHandler("unapproveall", unapproveall, filters=Filters.chat_type.groups, run_async=True)
