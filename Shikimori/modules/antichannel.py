@@ -4,7 +4,7 @@ from telegram import Update, message
 from telegram.ext import CallbackContext
 from ..modules.helper_funcs.anonymous import user_admin, AdminPerms
 import html
-from .mongo.antichannel_mongo import antichannel_status, disable_antichannel, enable_antichannel
+from .mongo.antichannel_mongo import antichannel_status, channel_status, disable_antichannel, enable_antichannel
 
 
 @Shikimoricmd(command="antichannel", group=100)
@@ -35,9 +35,21 @@ def eliminate_channel(update: Update, context: CallbackContext):
     message = update.effective_message
     chat = update.effective_chat
     bot = context.bot
-    if not antichannel_status(chat.id):
-        return
-    if message.sender_chat and message.sender_chat.type == "channel" and not message.is_automatic_forward:
+    if (message.sender_chat
+        and message.sender_chat.type == "channel"
+        and not message.is_automatic_forward
+    ):
+        if not antichannel_status(chat.id):
+            return
+        if channel_status(chat.id, sender_chat.id):
+            return
         message.delete()
         sender_chat = message.sender_chat
         bot.ban_chat_sender_chat(sender_chat_id=sender_chat.id, chat_id=chat.id)
+
+
+__mod_name__ = "Anti Channel"
+
+__help__ = """
+Use `/antichannel` to auto delete message comming from channels.
+"""

@@ -27,6 +27,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 from Shikimori.mongo import db
 
 antichanneldb = db.antichannel
+approveddb = db.approved
 
 def antichannel_status(chat_id):
     is_achannel = antichanneldb.find_one({"chat_id": chat_id})
@@ -48,3 +49,24 @@ def disable_antichannel(chat_id):
         return
     else:
         return antichanneldb.delete_one({"chat_id": chat_id})
+
+def channel_status(chat_id, channel_id):
+    is_approved = approveddb.find_one({"chat_id": chat_id, "channel_id": channel_id})
+    if not is_approved:
+        return False
+    else:
+        return True
+
+def approve_channel(chat_id, channel_id):
+    is_approved = channel_status(chat_id)
+    if is_approved:
+        return
+    else:
+        approveddb.insert_one({"chat_id": chat_id, "channel_id": channel_id})
+
+def approve_channel(chat_id, channel_id):
+    is_approved = channel_status(chat_id)
+    if not is_approved:
+        return
+    else:
+        approveddb.delete_one({"chat_id": chat_id, "channel_id": channel_id})

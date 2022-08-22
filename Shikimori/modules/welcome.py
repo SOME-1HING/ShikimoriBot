@@ -254,6 +254,7 @@ def new_member(update: Update, context: CallbackContext):  # sourcery no-metrics
                         parse_mode=ParseMode.HTML,
                         reply_to_message_id=reply,
                     )
+                continue
 
             # Give the owner a special welcome
             if new_mem.id == OWNER_ID:

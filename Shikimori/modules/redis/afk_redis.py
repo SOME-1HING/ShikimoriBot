@@ -31,7 +31,6 @@ def is_user_afk(userid):
     rget = REDIS.get(f'is_afk_{userid}')
     return bool(rget)
 
-
 def start_afk(userid, reason):
     REDIS.set(f'is_afk_{userid}', reason)
     
