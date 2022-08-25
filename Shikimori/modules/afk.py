@@ -40,6 +40,7 @@ from Shikimori.modules.helper_funcs.readable_time import get_readable_time
 
 AFK_GROUP = 7
 AFK_REPLY_GROUP = 8
+AFK_GIF ="https://telegra.ph/file/bfe511a9f3b1bf225c144.mp4"
 
 def afk(update, context):
     args = update.effective_message.text.split(None, 1)
@@ -56,7 +57,7 @@ def afk(update, context):
     REDIS.set(f'afk_time_{update.effective_user.id}', start_afk_time)
     fname = update.effective_user.first_name
     try:
-        Shikimori = update.effective_message.reply_text(
+        Shikimori = AFK_GIF,update.effective_message.reply_text(
             "*{}* is now AFK! GoodBye!".format(fname), parse_mode=ParseMode.MARKDOWN)
         time.sleep(5)
         try:
