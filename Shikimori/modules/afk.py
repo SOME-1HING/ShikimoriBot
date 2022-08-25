@@ -57,8 +57,8 @@ def afk(update, context):
     REDIS.set(f'afk_time_{update.effective_user.id}', start_afk_time)
     fname = update.effective_user.first_name
     try:
-        Shikimori = update.effective_message.reply_video({AFK_GIF}).caption(
-            "`{}` is now AFK! GoodBye!".format(fname), parse_mode=ParseMode.MARKDOWN)
+        Shikimori = update.message.reply_video({AFK_GIF}).caption(
+            "`{}` is now AFK! Sayonara!".format(fname), parse_mode=ParseMode.MARKDOWN)
         time.sleep(5)
         try:
             Shikimori.delete()
