@@ -1,7 +1,7 @@
 import os
 
 
-ENV = bool(os.environ.get("ENV", True))
+ENV = bool(os.environ.get("ENV", False))
 
 if ENV:
     TOKEN = os.environ.get("BOT_TOKEN", None)
@@ -99,14 +99,17 @@ if ENV:
 else:
     from Shikimori.config import Development as Config
 
-    TOKEN = Config.TOKEN
+    BOT_TOKEN = Config.BOT_TOKEN
 
     try:
         OWNER_ID = int(Config.OWNER_ID)
     except ValueError:
         raise Exception("Your OWNER_ID variable is not a valid integer.")
-    ERROR_LOG_CHANNEL = Config.ERROR_LOG_CHANNEL
+
     OWNER_USERNAME = Config.OWNER_USERNAME
+    SUPPORT_CHAT = Config.SUPPORT_CHAT
+    LOG_CHANNEL = Config.LOG_CHANNEL
+    ERROR_LOG_CHANNEL = Config.ERROR_LOG_CHANNEL
 
     try:
         DRAGONS = set(int(x) for x in Config.DRAGONS or [])
@@ -129,16 +132,10 @@ else:
     except ValueError:
         raise Exception("Your tiger users list does not contain valid integers.")
 
-    LOG_CHANNEL = Config.LOG_CHANNEL
     WEBHOOK = Config.WEBHOOK
     URL = Config.URL
     PORT = Config.PORT
     CERT_PATH = Config.CERT_PATH
-    API_ID = Config.API_ID
-    API_HASH = Config.API_HASH
-    HEROKU_API_KEY = Config.HEROKU_API_KEY
-    HEROKU_APP_NAME = Config.HEROKU_APP_NAME
-    DB_URI = Config.SQLALCHEMY_DATABASE_URI
     LOAD = Config.LOAD
     NO_LOAD = Config.NO_LOAD
     DEL_CMDS = Config.DEL_CMDS
@@ -146,30 +143,30 @@ else:
     WORKERS = Config.WORKERS
     BAN_STICKER = Config.BAN_STICKER
     ALLOW_EXCL = Config.ALLOW_EXCL
+
+    API_ID = Config.API_ID
+    API_HASH = Config.API_HASH
+    BOT_USERNAME = Config.BOT_USERNAME
+    BOT_ID = Config.BOT_ID
+    MONGO_DB_URI = Config.MONGO_DB_URI
     CASH_API_KEY = Config.CASH_API_KEY
     TIME_API_KEY = Config.TIME_API_KEY
-    AI_API_KEY = Config.AI_API_KEY
     API_WEATHER = Config.API_WEATHER
+    DATABASE_URL = Config.DATABASE_URL
+    FUNC_DB_URL = Config.FUNC_DB_URL
+    ARQ_API = Config.ARQ_API
     WALL_API = Config.WALL_API
-    SUPPORT_CHAT = Config.SUPPORT_CHAT
-    SPAMWATCH_SUPPORT_CHAT = Config.SPAMWATCH_SUPPORT_CHAT
-    APOD_API_KEY = Config.APOD_API_KEY
     REDIS_URL = Config.REDIS_URL
     ANIME_NAME = Config.ANIME_NAME
     START_MEDIA = Config.START_MEDIA
-    BOT_USERNAME = Config.BOT_USERNAME
     UPDATE_CHANNEL = Config.UPDATE_CHANNEL
     ALIVE_MEDIA = Config.ALIVE_MEDIA
-    BOT_ID = Config.BOT_ID
+    AI_API_KEY = Config.AI_API_KEY
     STATS_IMG = Config.STATS_IMG
     NETWORK = Config.NETWORK
     NETWORK_USERNAME = Config.NETWORK_USERNAME
-    MEDIA_GM = Config.MEDIA_GM
-    MEDIA_GN = Config.MEDIA_GN
-    MEDIA_HELLO = Config.MEDIA_HELLO
-    MEDIA_BYE = Config.MEDIA_BYE
-    INLINE_IMG = Config.INLINE_IMG
     OWNER_WELCOME_MEDIA = Config.OWNER_WELCOME_MEDIA
+    INLINE_IMG = Config.INLINE_IMG
 
     try:
         WHITELIST_CHATS = {int(x) for x in os.environ.get('WHITELIST_CHATS', "").split()}
