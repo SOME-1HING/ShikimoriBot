@@ -1105,7 +1105,7 @@ __handlers__ = [
 ]
 
 
-__mod_name__ = "ᴀᴅᴍɪɴs "
+__mod_name__ = "Admins "
 
 __help__ = """
 *User Commands*:
