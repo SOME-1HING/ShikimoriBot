@@ -279,7 +279,7 @@ def main():
                 "👋 Hi, i'm alive.",
                 parse_mode=ParseMode.MARKDOWN
                 )
-            time.sleep(15)
+            time.sleep()
             try:
                 msg.delete()
             except BadRequest:
