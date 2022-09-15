@@ -5,7 +5,7 @@ STATUS: Code is working. ✅
 """
 GNU General Public License v3.0
 
-Copyright (C) 2022, SOME-1HING [https://github.com/SOME-1HING]
+Gojo
 
 Credits:-
     I don't know who originally wrote this code. If you originally wrote this code, please reach out to me. 
