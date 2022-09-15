@@ -606,7 +606,7 @@ __handlers__ = [
     BANME_HANDLER,
 ]
 
-__mod_name__ = "Bans/Mutes 👮"
+__mod_name__ = "Bans/Mutes "
 
 __help__ = """
 *User Commands:*
