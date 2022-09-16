@@ -38,6 +38,12 @@
 <a href="https://github.com/asadali32117"> <img src="https://img.shields.io/badge/asadali32117-Github-magenta?style=for-the-badge&logo=github" alt="Ryu120 Github" /> </a>
 </p>
 
+## Compattible with:
+    - Heroku
+    - Docker Desktop (self hosting)
+    - Okteto (possible okteto account ban)
+    - mogenius
+
 ## How to setup/deploy.
 
 ### Read these notes carefully before proceeding 
