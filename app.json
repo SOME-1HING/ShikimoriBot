@@ -66,7 +66,7 @@
          "value": "SOME1HING"
       },
       "SUPPORT_CHAT": {
-         "description": "Your Telegram support group chat username where your users will go and bother you with shit But be like: MyGroupChatUsernameBlah. If this ever points to masha support than consider you made an enemy.",
+         "description": "Your Telegram support group chat username where your users will go and bother you with shit But be like: MyGroupChatUsernameBlah. If this ever points to shikimori support than consider you made an enemy.",
          "required": true,
          "value": "tyranteyeeee"
       },
