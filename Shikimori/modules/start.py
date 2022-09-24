@@ -49,7 +49,7 @@ bot_name = f"{dispatcher.bot.first_name}"
 IMG_START = START_MEDIA.split(".")
 start_id = IMG_START[-1]
 
-buttons = 
+buttons = [ 
     [
         InlineKeyboardButton(
             text=f"➕ Aᴅᴅ Mᴇ Tᴏ Yᴏᴜʀ Cʜᴀᴛ ➕", url=f"t.me/{BOT_USERNAME}?startgroup=true"),
@@ -58,7 +58,11 @@ buttons =
         InlineKeyboardButton(text="Sᴜᴘᴘᴏʀᴛ", url=f"https://t.me/{SUPPORT_CHAT}"),
         InlineKeyboardButton(text="Uᴘᴅᴀᴛᴇ", url=f"https://t.me/{UPDATE_CHANNEL}"),   
     ], 
-  
+    [    
+        InlineKeyboardButton(text="ɴᴇᴛᴡᴏʀᴋ", url=f"https://t.me/Otaku_Binge", 
+    ], 
+ ]
+
                             
 
 def start(update: Update, context: CallbackContext):
