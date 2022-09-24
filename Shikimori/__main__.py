@@ -147,14 +147,14 @@ def donate(update: Update, context: CallbackContext):
     bot = context.bot
     if chat.type == "private":
         update.effective_message.reply_text(
-            "https://www.paypal.me/PaulSonOfLars", parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True
+            "https://www.paypal.me/abhinavsharma01", parse_mode=ParseMode.MARKDOWN, disable_web_page_preview=True
         )
 
     else:
         try:
             bot.send_message(
                 user.id,
-                "https://www.paypal.me/PaulSonOfLars",
+                "https://www.paypal.me/abhinavsharma01",
                 parse_mode=ParseMode.MARKDOWN,
                 disable_web_page_preview=True,
             )
