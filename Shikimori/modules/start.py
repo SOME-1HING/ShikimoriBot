@@ -49,7 +49,7 @@ bot_name = f"{dispatcher.bot.first_name}"
 IMG_START = START_MEDIA.split(".")
 start_id = IMG_START[-1]
 
-buttons = [
+buttons = 
     [
         InlineKeyboardButton(
             text=f"➕ Aᴅᴅ Mᴇ Tᴏ Yᴏᴜʀ Cʜᴀᴛ ➕", url=f"t.me/{BOT_USERNAME}?startgroup=true"),
