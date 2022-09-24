@@ -58,7 +58,11 @@ buttons = [
         InlineKeyboardButton(text="Sᴜᴘᴘᴏʀᴛ", url=f"https://t.me/{SUPPORT_CHAT}"),
         InlineKeyboardButton(text="Uᴘᴅᴀᴛᴇ", url=f"https://t.me/{UPDATE_CHANNEL}"),   
     ], 
-]
+        InlinekeyboardButton(
+             text="ʜᴇʟᴘ ᴀɴᴅ ᴄᴍᴅs❔",
+             callback_data="help_back"), 
+    ], 
+                            
 
 def start(update: Update, context: CallbackContext):
     args = context.args
