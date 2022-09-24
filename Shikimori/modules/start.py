@@ -58,9 +58,8 @@ buttons = [
         InlineKeyboardButton(text="Sᴜᴘᴘᴏʀᴛ", url=f"https://t.me/{SUPPORT_CHAT}"),
         InlineKeyboardButton(text="Uᴘᴅᴀᴛᴇ", url=f"https://t.me/{UPDATE_CHANNEL}"),   
     ], 
-        InlinekeyboardButton(
-             text="ʜᴇʟᴘ ᴀɴᴅ ᴄᴍᴅs❔",
-             callback_data="help_back"), 
+        InlinekeyboardButton(text="ɴᴇᴛᴡᴏʀᴋ", url=f"https://t.me/Otaku_Binge"), 
+    
     ], 
                             
 
