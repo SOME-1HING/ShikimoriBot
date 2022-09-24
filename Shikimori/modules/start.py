@@ -60,7 +60,7 @@ buttons = [
     ], 
     [
     
-        InlineKeyboardButton(text="ɴᴇᴛᴡᴏʀᴋ", url=f"https://t.me/Otaku_Binge", 
+        InlineKeyboardButton(text="ɴᴇᴛᴡᴏʀᴋ", url=f"https://t.me/Otaku_Binge"), 
     
     ],
 ]
