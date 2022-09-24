@@ -246,7 +246,7 @@ def info(update: Update, context: CallbackContext):
                              text="Health",
                              url="https://t.me/kakashi_bots_updates/11"),
                        InlineKeyboardButton(
-                             text="sudoers",
+                             text="disasters",
                              url="https://t.me/kakashi_bots_updates/14"),
                     ],
     ]
