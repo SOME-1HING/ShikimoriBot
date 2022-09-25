@@ -1,4 +1,3 @@
-future
 lxml
 wget
 gtts
