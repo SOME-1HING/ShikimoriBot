@@ -26,7 +26,6 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import importlib
 from typing import Union
-
 from future.utils import string_types
 from Shikimori import dispatcher
 from Shikimori.modules.helper_funcs.handlers import CMD_STARTERS, SpamChecker

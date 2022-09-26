@@ -99,7 +99,7 @@ if ENV:
 else:
     from Shikimori.config import Development as Config
 
-    BOT_TOKEN = Config.BOT_TOKEN
+    TOKEN = Config.BOT_TOKEN
 
     try:
         OWNER_ID = int(Config.OWNER_ID)
@@ -143,18 +143,21 @@ else:
     WORKERS = Config.WORKERS
     BAN_STICKER = Config.BAN_STICKER
     ALLOW_EXCL = Config.ALLOW_EXCL
-
+    APOD_API_KEY = Config.APOD_API_KEY
     API_ID = Config.API_ID
     API_HASH = Config.API_HASH
     BOT_USERNAME = Config.BOT_USERNAME
+    HEROKU_APP_NAME = Config.HEROKU_APP_NAME
+    HEROKU_API_KEY = Config.HEROKU_API_KEY
     BOT_ID = Config.BOT_ID
     MONGO_DB_URI = Config.MONGO_DB_URI
     CASH_API_KEY = Config.CASH_API_KEY
     TIME_API_KEY = Config.TIME_API_KEY
     API_WEATHER = Config.API_WEATHER
-    DATABASE_URL = Config.DATABASE_URL
+    DB_URL = Config.DATABASE_URL
     FUNC_DB_URL = Config.FUNC_DB_URL
-    ARQ_API = Config.ARQ_API
+    ARQ_API_KEY = Config.ARQ_API
+    TEMP_DOWNLOAD_DIRECTORY = Config.TEMP_DOWNLOAD_DIRECTORY
     WALL_API = Config.WALL_API
     REDIS_URL = Config.REDIS_URL
     ANIME_NAME = Config.ANIME_NAME
