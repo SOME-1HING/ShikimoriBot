@@ -33,7 +33,7 @@ from telegram.ext import Filters, MessageHandler
 
 from Shikimori import dispatcher
 from Shikimori.modules.disable import DisableAbleCommandHandler
-from Shikimori.modules.redis.afk_redis import start_afk, end_afk, is_user_afk, afk_reason
+from Shikimori.modules.redis.afk_redis import start_afk, end_afk, is_user_afk, afk_reason, afk_time
 from Shikimori.modules.users import get_user_id
 
 from Shikimori.modules.helper_funcs.readable_time import get_readable_time
@@ -52,8 +52,7 @@ def afk(update, context):
         reason = args[1]
     else:
         reason = "none"
-    start_afk(update.effective_user.id, reason)
-    REDIS.set(f'afk_time_{update.effective_user.id}', start_afk_time)
+    start_afk(update.effective_user.id, reason. start_afk_time)
     fname = update.effective_user.first_name
     try:
         Shikimori = update.effective_message.reply_text(
@@ -74,8 +73,7 @@ def no_longer_afk(update, context):
 
     if not is_user_afk(user.id):  #Check if user is afk or not
         return
-    end_afk_time = get_readable_time((time.time() - float(REDIS.get(f'afk_time_{user.id}'))))
-    REDIS.delete(f'afk_time_{user.id}')
+    end_afk_time = get_readable_time((time.time() - float(afk_time(user.id))))
     res = end_afk(user.id)
     if res:
         if message.new_chat_members:  #dont say msg
@@ -166,7 +164,7 @@ def __user_info__(user_id):
     is_afk = is_user_afk(user_id)
     text = ""
     if is_afk:
-        since_afk = get_readable_time((time.time() - float(REDIS.get(f'afk_time_{user_id}'))))
+        since_afk = get_readable_time((time.time() - float(afk_time(user_id))))
         text = "This user is currently afk (away from keyboard)."
         text += f"\nLast Seen: {since_afk} Ago."
        

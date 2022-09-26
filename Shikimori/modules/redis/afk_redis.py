@@ -24,24 +24,32 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 
-from Shikimori.modules.redis import REDIS
+from Shikimori.mongo import db
 
-# AFK
+afkdb = db.afk
+
 def is_user_afk(userid):
-    rget = REDIS.get(f'is_afk_{userid}')
-    return bool(rget)
+    is_afk = afkdb.find_one({"user_id": userid})
+    return bool(is_afk)
 
+def start_afk(userid, reason, time):
+    return afkdb.update_one({"user_id": userid}, {"$set": {"reason" : reason, "time" : time}}, upsert=True)
 
-def start_afk(userid, reason):
-    REDIS.set(f'is_afk_{userid}', reason)
-    
 def afk_reason(userid):
-    return strb(REDIS.get(f'is_afk_{userid}'))
+    user = strb(userid)
+    if user:
+        return user["reason"]
+
+def afk_time(userid):
+    user = strb(userid)
+    if user:
+        return user["time"]
 
 def end_afk(userid):
-    REDIS.delete(f'is_afk_{userid}')
+    afkdb.delete_one({"user_id": userid})
     return True
+    
 
 # Helpers
-def strb(redis_string):
-    return str(redis_string)
+def strb(user_id):
+    return afkdb.find_one({"user_id": user_id})
