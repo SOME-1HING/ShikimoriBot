@@ -71,7 +71,7 @@ from telegram.ext import (
     run_async,
 )
 from telegram.utils.helpers import mention_html
-from Shikimori.modules.sql_2.approve_sql import is_approved
+from Shikimori.modules.mongo.approve_sql import is_approved
 
 WARN_HANDLER_GROUP = 9
 CURRENT_WARNING_FILTER_STRING = "<b>Current warning filters in this chat:</b>\n"

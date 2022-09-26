@@ -26,7 +26,7 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 from typing import Optional
 
-import Shikimori.modules.sql_2.rules_sql as sql
+import Shikimori.modules.mongo.rules_sql as sql
 from Shikimori import dispatcher
 from Shikimori.modules.helper_funcs.chat_status import user_admin
 from Shikimori.modules.helper_funcs.string_handling import markdown_parser

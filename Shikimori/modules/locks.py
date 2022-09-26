@@ -43,7 +43,7 @@ from Shikimori.modules.helper_funcs.chat_status import (
     is_bot_admin,
     user_admin,
 )
-from Shikimori.modules.sql_2.approve_sql import is_approved
+from Shikimori.modules.mongo.approve_sql import is_approved
 from Shikimori.modules.log_channel import loggable
 from Shikimori.modules.connection import connected
 from Shikimori.modules.helper_funcs.alternate import send_message, typing_action
