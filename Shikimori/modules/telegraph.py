@@ -67,7 +67,7 @@ async def _(event):
                 end = datetime.now()
                 ms_two = (end - start).seconds
                 os.remove(downloaded_file_name)
-                await h.edit("[Telegraph Link](https://telegra.ph{}) `https://telegra.ph{}`".format(media_urls[0], media_urls[0]), link_preview=True, parse_mode=ParseMode.MARKDOWN)
+                await h.edit("[Telegraph Link](https://graph.org{}) `https://graph.org{}`".format(media_urls[0], media_urls[0]), link_preview=True, parse_mode=ParseMode.MARKDOWN)
         elif input_str == "gt":
             user_object = await tbot.get_entity(r_message.sender_id)
             title_of_page = user_object.first_name # + " " + user_object.last_name
@@ -95,7 +95,7 @@ async def _(event):
             )
             end = datetime.now()
             ms = (end - start).seconds
-            await event.reply("Telegraph Link- [Click Here](https://telegra.ph/{}) in {} seconds.".format(response["path"], ms), link_preview=True, parse_mode=ParseMode.MARKDOWN)
+            await event.reply("Telegraph Link- [Click Here](https://graph.org/{}) in {} seconds.".format(response["path"], ms), link_preview=True, parse_mode=ParseMode.MARKDOWN)
     else:
         await event.reply("Reply to a message to get a permanent telegra.ph link.")
 
