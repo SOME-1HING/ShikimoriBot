@@ -73,7 +73,7 @@ if ENV:
     BOT_USERNAME = os.environ.get("BOT_USERNAME", "micchon_shikimori_bot")
     UPDATE_CHANNEL = os.environ.get("UPDATE_CHANNEL", "Shikimori_bot_Updates")
     ALIVE_MEDIA = os.environ.get("ALIVE_MEDIA", "https://telegra.ph/file/2b04f7812f22b983f8a10.mp4")
-    BOT_ID = os.environ.get("BOT_ID", "5169508699")
+    BOT_ID = int(os.environ.get("BOT_ID", "5169508699"))
     STATS_IMG = os.environ.get("STATS_IMG", None)
     NETWORK = os.environ.get("NETWORK", None)
     NETWORK_USERNAME = os.environ.get("NETWORK_USERNAME", None)
